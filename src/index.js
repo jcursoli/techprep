@@ -10,6 +10,8 @@ import Login from './components/login';
 import Signup from './components/signup';
 import LandingPage from './components/landingPage';
 import Welcome from './components/welcome';
+import { AUTH_USER } from './actions/actionTypes';
+import RequireAuth from './components/auth/require_auth';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -20,9 +22,16 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
+const token = localStorage.getItem('token');
+
+if(token) {
+  store.dispatch({ type: AUTH_USER });
+}
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Router history={browserHistory}>
         <Route path="/" component={App}>
