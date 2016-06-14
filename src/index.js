@@ -6,11 +6,11 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
-import Login from './components/login';
-import Signup from './components/signup';
+import Login from './components/auth/login';
+import Signup from './components/auth/signup';
 import LandingPage from './components/landingPage';
+import Profile from './components/profile';
 import Welcome from './components/welcome';
-
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -30,6 +30,7 @@ ReactDOM.render(
           <Route path="login" component={Login} />
           <Route path="signup" component={Signup} />
           <Route path="welcome" component={Welcome} />
+          <Route path="profile" component={Profile} />
         </Route>
       </Router>
     </MuiThemeProvider>

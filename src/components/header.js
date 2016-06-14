@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import FlatButton from 'material-ui/FlatButton';
@@ -14,6 +14,33 @@ import Assignment from 'material-ui/svg-icons/action/assignment';
 import Help from 'material-ui/svg-icons/action/help';
 import Message from 'material-ui/svg-icons/communication/message';
 
+import Subheader from 'material-ui/Subheader';
+import Avatar from 'material-ui/Avatar';
+import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
+
+
+const iconButtonElement = (
+  <IconButton
+    touch={true}
+    tooltip="more"
+    tooltipPosition="bottom-left"
+  >
+    <MoreVertIcon color={grey400} />
+  </IconButton>
+);
+
+const rightIconMenu = (
+  <IconMenu iconButtonElement={iconButtonElement}>
+    <MenuItem>Reply</MenuItem>
+    <MenuItem>Forward</MenuItem>
+    <MenuItem>Delete</MenuItem>
+  </IconMenu>
+);
 
 const style = {
   appBar: {
@@ -35,15 +62,28 @@ const style = {
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {rightOpen: false, leftOpen: false};
   }
 
-  handleToggle() {
-    this.setState({open: !this.state.open});
+  handleRightToggle() {
+    this.setState({rightOpen: !this.state.rightOpen});
   }
 
-  handleClose() {
-    this.setState({open: false});
+  handleRightClose() {
+    this.setState({rightOpen: false});
+  }
+
+  handleLeftToggle() {
+    this.setState({leftOpen: !this.state.leftOpen});
+  }
+
+  handleLeftClose() {
+    this.setState({leftOpen: false});
+  }
+
+  handleTap(route) {
+    this.handleClose();
+    browserHistory.push(route);
   }
 
   handleSignout() {
@@ -82,7 +122,7 @@ class Header extends Component {
           showMenuIconButton={this.props.authenticated ? true : false}
           style={style.appBar}
           zDepth={1}
-          onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
+          onLeftIconButtonTouchTap={this.handleRightToggle.bind(this)}
           title={<Link style={style.title} to="/">TechPrep</Link>}
           children={
               <div>
@@ -93,17 +133,86 @@ class Header extends Component {
           <Drawer
             docked={false}
             width={200}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
+            open={this.state.rightOpen}
+            onRequestChange={(rightOpen) => this.setState({rightOpen})}
           >
             <List>
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Profile" leftIcon={<AccountBox />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Stats" leftIcon={<ShowChart />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Practice" leftIcon={<Code />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Friends" leftIcon={<Group />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Mock Interview" leftIcon={<Assignment />} />
-              <ListItem onTouchTap={this.handleClose.bind(this)} primaryText="Help" leftIcon={<Help />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/friends')} primaryText="Friends" leftIcon={<Group />} />
+              <ListItem onTouchTap={this.handleLeftToggle.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
+            </List>
+          </Drawer>
+          <Drawer width={400} openSecondary={true} open={this.state.leftOpen} >
+            <List>
+              <ListItem
+                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+                rightIconButton={rightIconMenu}
+                primaryText="Drew Baugher"
+                secondaryText={
+                  <p>
+                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
+                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  </p>
+                }
+                secondaryTextLines={2}
+              />
+              <Divider inset={false} />
+              <ListItem
+                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+                rightIconButton={rightIconMenu}
+                primaryText="Drew Baugher"
+                secondaryText={
+                  <p>
+                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
+                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  </p>
+                }
+                secondaryTextLines={2}
+              />
+              <Divider inset={false} />
+              <ListItem
+                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+                rightIconButton={rightIconMenu}
+                primaryText="Drew Baugher"
+                secondaryText={
+                  <p>
+                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
+                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  </p>
+                }
+                secondaryTextLines={2}
+              />
+              <Divider inset={false} />
+              <ListItem
+                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+                rightIconButton={rightIconMenu}
+                primaryText="Drew Baugher"
+                secondaryText={
+                  <p>
+                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
+                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  </p>
+                }
+                secondaryTextLines={2}
+              />
+              <Divider inset={false} />
+              <ListItem
+                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+                rightIconButton={rightIconMenu}
+                primaryText="Drew Baugher"
+                secondaryText={
+                  <p>
+                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
+                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  </p>
+                }
+                secondaryTextLines={2}
+              />
+              <Divider inset={false} />
             </List>
           </Drawer>
         </div>
