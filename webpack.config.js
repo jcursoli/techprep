@@ -1,6 +1,11 @@
+const webpack = require('webpack');
+const path = require('path');
+
 module.exports = {
   entry: [
-    './src/index.js'
+    'webpack/hot/dev-server',
+    'webpack/hot/only-dev-server',
+    './src/index'
   ],
   output: {
     path: __dirname,
@@ -8,19 +13,32 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015', 'stage-1']
-      }
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: [
+          'react-hot',
+          'babel-loader',
+        ],
+        exclude: /node_modules/,
+      },
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   devServer: {
+    devtool: 'eval',
+    hot: true,
     historyApiFallback: true,
-    contentBase: './'
-  }
+    contentBase: './',
+    outputPath: './',
+  },
+  devtool: 'eval',
+  plugins: [
+      // Allows for sync with browser while developing (like BorwserSync)
+      new webpack.HotModuleReplacementPlugin(),
+      // Allows error warninggs but does not stop compiling. Will remove when eslint is added
+      new webpack.NoErrorsPlugin(),
+    ],
 };
