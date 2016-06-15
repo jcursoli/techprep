@@ -9,6 +9,12 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 	const contents = [ {title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
 										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
+										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'},
+										{title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
+										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
+										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'},
+										{title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
+										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
 										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'} ];
 
 const style = {
@@ -19,6 +25,8 @@ const style = {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginTop: 35,
+    marginLeft:'25%',
+    overflowY: 'auto',
   },
   gridList: {
     width: 500,
@@ -43,7 +51,7 @@ export default class Practice extends Component {
 			     <GridTile
 			     	 onTouchTap={()=>{this.handleClick(category)}}
 			     	 style={style.GridTile}
-			       key={category.title}
+			       // key={category.title}
 			       title={category.title}
 			       subtitle={<span>by <b>{category.title}</b></span>}
 			       actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
