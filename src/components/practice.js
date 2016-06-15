@@ -30,16 +30,18 @@ const style = {
 };
 
 export default class Practice extends Component {
-	
-	handleClick(target){
-		console.log('handleClick clicked now',target);
-	};
-
+	constructor() {
+    super();
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+		handleClick(categoryClicked){
+		console.log('handleClick clicked now',categoryClicked.title);
+	}
 	renderElements(category){
-		console.log(category);
 		return (
 			     <GridTile
-			     	 onTouchTap={this.handleClick.bind(this)}
+			     	 onTouchTap={()=>{this.handleClick(category)}}
 			     	 style={style.GridTile}
 			       key={category.title}
 			       title={category.title}
@@ -49,13 +51,13 @@ export default class Practice extends Component {
 			       <img height='100%'width='100%' src={category.pic} />
 			     </GridTile>
 		);
-	};
+	}
 	render(){
 		return(
 			<div>
 				<div style={style.root}>
 					<GridList>
-						{contents.map(this.renderElements)}
+						{contents.map(this.renderElements.bind(this))}
 					</GridList>
 				</div>
 			</div>
