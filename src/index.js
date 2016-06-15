@@ -11,6 +11,7 @@ import Signup from './components/auth/signup';
 import LandingPage from './components/landingPage';
 import Profile from './components/profile';
 import Welcome from './components/welcome';
+import Practice from './components/practice';
 import { AUTH_USER } from './actions/actionTypes';
 import RequireAuth from './components/auth/require_auth';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -40,6 +41,7 @@ ReactDOM.render(
           <Route path="signup" component={Signup} />
           <Route path="welcome" component={Welcome} />
           <Route path="profile" component={Profile} />
+          <Route path='practice' component={Practice} />
         </Route>
       </Router>
     </MuiThemeProvider>
