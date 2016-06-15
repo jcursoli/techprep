@@ -7,35 +7,33 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
-	const contents = [ {title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
-										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
-										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'},
-										{title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
-										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
-										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'},
-										{title: '<html/>', pic:'http://ademocut.com/wp-content/uploads/2015/02/HTML.jpg'},
-										{title: 'CSS', pic:'http://thecybertramp.com/blog/wp-content/uploads/2011/08/rainbow.jpg'},
-										{title: 'Javascript', pic: 'http://linpossible.com/img/skills/javascript_logo.png'} ];
+	const contents = [{title: '<html/>', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
+										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
+										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
+										];
 
 const style = {
   root: {
-  	width: 500,
   	height: 500,
-    display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginTop: 35,
-    marginLeft:'25%',
+    marginLeft:25,
+    marginRight:25,
     overflowY: 'auto',
   },
   gridList: {
-    width: 500,
     height: 500,
     overflowY: 'auto',
-    marginBottom: 24,
-    marginTop: 35,
   },
+  GridTile:{
+
+  },
+  title:{
+
+  }
 };
+
 
 export default class Practice extends Component {
 	constructor() {
@@ -48,25 +46,20 @@ export default class Practice extends Component {
 	}
 	renderElements(category){
 		return (
-			     <GridTile
-			     	 onTouchTap={()=>{this.handleClick(category)}}
-			     	 style={style.GridTile}
-			       // key={category.title}
-			       title={category.title}
-			       subtitle={<span>by <b>{category.title}</b></span>}
-			       actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-			     	>
-			       <img height='100%'width='100%' src={category.pic} />
-			     </GridTile>
+							<div key={category.title} onTouchTap={()=>{this.handleClick(category)}} style={style.GridTile} className="col-lg-2 col-md-3 col-xs-12 col-sm-4">
+								<div style={style.img}>
+				       	 <div height='200'width='200'>
+				        	<img  height='200' src={category.pic}/>
+				       	</div>
+				       </div>
+			       </div>
 		);
 	}
 	render(){
 		return(
 			<div>
-				<div style={style.root}>
-					<GridList>
+				<div className="row center-xs" style={style.root}>
 						{contents.map(this.renderElements.bind(this))}
-					</GridList>
 				</div>
 			</div>
 		)
