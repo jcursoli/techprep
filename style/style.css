@@ -117,7 +117,7 @@ form button:hover {
 }
 
 #answer {
-  visibility: visible;
+  visibility: hidden;
 }
 
 table {

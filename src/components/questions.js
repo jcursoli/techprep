@@ -125,6 +125,7 @@ export default class Questions extends Component  {
       open: false,
       question: '',
       answer: '',
+      showAnswer: false,
       selectedRow: null
     };
 
@@ -134,10 +135,11 @@ export default class Questions extends Component  {
   handleClose() {
     this.setState({open: false});
   };
-  // showAnswer() {
-  //   //document.getElementById("answer").style.visibility = hidden;
-  //   // answer.style.visibility = visibility;
-  // }
+  
+  showAnswer() {
+    document.getElementById("answer").style.visibility = 'visible';
+    //this.setState({showAnswer: true})
+  }
   
   render() {
      
@@ -151,7 +153,7 @@ export default class Questions extends Component  {
           label="Show Answer"
           primary={true}
           keyboardFocused={true}
-          onTouchTap={this.handleClose}
+          onTouchTap={this.showAnswer}
         />,
       ];
 
@@ -177,7 +179,6 @@ export default class Questions extends Component  {
             fixedFooter={this.state.fixedFooter}
             selectable={this.state.selectable}
             multiSelectable={this.state.multiSelectable}
-            table-layout='auto'
           >
             <TableHeader
               displaySelectAll={this.state.showCheckboxes}
@@ -205,7 +206,6 @@ export default class Questions extends Component  {
                 
                 const handleOpen = () => {
                   this.setState({open: true, question: tableData[index]['question'], answer: tableData[index]['answer']});
-                  console.log(this.state);
                 };
 
                 return (
