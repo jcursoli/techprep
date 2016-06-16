@@ -27,10 +27,11 @@ export function loginUser({ email, password }) {
 export function signupUser({ email, password }) {
   return function(dispatch) {
     firebase.createUserWithEmailAndPassword(email, password).then(response => {
-      var user = firebase.auth().currentUser;
+      console.log('inside auth signup')
       dispatch({ type: AUTH_USER });
       browserHistory.push('/welcome');
     }).catch(function(error) {
+      console.log('inside auth signup erro is =>>',error);
       var errorCode = error.code;
       var errorMessage = error.message;
       dispatch(authError(errorMessage));
