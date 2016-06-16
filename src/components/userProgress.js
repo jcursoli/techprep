@@ -3,11 +3,35 @@ import {connect} from 'react-redux';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import LinearProgress from 'material-ui/LinearProgress';
 
- class UserProgress extends Component {
- 	
+		const styles = {
+     tabs: {
+       color: '#151515',
+       background: 'rgba(0, 0, 0, 0)',
+     },
+     headline: {
+       fontWeight: 400,
+       color: '#151515',
+       background: 'rgba(0, 0, 0, 0)',
+     },
+     table:{
+       border:' 2px solid #EEEFF2',
+        background: 'rgba(0, 0, 0, 0)',
+        width:'85%',
+        display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+     },
+     background:{
+       height:'90%',
+       opacity: .8,
+     }
+   };
 
+ class ProgressTable extends Component {
  	render(){
- 		<div className="box">
+ 		console.log('rendering userprogress')
+	return (
+ 		<div className="box" style={styles.table}>
  		  <Table
  		    selectable={false}
  		  >
@@ -43,10 +67,11 @@ import LinearProgress from 'material-ui/LinearProgress';
  		      </TableBody>
  		    </Table>
  		</div>
+ 		);
  	}
  }
 function mapStateToProps(state){
-	return { data: state }
+	return {}
 }
 
-export default connect(mapStateToProps)(UserProgress)
+export default connect(mapStateToProps)(ProgressTable);
