@@ -28,24 +28,33 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
     const styles = {
       tabs: {
-        border:' 1px solid #585858',
         color: '#151515',
         background: 'rgba(0, 0, 0, 0)',
       },
       headline: {
+        border:' 1px solid #EEEFF2',
         fontWeight: 400,
         color: '#151515',
+        background: 'rgba(0, 0, 0, 0)',
       },
+      table:{
+        border:' 2px solid #EEEFF2',
+         background: 'rgba(0, 0, 0, 0)',
+      },
+      background:{
+        height:'90%',
+        opacity: .8,
+
+      }
     };
 
     return (
-      <div className="newBackground">
+      <div className="newBackground" style={styles.background}>
       <Tabs
       tabItemContainerStyle={styles.tabs}>
         <Tab label="Stats" style={styles.headline}>
           <div className="row center-xs">
           <div className="col-xs-6">
-            <h2 style={styles.headline}>Tab One</h2>
             <p>
               This is an example tab.
             </p>
@@ -89,6 +98,7 @@ class Profile extends Component {
                   <TableHeader
                     displaySelectAll={false}
                     adjustForCheckbox={false}
+                    style={styles.table}
                   >
                     <TableRow>
                       <TableHeaderColumn width={'25%'}>Category</TableHeaderColumn>
@@ -99,17 +109,17 @@ class Profile extends Component {
                   <TableBody
                     displayRowCheckbox={false}
                   >
-                    <TableRow>
+                    <TableRow style={styles.table}>
                       <TableRowColumn width={'25%'}>HTML</TableRowColumn>
                       <TableRowColumn width={'50%'}><LinearProgress mode="determinate" value={100} /></TableRowColumn>
                       <TableRowColumn width={'25%'}>44%</TableRowColumn>
                     </TableRow>
-                    <TableRow>
+                    <TableRow style={styles.table}>
                       <TableRowColumn width={'25%'}>CSS</TableRowColumn>
                       <TableRowColumn width={'50%'}><LinearProgress mode="determinate" color="red" value={57} /></TableRowColumn>
                       <TableRowColumn width={'25%'}>57%</TableRowColumn>
                     </TableRow>
-                    <TableRow>
+                    <TableRow style={styles.table}>
                       <TableRowColumn width={'25%'}>JavaScript</TableRowColumn>
                       <TableRowColumn width={'50%'}><LinearProgress mode="determinate" color="green" value={83} /></TableRowColumn>
                       <TableRowColumn width={'25%'}>83%</TableRowColumn>
