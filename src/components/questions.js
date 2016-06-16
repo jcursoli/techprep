@@ -190,9 +190,9 @@ export default class Questions extends Component  {
                 </TableHeaderColumn>
               </TableRow>
               <TableRow>
-                <TableHeaderColumn class="col-xs-1" style={{width: '76%'}} tooltip="Question">Question</TableHeaderColumn>
-                <TableHeaderColumn class="col-xs-1" style={{width: '10%'}} tooltip="Acceptance">Acceptance</TableHeaderColumn>
-                <TableHeaderColumn class="col-xs-10" style={{width: '10%'}} tooltip="Difficulty">Difficulty</TableHeaderColumn>
+                <TableHeaderColumn class="col-xs-1" style={{width: '78%'}} tooltip="Question">Question</TableHeaderColumn>
+                <TableHeaderColumn class="col-xs-1" style={{width: '11%'}} tooltip="Acceptance">Acceptance</TableHeaderColumn>
+                <TableHeaderColumn class="col-xs-10" style={{width: '11%'}} tooltip="Difficulty">Difficulty</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody
