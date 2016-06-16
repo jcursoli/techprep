@@ -4,8 +4,8 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 class Login extends Component {
-  handleFormSubmit({ username, password }) {
-    this.props.loginUser({ username, password });
+  handleFormSubmit({ email, password }) {
+    this.props.loginUser({ email, password });
   }
 
   renderError() {
@@ -15,13 +15,13 @@ class Login extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: { username, password }} = this.props;
+    const { handleSubmit, fields: { email, password }} = this.props;
 
     return (
       <div className="login">
         <h1>Welcome back</h1>
         <form className="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <input {...username} type="text" placeholder="Username" />
+          <input {...email} type="text" placeholder="Email" />
           <input {...password} type="password" placeholder="Password" />
           { this.renderError() }
           <button type="submit" id="login-button">Login</button>
@@ -45,6 +45,6 @@ function validate(formProps) {
 
 export default reduxForm({
   form: 'login',
-  fields: ['username','password'],
+  fields: ['email','password'],
   validate
 }, mapStateToProps, actions)(Login);
