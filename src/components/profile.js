@@ -28,14 +28,13 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
     const styles = {
       tabs: {
-        backgroundColor: 'white',
-        background: 'rgba(0, 0, 0, 0)'
+        border:' 1px solid #585858',
+        color: '#151515',
+        background: 'rgba(0, 0, 0, 0)',
       },
       headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
         fontWeight: 400,
+        color: '#151515',
       },
     };
 
@@ -43,10 +42,10 @@ class Profile extends Component {
       <div className="newBackground">
       <Tabs
       tabItemContainerStyle={styles.tabs}>
-        <Tab label="Stats" >
+        <Tab label="Stats" style={styles.headline}>
           <div className="row center-xs">
           <div className="col-xs-6">
-            <h2 style={styles.headline}>Tab One Yoooo</h2>
+            <h2 style={styles.headline}>Tab One</h2>
             <p>
               This is an example tab.
             </p>
@@ -56,9 +55,9 @@ class Profile extends Component {
             </div>
           </div>
         </Tab>
-        <Tab label="Item Two" >
-          <div>
-            <h2 style={styles.headline}>Tab Two</h2>
+        <Tab label="Item Two" style={styles.headline}>
+          <div >
+            <h2 >Tab Two</h2>
             <p>
               This is another example tab.
             </p>
@@ -102,7 +101,7 @@ class Profile extends Component {
                   >
                     <TableRow>
                       <TableRowColumn width={'25%'}>HTML</TableRowColumn>
-                      <TableRowColumn width={'50%'}><LinearProgress mode="determinate" value={44} /></TableRowColumn>
+                      <TableRowColumn width={'50%'}><LinearProgress mode="determinate" value={100} /></TableRowColumn>
                       <TableRowColumn width={'25%'}>44%</TableRowColumn>
                     </TableRow>
                     <TableRow>
