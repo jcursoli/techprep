@@ -125,7 +125,10 @@ export default class Questions extends Component  {
       open: false,
       question: '',
       answer: '',
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
       showAnswer: false,
+=======
+>>>>>>> [Add] Adds a question page with dialogs
       selectedRow: null
     };
 
@@ -135,11 +138,18 @@ export default class Questions extends Component  {
   handleClose() {
     this.setState({open: false});
   };
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
   
   showAnswer() {
     document.getElementById("answer").style.visibility = 'visible';
     //this.setState({showAnswer: true})
   }
+=======
+  // showAnswer() {
+  //   //document.getElementById("answer").style.visibility = hidden;
+  //   // answer.style.visibility = visibility;
+  // }
+>>>>>>> [Add] Adds a question page with dialogs
   
   render() {
      
@@ -153,7 +163,11 @@ export default class Questions extends Component  {
           label="Show Answer"
           primary={true}
           keyboardFocused={true}
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
           onTouchTap={this.showAnswer}
+=======
+          onTouchTap={this.handleClose}
+>>>>>>> [Add] Adds a question page with dialogs
         />,
       ];
 
@@ -179,6 +193,10 @@ export default class Questions extends Component  {
             fixedFooter={this.state.fixedFooter}
             selectable={this.state.selectable}
             multiSelectable={this.state.multiSelectable}
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
+=======
+            table-layout='auto'
+>>>>>>> [Add] Adds a question page with dialogs
           >
             <TableHeader
               displaySelectAll={this.state.showCheckboxes}
@@ -191,9 +209,15 @@ export default class Questions extends Component  {
                 </TableHeaderColumn>
               </TableRow>
               <TableRow>
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
                 <TableHeaderColumn class="col-xs-1" style={{width: '78%'}} tooltip="Question">Question</TableHeaderColumn>
                 <TableHeaderColumn class="col-xs-1" style={{width: '11%'}} tooltip="Acceptance">Acceptance</TableHeaderColumn>
                 <TableHeaderColumn class="col-xs-10" style={{width: '11%'}} tooltip="Difficulty">Difficulty</TableHeaderColumn>
+=======
+                <TableHeaderColumn class="col-xs-1" style={{width: '76%'}} tooltip="Question">Question</TableHeaderColumn>
+                <TableHeaderColumn class="col-xs-1" style={{width: '10%'}} tooltip="Acceptance">Acceptance</TableHeaderColumn>
+                <TableHeaderColumn class="col-xs-10" style={{width: '10%'}} tooltip="Difficulty">Difficulty</TableHeaderColumn>
+>>>>>>> [Add] Adds a question page with dialogs
               </TableRow>
             </TableHeader>
             <TableBody
@@ -206,6 +230,10 @@ export default class Questions extends Component  {
                 
                 const handleOpen = () => {
                   this.setState({open: true, question: tableData[index]['question'], answer: tableData[index]['answer']});
+<<<<<<< d41e08d5ed0605ae8bf678d57eb6a267e2f1be6f
+=======
+                  console.log(this.state);
+>>>>>>> [Add] Adds a question page with dialogs
                 };
 
                 return (
