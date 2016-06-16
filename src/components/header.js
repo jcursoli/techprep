@@ -82,7 +82,8 @@ class Header extends Component {
   }
 
   handleTap(route) {
-    this.handleClose();
+    this.handleLeftClose();
+    this.handleRightClose();
     browserHistory.push(route);
   }
 
@@ -122,7 +123,7 @@ class Header extends Component {
           showMenuIconButton={this.props.authenticated ? true : false}
           style={style.appBar}
           zDepth={1}
-          onLeftIconButtonTouchTap={this.handleRightToggle.bind(this)}
+          onLeftIconButtonTouchTap={this.handleLeftToggle.bind(this)}
           title={<Link style={style.title} to="/">TechPrep</Link>}
           children={
               <div>
@@ -133,20 +134,20 @@ class Header extends Component {
           <Drawer
             docked={false}
             width={200}
-            open={this.state.rightOpen}
-            onRequestChange={(rightOpen) => this.setState({rightOpen})}
+            open={this.state.leftOpen}
+            onRequestChange={(leftOpen) => this.setState({leftOpen})}
           >
             <List>
               <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/friends')} primaryText="Friends" leftIcon={<Group />} />
-              <ListItem onTouchTap={this.handleLeftToggle.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
+              <ListItem onTouchTap={this.handleRightToggle.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
             </List>
           </Drawer>
-          <Drawer width={400} openSecondary={true} open={this.state.leftOpen} >
+          <Drawer docked={false} width={300} openSecondary={true} open={this.state.rightOpen} onRequestChange={(rightOpen) => this.setState({rightOpen})}>
             <List>
               <ListItem
                 leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
