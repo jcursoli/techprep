@@ -116,10 +116,6 @@ form button:hover {
   background-color: #f5f7f9;
 }
 
-#answer {
-  visibility: hidden;
-}
-
 table {
   table-layout: auto !important;
 }
