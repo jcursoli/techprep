@@ -4,26 +4,15 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import LinearProgress from 'material-ui/LinearProgress';
 
 		const styles = {
-     tabs: {
-       color: '#151515',
-       background: 'rgba(0, 0, 0, 0)',
-     },
-     headline: {
-       fontWeight: 400,
-       color: '#151515',
-       background: 'rgba(0, 0, 0, 0)',
-     },
      table:{
        border:' 2px solid #EEEFF2',
-        background: 'rgba(0, 0, 0, 0)',
-        width:'85%',
-        display: 'flex',
+     },
+     align:{
+     	marginTop: 12,
+	      width:'85%',
+	      display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
-     },
-     background:{
-       height:'90%',
-       opacity: .8,
      }
    };
 
@@ -31,7 +20,7 @@ import LinearProgress from 'material-ui/LinearProgress';
  	render(){
  		console.log('rendering userprogress')
 	return (
- 		<div className="box" style={styles.table}>
+ 		<div className="box" style={styles.align}>
  		  <Table
  		    selectable={false}
  		  >

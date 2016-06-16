@@ -8,6 +8,23 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
 
+  const styles = {
+      tabs: {
+        color: '#151515',
+        background: 'rgba(0, 0, 0, 0)',
+      },
+      headline: {
+        border:' 1px solid #EEEFF2',
+        fontWeight: 400,
+        color: '#151515',
+        background: 'rgba(0, 0, 0, 0)',
+      },
+      background:{
+        height:'90%',
+
+      },
+    };
+
 class Profile extends Component {
   handleActive(tab) {
     console.log('Handle active');
@@ -26,22 +43,6 @@ class Profile extends Component {
 
   render() {
     const { handleSubmit, fields: {}} = this.props;
-    const styles = {
-      tabs: {
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
-      headline: {
-        border:' 1px solid #EEEFF2',
-        fontWeight: 400,
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
-      background:{
-        height:'90%',
-
-      },
-    };
 
     return (
       <div className="newBackground" style={styles.background}>
@@ -49,7 +50,7 @@ class Profile extends Component {
       tabItemContainerStyle={styles.tabs}>
         <Tab label="Stats" style={styles.headline}>
           <div className="row center-xs">
-            <p>
+            <p color="black">
               This is an example tab.
             </p>
             <p>
