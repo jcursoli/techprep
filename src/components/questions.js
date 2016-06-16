@@ -125,10 +125,12 @@ export default class Questions extends Component  {
       open: false,
       question: '',
       answer: '',
-      showAnswer: false,
-      selectedRow: null
+      revealAnswer: false,
+      selectedRow: null, 
+      buttonName: ''
     };
 
+    this.showAnswer = this.showAnswer.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -137,8 +139,11 @@ export default class Questions extends Component  {
   };
   
   showAnswer() {
-    document.getElementById("answer").style.visibility = 'visible';
-    //this.setState({showAnswer: true})
+    if(this.state.revealAnswer) {
+      this.setState({revealAnswer: false, buttonName: 'Show Answer'});
+    } else {
+      this.setState({revealAnswer: true, buttonName: 'Hide Answer'});
+    }
   }
 
   render() {
@@ -150,7 +155,7 @@ export default class Questions extends Component  {
           onTouchTap={this.handleClose}
         />,
         <FlatButton
-          label="Show Answer"
+          label={this.state.buttonName}
           primary={true}
           keyboardFocused={true}
           onTouchTap={this.showAnswer}
@@ -167,7 +172,7 @@ export default class Questions extends Component  {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            <div id="answer"> {this.state.answer} </div>
+            <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
             
           </Dialog>
         </div>
@@ -206,9 +211,13 @@ export default class Questions extends Component  {
               {tableData.map((row, index) => {
                 
                 const handleOpen = () => {
-                  this.setState({open: true, question: tableData[index]['question'], answer: tableData[index]['answer']});
-
-                };
+                  this.setState({
+                    open: true, 
+                    question: tableData[index]['question'], 
+                    answer: tableData[index]['answer'], 
+                    revealAnswer: false, 
+                    buttonName: 'Show Answer'});
+                  };
 
                 return (
                   <TableRow key={index}>
