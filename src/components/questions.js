@@ -53,11 +53,20 @@ class Questions extends Component {
     return (
       <div>
         <div id="stay">
-          <Dialog 
-            question={this.state.question}
-            localOpen={this.state.open} 
-            localHandleClose={this.handleClose.bind(this)}
-            currentUser={this.state.currentUser} />
+        <div>
+          <Dialog
+            title={this.state.question}
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+            repositionOnUpdate={false}
+            style={{position: 'absolute', bottom: '50%'}}
+          >
+
+            <div id="answer"> {this.state.answer} </div>
+          </Dialog>
+            </div>
         </div>
         <div>
           <Table
