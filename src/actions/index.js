@@ -5,7 +5,7 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   INITIALIZE_USER,
-  SIGNOUT_USER
+  SIGNOUT_USER,
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 

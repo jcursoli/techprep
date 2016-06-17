@@ -1,6 +1,12 @@
 import firebase from 'firebase';
 import { store } from '../index';
-import { INITIALIZE_USER, INITIALIZE_FRIENDS, INITIALIZE_CHAT } from '../actions/actionTypes';
+import {
+  AUTH_USER,
+  INITIALIZE_USER,
+  INITIALIZE_FRIENDS,
+  INITIALIZE_CHAT,
+  LOAD_QUESTIONS
+ } from '../actions/actionTypes';
 var config = {
   apiKey: "AIzaSyBBBowxlfghEwetZ6tP6On58nQ30kqHT6M",
   authDomain: "mks38thesis.firebaseapp.com",
@@ -12,10 +18,16 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      dispatch({ type: AUTH_USER });
+      store.dispatch({ type: AUTH_USER });
       //make dispatches to populate state that's needed
       console.log('User logged in/signed up (in onAuthStateChanged)');
-      console.log('user:', user);
+      var questionsRef = firebase.database().ref('/questions');
+
+      questionsRef.on("value", function(snapshot) {
+        store.dispatch({ type: LOAD_QUESTIONS, payload: snapshot.val().questions});
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
       store.dispatch({ type: INITIALIZE_FRIENDS });
       store.dispatch({ type: INITIALIZE_CHAT });
     } else {
