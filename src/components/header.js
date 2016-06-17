@@ -14,6 +14,7 @@ import Assignment from 'material-ui/svg-icons/action/assignment';
 import Arrows from 'material-ui/svg-icons/action/compare-arrows';
 import Help from 'material-ui/svg-icons/action/help';
 import Message from 'material-ui/svg-icons/communication/message';
+import NavMenu from 'material-ui/svg-icons/navigation/menu';
 
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -23,25 +24,10 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import Badge from 'material-ui/Badge';
 
-
-const iconButtonElement = (
-  <IconButton
-    touch={true}
-    tooltip="more"
-    tooltipPosition="bottom-left"
-  >
-    <MoreVertIcon color={grey400} />
-  </IconButton>
-);
-
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Reply</MenuItem>
-    <MenuItem>Forward</MenuItem>
-    <MenuItem>Delete</MenuItem>
-  </IconMenu>
-);
+import Chat from './chat/chat';
+import Friends from './friends/friends';
 
 const style = {
   appBar: {
@@ -57,34 +43,48 @@ const style = {
   title: {
     textDecoration: 'none',
     color: 'white'
+  },
+  menu: {
+    color: 'white'
   }
 }
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {rightOpen: false, leftOpen: false};
+    this.state = { menu: false, chat: false, friends: false };
   }
 
-  handleRightToggle() {
-    this.setState({rightOpen: !this.state.rightOpen});
+  handleChatToggle() {
+    this.handleFriendsClose();
+    this.setState({ chat: !this.state.chat });
   }
 
-  handleRightClose() {
-    this.setState({rightOpen: false});
+  handleChatClose() {
+    this.setState({ chat: false });
   }
 
-  handleLeftToggle() {
-    this.setState({leftOpen: !this.state.leftOpen});
+  handleFriendsToggle() {
+    this.handleChatClose();
+    this.setState({ friends: !this.state.friends });
   }
 
-  handleLeftClose() {
-    this.setState({leftOpen: false});
+  handleFriendsClose() {
+    this.setState({ friends: false });
+  }
+
+  handleMenuToggle() {
+    this.setState({ menu: !this.state.menu });
+  }
+
+  handleMenuClose() {
+    this.setState({ menu: false });
   }
 
   handleTap(route) {
-    this.handleLeftClose();
-    this.handleRightClose();
+    this.handleFriendsClose();
+    this.handleMenuClose();
+    this.handleChatClose();
     browserHistory.push(route);
   }
 
@@ -124,7 +124,7 @@ class Header extends Component {
           showMenuIconButton={this.props.authenticated ? true : false}
           style={style.appBar}
           zDepth={1}
-          onLeftIconButtonTouchTap={this.handleLeftToggle.bind(this)}
+          onLeftIconButtonTouchTap={this.handleMenuToggle.bind(this)}
           title={<Link style={style.title} to="/">TechPrep</Link>}
           children={
               <div>
@@ -135,88 +135,24 @@ class Header extends Component {
           <Drawer
             docked={false}
             width={200}
-            open={this.state.leftOpen}
-            onRequestChange={(leftOpen) => this.setState({leftOpen})}
+            open={this.state.menu}
+            onRequestChange={(menu) => this.setState({menu})}
           >
             <List>
               <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/friends')} primaryText="Friends" leftIcon={<Group />} />
-              <ListItem onTouchTap={this.handleRightToggle.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
+              <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />
+              <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText={<div><div>Inbox</div><div className="badgeNumber">4</div></div>} leftIcon={<Message />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/questions')} primaryText="Interview Questions" leftIcon={<Arrows />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
             </List>
           </Drawer>
-          <Drawer docked={false} width={300} openSecondary={true} open={this.state.rightOpen} onRequestChange={(rightOpen) => this.setState({rightOpen})}>
-            <List>
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-            </List>
+          <Drawer docked={false} width={300} openSecondary={true} open={this.state.chat} onRequestChange={(chat) => this.setState({chat})}>
+            <Chat />
+          </Drawer>
+          <Drawer docked={false} width={300} openSecondary={true} open={this.state.friends} onRequestChange={(friends) => this.setState({friends})}>
+            <Friends />
           </Drawer>
         </div>
     );

@@ -4,6 +4,8 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
+  INITIALIZE_USER,
+  SIGNOUT_USER,
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -14,6 +16,11 @@ export function loginUser({ email, password }) {
     firebase.signInWithEmailAndPassword(email, password).then(user => {
       console.log('user after login:', user);
       dispatch({ type: AUTH_USER });
+      dispatch({ type: INITIALIZE_USER, payload: {
+        email: user.email,
+        uid: user.uid,
+        photoURL: user.photoURL
+      } });
       browserHistory.push('/welcome');
     }).catch(function(error) {
       var errorCode = error.code;
@@ -29,6 +36,11 @@ export function signupUser({ email, password }) {
       firebase.createUserInDatabase();
       console.log('then inside signup');
       dispatch({ type: AUTH_USER });
+      dispatch({ type: INITIALIZE_USER, payload: {
+        email: user.email,
+        uid: user.uid,
+        photoURL: user.photoURL
+      } });
       browserHistory.push('/welcome');
     }).catch(function(error) {
       console.log('error:', error);
@@ -43,6 +55,7 @@ export function signoutUser() {
   return function(dispatch) {
     firebase.signOutUser().then(function() {
       dispatch({ type: UNAUTH_USER });
+      dispatch({ type: SIGNOUT_USER });
     }, function(error) {
       // error
       console.log('Error:', error);
