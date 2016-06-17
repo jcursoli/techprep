@@ -67,24 +67,13 @@ export default class Questions extends Component  {
   render() {
 
     const actions = [
-      <FlatButton
-        label="Close"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label={this.state.buttonName}
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.showAnswer}
-      />,
       <Comments hintText="Show Comments" />
 
     ];
 
     return (
       <div>
-        <div>
+        <div id="stay">
         <div>
           <Dialog
             title={this.state.question}
@@ -92,8 +81,10 @@ export default class Questions extends Component  {
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
+            repositionOnUpdate={false}
+            style={{position: 'absolute', button: '50%'}}
           >
-            <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
+            <div id="answer"> {this.state.answer} </div>
           </Dialog>
             </div>
         </div>
@@ -137,8 +128,9 @@ export default class Questions extends Component  {
                     question: this.state.tableData[index]['question'], 
                     answer: this.state.tableData[index]['answer'], 
                     revealAnswer: false, 
-                    buttonName: 'Show Answer'});
-                  };
+                    buttonName: 'Show Answer'
+                  });
+                };
 
                 return (
                   <TableRow key={index}>
