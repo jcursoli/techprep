@@ -16,7 +16,6 @@ export function loginUser({ email, password }) {
       dispatch({ type: AUTH_USER });
       browserHistory.push('/welcome');
     }).catch(function(error) {
-      // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
       dispatch(authError(errorMessage));
@@ -27,11 +26,12 @@ export function loginUser({ email, password }) {
 export function signupUser({ email, password }) {
   return function(dispatch) {
     firebase.createUserWithEmailAndPassword(email, password).then(response => {
-      console.log('inside auth signup')
+      firebase.createUserInDatabase();
+      console.log('then inside signup');
       dispatch({ type: AUTH_USER });
       browserHistory.push('/welcome');
     }).catch(function(error) {
-      console.log('inside auth signup erro is =>>',error);
+      console.log('error:', error);
       var errorCode = error.code;
       var errorMessage = error.message;
       dispatch(authError(errorMessage));
