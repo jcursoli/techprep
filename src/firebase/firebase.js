@@ -11,7 +11,6 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log('user is:', user);
       console.log('if user');
     } else {
       console.log('if user else');
@@ -19,7 +18,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 export function signInWithEmailAndPassword(email, password) {
-  addQuestionsToDatabase();
+  // addQuestionsToDatabase();
   return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
@@ -131,4 +130,17 @@ export function addQuestionsToDatabase() {
       answer: '$resource is a REST wrapper for $http that simplifies the boilerplate code needed to interact with web services (provided they adhere to REST). Personally I love it, but there are times when it\'s not feasible to use it (i.e., you don\'t control the API you\'re hitting and its not RESTful... although you could always stand up a Node/Express proxy in that case.'
     }
   ]});
+}
+
+export function createUserInDatabase() {
+  var user = firebase.auth().currentUser;
+  console.log('user:', user);
+  var userRef = firebase.database().ref('users/' + user.uid);
+  userRef.set({
+    email: user.email,
+    friends: [],
+    profileURL: 'http://i.imgur.com/DRuG5YH.png',
+    messages: [],
+    answered: []
+  });
 }

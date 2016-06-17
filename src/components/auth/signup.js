@@ -7,18 +7,17 @@ import * as actions from '../../actions';
 
 class Signup extends Component {
 
-  handleFormSubmit({ email, username, password }) {
-    this.props.signupUser({ email, username, password });
+  handleFormSubmit({ email, password }) {
+    this.props.signupUser({ email, password });
   }
 
   render() {
-    const { handleSubmit, fields: { email, username, password, confirmPassword }} = this.props;
+    const { handleSubmit, fields: { email, password, confirmPassword }} = this.props;
 
     return (
       <div className="login">
         <h1>Welcome to TechPrep</h1>
         <form className="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <input {...username} type="text" placeholder="Username" />
           <input {...email} type="email" placeholder="Email" />
           <input {...password} type="password" placeholder="Password" />
           <input {...confirmPassword} type="password" placeholder="Confirm Password" />
@@ -43,6 +42,6 @@ function validate(formProps) {
 
 export default reduxForm({
   form: 'signup',
-  fields: ['email', 'username', 'password', 'confirmPassword'],
+  fields: ['email', 'password', 'confirmPassword'],
   validate
 }, mapStateToProps, actions)(Signup);
