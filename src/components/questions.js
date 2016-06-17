@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
   from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
@@ -7,20 +8,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class Questions extends Component  {
+class Questions extends Component {
 
   constructor(props) {
     super(props);
 
-    var that = this;
-    var ref = firebase.database().ref('/questions');
-    
-    ref.on("value", function(snapshot) {
-      that.setState({tableData : snapshot.val().questions});
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
-    
     this.state = {
       fixedHeader: true,
       fixedFooter: false,
@@ -36,9 +28,8 @@ export default class Questions extends Component  {
       question: '',
       answer: '',
       revealAnswer: false,
-      selectedRow: null, 
+      selectedRow: null,
       buttonName: 'Show Answer',
-      tableData: []
     };
 
     this.showAnswer = this.showAnswer.bind(this);
@@ -48,7 +39,7 @@ export default class Questions extends Component  {
   handleClose() {
     this.setState({open: false});
   };
-  
+
   showAnswer() {
     if(this.state.revealAnswer) {
       this.setState({revealAnswer: false, buttonName: 'Show Answer'});
@@ -58,7 +49,7 @@ export default class Questions extends Component  {
   }
 
   render() {
-     
+
      const actions = [
         <FlatButton
           label="Close"
@@ -84,7 +75,7 @@ export default class Questions extends Component  {
             onRequestClose={this.handleClose}
           >
             <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
-            
+
           </Dialog>
         </div>
 
@@ -119,14 +110,14 @@ export default class Questions extends Component  {
               showRowHover={this.state.showRowHover}
               stripedRows={this.state.stripedRows}
             >
-              {this.state.tableData.map((row, index) => {
-                
+              {this.props.questions.map((row, index) => {
+
                 const handleOpen = () => {
                   this.setState({
-                    open: true, 
-                    question: this.state.tableData[index]['question'], 
-                    answer: this.state.tableData[index]['answer'], 
-                    revealAnswer: false, 
+                    open: true,
+                    question: this.props.questions[index]['question'],
+                    answer: this.props.questions[index]['answer'],
+                    revealAnswer: false,
                     buttonName: 'Show Answer'});
                   };
 
@@ -145,3 +136,8 @@ export default class Questions extends Component  {
   }
 }
 
+function mapStateToProps(state) {
+  return { questions: state.questions };
+}
+
+export default connect(mapStateToProps)(Questions);

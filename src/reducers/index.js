@@ -4,12 +4,14 @@ import auth from './authReducer';
 import friends from './friendsReducer';
 import user from './userReducer';
 import chat from './chatReducer';
+import questions from './questionsReducer';
 
 const rootReducer = combineReducers({
   form,
   auth,
   friends,
-  user
+  user,
+  questions
 });
 
 export default rootReducer;

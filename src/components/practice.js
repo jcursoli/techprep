@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as actions from '../actions';
+import { browserHistory } from 'react-router';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -7,7 +8,7 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
-	const contents = [{title: '<html/>', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
+	const contents = [{title: 'HTML', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
 										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
 										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
 										];
@@ -43,6 +44,7 @@ export default class Practice extends Component {
   }
 		handleClick(categoryClicked){
 		console.log('handleClick clicked now',categoryClicked.title);
+    browserHistory.push('/questions');
 	}
 	renderElements(category){
 		return (

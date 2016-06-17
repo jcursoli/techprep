@@ -145,7 +145,6 @@ class Header extends Component {
               <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />
               <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText={<div><div>Inbox</div><div className="badgeNumber">4</div></div>} leftIcon={<Message />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/questions')} primaryText="Interview Questions" leftIcon={<Arrows />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
             </List>
           </Drawer>
