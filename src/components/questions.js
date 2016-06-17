@@ -7,6 +7,8 @@ import Toggle from 'material-ui/Toggle';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import Comments from './comments';
 
 class Questions extends Component {
 
@@ -30,11 +32,16 @@ class Questions extends Component {
       revealAnswer: false,
       selectedRow: null,
       buttonName: 'Show Answer',
+      tableData: []
     };
-
-    this.showAnswer = this.showAnswer.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.showAnswer = this.showAnswer.bind(this);
   }
+
+  handleOpen() {
+    this.setState({open: true});
+  };
 
   handleClose() {
     this.setState({open: false});
@@ -50,22 +57,14 @@ class Questions extends Component {
 
   render() {
 
-     const actions = [
-        <FlatButton
-          label="Close"
-          primary={true}
-          onTouchTap={this.handleClose}
-        />,
-        <FlatButton
-          label={this.state.buttonName}
-          primary={true}
-          keyboardFocused={true}
-          onTouchTap={this.showAnswer}
-        />,
-      ];
+    const actions = [
+      <Comments hintText="Show Comments" />
+
+    ];
 
     return (
       <div>
+        <div id="stay">
         <div>
           <Dialog
             title={this.state.question}
@@ -73,10 +72,13 @@ class Questions extends Component {
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
+            repositionOnUpdate={false}
+            style={{position: 'absolute', button: '50%'}}
           >
-            <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
 
+            <div id="answer"> {this.state.answer} </div>
           </Dialog>
+            </div>
         </div>
 
         <div>
@@ -114,12 +116,14 @@ class Questions extends Component {
 
                 const handleOpen = () => {
                   this.setState({
-                    open: true,
-                    question: this.props.questions[index]['question'],
-                    answer: this.props.questions[index]['answer'],
-                    revealAnswer: false,
-                    buttonName: 'Show Answer'});
-                  };
+
+                    open: true, 
+                    question: this.state.tableData[index]['question'], 
+                    answer: this.state.tableData[index]['answer'], 
+                    revealAnswer: false, 
+                    buttonName: 'Show Answer'
+                  });
+                };
 
                 return (
                   <TableRow key={index}>
