@@ -11,14 +11,11 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log('user is:', user);
       console.log('if user');
     } else {
       console.log('if user else');
     }
 });
-var ref = firebase.database().ref();
-ref.set({ testing: 188989 });
 
 export function signInWithEmailAndPassword(email, password) {
   return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -30,4 +27,17 @@ export function createUserWithEmailAndPassword(email, password) {
 
 export function signOutUser() {
   return firebase.auth().signOut();
+}
+
+export function createUserInDatabase() {
+  var user = firebase.auth().currentUser;
+  console.log('user:', user);
+  var userRef = firebase.database().ref('users/' + user.uid);
+  userRef.set({
+    email: user.email,
+    friends: [],
+    profileURL: 'http://i.imgur.com/DRuG5YH.png',
+    messages: [],
+    answered: []
+  });
 }
