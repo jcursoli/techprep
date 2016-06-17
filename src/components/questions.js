@@ -6,6 +6,8 @@ import Toggle from 'material-ui/Toggle';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import Comments from './comments';
 
 export default class Questions extends Component  {
 
@@ -39,15 +41,20 @@ export default class Questions extends Component  {
       selectedRow: null, 
       buttonName: 'Show Answer',
       tableData: []
-    };
 
-    this.showAnswer = this.showAnswer.bind(this);
+    };
+    this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.showAnswer = this.showAnswer.bind(this);
   }
+
+  handleOpen() {
+    this.setState({open: true});
+  };
 
   handleClose() {
     this.setState({open: false});
-  };
+  }
   
   showAnswer() {
     if(this.state.revealAnswer) {
@@ -58,23 +65,29 @@ export default class Questions extends Component  {
   }
 
   render() {
-     
-     const actions = [
-        <FlatButton
-          label="Close"
-          primary={true}
-          onTouchTap={this.handleClose}
-        />,
-        <FlatButton
-          label={this.state.buttonName}
-          primary={true}
-          keyboardFocused={true}
-          onTouchTap={this.showAnswer}
-        />,
-      ];
+
+    const actions = [
+      <FlatButton
+        label="Close"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label={this.state.buttonName}
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.showAnswer}
+      />,
+    ];
+    
+    const comments = [
+      { username: 'brad', comment: 'hi guys' },
+      { username: 'peter', comment: 'hello'}
+    ];
 
     return (
       <div>
+        <div>
         <div>
           <Dialog
             title={this.state.question}
@@ -84,8 +97,9 @@ export default class Questions extends Component  {
             onRequestClose={this.handleClose}
           >
             <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
-            
+            <Comments hintText="Show Comments" />
           </Dialog>
+            </div>
         </div>
 
         <div>
