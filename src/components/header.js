@@ -224,6 +224,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('this is in the mapstatetoprops', state.auth.authenticated)
   return { authenticated: state.auth.authenticated };
 }
 
