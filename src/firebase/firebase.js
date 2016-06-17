@@ -17,8 +17,6 @@ firebase.auth().onAuthStateChanged(function(user) {
       console.log('if user else');
     }
 });
-var ref = firebase.database().ref();
-ref.set({ testing: 188989 });
 
 export function signInWithEmailAndPassword(email, password) {
   return firebase.auth().signInWithEmailAndPassword(email, password);
