@@ -50,7 +50,7 @@ class Profile extends Component {
       tabItemContainerStyle={styles.tabs}>
         <Tab label="Stats" style={styles.headline}>
           <div className="row center-xs">
-            <p color="black">
+            <p>
               This is an example tab.
             </p>
             <p>
