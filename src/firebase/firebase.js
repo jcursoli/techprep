@@ -12,9 +12,12 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      dispatch({ type: AUTH_USER });
       //make dispatches to populate state that's needed
       console.log('User logged in/signed up (in onAuthStateChanged)');
-      store.dispatch({ type: INITIALIZE_FRIENDS })
+      console.log('user:', user);
+      store.dispatch({ type: INITIALIZE_FRIENDS });
+      store.dispatch({ type: INITIALIZE_CHAT });
     } else {
       //clear state
       console.log('User logged out (in onAuthStateChanged)');

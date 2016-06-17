@@ -24,6 +24,8 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
+import Chat from './chat/chat';
+
 
 const iconButtonElement = (
   <IconButton
@@ -150,73 +152,7 @@ class Header extends Component {
             </List>
           </Drawer>
           <Drawer docked={false} width={300} openSecondary={true} open={this.state.rightOpen} onRequestChange={(rightOpen) => this.setState({rightOpen})}>
-            <List>
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-              <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-                rightIconButton={rightIconMenu}
-                primaryText="Drew Baugher"
-                secondaryText={
-                  <p>
-                  <span style={{color: 'black'}}>Brunch this weekend?</span><br />
-                    I'll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                  </p>
-                }
-                secondaryTextLines={2}
-              />
-              <Divider inset={false} />
-            </List>
+            <Chat />
           </Drawer>
         </div>
     );
@@ -224,6 +160,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('mapstatetoprops stateauth',state.auth.authenticated);
   return { authenticated: state.auth.authenticated };
 }
 
