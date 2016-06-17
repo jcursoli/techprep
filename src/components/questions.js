@@ -81,8 +81,6 @@ export default class Questions extends Component  {
       <Comments hintText="Show Comments" />
 
     ];
-    
-    
 
     return (
       <div>
