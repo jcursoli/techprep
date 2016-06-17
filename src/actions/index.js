@@ -10,9 +10,9 @@ import * as firebase from '../firebase/firebase';
 const ROOT_URL = 'http://localhost:8000';
 
 export function loginUser({ email, password }) {
-  console.log('email:', email, 'password:', password);
   return function(dispatch) {
-    firebase.signInWithEmailAndPassword(email, password).then((response) => {
+    firebase.signInWithEmailAndPassword(email, password).then(user => {
+      console.log('user after login:', user);
       dispatch({ type: AUTH_USER });
       browserHistory.push('/welcome');
     }).catch(function(error) {
@@ -25,7 +25,7 @@ export function loginUser({ email, password }) {
 
 export function signupUser({ email, password }) {
   return function(dispatch) {
-    firebase.createUserWithEmailAndPassword(email, password).then(response => {
+    firebase.createUserWithEmailAndPassword(email, password).then(user => {
       firebase.createUserInDatabase();
       console.log('then inside signup');
       dispatch({ type: AUTH_USER });
