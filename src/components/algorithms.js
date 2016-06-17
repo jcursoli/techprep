@@ -17,20 +17,21 @@ const style = {
 		marginBottom:'20px',
 		border:' 4px solid #EEEFF2',
 		background:'black',
-		color:'red', 
+		color:'white', 
 		display:'inline',
 		fontweight: '600',
 	},
 	compiler:{
 		display: 'flex',
 		alignItems: 'center',
+		marginLeft:'200px'
 	},
 	button:{
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		width: '10%px', 
-		height: '30px',
+		height: '40%',
 		margin: '20px', 
 		padding: '4px',
 		margin:' 20px',
@@ -52,7 +53,7 @@ class Algorithms extends Component {
 	this.state = {
 		editorContents: 'function toyProblem(a,b){ \n //enter code here \n }',
 		language: 'javascript',
-		error: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
 		};
 		this.editorChanged = this.editorChanged.bind(this);
 		this.runCode = this.runCode.bind(this);
@@ -67,14 +68,18 @@ class Algorithms extends Component {
 		var lastIndex = this.state.editorContents.lastIndexOf('}');
 		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
 		try{
-			this.setState({error:''});
+			this.setState({output:''});
 				userFunction = new Function(functionBody);
 		}
 		catch(err){
 			console.log(err);
-			this.setState({error:'Syntax Error cannot run'});
+			this.setState({output:'Syntax output cannot run'});
 		}
-		console.log('this is the editor contents',userFunction);
+		if(userFunction){
+			var output = userFunction();
+			this.setState({output})
+
+		}
 	}
 
 	render(){
@@ -85,8 +90,8 @@ class Algorithms extends Component {
 					<div  style={{color:'black', margin:'20px'}}>
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 					</div>
-						<span style={style.compiler}>
-							<div style={style.output}>{this.state.error}</div>
+						<div style={style.compiler}>
+							<div style={style.output}>{this.state.output}</div>
 							<div style={style.editor}>
 								<AceEditor
 									height={'300px'}
@@ -99,7 +104,7 @@ class Algorithms extends Component {
 								  editorProps={{$blockScrolling: true}}
 								/>
 							</div>
-						</span>
+						</div>
 						<button onClick={this.runCode} style={style.button}>Run</button>
 				</div>
 			</div>
