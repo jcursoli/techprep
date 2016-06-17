@@ -1,5 +1,6 @@
 import firebase from 'firebase';
-
+import { store } from '../index';
+import { INITIALIZE_USER, INITIALIZE_FRIENDS, INITIALIZE_CHAT } from '../actions/actionTypes';
 var config = {
   apiKey: "AIzaSyBBBowxlfghEwetZ6tP6On58nQ30kqHT6M",
   authDomain: "mks38thesis.firebaseapp.com",
@@ -11,9 +12,12 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log('if user');
+      //make dispatches to populate state that's needed
+      console.log('User logged in/signed up (in onAuthStateChanged)');
+      store.dispatch({ type: INITIALIZE_FRIENDS })
     } else {
-      console.log('if user else');
+      //clear state
+      console.log('User logged out (in onAuthStateChanged)');
     }
 });
 
