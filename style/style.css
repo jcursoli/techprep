@@ -120,4 +120,20 @@ table {
   table-layout: auto !important;
 }
 
-
+.badgeNumber {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  position: absolute;
+  top: 12px;
+  right: 50px;
+  font-weight: 500;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 64, 129);
+}

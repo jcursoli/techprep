@@ -14,6 +14,7 @@ import Assignment from 'material-ui/svg-icons/action/assignment';
 import Arrows from 'material-ui/svg-icons/action/compare-arrows';
 import Help from 'material-ui/svg-icons/action/help';
 import Message from 'material-ui/svg-icons/communication/message';
+import NavMenu from 'material-ui/svg-icons/navigation/menu';
 
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -23,6 +24,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import Badge from 'material-ui/Badge';
 
 import Chat from './chat/chat';
 import Friends from './friends/friends';
@@ -40,6 +42,9 @@ const style = {
   },
   title: {
     textDecoration: 'none',
+    color: 'white'
+  },
+  menu: {
     color: 'white'
   }
 }
@@ -138,7 +143,7 @@ class Header extends Component {
               <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
               <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />
-              <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText="Inbox" leftIcon={<Message />} />
+              <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText={<div><div>Inbox</div><div className="badgeNumber">4</div></div>} leftIcon={<Message />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/questions')} primaryText="Interview Questions" leftIcon={<Arrows />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
