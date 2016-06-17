@@ -78,7 +78,8 @@ export default class Questions extends Component  {
         keyboardFocused={true}
         onTouchTap={this.showAnswer}
       />,
-      <Comments />
+      <Comments hintText="Show Comments" />
+
     ];
     
     
@@ -95,7 +96,6 @@ export default class Questions extends Component  {
             onRequestClose={this.handleClose}
           >
             <div id="answer"> {this.state.revealAnswer ? this.state.answer : ''} </div>
-            
           </Dialog>
             </div>
         </div>
