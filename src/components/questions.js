@@ -73,7 +73,7 @@ class Questions extends Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
             repositionOnUpdate={false}
-            style={{position: 'absolute', button: '50%'}}
+            style={{position: 'absolute', bottom: '50%'}}
           >
 
             <div id="answer"> {this.state.answer} </div>
@@ -118,11 +118,12 @@ class Questions extends Component {
                   this.setState({
 
                     open: true, 
-                    question: this.state.tableData[index]['question'], 
-                    answer: this.state.tableData[index]['answer'], 
+                    question: this.props.questions[index]['question'], 
+                    answer: this.props.questions[index]['answer'], 
                     revealAnswer: false, 
                     buttonName: 'Show Answer'
                   });
+                  console.log(this.state.question);
                 };
 
                 return (
