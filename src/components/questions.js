@@ -106,10 +106,10 @@ export default class Questions extends Component  {
                   Interview Questions
                 </TableHeaderColumn>
               </TableRow>
-              <TableRow>
-                <TableHeaderColumn style={{width: '78%'}} tooltip="Question">Question</TableHeaderColumn>
-                <TableHeaderColumn style={{width: '11%'}} tooltip="Acceptance">Acceptance</TableHeaderColumn>
-                <TableHeaderColumn style={{width: '11%'}} tooltip="Difficulty">Difficulty</TableHeaderColumn>
+              <TableRow>/
+                <TableHeaderColumn style={{width: '78%'}}>Question</TableHeaderColumn>
+                <TableHeaderColumn style={{width: '11%'}}>Acceptance</TableHeaderColumn>
+                <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
 
               </TableRow>
             </TableHeader>
