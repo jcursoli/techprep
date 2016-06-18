@@ -53,7 +53,7 @@ class Algorithms extends Component {
 	constructor(props){
 	super(props);
 	this.state = {
-		editorContents: 'function toyProblem(a,b){ \n //enter code here \n }',
+		editorContents: 'function reverseString(string){ \n //enter code here \n }',
 		language: 'javascript',
 		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
 		};
@@ -64,16 +64,17 @@ class Algorithms extends Component {
 		this.setState({ editorContents })
 	}
 	runCode(){
-		//new Function ([arg1[, arg2[, ...argN]],] functionBody)
+		var flag = false;
 		var userFunction;
 		var output;
-		var index = this.state.editorContents.indexOf('{');
-		var lastIndex = this.state.editorContents.lastIndexOf('}');
-		var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
-		var paramsLastIndex = this.state.editorContents.indexOf(')');
-		var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
-		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
 		try{
+			var index = this.state.editorContents.indexOf('{');
+			var lastIndex = this.state.editorContents.lastIndexOf('}');
+			var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
+			var paramsLastIndex = this.state.editorContents.indexOf(')');
+			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
+			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
+
 			this.setState({output:''});
 				userFunction = new Function(...params ,functionBody);
 		}
@@ -83,8 +84,20 @@ class Algorithms extends Component {
 		}
 		if(userFunction){
 			try{
-				output = userFunction();
-				this.setState({output})
+				output = userFunction('abcdefgh');
+				this.setState({output});
+				if(output === 'hgfedcba'){
+					output = userFunction('qwert');
+					this.setState({output:`${this.state.output}\n${output}`})
+					if(output === 'trewq'){
+						flag = true;
+					}
+				}
+				if(flag){
+					alert('Great Job!')
+				}else{
+					alert('Nice Try')
+				}
 			}
 			catch(err){
 				this.setState({output:err.toString()})
