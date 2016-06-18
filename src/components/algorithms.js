@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+import Checkpoint from './checkPoint';
 
 import 'brace/mode/javascript';
 import 'brace/mode/java';
@@ -46,7 +47,7 @@ const style = {
 		alignItems: 'center',
 	}
 }
-
+var flag;
 
 class Algorithms extends Component {
 
@@ -64,7 +65,7 @@ class Algorithms extends Component {
 		this.setState({ editorContents })
 	}
 	runCode(){
-		var flag = false;
+		flag = false;
 		var userFunction;
 		var output;
 		try{
@@ -93,11 +94,6 @@ class Algorithms extends Component {
 						flag = true;
 					}
 				}
-				if(flag){
-					alert('Great Job!')
-				}else{
-					alert('Nice Try')
-				}
 			}
 			catch(err){
 				this.setState({output:err.toString()})
@@ -107,9 +103,11 @@ class Algorithms extends Component {
 	}
 
 	render(){
-
 		return (
 			<div className='newBackground' style={{overflow: 'scroll'}}>
+				<div>
+					<Checkpoint flag={flag}/>
+				</div>
 				<div>
 					<div  style={{color:'black', margin:'20px'}}>
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
