@@ -67,6 +67,7 @@ class Algorithms extends Component {
 		var flag = false;
 		var userFunction;
 		var output;
+<<<<<<< 8bdd7b5592da9b90e71737c4f2f37da4d7eae660
 <<<<<<< 8d57cbf428e9b0a5493e185f236533eb3059896e
 =======
 		var index = this.state.editorContents.indexOf('{');
@@ -76,6 +77,8 @@ class Algorithms extends Component {
 		var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
 		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
 >>>>>>> [Pull] Adds error handling for user functions
+=======
+>>>>>>> [Pull] Adds testing for user functions
 		try{
 			var index = this.state.editorContents.indexOf('{');
 			var lastIndex = this.state.editorContents.lastIndexOf('}');
