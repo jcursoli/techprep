@@ -67,6 +67,12 @@ class Algorithms extends Component {
 		var flag = false;
 		var userFunction;
 		var output;
+<<<<<<< 8d57cbf428e9b0a5493e185f236533eb3059896e
+=======
+		var index = this.state.editorContents.indexOf('{');
+		var lastIndex = this.state.editorContents.lastIndexOf('}');
+		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
+>>>>>>> [Pull] Adds error handling for user functions
 		try{
 			var index = this.state.editorContents.indexOf('{');
 			var lastIndex = this.state.editorContents.lastIndexOf('}');
@@ -100,6 +106,11 @@ class Algorithms extends Component {
 				}
 			}
 			catch(err){
+				output = userFunction();
+				this.setState({output})
+			}
+			catch(err){
+				console.log('thisis the error',err)
 				this.setState({output:err.toString()})
 			}
 
