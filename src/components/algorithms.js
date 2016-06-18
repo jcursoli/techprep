@@ -73,8 +73,7 @@ class Algorithms extends Component {
 		var lastIndex = this.state.editorContents.lastIndexOf('}');
 		var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
 		var paramsLastIndex = this.state.editorContents.indexOf(')');
-
-		var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex);
+		var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
 		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
 >>>>>>> [Pull] Adds error handling for user functions
 		try{
