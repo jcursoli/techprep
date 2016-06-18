@@ -5,13 +5,15 @@ import friends from './friendsReducer';
 import user from './userReducer';
 import chat from './chatReducer';
 import questions from './questionsReducer';
+import dialog from './dialogReducer';
 
 const rootReducer = combineReducers({
   form,
   auth,
   friends,
   user,
-  questions
+  questions,
+  dialog
 });
 
 export default rootReducer;

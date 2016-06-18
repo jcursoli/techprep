@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import brace from 'brace';
 import AceEditor from 'react-ace';
-import Checkpoint from './checkPoint';
+import AlgorithmDialog from './algorithmDialog';
+import * as actions from '../actions';
 
 import 'brace/mode/javascript';
 import 'brace/mode/java';
@@ -29,16 +30,6 @@ const style = {
 		alignItems: 'center',
 		marginLeft:'200px'
 	},
-	button:{
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		width: '50px', 
-		height: '40%',
-		margin: '20px', 
-		padding: '4px',
-		margin:' 20px',
-	},
 	editor:{
 		height: '308px',
 		marginTop:'25px',
@@ -47,7 +38,6 @@ const style = {
 		alignItems: 'center',
 	}
 }
-var flag;
 
 class Algorithms extends Component {
 
@@ -56,7 +46,8 @@ class Algorithms extends Component {
 	this.state = {
 		editorContents: 'function reverseString(string){ \n //enter code here \n }',
 		language: 'javascript',
-		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+		correct: false,
 		};
 		this.editorChanged = this.editorChanged.bind(this);
 		this.runCode = this.runCode.bind(this);
@@ -65,7 +56,6 @@ class Algorithms extends Component {
 		this.setState({ editorContents })
 	}
 	runCode(){
-		flag = false;
 		var userFunction;
 		var output;
 		try{
@@ -91,9 +81,10 @@ class Algorithms extends Component {
 					output = userFunction('qwert');
 					this.setState({output:`${this.state.output}\n${output}`})
 					if(output === 'trewq'){
-						flag = true;
+						this.state.correct = true;
 					}
 				}
+				this.actions.openDialog(this.state.correct);
 			}
 			catch(err){
 				this.setState({output:err.toString()})
@@ -106,12 +97,13 @@ class Algorithms extends Component {
 		return (
 			<div className='newBackground' style={{overflow: 'scroll'}}>
 				<div>
-					<Checkpoint flag={flag}/>
+					<Checkpoint flag={this.state.correct}/>
 				</div>
 				<div>
 					<div  style={{color:'black', margin:'20px'}}>
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 					</div>
+					<AlgorithmDialog />
 						<div style={style.compiler}>
 							<div style={style.output}>{this.state.output}</div>
 							<div style={style.editor}>
@@ -138,4 +130,4 @@ class Algorithms extends Component {
 function mapStateToProps(state){
 	return {}
 }
-export default connect(mapStateToProps)(Algorithms);
+export default connect(mapStateToProps, actions)(Algorithms);

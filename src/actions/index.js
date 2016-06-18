@@ -6,6 +6,8 @@ import {
   AUTH_ERROR,
   INITIALIZE_USER,
   SIGNOUT_USER,
+  OPEN_DIALOG,
+  CLOSE_DIALOG
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -69,3 +71,20 @@ export function authError(error) {
     payload: error
   };
 };
+
+export function openDialog(answer){
+  return {
+    type: OPEN_DIALOG
+  }
+};
+export function closeDialog(){
+   return {
+      type: CLOSE_DIALOG
+   }
+};
+
+
+
+
+
+

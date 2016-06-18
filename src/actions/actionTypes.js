@@ -6,3 +6,5 @@ export const INITIALIZE_FRIENDS = 'initialize_friends';
 export const INITIALIZE_CHAT = 'initialize_chat';
 export const SIGNOUT_USER = 'signout_user';
 export const LOAD_QUESTIONS = 'load_questions';
+export const CLOSE_DIALOG = 'close_dialog';
+export const OPEN_DIALOG = 'open_dialog';
