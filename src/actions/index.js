@@ -74,7 +74,8 @@ export function authError(error) {
 
 export function openDialog(answer){
   return {
-    type: OPEN_DIALOG
+    type: OPEN_DIALOG,
+    payload: answer
   }
 };
 export function closeDialog(){

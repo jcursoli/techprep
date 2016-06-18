@@ -84,7 +84,7 @@ class Algorithms extends Component {
 						this.state.correct = true;
 					}
 				}
-				this.actions.openDialog(this.state.correct);
+				this.props.openDialog(this.state.correct);
 			}
 			catch(err){
 				this.setState({output:err.toString()})
@@ -97,7 +97,6 @@ class Algorithms extends Component {
 		return (
 			<div className='newBackground' style={{overflow: 'scroll'}}>
 				<div>
-					<Checkpoint flag={this.state.correct}/>
 				</div>
 				<div>
 					<div  style={{color:'black', margin:'20px'}}>

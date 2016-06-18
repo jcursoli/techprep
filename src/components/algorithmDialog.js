@@ -1,4 +1,4 @@
-import Checkpoint from './checkPoint';
+import CheckPoint from './checkPoint';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Dialog from 'material-ui/Dialog';
@@ -8,33 +8,38 @@ import * as actions from '../actions';
 
 class AlgorithmDialog extends Component {
 
+  handleClose = () => {
+		this.props.closeDialog(); 
+  };
+
+
   render() {
     const action = [
       <FlatButton
         label="Ok"
         primary={true}
-        onTouchTap={this.actions.closeDialog}
+        onTouchTap={this.handleClose}
       />
     ];
     return (
       <div>
-      	<Checkpoint flag={this.props.correct} />
-        <RaisedButton label="Alert" onTouchTap={this.actions.closeDialog} />
         <Dialog
         	actions={action}
           modal={false}
           open={this.props.open}
-          onRequestClose={this.actions.closeDialog}
+          onRequestClose={this.handleClose}
         >
+        <CheckPoint flag={this.props.answer} />
         </Dialog>
       </div>
     );
   }
 }
 function mapStateToProps(state){
+	console.log('this is the mstp in algoDialog',state.dialog);
 	return {
 		open: state.dialog.open,
-		correct: state.dialog.correct
+		answer: state.dialog.answer
 	}
 }
 export default connect(mapStateToProps, actions)(AlgorithmDialog);

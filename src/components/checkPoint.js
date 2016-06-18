@@ -1,8 +1,8 @@
 import React from 'react';
 
- const CheckPoint = (props) => {
-	console.log('inside CheckPoint compinent')
-	console.log(props.flag)
+var CheckPoint = (props) => {
+	console.log('inside CheckPoint compinent');
+	console.log(props.flag);
 	if(props.flag){
 		return(
 			<div>
