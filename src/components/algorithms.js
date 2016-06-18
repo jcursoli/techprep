@@ -8,6 +8,9 @@ import 'brace/mode/java';
 import 'brace/mode/python';
 import 'brace/mode/ruby';
 
+import 'brace/theme/tomorrow';
+import 'brace/ext/language_tools';
+
 
 const style = {
 	output:{
@@ -19,7 +22,6 @@ const style = {
 		background:'black',
 		color:'white', 
 		display:'inline',
-		fontweight: '600',
 	},
 	compiler:{
 		display: 'flex',
@@ -30,7 +32,7 @@ const style = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		width: '10%px', 
+		width: '50px', 
 		height: '40%',
 		margin: '20px', 
 		padding: '4px',
@@ -64,6 +66,7 @@ class Algorithms extends Component {
 	runCode(){
 		//new Function ([arg1[, arg2[, ...argN]],] functionBody)
 		var userFunction;
+		var output;
 		var index = this.state.editorContents.indexOf('{');
 		var lastIndex = this.state.editorContents.lastIndexOf('}');
 		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
@@ -73,11 +76,17 @@ class Algorithms extends Component {
 		}
 		catch(err){
 			console.log(err);
-			this.setState({output:'Syntax output cannot run'});
+			this.setState({output:err});
 		}
 		if(userFunction){
-			var output = userFunction();
-			this.setState({output})
+			try{
+				output = userFunction();
+				this.setState({output})
+			}
+			catch(err){
+				console.log('thisis the error',err)
+				this.setState({output:err.toString()})
+			}
 
 		}
 	}
@@ -94,14 +103,16 @@ class Algorithms extends Component {
 							<div style={style.output}>{this.state.output}</div>
 							<div style={style.editor}>
 								<AceEditor
+									theme='tomorrow'
 									height={'300px'}
 									fontSize={10}
 									value={this.state.editorContents}
 								  mode="javascript"
-								  theme="github"
 								  onChange={this.editorChanged}
 								  name="ACE_EDITOR"
 								  editorProps={{$blockScrolling: true}}
+								  enableBasicAutocompletion={true}
+				   				enableLiveAutocompletion={true}
 								/>
 							</div>
 						</div>
