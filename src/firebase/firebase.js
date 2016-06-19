@@ -4,6 +4,7 @@ import {
   AUTH_USER,
   INITIALIZE_USER,
   INITIALIZE_FRIENDS,
+  INITIALIZE_INVITES,
   INITIALIZE_CHAT,
   LOAD_QUESTIONS
  } from '../actions/actionTypes';
@@ -21,14 +22,30 @@ firebase.auth().onAuthStateChanged(function(user) {
       store.dispatch({ type: AUTH_USER });
       //make dispatches to populate state that's needed
       console.log('User logged in/signed up (in onAuthStateChanged)');
+      console.log('user:', user);
+      // Load questions from database
       var questionsRef = firebase.database().ref('/questions');
-
       questionsRef.on("value", function(snapshot) {
         store.dispatch({ type: LOAD_QUESTIONS, payload: snapshot.val().questions});
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
-      store.dispatch({ type: INITIALIZE_FRIENDS });
+
+      // Load friends from database
+      var friendsRef = firebase.database().ref('friends/' + user.uid + '/friendsList');
+      friendsRef.on("value", function(snapshot) {
+        store.dispatch({ type: INITIALIZE_FRIENDS, payload: snapshot.val() });
+      }, function (errorObject) {
+        console.log("The read failed:", errorObject.code);
+      });
+
+      // watch for friend invites
+      var invitesRef = firebase.database().ref('friends/' + user.uid + '/invites');
+      invitesRef.on('child_added', function(childSnapshot) {
+        console.log('childSnapshot', childSnapshot.val());
+        store.dispatch({ type: INITIALIZE_INVITES, payload: childSnapshot.val() });
+      });
+
       store.dispatch({ type: INITIALIZE_CHAT });
     } else {
       //clear state
@@ -155,11 +172,42 @@ export function createUserInDatabase() {
   var user = firebase.auth().currentUser;
   console.log('user:', user);
   var userRef = firebase.database().ref('users/' + user.uid);
+  var friendsRef = firebase.database().ref('friends/' + user.uid);
   userRef.set({
     email: user.email,
-    friends: [],
+    displayName: user.uid,
     profileURL: 'http://i.imgur.com/DRuG5YH.png',
-    messages: [],
-    answered: []
+  });
+  friendsRef.set({
+    friendsList: {
+      'R6PAt6KeuCURYFB4d4BUS65qRsl1': {
+        email: 'idugcoal@gmail.com',
+        displayName: 'doug',
+        profileURL: 'http://i.imgur.com/DRuG5YH.png'
+      }
+    },
+    invites: {
+      'UhlE2WagS7bKJfYrV5Kp6Ydt9Zl1' : {
+        email: 'drew@gmail.com',
+        displayName: 'drew',
+        profileURL: 'http://i.imgur.com/DRuG5YH.png'
+      }
+    }
+  });
+}
+
+export function checkIfUserExists(uid) {
+  return firebase.database().ref('users/' + uid).once("value");
+}
+
+export function addFriendInvite(uid) {
+  var user = firebase.auth().currentUser;
+  console.log('addFriendInvite uid:', uid);
+  //firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
+  var friendsInviteRef = firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
+  friendsInviteRef.set({
+    displayName: user.displayName,
+    email: user.email,
+    profileURL: user.profileURL
   });
 }

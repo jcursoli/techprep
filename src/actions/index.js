@@ -6,10 +6,10 @@ import {
   AUTH_ERROR,
   INITIALIZE_USER,
   SIGNOUT_USER,
+  ADD_MESSAGE,
+  ADD_FRIEND
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
-
-const ROOT_URL = 'http://localhost:8000';
 
 export function loginUser({ email, password }) {
   return function(dispatch) {
@@ -69,3 +69,31 @@ export function authError(error) {
     payload: error
   };
 };
+
+export function addMessage(obj) {
+  return {
+    type: ADD_MESSAGE,
+    payload: obj
+  };
+}
+
+export function addFriend(friend) {
+  return function(dispatch) {
+    console.log('inside addFriend action creator, friend is:', friend);
+    //do firebase check to see if friends uid exists, if it does, then add to that uid's friendsinvites
+    firebase.checkIfUserExists(friend).then(user => {
+      console.log('user:', user.exists());
+      if (user.exists()) {
+      //if user exists, add pending invite to their invite list
+        console.log('user exists');
+        firebase.addFriendInvite(friend);
+        dispatch({ type: ADD_FRIEND });
+      } else {
+      // if user does not exist, relay error message back to client
+        console.log('user does not exist');
+      }
+    }).catch(err => {
+      console.log('err:', err);
+    });
+  }
+}
