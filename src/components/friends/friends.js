@@ -154,7 +154,7 @@ function mapStateToProps(state) {
     n.uid = i;
     return n;
   });
-  return { friends: restructuredFriends };
+  return { friends: restructuredFriends, invites: state.invites };
 }
 
 export default connect(mapStateToProps, actions)(Friends);

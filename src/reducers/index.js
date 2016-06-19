@@ -6,8 +6,9 @@ import user from './userReducer';
 import chat from './chatReducer';
 import questions from './questionsReducer';
 import invites from './inviteReducer';
+import { SIGNOUT_USER } from '../actions/actionTypes';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   form,
   auth,
   friends,
@@ -16,5 +17,14 @@ const rootReducer = combineReducers({
   chat,
   invites
 });
+
+const rootReducer = (state, action) => {
+  switch(action.type){
+    case SIGNOUT_USER:
+      return appReducer(undefined, action);
+    default:
+      return appReducer(state, action);
+  }
+}
 
 export default rootReducer;

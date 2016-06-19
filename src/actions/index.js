@@ -14,7 +14,6 @@ import * as firebase from '../firebase/firebase';
 export function loginUser({ email, password }) {
   return function(dispatch) {
     firebase.signInWithEmailAndPassword(email, password).then(user => {
-      console.log('user after login:', user);
       dispatch({ type: AUTH_USER });
       dispatch({ type: INITIALIZE_USER, payload: {
         email: user.email,
@@ -34,7 +33,6 @@ export function signupUser({ email, password }) {
   return function(dispatch) {
     firebase.createUserWithEmailAndPassword(email, password).then(user => {
       firebase.createUserInDatabase();
-      console.log('then inside signup');
       dispatch({ type: AUTH_USER });
       dispatch({ type: INITIALIZE_USER, payload: {
         email: user.email,
