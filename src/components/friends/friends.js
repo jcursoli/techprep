@@ -58,6 +58,11 @@ class Friends extends Component {
     this.setState({ addFriendInput: e.target.value });
   }
 
+  handleAcceptFriendRequest(userObj) {
+    console.log('accepted friend request');
+    console.log('userobj:', userObj);
+  }
+
   handleProfileClick() {
     console.log('clicked');
   }
@@ -87,6 +92,15 @@ class Friends extends Component {
     );
   }
 
+  rightIconMenuInvite(userObj) {
+    return (
+      <IconMenu iconButtonElement={this.iconButtonElement()}>
+        <MenuItem onTouchTap={this.handleAcceptFriendRequest.bind(this, userObj)}>Accept</MenuItem>
+        <MenuItem onTouchTap={this.handleRemoveClick.bind(this)}>Ignore</MenuItem>
+      </IconMenu>
+    );
+  }
+
   renderFriends(obj, idx) {
     const displayName = obj.displayName || obj.email;
     const profileURL = obj.profileURL;
@@ -96,6 +110,20 @@ class Friends extends Component {
         key={idx}
         leftAvatar={<Avatar src={profileURL} />}
         rightIconButton={this.rightIconMenu.apply(this, [displayName, profileURL])}
+        primaryText={<div className="centered ellipse">{displayName}</div>}
+      />
+    );
+  }
+
+  renderInvites(obj, idx) {
+    const displayName = obj.displayName || obj.email;
+    const profileURL = obj.profileURL;
+    // <Divider inset={false} />
+    return (
+      <ListItem
+        key={idx}
+        leftAvatar={<Avatar src={profileURL} />}
+        rightIconButton={this.rightIconMenuInvite.apply(this, [obj])}
         primaryText={<div className="centered ellipse">{displayName}</div>}
       />
     );
@@ -123,7 +151,6 @@ class Friends extends Component {
       <div>
         <List>
           <div className="centered">
-            <h2 className="friends">Friends</h2>
             <FloatingActionButton
               style={style}
               mini={true}
@@ -141,9 +168,16 @@ class Friends extends Component {
             onChange={this.handleAddFriendChange.bind(this)}
           />
           </div>
+          <div className="centered">
+            <h2 className="friends">Friends</h2>
+          </div>
           {this.props.friends.map(this.renderFriends.bind(this)).sort(function(a,b) {return a.displayName-b.displayName})}
+          <div className="centered">
+            <h2 className="friends">Pending Invites</h2>
+          </div>
+          {this.props.invites.map(this.renderInvites.bind(this))}
         </List>
-          <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
+        <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
       </div>
     );
   }
