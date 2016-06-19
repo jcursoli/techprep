@@ -117,10 +117,10 @@ class Questions extends Component {
                 const handleOpen = () => {
                   this.setState({
 
-                    open: true, 
-                    question: this.state.tableData[index]['question'], 
-                    answer: this.state.tableData[index]['answer'], 
-                    revealAnswer: false, 
+                    open: true,
+                    question: this.props.questions[index]['question'],
+                    answer: this.props.questions[index]['answer'],
+                    revealAnswer: false,
                     buttonName: 'Show Answer'
                   });
                 };

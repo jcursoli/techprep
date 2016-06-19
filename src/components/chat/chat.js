@@ -11,6 +11,15 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
+import FlatButton from 'material-ui/FlatButton';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+
+import ChatBox from '../chat/chatBox';
+
 
 const iconButtonElement = (
   <IconButton
@@ -25,7 +34,6 @@ const iconButtonElement = (
 const rightIconMenu = (
   <IconMenu iconButtonElement={iconButtonElement}>
     <MenuItem>Reply</MenuItem>
-    <MenuItem>Forward</MenuItem>
     <MenuItem>Delete</MenuItem>
   </IconMenu>
 );
@@ -33,7 +41,17 @@ const rightIconMenu = (
 class Chat extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { open: false, clickedUser: { displayName: null, profileURL: null } }
   }
+
+  handleOpen() {
+    this.setState({open: true, clickedUser: { displayName, profileURL }});
+  };
+
+  handleClose() {
+    this.setState({open: false});
+  };
 
   renderChat() {
     //render current chat chronologically
@@ -41,14 +59,16 @@ class Chat extends Component {
 
   render() {
     return (
+      <div>
       <List>
         <ListItem
           leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/10988122?v=3&s=460" />}
+          onTouchTap={this.handleOpen.bind(this)}
           rightIconButton={rightIconMenu}
           primaryText="Joey Cursoli"
           secondaryText={
             <p>
-            <span style={{color: 'black'}}>help me please!?</span><br />
+            <span style={{color: 'green'}}>Online</span><br />
               I don't know what I'm doing
             </p>
           }
@@ -57,11 +77,12 @@ class Chat extends Component {
         <Divider inset={false} />
         <ListItem
           leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/9814083?v=3&s=460" />}
+          onTouchTap={this.handleOpen.bind(this)}
           rightIconButton={rightIconMenu}
           primaryText="Doug Cole"
           secondaryText={
             <p>
-            <span style={{color: 'black'}}>yo dude</span><br />
+            <span style={{color: 'green'}}>Online</span><br />
               i solved the middle out algorithm
             </p>
           }
@@ -70,11 +91,12 @@ class Chat extends Component {
         <Divider inset={false} />
         <ListItem
           leftAvatar={<Avatar src="https://avatars1.githubusercontent.com/u/4237388?v=3&s=460" />}
+          onTouchTap={this.handleOpen.bind(this)}
           rightIconButton={rightIconMenu}
           primaryText="Forrest Akin"
           secondaryText={
             <p>
-            <span style={{color: 'black'}}>heyooo</span><br />
+            <span style={{color: 'green'}}>Online</span><br />
               I can't find my shirt, do you know where I left it?
             </p>
           }
@@ -83,11 +105,12 @@ class Chat extends Component {
         <Divider inset={false} />
         <ListItem
           leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/16884524?v=3&s=460" />}
+          onTouchTap={this.handleOpen.bind(this)}
           rightIconButton={rightIconMenu}
           primaryText="Colin Zarnegar"
           secondaryText={
             <p>
-            <span style={{color: 'black'}}>React help</span><br />
+            <span style={{color: 'red'}}>Offline</span><br />
               Hey, can you help me with React
             </p>
           }
@@ -96,11 +119,12 @@ class Chat extends Component {
         <Divider inset={false} />
         <ListItem
           leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
+          onTouchTap={this.handleOpen.bind(this)}
           rightIconButton={rightIconMenu}
           primaryText="Drew Baugher"
           secondaryText={
             <p>
-            <span style={{color: 'black'}}>Re: Question</span><br />
+            <span style={{color: 'red'}}>Offline</span><br />
               I created Google.
             </p>
           }
@@ -108,6 +132,8 @@ class Chat extends Component {
         />
         <Divider inset={false} />
       </List>
+        <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
+      </div>
     );
   }
 }
