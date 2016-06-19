@@ -202,12 +202,14 @@ export function checkIfUserExists(uid) {
 
 export function addFriendInvite(uid) {
   var user = firebase.auth().currentUser;
+  console.log('this is user before add:', user);
   console.log('addFriendInvite uid:', uid);
   //firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
   var friendsInviteRef = firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
   friendsInviteRef.set({
+    uid: user.uid,
     displayName: user.displayName,
     email: user.email,
-    profileURL: user.profileURL
+    profileURL: user.photoURL || "http://i.imgur.com/DRuG5YH.png"
   });
 }
