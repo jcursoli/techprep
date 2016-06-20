@@ -7,7 +7,9 @@ import {
   INITIALIZE_USER,
   SIGNOUT_USER,
   ADD_MESSAGE,
-  ADD_FRIEND
+  ADD_FRIEND,
+  OPEN_DIALOG,
+  CLOSE_DIALOG
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -111,3 +113,15 @@ export function addFriend(friend) {
     });
   }
 }
+
+export function openDialog(answer){
+  return {
+    type: OPEN_DIALOG,
+    payload: answer
+  }
+};
+export function closeDialog(){
+   return {
+      type: CLOSE_DIALOG
+   }
+};

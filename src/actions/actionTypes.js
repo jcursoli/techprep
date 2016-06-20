@@ -10,3 +10,5 @@ export const LOAD_QUESTIONS = 'load_questions';
 export const ADD_MESSAGE = 'add_message';
 export const ADD_FRIEND = 'add_friend';
 export const CHECK_DISPLAY_NAME = 'check_display_name';
+export const CLOSE_DIALOG = 'close_dialog';
+export const OPEN_DIALOG = 'open_dialog';
