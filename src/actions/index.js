@@ -123,6 +123,7 @@ export function closeDialog(){
       type: CLOSE_DIALOG
    }
 };
+
 export function acceptFriendRequest(userObj) {
   console.log('inside action creator acceptFriendRequest', userObj);
   return function(dispatch) {
