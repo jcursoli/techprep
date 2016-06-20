@@ -86,20 +86,8 @@ class Algorithms extends Component {
 		return correctness;
 	}
 	runCode(){
-		var flag = false;
-		var userFunction;
-		var output;
-
-		var index = this.state.editorContents.indexOf('{');
-		var lastIndex = this.state.editorContents.lastIndexOf('}');
-		var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
-		var paramsLastIndex = this.state.editorContents.indexOf(')');
-		var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
-		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
-
 		// reset output
 		this.setState({output:''});
-
 		var userFunction;
 		var output;
 		try{
@@ -109,43 +97,10 @@ class Algorithms extends Component {
 			var paramsLastIndex = this.state.editorContents.indexOf(')');
 			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
 			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
-
-			this.setState({output:''});
-				userFunction = new Function(...params ,functionBody);
-		}
-		catch(err){
-			console.log(err);
-			this.setState({output:err});
-		}
-		if(userFunction){
-			try{
-				output = userFunction('abcdefgh');
-				this.setState({output});
-				if(output === 'hgfedcba'){
-					output = userFunction('qwert');
-					this.setState({output:`${this.state.output}\n${output}`})
-					if(output === 'trewq'){
-						flag = true;
-					}
-				}
-				if(flag){
-					alert('Great Job!')
-				}else{
-					alert('Nice Try')
-				}
-			}
-			catch(err){
-				output = userFunction();
-				this.setState({output})
-			}
-			catch(err){
-				this.setState({output:err.toString()})
-			}
-
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			this.setState({output:err.toString()});
+			this.setState({output:err});
 		}
 		if(userFunction){
 				 var correctness = this.testCode(userFunction);
