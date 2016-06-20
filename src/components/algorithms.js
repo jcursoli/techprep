@@ -32,16 +32,6 @@ const style = {
 		alignItems: 'center',
 		marginLeft:'200px'
 	},
-	button:{
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		width: '50px', 
-		height: '40%',
-		margin: '20px', 
-		padding: '4px',
-		margin:' 20px',
-	},
 	editor:{
 		height: '308px',
 		marginTop:'25px',
@@ -49,9 +39,6 @@ const style = {
 		border:' 4px solid #EEEFF2',
 		alignItems: 'center',
 	},
-	button: {
-		color: 'red'
-	}
 }
 
 class Algorithms extends Component {
@@ -136,7 +123,7 @@ class Algorithms extends Component {
 								/>
 							</div>
 						</div>
-						<RaisedButton onClick={this.runCode} label="Run" style={style.button} backgroundColor='#A80000' />
+						<RaisedButton onClick={this.runCode} label="Run" backgroundColor='#A80000' />
 				</div>
 			</div>
 		)
