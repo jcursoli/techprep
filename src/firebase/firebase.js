@@ -58,6 +58,10 @@ export function signInWithEmailAndPassword(email, password) {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
+export function checkDisplayName(displayName) {
+  return firebase.database().ref('displayNames/' + displayName).once("value");
+}
+
 export function createUserWithEmailAndPassword(email, password) {
   return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
@@ -168,14 +172,14 @@ export function addQuestionsToDatabase() {
   ]});
 }
 
-export function createUserInDatabase() {
+export function createUserInDatabase(username) {
   var user = firebase.auth().currentUser;
   console.log('user:', user);
   var userRef = firebase.database().ref('users/' + user.uid);
   var friendsRef = firebase.database().ref('friends/' + user.uid);
   userRef.set({
     email: user.email,
-    displayName: user.uid,
+    displayName: username,
     profileURL: 'http://i.imgur.com/DRuG5YH.png',
   });
   friendsRef.set({
@@ -193,6 +197,13 @@ export function createUserInDatabase() {
         profileURL: 'http://i.imgur.com/DRuG5YH.png'
       }
     }
+  });
+}
+
+export function createDisplayName(displayName) {
+  var displayNamesRef = firebase.database().ref('displayNames/' + displayName);
+  displayNamesRef.set({
+    used: true
   });
 }
 
