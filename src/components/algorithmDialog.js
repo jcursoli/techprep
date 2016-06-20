@@ -6,6 +6,11 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../actions';
 
+const customContentStyle = {
+  width: '40%',
+  maxWidth: 'none',
+};
+
 class AlgorithmDialog extends Component {
 
   handleClose = () => {
@@ -28,6 +33,7 @@ class AlgorithmDialog extends Component {
           modal={false}
           open={this.props.open}
           onRequestClose={this.handleClose}
+          contentStyle={customContentStyle}
         >
         <CheckPoint flag={this.props.answer} />
         </Dialog>
@@ -36,7 +42,6 @@ class AlgorithmDialog extends Component {
   }
 }
 function mapStateToProps(state){
-	console.log('this is the mstp in algoDialog',state.dialog);
 	return {
 		open: state.dialog.open,
 		answer: state.dialog.answer

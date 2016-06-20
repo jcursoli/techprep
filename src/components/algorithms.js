@@ -4,6 +4,7 @@ import brace from 'brace';
 import AceEditor from 'react-ace';
 import AlgorithmDialog from './algorithmDialog';
 import * as actions from '../actions';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import 'brace/mode/javascript';
 import 'brace/mode/java';
@@ -24,6 +25,7 @@ const style = {
 		background:'black',
 		color:'white', 
 		display:'inline',
+		overflow: 'scroll',
 	},
 	compiler:{
 		display: 'flex',
@@ -36,6 +38,9 @@ const style = {
 		marginBottom:'20px',
 		border:' 4px solid #EEEFF2',
 		alignItems: 'center',
+	},
+	button: {
+		color: 'red'
 	}
 }
 
@@ -46,8 +51,7 @@ class Algorithms extends Component {
 	this.state = {
 		editorContents: 'function reverseString(string){ \n //enter code here \n }',
 		language: 'javascript',
-		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-		correct: false,
+		output: ''
 		};
 		this.editorChanged = this.editorChanged.bind(this);
 		this.runCode = this.runCode.bind(this);
@@ -55,36 +59,53 @@ class Algorithms extends Component {
 	editorChanged(editorContents){
 		this.setState({ editorContents })
 	}
+	testCode(){
+		var passed = false;
+		try{
+
+		}catch(err){
+
+		}
+	}
 	runCode(){
+		// reset output
+		this.setState({output:''});
+
 		var userFunction;
 		var output;
+		var correct = false
+		var logs = console.log;
+		console.log = (message)=>{
+			 logs.call(console, message);
+			 this.setState({output: this.state.output += '\n' + message + '\n'})
+			}
 		try{
+
 			var index = this.state.editorContents.indexOf('{');
 			var lastIndex = this.state.editorContents.lastIndexOf('}');
 			var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
 			var paramsLastIndex = this.state.editorContents.indexOf(')');
+
 			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
 			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
 
-			this.setState({output:''});
-				userFunction = new Function(...params ,functionBody);
+			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			console.log(err);
-			this.setState({output:err});
+			this.setState({output:err.toString()});
 		}
 		if(userFunction){
 			try{
 				output = userFunction('abcdefgh');
-				this.setState({output});
+				//this.setState({output});
 				if(output === 'hgfedcba'){
 					output = userFunction('qwert');
-					this.setState({output:`${this.state.output}\n${output}`})
+					//this.setState({output:`${this.state.output}\n${output}`})
 					if(output === 'trewq'){
-						this.state.correct = true;
+						correct = true;
 					}
 				}
-				this.props.openDialog(this.state.correct);
+				this.props.openDialog(correct);
 			}
 			catch(err){
 				this.setState({output:err.toString()})
@@ -120,7 +141,7 @@ class Algorithms extends Component {
 								/>
 							</div>
 						</div>
-						<button onClick={this.runCode} style={style.button}>Run</button>
+						<RaisedButton onClick={this.runCode} label="Run" style={style.button} backgroundColor='#A80000' />
 				</div>
 			</div>
 		)
