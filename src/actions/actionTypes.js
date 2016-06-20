@@ -9,3 +9,4 @@ export const SIGNOUT_USER = 'signout_user';
 export const LOAD_QUESTIONS = 'load_questions';
 export const ADD_MESSAGE = 'add_message';
 export const ADD_FRIEND = 'add_friend';
+export const CHECK_DISPLAY_NAME = 'check_display_name';
