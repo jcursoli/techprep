@@ -19,39 +19,47 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      store.dispatch({ type: AUTH_USER });
-      //make dispatches to populate state that's needed
-      console.log('User logged in/signed up (in onAuthStateChanged)');
-      console.log('user:', user);
-      // Load questions from database
-      var questionsRef = firebase.database().ref('/questions');
-      questionsRef.on("value", function(snapshot) {
-        store.dispatch({ type: LOAD_QUESTIONS, payload: snapshot.val().questions});
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-
-      // Load friends from database
-      var friendsRef = firebase.database().ref('friends/' + user.uid + '/friendsList');
-      friendsRef.on("value", function(snapshot) {
-        store.dispatch({ type: INITIALIZE_FRIENDS, payload: snapshot.val() });
-      }, function (errorObject) {
-        console.log("The read failed:", errorObject.code);
-      });
-
-      // watch for friend invites
-      var invitesRef = firebase.database().ref('friends/' + user.uid + '/invites');
-      invitesRef.on('child_added', function(childSnapshot) {
-        console.log('childSnapshot', childSnapshot.val());
-        store.dispatch({ type: INITIALIZE_INVITES, payload: childSnapshot.val() });
-      });
-
-      store.dispatch({ type: INITIALIZE_CHAT });
+      console.log('user is authenticatd');
     } else {
       //clear state
       console.log('User logged out (in onAuthStateChanged)');
     }
 });
+
+export function initializeState(user) {
+  console.log('initializing state');
+  store.dispatch({ type: AUTH_USER });
+  //make dispatches to populate state that's needed
+  console.log('User logged in/signed up (in onAuthStateChanged)');
+  console.log('user:', user);
+  // Load questions from database
+  var questionsRef = firebase.database().ref('/questions');
+  questionsRef.on("value", function(snapshot) {
+    console.log('dispatching load questions');
+    store.dispatch({ type: LOAD_QUESTIONS, payload: snapshot.val().questions});
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
+  // Load friends from database
+  var friendsRef = firebase.database().ref('friends/' + user.displayName + '/friendsList');
+  friendsRef.on("value", function(snapshot) {
+    console.log('dispatching initialize friends');
+    store.dispatch({ type: INITIALIZE_FRIENDS, payload: snapshot.val() });
+  }, function (errorObject) {
+    console.log("The read failed:", errorObject.code);
+  });
+
+  // watch for friend invites
+  var invitesRef = firebase.database().ref('friends/' + user.displayName + '/invites');
+  invitesRef.on('child_added', function(childSnapshot) {
+    console.log('dispatching invites initialize');
+    console.log('childSnapshot', childSnapshot.val());
+    store.dispatch({ type: INITIALIZE_INVITES, payload: childSnapshot.val() });
+  });
+
+  store.dispatch({ type: INITIALIZE_CHAT });
+}
 
 export function signInWithEmailAndPassword(email, password) {
   // addQuestionsToDatabase();
@@ -67,6 +75,10 @@ export function createUserWithEmailAndPassword(email, password) {
 }
 
 export function signOutUser() {
+  var user = firebase.auth().currentUser;
+  firebase.database().ref('/questions').off('value');
+  firebase.database().ref('friends/' + user.displayName + '/friendsList').off('value');
+  firebase.database().ref('friends/' + user.displayName + '/invites').off('child_added');
   return firebase.auth().signOut();
 }
 
@@ -175,25 +187,29 @@ export function addQuestionsToDatabase() {
 export function createUserInDatabase(username) {
   var user = firebase.auth().currentUser;
   console.log('user:', user);
-  var userRef = firebase.database().ref('users/' + user.uid);
-  var friendsRef = firebase.database().ref('friends/' + user.uid);
+  console.log('username is:', username);
+  var userRef = firebase.database().ref('users/' + username);
+  var friendsRef = firebase.database().ref('friends/' + username);
   userRef.set({
-    email: user.email,
     displayName: username,
+    email: user.email,
+    uid: user.uid,
     profileURL: 'http://i.imgur.com/DRuG5YH.png',
   });
   friendsRef.set({
     friendsList: {
-      'R6PAt6KeuCURYFB4d4BUS65qRsl1': {
-        email: 'idugcoal@gmail.com',
+      doug: {
         displayName: 'doug',
+        email: 'idugcoal@gmail.com',
+        uid: 'R6PAt6KeuCURYFB4d4BUS65qRsl1',
         profileURL: 'http://i.imgur.com/DRuG5YH.png'
       }
     },
     invites: {
-      'UhlE2WagS7bKJfYrV5Kp6Ydt9Zl1' : {
-        email: 'drew@gmail.com',
+      drew: {
         displayName: 'drew',
+        email: 'drew@gmail.com',
+        uid: 'UhlE2WagS7bKJfYrV5Kp6Ydt9Zl1',
         profileURL: 'http://i.imgur.com/DRuG5YH.png'
       }
     }
@@ -207,20 +223,38 @@ export function createDisplayName(displayName) {
   });
 }
 
-export function checkIfUserExists(uid) {
-  return firebase.database().ref('users/' + uid).once("value");
+export function checkIfUserExists(displayName) {
+  console.log('check if this user exists:', displayName);
+  return firebase.database().ref('users/' + displayName).once("value");
 }
 
-export function addFriendInvite(uid) {
+export function addFriendInvite(displayName) {
   var user = firebase.auth().currentUser;
   console.log('this is user before add:', user);
-  console.log('addFriendInvite uid:', uid);
+  console.log('addFriendInvite uid:', displayName);
   //firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
-  var friendsInviteRef = firebase.database().ref('friends/' + uid + '/invites/' + user.uid);
+  var friendsInviteRef = firebase.database().ref('friends/' + displayName + '/invites/' + user.displayName);
   friendsInviteRef.set({
     uid: user.uid,
     displayName: user.displayName,
     email: user.email,
     profileURL: user.photoURL || "http://i.imgur.com/DRuG5YH.png"
   });
+}
+
+export function acceptFriendRequest(userObj) {
+  // add person to friends list in db
+  // add self to their friends list in db
+  // remove from invites
+  var user = firebase.auth().currentUser;
+  console.log('user before set,remove, set', user);
+  firebase.database().ref('friends/' + user.displayName + '/friendsList/' + userObj.displayName).set(userObj);
+  firebase.database().ref('friends/' + user.displayName + '/invites/' + userObj.displayName).remove();
+  firebase.database().ref('friends/' + userObj.displayName + '/friendsList/' + user.displayName).set({
+    displayName: user.displayName,
+    email: user.email,
+    profileURL: user.photoURL,
+    uid: user.uid
+  });
+
 }
