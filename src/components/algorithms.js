@@ -57,15 +57,23 @@ class Algorithms extends Component {
 		this.runCode = this.runCode.bind(this);
 	}
 	editorChanged(editorContents){
-		this.setState({ editorContents })
+		this.setState({ editorContents });
 	}
-	testCode(){
-		var passed = false;
+	testCode(userFunction){
+		var correctness = true;
+		var hardCodedTests = [['abcde','edcba'],['this is a test', 'tset a si siht'],['zzzaaabbb','bbbaaazzz']];
 		try{
-
-		}catch(err){
-
+			for(var i = 0; i < hardCodedTests.length;i++){
+				console.log('this is i', i)
+				if(userFunction(hardCodedTests[i][0]) !== hardCodedTests[i][1]){
+					correctness = false;
+				}
+			}
+	} catch(err){
+		this.setState({output:`${this.state.output}\n${err.toString()}`})
+		correctness = false;
 		}
+		return correctness;
 	}
 	runCode(){
 		// reset output
@@ -73,44 +81,23 @@ class Algorithms extends Component {
 
 		var userFunction;
 		var output;
-		var correct = false
-		var logs = console.log;
-		console.log = (message)=>{
-			 logs.call(console, message);
-			 this.setState({output: this.state.output += '\n' + message + '\n'})
-			}
 		try{
-
 			var index = this.state.editorContents.indexOf('{');
 			var lastIndex = this.state.editorContents.lastIndexOf('}');
 			var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
 			var paramsLastIndex = this.state.editorContents.indexOf(')');
-
 			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
 			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
-
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
 			this.setState({output:err.toString()});
 		}
 		if(userFunction){
-			try{
-				output = userFunction('abcdefgh');
-				//this.setState({output});
-				if(output === 'hgfedcba'){
-					output = userFunction('qwert');
-					//this.setState({output:`${this.state.output}\n${output}`})
-					if(output === 'trewq'){
-						correct = true;
-					}
-				}
-				this.props.openDialog(correct);
-			}
-			catch(err){
-				this.setState({output:err.toString()})
-			}
-
+				 var correctness = this.testCode(userFunction);
+				this.props.openDialog(correctness);
+		} else {
+			this.props.openDialog(false);
 		}
 	}
 
