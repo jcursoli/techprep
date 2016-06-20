@@ -8,12 +8,16 @@ import {
   SIGNOUT_USER,
   ADD_MESSAGE,
   ADD_FRIEND,
+<<<<<<< HEAD
 <<<<<<< b991ca029e09b6a9f2868d38b5155594e22e216a
   OPEN_DIALOG,
   CLOSE_DIALOG
 =======
   REMOVE_INVITE
 >>>>>>> [Feature] Adds ability to send friend invites and accept friend invites
+=======
+  REMOVE_INVITE
+>>>>>>> friends
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
