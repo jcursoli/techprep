@@ -74,7 +74,6 @@ class Algorithms extends Component {
 		var hardCodedTests = [['abcde','edcba'],['this is a test', 'tset a si siht'],['zzzaaabbb','bbbaaazzz']];
 		try{
 			for(var i = 0; i < hardCodedTests.length;i++){
-				console.log('this is i', i)
 				if(userFunction(hardCodedTests[i][0]) !== hardCodedTests[i][1]){
 					correctness = false;
 				}
@@ -100,7 +99,7 @@ class Algorithms extends Component {
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			this.setState({output:err});
+			this.setState({output:err.toString()});
 		}
 		if(userFunction){
 				 var correctness = this.testCode(userFunction);
