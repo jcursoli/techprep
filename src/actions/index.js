@@ -29,23 +29,39 @@ export function loginUser({ email, password }) {
   }
 };
 
-export function signupUser({ email, password }) {
+export function signupUser({ username, email, password }) {
   return function(dispatch) {
-    firebase.createUserWithEmailAndPassword(email, password).then(user => {
-      firebase.createUserInDatabase();
-      dispatch({ type: AUTH_USER });
-      dispatch({ type: INITIALIZE_USER, payload: {
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL
-      } });
-      browserHistory.push('/welcome');
-    }).catch(function(error) {
-      console.log('error:', error);
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      dispatch(authError(errorMessage));
-    });
+    firebase.checkDisplayName(username).then(user => {
+      if (!user.exists()) {
+        firebase.createUserWithEmailAndPassword(email, password).then(user => {
+          firebase.createDisplayName(username);
+          firebase.createUserInDatabase(username);
+          user.updateProfile({
+            displayName: username,
+            photoURL: "http://i.imgur.com/DRuG5YH.png"
+          }).then(function() {
+            console.log('user update success');
+          }, function(error) {
+            console.log('user update failed:', error);
+          });
+          dispatch({ type: AUTH_USER });
+          dispatch({ type: INITIALIZE_USER, payload: {
+            email: user.email,
+            displayName: username,
+            uid: user.uid,
+            photoURL: "http://i.imgur.com/DRuG5YH.png"
+          } });
+          browserHistory.push('/welcome');
+        }).catch(function(error) {
+          console.log('error:', error);
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          dispatch(authError(errorMessage));
+        });
+      } else {
+        console.log('username already exists');
+      }
+    })
   }
 }
 
