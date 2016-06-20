@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+import AlgorithmDialog from './algorithmDialog';
+import * as actions from '../actions';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import 'brace/mode/javascript';
 import 'brace/mode/java';
 import 'brace/mode/python';
 import 'brace/mode/ruby';
+
+import 'brace/theme/tomorrow';
+import 'brace/ext/language_tools';
 
 
 const style = {
@@ -19,22 +25,12 @@ const style = {
 		background:'black',
 		color:'white', 
 		display:'inline',
-		fontweight: '600',
+		overflow: 'scroll',
 	},
 	compiler:{
 		display: 'flex',
 		alignItems: 'center',
 		marginLeft:'200px'
-	},
-	button:{
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		width: '10%px', 
-		height: '40%',
-		margin: '20px', 
-		padding: '4px',
-		margin:' 20px',
 	},
 	editor:{
 		height: '308px',
@@ -42,70 +38,92 @@ const style = {
 		marginBottom:'20px',
 		border:' 4px solid #EEEFF2',
 		alignItems: 'center',
-	}
+	},
 }
-
 
 class Algorithms extends Component {
 
 	constructor(props){
 	super(props);
 	this.state = {
-		editorContents: 'function toyProblem(a,b){ \n //enter code here \n }',
+		editorContents: 'function reverseString(string){ \n //enter code here \n }',
 		language: 'javascript',
-		output: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+		output: ''
 		};
 		this.editorChanged = this.editorChanged.bind(this);
 		this.runCode = this.runCode.bind(this);
 	}
 	editorChanged(editorContents){
-		this.setState({ editorContents })
+		this.setState({ editorContents });
+	}
+	testCode(userFunction){
+		var correctness = true;
+		var hardCodedTests = [['abcde','edcba'],['this is a test', 'tset a si siht'],['zzzaaabbb','bbbaaazzz']];
+		try{
+			for(var i = 0; i < hardCodedTests.length;i++){
+				if(userFunction(hardCodedTests[i][0]) !== hardCodedTests[i][1]){
+					correctness = false;
+				}
+			}
+	} catch(err){
+		this.setState({output:`${this.state.output}\n${err.toString()}`})
+		correctness = false;
+		}
+		return correctness;
 	}
 	runCode(){
-		//new Function ([arg1[, arg2[, ...argN]],] functionBody)
+		// reset output
+		this.setState({output:''});
 		var userFunction;
-		var index = this.state.editorContents.indexOf('{');
-		var lastIndex = this.state.editorContents.lastIndexOf('}');
-		var functionBody = this.state.editorContents.substring(index+1,lastIndex);
+		var output;
 		try{
-			this.setState({output:''});
-				userFunction = new Function(functionBody);
+			var index = this.state.editorContents.indexOf('{');
+			var lastIndex = this.state.editorContents.lastIndexOf('}');
+			var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
+			var paramsLastIndex = this.state.editorContents.indexOf(')');
+			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
+			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
+			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			console.log(err);
-			this.setState({output:'Syntax output cannot run'});
+			this.setState({output:err.toString()});
 		}
 		if(userFunction){
-			var output = userFunction();
-			this.setState({output})
-
+				 var correctness = this.testCode(userFunction);
+				this.props.openDialog(correctness);
+		} else {
+			this.props.openDialog(false);
 		}
 	}
 
 	render(){
-
 		return (
 			<div className='newBackground' style={{overflow: 'scroll'}}>
+				<div>
+				</div>
 				<div>
 					<div  style={{color:'black', margin:'20px'}}>
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 					</div>
+					<AlgorithmDialog />
 						<div style={style.compiler}>
 							<div style={style.output}>{this.state.output}</div>
 							<div style={style.editor}>
 								<AceEditor
+									theme='tomorrow'
 									height={'300px'}
 									fontSize={10}
 									value={this.state.editorContents}
 								  mode="javascript"
-								  theme="github"
 								  onChange={this.editorChanged}
 								  name="ACE_EDITOR"
 								  editorProps={{$blockScrolling: true}}
+								  enableBasicAutocompletion={true}
+				   				enableLiveAutocompletion={true}
 								/>
 							</div>
 						</div>
-						<button onClick={this.runCode} style={style.button}>Run</button>
+						<RaisedButton onClick={this.runCode} label="Run" backgroundColor='#A80000' />
 				</div>
 			</div>
 		)
@@ -114,4 +132,4 @@ class Algorithms extends Component {
 function mapStateToProps(state){
 	return {}
 }
-export default connect(mapStateToProps)(Algorithms);
+export default connect(mapStateToProps, actions)(Algorithms);
