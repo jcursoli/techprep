@@ -432,7 +432,11 @@ li {
   border-radius:5%;
   overflow:hidden;
   text-align: center;
+<<<<<<< HEAD
   align-items: center; 
+=======
+  align-items: center;
+>>>>>>> feature/profile
 }
 .profileTabs{
   margin:10px;
@@ -466,6 +470,21 @@ li {
   font-weight: bold;
 }
 .userSettings{
+  display: flex;    
+  flex-direction: column; 
+  align-items: center; 
+  margin: 5px;
+  max-width: 600px;
+  height: 400px;
+  text-align: center;
+}
+.settingsInput{
+  margin-top: 20px;
+  width: 300px;
+  height: 30px;
+  color: black;
+}
+.runButton{
   display: flex;    
   flex-direction: column; 
   align-items: center; 
