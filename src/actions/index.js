@@ -8,6 +8,7 @@ import {
   SIGNOUT_USER,
   ADD_MESSAGE,
   ADD_FRIEND,
+  REMOVE_FRIEND,
   OPEN_DIALOG,
   CLOSE_DIALOG,
   REMOVE_INVITE,
@@ -92,9 +93,10 @@ export function authError(error) {
 };
 
 export function addMessage(obj) {
-  return {
-    type: ADD_MESSAGE,
-    payload: obj
+  return function(dispatch) {
+    console.log('addmessage action creator, obj:', obj);
+    firebase.addMessage(obj);
+    dispatch({ type: ADD_MESSAGE, payload: obj });
   };
 }
 
@@ -136,10 +138,14 @@ export function ignoreFriendInvite(userObj) {
   return function(dispatch) {
     console.log('inside ignoreFriendInvite dispatch before firebase call');
     firebase.ignoreFriendInvite(userObj);
-    dispatch({ type: REMOVE_INVITE, payload: userObj })
+    dispatch({ type: REMOVE_INVITE, payload: userObj });
   }
 }
 
-export function removeFriend() {
-
+export function removeFriend(displayName) {
+  return function(dispatch) {
+    console.log('inside removeFriend action creator');
+    firebase.removeFriend(displayName);
+    dispatch({ type: REMOVE_FRIEND, payload: displayName });
+  }
 }

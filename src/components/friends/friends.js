@@ -71,8 +71,9 @@ class Friends extends Component {
     this.props.ignoreFriendInvite(userObj);
   }
 
-  handleRemoveFriend() {
+  handleRemoveFriend(displayName) {
     console.log('handle remove friend clicked');
+    this.props.removeFriend(displayName);
   }
 
   iconButtonElement() {
@@ -91,7 +92,7 @@ class Friends extends Component {
     return (
       <IconMenu iconButtonElement={this.iconButtonElement()}>
         <MenuItem onTouchTap={this.handleOpen.bind(this, displayName, profileURL)}>Message</MenuItem>
-        <MenuItem onTouchTap={this.handleRemoveFriend.bind(this)}>Remove Friend</MenuItem>
+        <MenuItem onTouchTap={this.handleRemoveFriend.bind(this, displayName)}>Remove Friend</MenuItem>
       </IconMenu>
     );
   }
@@ -188,6 +189,7 @@ class Friends extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state.friends', state.friends)
   var friends = _.map(state.friends, (n, i) => {
     return n;
   });
