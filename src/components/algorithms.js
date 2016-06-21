@@ -51,7 +51,7 @@ class Algorithms extends Component {
 		output: ''
 		};
 		this.editorChanged = this.editorChanged.bind(this);
-		this.runCode = this.runCode.bind(this);
+		this.createFunction = this.createFunction.bind(this);
 	}
 	editorChanged(editorContents){
 		this.setState({ editorContents });
@@ -71,7 +71,7 @@ class Algorithms extends Component {
 		}
 		return correctness;
 	}
-	runCode(){
+	createFunction(){
 		// reset output
 		this.setState({output:''});
 		var userFunction;
@@ -123,7 +123,7 @@ class Algorithms extends Component {
 								/>
 							</div>
 						</div>
-						<RaisedButton onClick={this.runCode} label="Run" backgroundColor='#A80000' />
+						<RaisedButton onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
 				</div>
 			</div>
 		)

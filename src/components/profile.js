@@ -43,7 +43,7 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div className="newBackground">
+      <div style={{height:'100%', background:'white'}}>
         <div className="profileTabs">
         <div className='userInfo'>
              <div className='profileImg'>
@@ -82,11 +82,16 @@ class Profile extends Component {
                 <ProgressTable />
                 </div>
             </Tab>
-            <Tab label="Item Two" style={styles.headline}>
+            <Tab label="Settings" style={styles.headline}>
               <div>
                 <p style={{color:'black'}}>
                   This is another example tab.
                 </p>
+                <div className='userSettings'>
+                  <input />
+                  <input />
+                  <input />
+                </div>
               </div>
             </Tab>
           </Tabs>
