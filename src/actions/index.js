@@ -93,9 +93,10 @@ export function authError(error) {
 };
 
 export function addMessage(obj) {
-  return {
-    type: ADD_MESSAGE,
-    payload: obj
+  return function(dispatch) {
+    console.log('addmessage action creator, obj:', obj);
+    firebase.addMessage(obj);
+    dispatch({ type: ADD_MESSAGE, payload: obj });
   };
 }
 

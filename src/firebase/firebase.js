@@ -20,6 +20,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      // addQuestionsToDatabase();
       console.log('user is authenticatd');
       initializeState(user);
     } else {
@@ -67,7 +68,11 @@ export function initializeState(user) {
     store.dispatch({ type: REMOVE_FRIEND, payload: childSnapshot.val().displayName });
   });
 
-  store.dispatch({ type: INITIALIZE_CHAT });
+var chatRef = firebase.database().ref('chat/' + user.displayName);
+chatRef.on('value', function(snapshot) {
+  console.log('chat has changed,', snapshot.val());
+  store.dispatch({ type: INITIALIZE_CHAT, payload: snapshot.val() });
+});
 }
 
 export function signInWithEmailAndPassword(email, password) {
@@ -282,4 +287,13 @@ export function removeFriend(displayName) {
   firebase.database().ref('friends/' + user.displayName + '/friendsList/' + displayName).remove();
   // remove yourself from friends friend list
   firebase.database().ref('friends/' + displayName + '/friendsList/' + user.displayName).remove();
+}
+
+export function addMessage(messageObj) {
+  var user = firebase.auth().currentUser;
+  // add message object to own chat messages
+  firebase.database().ref('chat/' + user.displayName + '/' + messageObj.recipient).push(messageObj);
+  // add message object to receivers chat messages
+  firebase.database().ref('chat/' + messageObj.recipient + '/' + user.displayName).push(messageObj);
+  console.log('current messageObj in addMessags in firebase.js:', messageObj);
 }
