@@ -16,16 +16,17 @@ import Firebase from 'firebase';
 import {LineChart} from 'react-d3';
 
   const styles = {
-      tabs: {
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
-      headline: {
-        border:' 1px solid #EEEFF2',
-        fontWeight: 400,
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',      },
-    };
+    tabs: {
+      color: '#151515',
+      background: 'rgba(0, 0, 0, 0)',
+    },
+    headline: {
+      border:' 1px solid #EEEFF2',
+      fontWeight: 400,
+      color: '#151515',
+      background: 'rgba(0, 0, 0, 0)',
+    },
+  };
 
 class Profile extends Component {
   handleActive(tab) {
@@ -73,6 +74,7 @@ class Profile extends Component {
                </div>
                <Divider />
              </div>
+
            </div>
           <Tabs
           tabItemContainerStyle={styles.tabs}>
