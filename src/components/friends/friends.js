@@ -59,8 +59,6 @@ class Friends extends Component {
   }
 
   handleAcceptFriendRequest(userObj) {
-    console.log('accepted friend request');
-    console.log('userobj:', userObj);
     this.props.acceptFriendRequest(userObj);
   }
 
@@ -68,8 +66,13 @@ class Friends extends Component {
     console.log('clicked');
   }
 
-  handleRemoveClick() {
-    console.log('clicked');
+  handleIgnoreInvite(userObj) {
+    console.log('clicked handleigoreinvite');
+    this.props.ignoreFriendInvite(userObj);
+  }
+
+  handleRemoveFriend() {
+    console.log('handle remove friend clicked');
   }
 
   iconButtonElement() {
@@ -88,7 +91,7 @@ class Friends extends Component {
     return (
       <IconMenu iconButtonElement={this.iconButtonElement()}>
         <MenuItem onTouchTap={this.handleOpen.bind(this, displayName, profileURL)}>Message</MenuItem>
-        <MenuItem onTouchTap={this.handleRemoveClick.bind(this)}>Remove Friend</MenuItem>
+        <MenuItem onTouchTap={this.handleRemoveFriend.bind(this)}>Remove Friend</MenuItem>
       </IconMenu>
     );
   }
@@ -97,7 +100,7 @@ class Friends extends Component {
     return (
       <IconMenu iconButtonElement={this.iconButtonElement()}>
         <MenuItem onTouchTap={this.handleAcceptFriendRequest.bind(this, userObj)}>Accept</MenuItem>
-        <MenuItem onTouchTap={this.handleRemoveClick.bind(this)}>Ignore</MenuItem>
+        <MenuItem onTouchTap={this.handleIgnoreInvite.bind(this, userObj)}>Ignore</MenuItem>
       </IconMenu>
     );
   }

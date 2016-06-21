@@ -10,7 +10,8 @@ import {
   ADD_FRIEND,
   OPEN_DIALOG,
   CLOSE_DIALOG,
-  REMOVE_INVITE
+  REMOVE_INVITE,
+  IGNORE_INVITE
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -125,9 +126,20 @@ export function closeDialog(){
 };
 
 export function acceptFriendRequest(userObj) {
-  console.log('inside action creator acceptFriendRequest', userObj);
   return function(dispatch) {
     firebase.acceptFriendRequest(userObj);
     dispatch({ type: REMOVE_INVITE, payload: userObj });
   }
+}
+
+export function ignoreFriendInvite(userObj) {
+  return function(dispatch) {
+    console.log('inside ignoreFriendInvite dispatch before firebase call');
+    firebase.ignoreFriendInvite(userObj);
+    dispatch({ type: REMOVE_INVITE, payload: userObj })
+  }
+}
+
+export function removeFriend() {
+
 }
