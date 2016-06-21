@@ -98,7 +98,7 @@ class Algorithms extends Component {
 
 	render(){
 		return (
-			<div className='newBackground' style={{overflow: 'scroll'}}>
+			<div className='newBackground' style={{overFlow: 'scroll'}}>
 				<div>
 				</div>
 				<div>
