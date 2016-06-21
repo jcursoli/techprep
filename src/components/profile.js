@@ -74,7 +74,6 @@ class Profile extends Component {
                </div>
                <Divider />
              </div>
-
            </div>
           <Tabs
           tabItemContainerStyle={styles.tabs}>
