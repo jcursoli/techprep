@@ -19,10 +19,6 @@ import * as actions from '../actions';
         color: '#151515',
         background: 'rgba(0, 0, 0, 0)',
       },
-      background:{
-        height:'90%',
-
-      },
     };
 
 class Profile extends Component {
@@ -45,30 +41,34 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div className="newBackground" style={styles.background}>
-      <Tabs
-      tabItemContainerStyle={styles.tabs}>
-        <Tab label="Stats" style={styles.headline}>
-          <div className="row center-xs">
-            <p>
-              This is an example tab.
-            </p>
-            <p>
-              You can put any sort of HTML or react component in here. It even keeps the component state!
-            </p>
-            <ProgressTable />
-            </div>
-        </Tab>
-        <Tab label="Item Two" style={styles.headline}>
-          <div className="row center-xs">
-            <p>
-              This is another example tab.
-            </p>
-              <ProgressTable />
+      <div className="newBackground">
+        <div className="profileTabs">
+          <div className='profileImg'>
+           <img width='100%' height='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' /> 
+           </div>
+          <Tabs
+          tabItemContainerStyle={styles.tabs}>
+            <Tab label="Overview" style={styles.headline}>
+              <div>
+                <p>
+                  This is an example tab.
+                </p>
+                <p>
+                  You can put any sort of HTML or react component in here. It even keeps the component state!
+                </p>
+                <ProgressTable />
+                </div>
+            </Tab>
+            <Tab label="Item Two" style={styles.headline}>
+              <div>
+                <p>
+                  This is another example tab.
+                </p>
+              </div>
+            </Tab>
+          </Tabs>
           </div>
-        </Tab>
-      </Tabs>
-        </div>
+      </div>
     );
   }
 }
