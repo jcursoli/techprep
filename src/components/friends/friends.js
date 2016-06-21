@@ -189,7 +189,6 @@ class Friends extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state.friends', state.friends)
   var friends = _.map(state.friends, (n, i) => {
     return n;
   });

@@ -13,6 +13,10 @@ import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+import firebase from 'firebase';
+import _ from 'lodash';
+
+
 const styles = {
   table:{
     border:' 2px solid #EEEFF2',
@@ -27,10 +31,11 @@ class ChatBox extends Component {
   }
 
   renderChatHistory(obj, idx) {
+    var user = firebase.auth().currentUser;
     const username = obj.username;
     const time = obj.time;
     const message = obj.message;
-    if (username === 'dmusicb') {
+    if (username === ( user ? user.displayName : null)) {
       return (
         <li className="clearfix" key={idx}>
           <div className="message-data align-right">
@@ -62,18 +67,17 @@ class ChatBox extends Component {
   }
 
   addChatMessage() {
-    console.log('this is clickeduser in chatbox:', this.props.clickedUser);
+    var user = firebase.auth().currentUser;
     const message = this.state.chatMessageInput;
     const time = (new Date()).toString();
-    console.log('add chat message')
-    console.log('message:', message);
-    console.log('time:', time);
     this.props.addMessage({
-      username: 'dmusicb',
-      photoURL: null,
+      recipient: this.props.clickedUser.displayName,
+      username: user.displayName,
+      photoURL: user.photoURL,
       time,
       message
     });
+    this.setState({ chatMessageInput: '' });
   }
 
   renderHeader() {
@@ -99,6 +103,7 @@ class ChatBox extends Component {
         floatingLabelText="Type Message"
         fullWidth={true}
         onChange={this.handleMessageChange.bind(this)}
+        value={this.state.chatMessageInput}
       />,
       <FlatButton
         label="Cancel"
@@ -116,7 +121,6 @@ class ChatBox extends Component {
       <Dialog
         actions={actions}
         title={this.renderHeader()}
-        autoDetectWindowHeight={true}
         modal={false}
         open={this.props.localOpen}
         onRequestClose={this.props.localHandleClose}
@@ -127,7 +131,10 @@ class ChatBox extends Component {
           <div className="chat">
             <div className="chat-history">
               <ul>
-                {this.props.chat.map(this.renderChatHistory)}
+                {this.props.chat ?
+                  _.map(this.props.chat[this.props.clickedUser ? this.props.clickedUser.displayName : null], this.renderChatHistory.bind(this)).reverse()
+                  :
+                  null}
               </ul>
             </div>
           </div>
@@ -139,6 +146,7 @@ class ChatBox extends Component {
 
 function mapStateToProps(state) {
   //pull out the history for the currentuser that was passed down
+  console.log('state.chat', state.chat);
   return { chat: state.chat };
 }
 
