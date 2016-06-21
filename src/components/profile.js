@@ -12,6 +12,8 @@ import {Menu, MenuItem} from 'material-ui/Menu';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Firebase from 'firebase';
+import {LineChart} from 'react-d3';
 
   const styles = {
       tabs: {
@@ -22,8 +24,7 @@ import RaisedButton from 'material-ui/RaisedButton';
         border:' 1px solid #EEEFF2',
         fontWeight: 400,
         color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
+        background: 'rgba(0, 0, 0, 0)',      },
     };
 
 class Profile extends Component {
@@ -43,17 +44,18 @@ class Profile extends Component {
   }
 
   render() {
+    var user = firebase.auth().currentUser;
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div style={{background:'white', overflow: 'scroll'}}>
+      <div style={{background:'white',overflow: 'scroll'}}>
         <div className="profileTabs">
         <div className='userInfo'>
              <div className='profileImg'>
                <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' /> 
              </div>
              <div>
-               <h3 style={{color:'black'}}>Joey Cursoli</h3>
+               <h3 style={{color:'black'}}>{user.displayName}</h3>
                <Divider />
                <div className='userStats'>
                  <div className='userDetails'>
@@ -81,7 +83,13 @@ class Profile extends Component {
                 </p>
                 <ProgressTable />
                 <br />
-                <ProgressTable />
+                <LineChart 
+                data={[1,2,3,5,6]} 
+                title={'Stuff'}
+                width={500}
+                height={500}
+                x={function(d) {return d}}
+                />
                 </div>
             </Tab>
             <Tab label="Settings" style={styles.headline}>
