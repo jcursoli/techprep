@@ -437,8 +437,7 @@ li {
 .profileTabs{
   margin:10px;
   display: flex;         
-  flex-direction: row;  
-  justify-content: left;
+  flex-direction: row;
   align-items: left; 
   height: 60%;
 }
@@ -466,8 +465,8 @@ li {
   font-size: 28px;
   font-weight: bold;
 }
-
-
-
-
-
+.userSettings{
+  display: flex;    
+  flex-direction: column; 
+  align-items: center; 
+}
