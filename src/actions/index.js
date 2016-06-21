@@ -9,7 +9,9 @@ import {
   ADD_MESSAGE,
   ADD_FRIEND,
   OPEN_DIALOG,
-  CLOSE_DIALOG
+  CLOSE_DIALOG,
+  REMOVE_INVITE,
+  IGNORE_INVITE
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -20,8 +22,10 @@ export function loginUser({ email, password }) {
       dispatch({ type: INITIALIZE_USER, payload: {
         email: user.email,
         uid: user.uid,
+        displayName: user.displayName,
         photoURL: user.photoURL
       } });
+      firebase.initializeState(user);
       browserHistory.push('/welcome');
     }).catch(function(error) {
       var errorCode = error.code;
@@ -42,14 +46,15 @@ export function signupUser({ username, email, password }) {
             displayName: username,
             photoURL: "http://i.imgur.com/DRuG5YH.png"
           }).then(function() {
-            console.log('user update success');
+            console.log('user update success', user);
+            firebase.initializeState(user);
           }, function(error) {
             console.log('user update failed:', error);
           });
           dispatch({ type: AUTH_USER });
           dispatch({ type: INITIALIZE_USER, payload: {
             email: user.email,
-            displayName: username,
+            displayName: user.displayName,
             uid: user.uid,
             photoURL: "http://i.imgur.com/DRuG5YH.png"
           } });
@@ -95,18 +100,12 @@ export function addMessage(obj) {
 
 export function addFriend(friend) {
   return function(dispatch) {
-    console.log('inside addFriend action creator, friend is:', friend);
-    //do firebase check to see if friends uid exists, if it does, then add to that uid's friendsinvites
     firebase.checkIfUserExists(friend).then(user => {
-      console.log('user:', user.exists());
       if (user.exists()) {
-      //if user exists, add pending invite to their invite list
-        console.log('user exists');
         firebase.addFriendInvite(friend);
         dispatch({ type: ADD_FRIEND });
       } else {
-      // if user does not exist, relay error message back to client
-        console.log('user does not exist');
+        console.log('User does not exist');
       }
     }).catch(err => {
       console.log('err:', err);
@@ -125,3 +124,22 @@ export function closeDialog(){
       type: CLOSE_DIALOG
    }
 };
+
+export function acceptFriendRequest(userObj) {
+  return function(dispatch) {
+    firebase.acceptFriendRequest(userObj);
+    dispatch({ type: REMOVE_INVITE, payload: userObj });
+  }
+}
+
+export function ignoreFriendInvite(userObj) {
+  return function(dispatch) {
+    console.log('inside ignoreFriendInvite dispatch before firebase call');
+    firebase.ignoreFriendInvite(userObj);
+    dispatch({ type: REMOVE_INVITE, payload: userObj })
+  }
+}
+
+export function removeFriend() {
+
+}
