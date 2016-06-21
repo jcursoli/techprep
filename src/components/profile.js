@@ -9,6 +9,9 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
 import Divider from 'material-ui/Divider';
 import {Menu, MenuItem} from 'material-ui/Menu';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import RaisedButton from 'material-ui/RaisedButton';
 
   const styles = {
       tabs: {
@@ -43,7 +46,7 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div style={{height:'100%', background:'white'}}>
+      <div style={{background:'white', overflow: 'scroll'}}>
         <div className="profileTabs">
         <div className='userInfo'>
              <div className='profileImg'>
@@ -74,23 +77,24 @@ class Profile extends Component {
             <Tab label="Overview" style={styles.headline}>
               <div>
                 <p style={{color:'black'}}>
-                  This is an example tab.
+                  Profile Overview:
                 </p>
-                <p style={{color:'black'}}>
-                  You can put any sort of HTML or react component in here. It even keeps the component state!
-                </p>
+                <ProgressTable />
+                <br />
                 <ProgressTable />
                 </div>
             </Tab>
             <Tab label="Settings" style={styles.headline}>
               <div>
                 <p style={{color:'black'}}>
-                  This is another example tab.
+                  Edit profile:
                 </p>
                 <div className='userSettings'>
-                  <input />
-                  <input />
-                  <input />
+                  <TextField floatingLabelText="Name:" />
+                  <TextField floatingLabelText="Email:" />
+                  <TextField floatingLabelText="Password:" />
+                  <TextField floatingLabelText="re-enter password:" />
+                  <RaisedButton label="Save" backgroundColor='#52a0cc'/>
                 </div>
               </div>
             </Tab>
