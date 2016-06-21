@@ -6,7 +6,8 @@ import {
   INITIALIZE_FRIENDS,
   INITIALIZE_INVITES,
   INITIALIZE_CHAT,
-  LOAD_QUESTIONS
+  LOAD_QUESTIONS,
+  REMOVE_FRIEND
  } from '../actions/actionTypes';
 var config = {
   apiKey: "AIzaSyBBBowxlfghEwetZ6tP6On58nQ30kqHT6M",
@@ -20,6 +21,7 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       console.log('user is authenticatd');
+      initializeState(user);
     } else {
       //clear state
       console.log('User logged out (in onAuthStateChanged)');
@@ -56,6 +58,13 @@ export function initializeState(user) {
     console.log('dispatching invites initialize');
     console.log('childSnapshot', childSnapshot.val());
     store.dispatch({ type: INITIALIZE_INVITES, payload: childSnapshot.val() });
+  });
+
+  //watch for friend removes
+  var friendsRemoveRef = firebase.database().ref('friends/' + user.displayName + '/friendsList');
+  friendsRemoveRef.on('child_removed', function(childSnapshot) {
+    console.log('friend was removed from friends list');
+    store.dispatch({ type: REMOVE_FRIEND, payload: childSnapshot.val().displayName });
   });
 
   store.dispatch({ type: INITIALIZE_CHAT });
@@ -261,11 +270,16 @@ export function acceptFriendRequest(userObj) {
 export function ignoreFriendInvite(userObj) {
   // remove friend invite from own invite
   var user = firebase.auth().currentUser;
-  console.log('inside firebases ignoreFriendInvite');
   firebase.database().ref('friends/' + user.displayName + '/invites/' + userObj.displayName).remove();
 }
 
-export function removeFriend() {
+export function removeFriend(displayName) {
   // remove friend from own friends list
+  console.log('inside remove friend firebase');
+  var user = firebase.auth().currentUser;
+  console.log('removefriend user.displayName:', user.displayName);
+  console.log('displaynamein remofriend:', displayName);
+  firebase.database().ref('friends/' + user.displayName + '/friendsList/' + displayName).remove();
   // remove yourself from friends friend list
+  firebase.database().ref('friends/' + displayName + '/friendsList/' + user.displayName).remove();
 }
