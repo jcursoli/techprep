@@ -13,3 +13,4 @@ export const CHECK_DISPLAY_NAME = 'check_display_name';
 export const CLOSE_DIALOG = 'close_dialog';
 export const OPEN_DIALOG = 'open_dialog';
 export const REMOVE_INVITE = 'remove_invite';
+export const IGNORE_INVITE = 'ignore_invite';

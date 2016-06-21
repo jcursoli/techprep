@@ -256,5 +256,16 @@ export function acceptFriendRequest(userObj) {
     profileURL: user.photoURL,
     uid: user.uid
   });
+}
 
+export function ignoreFriendInvite(userObj) {
+  // remove friend invite from own invite
+  var user = firebase.auth().currentUser;
+  console.log('inside firebases ignoreFriendInvite');
+  firebase.database().ref('friends/' + user.displayName + '/invites/' + userObj.displayName).remove();
+}
+
+export function removeFriend() {
+  // remove friend from own friends list
+  // remove yourself from friends friend list
 }
