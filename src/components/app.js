@@ -5,7 +5,7 @@ import Header from './header';
 export default class App extends Component {
   render() {
     return (
-      <div style={{height:'100%'}}>
+      <div>
         <Header />
         {this.props.children}
       </div>

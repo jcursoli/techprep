@@ -425,19 +425,49 @@ li {
   overflow: hidden;
   white-space: nowrap;
 }
-.profileImg{
+.profileImg{ 
   margin:10px;
   width:200px;
   height:200px;
   border-radius:5%;
-  align-items: left;
   overflow:hidden;
+  text-align: center;
+  align-items: center; 
 }
 .profileTabs{
   margin:10px;
- display: flex;         
- flex-direction: row;  
- justify-content: left;
- align-items: left; 
- height: 60%;
+  display: flex;         
+  flex-direction: row;  
+  justify-content: left;
+  align-items: left; 
+  height: 60%;
 }
+.userInfo{
+  margin:10px;
+  display: flex;         
+  flex-direction: column;  
+  justify-content: left;
+  align-items: left; 
+  height: 60%;
+}
+.userStats{
+  display: flex;    
+  flex-direction: row; 
+  align-items: center; 
+}
+.userDetails{
+  margin:5px;
+  display: flex;    
+  flex-direction: column; 
+  align-items: center; 
+}
+.userNumbers{
+  color: blue;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+
+
+
+
