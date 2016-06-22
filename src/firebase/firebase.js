@@ -20,7 +20,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // addQuestionsToDatabase();
+      //addQuestionsToDatabase();
       console.log('user is authenticatd');
       initializeState(user);
     } else {
