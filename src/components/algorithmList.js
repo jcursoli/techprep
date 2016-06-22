@@ -5,11 +5,10 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class AlgorithmList extends Component {
-
+class AlgorithmList extends Component {
   constructor(props) {
     super(props);
-    this.state = {algorithms:[{id:12,title:'1', difficulty:'hard',attempts:'12'},{ id:22,title:'1', difficulty:'hard',attempts:'10'},{ id:52,title:'1', difficulty:'hard',attempts:'6'}]};
+    this.state = {algorithms:[{id:12,title:'Reverse String', difficulty:'hard',attempts:'12'},{ id:22,title:'Sum Array', difficulty:'hard',attempts:'10'},{ id:52,title:'sort arry', difficulty:'hard',attempts:'6'}]};
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(item){
@@ -17,14 +16,13 @@ export default class AlgorithmList extends Component {
   }
   renderListItems(){
   	return this.state.algorithms.map((item)=>(
-  		<TableRow onTouchTap={()=>(this.handleClick(item.id))}>/
+  		<TableRow onTouchTap={()=>(this.handleClick(item))}>/
   		  <TableHeaderColumn style={{width: '78%'}}>{item.title}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.attempts}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.difficulty}</TableHeaderColumn>
   		</TableRow>
   	))
   }
-
   render() {
     return (
       <div>
@@ -68,3 +66,11 @@ export default class AlgorithmList extends Component {
     );
   }
 }
+function mapStateToProps(state){
+	algorithms: state.algorithms;
+}
+
+export default connect(mapStateToProps)(AlgorithmList);
+
+
+
