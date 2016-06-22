@@ -18,7 +18,7 @@ import RequireAuth from './components/auth/require_auth';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Questions from './components/questions';
-import Algorithms from './components/algorithms';
+import Algorithm from './components/algorithms';
 import AlgorithmList from './components/algorithmList';
 
 import reducers from './reducers';
@@ -46,6 +46,7 @@ ReactDOM.render(
           <Route path="profile" component={Profile} />
           <Route path='practice' component={Practice} />
           <Route path="questions" component={Questions} />
+          <Route path="problem" component={Algorithm} />
           <Route path="algorithms" component={AlgorithmList} />
         </Route>
       </Router>

@@ -4,6 +4,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import { browserHistory } from 'react-router';
 
 class AlgorithmList extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class AlgorithmList extends Component {
   }
   handleClick(item){
   	console.log('this is the item clicked',item);
+  	browserHistory.push('/problem');
   }
   renderListItems(){
   	return this.state.algorithms.map((item)=>(
