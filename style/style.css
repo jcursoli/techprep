@@ -484,7 +484,6 @@ li {
   display: flex;    
   flex-direction: column; 
   overflow:hidden;
-  text-align: center;
   align-items: center; 
 }
 .profileTabs{
