@@ -10,8 +10,9 @@ class Login extends Component {
   }
 
   renderError() {
-    if (this.props.loginError) {
+    if (this.props.error) {
       // show error message here
+      console.log('there is an error:', this.props.error);
     }
   }
 
@@ -22,8 +23,10 @@ class Login extends Component {
       <div className="login">
         <h1>Welcome back</h1>
         <form className="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <input className={email.touched && email.error && 'errorColor'} {...email} type="text" placeholder={(email.touched && email.error) ? email.error : 'Email'} />
-          <input className={password.touched && password.error && 'errorColor' } {...password} type="password" placeholder={(password.touched && password.error) ? password.error : 'Password'} />
+          <input {...email} type="text" placeholder='Email' />
+          {email.touched && email.error && <div className="errorTextColor">{email.error}</div>}
+          <input {...password} type="password" placeholder='Password' />
+          {password.touched && password.error && <div className="errorTextColor">{password.error}</div>}
           { this.renderError() }
           <button type="submit" id="login-button">Login</button>
         </form>
@@ -33,7 +36,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state){
-  return {};// show error message
+  console.log()
+  return { error: state.auth.error };// show error message
 }
 
 function validate(values) {

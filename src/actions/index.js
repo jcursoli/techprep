@@ -31,6 +31,8 @@ export function loginUser({ email, password }) {
     }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
+      console.log('errorCode:', errorCode);
+      console.log('errorMessage:', errorMessage);
       dispatch(authError(errorMessage));
     });
   }
@@ -86,6 +88,7 @@ export function signoutUser() {
 }
 
 export function authError(error) {
+  console.log('inside authError:', error);
   return {
     type: AUTH_ERROR,
     payload: error
