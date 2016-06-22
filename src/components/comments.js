@@ -17,12 +17,13 @@ class Comments extends Component {
       currentUser: this.props.currentUser
     };
 
-    console.log('this.props in comments: ', this.props)
+    // console.log('state in comments:', this.state)
+
+    //console.log('props.question.commentsID in comments', props.question.commentsID);
   }
 
   handleUpvote(questionIndex, commentIndex) {
     console.log('in handle upvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasUpvoted.length);
-
     // if user has previously downvoted, then remove them from downvotes
     console.log('this is previous hasDownvoted check: ', questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName))
     var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
@@ -64,6 +65,7 @@ class Comments extends Component {
             {this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
+              {console.log('comment in map', comment)}
                   <ListItem disabled={true}>
                     <div>
                     <div>
