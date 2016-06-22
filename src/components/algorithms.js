@@ -20,7 +20,6 @@ const style = {
 		width:'200px',
 		height: '308px',
 		marginTop:'25px',
-		marginBottom:'20px',
 		border:' 4px solid #EEEFF2',
 		background:'black',
 		color:'white', 
@@ -30,14 +29,11 @@ const style = {
 	compiler:{
 		display: 'flex',
 		alignItems: 'center',
-		marginLeft:'200px'
 	},
 	editor:{
 		height: '308px',
 		marginTop:'25px',
-		marginBottom:'20px',
 		border:' 4px solid #EEEFF2',
-		alignItems: 'center',
 	},
 }
 
@@ -51,7 +47,7 @@ class Algorithms extends Component {
 		output: ''
 		};
 		this.editorChanged = this.editorChanged.bind(this);
-		this.runCode = this.runCode.bind(this);
+		this.createFunction = this.createFunction.bind(this);
 	}
 	editorChanged(editorContents){
 		this.setState({ editorContents });
@@ -71,7 +67,7 @@ class Algorithms extends Component {
 		}
 		return correctness;
 	}
-	runCode(){
+	createFunction(){
 		// reset output
 		this.setState({output:''});
 		var userFunction;
@@ -98,10 +94,10 @@ class Algorithms extends Component {
 
 	render(){
 		return (
-			<div className='newBackground' style={{overflow: 'scroll'}}>
+			<div className='newBackground' style={{overFlow: 'scroll'}}>
 				<div>
 				</div>
-				<div>
+				<div className='runButton'>
 					<div  style={{color:'black', margin:'20px'}}>
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 					</div>
@@ -123,7 +119,7 @@ class Algorithms extends Component {
 								/>
 							</div>
 						</div>
-						<RaisedButton onClick={this.runCode} label="Run" backgroundColor='#A80000' />
+						<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
 				</div>
 			</div>
 		)

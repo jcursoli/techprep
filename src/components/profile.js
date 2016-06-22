@@ -7,23 +7,27 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
+import Divider from 'material-ui/Divider';
+import {Menu, MenuItem} from 'material-ui/Menu';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import RaisedButton from 'material-ui/RaisedButton';
+import Firebase from 'firebase';
+import {LineChart} from 'react-d3';
+import {Chart} from 'react-d3';
 
   const styles = {
-      tabs: {
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
-      headline: {
-        border:' 1px solid #EEEFF2',
-        fontWeight: 400,
-        color: '#151515',
-        background: 'rgba(0, 0, 0, 0)',
-      },
-      background:{
-        height:'90%',
-
-      },
-    };
+    tabs: {
+      color: '#151515',
+      background: 'rgba(0, 0, 0, 0)',
+    },
+    headline: {
+      border:' 1px solid #EEEFF2',
+      fontWeight: 400,
+      color: '#151515',
+      background: 'rgba(0, 0, 0, 0)',
+    },
+  };
 
 class Profile extends Component {
   handleActive(tab) {
@@ -40,35 +44,69 @@ class Profile extends Component {
       // show error message here
     }
   }
+  x = function(d) {
+      return d.index;
+    }
 
   render() {
+    var user = firebase.auth().currentUser;
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div className="newBackground" style={styles.background}>
-      <Tabs
-      tabItemContainerStyle={styles.tabs}>
-        <Tab label="Stats" style={styles.headline}>
-          <div className="row center-xs">
-            <p>
-              This is an example tab.
-            </p>
-            <p>
-              You can put any sort of HTML or react component in here. It even keeps the component state!
-            </p>
-            <ProgressTable />
-            </div>
-        </Tab>
-        <Tab label="Item Two" style={styles.headline}>
-          <div className="row center-xs">
-            <p>
-              This is another example tab.
-            </p>
-              <ProgressTable />
+      <div style={{background:'white',overflow: 'scroll'}}>
+        <div className="profileTabs">
+        <div className='userInfo'>
+             <div className='profileImg'>
+               <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' /> 
+             </div>
+             <div>
+               <h3 style={{color:'black'}}>{user.displayName}</h3>
+               <Divider />
+               <div className='userStats'>
+                 <div className='userDetails'>
+                     <strong className='userNumbers'> 11 </strong>
+                    <h4 style={{color:'black'}} > solved </h4>
+                 </div>
+                 <div className='userDetails'>
+                    <strong className='userNumbers'> 106 </strong>
+                   <h4 style={{color:'black'}} > Friends </h4>
+                 </div>
+                 <div className='userDetails'>
+                  <strong className='userNumbers'> 44 </strong>
+                   <h4 style={{color:'black'}} > Lessons </h4>
+                 </div>
+               </div>
+               <Divider />
+             </div>
+           </div>
+          <Tabs
+          tabItemContainerStyle={styles.tabs}>
+            <Tab label="Overview" style={styles.headline}>
+              <div>
+                <p style={{color:'black'}}>
+                  Profile Overview:
+                </p>
+                <ProgressTable />
+                <br />
+                </div>
+            </Tab>
+            <Tab label="Settings" style={styles.headline}>
+              <div>
+                <p style={{color:'black'}}>
+                  Edit profile:
+                </p>
+                <div className='userSettings'>
+                  <TextField floatingLabelText="Name:" />
+                  <TextField floatingLabelText="Email:" />
+                  <TextField floatingLabelText="Password:" />
+                  <TextField floatingLabelText="re-enter password:" />
+                  <RaisedButton label="Save" backgroundColor='#52a0cc'/>
+                </div>
+              </div>
+            </Tab>
+          </Tabs>
           </div>
-        </Tab>
-      </Tabs>
-        </div>
+      </div>
     );
   }
 }
