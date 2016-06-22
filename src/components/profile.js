@@ -88,14 +88,6 @@ class Profile extends Component {
                 </p>
                 <ProgressTable />
                 <br />
-                 <LineChart
-                   title={"Taiwan refuse disposal"}
-                   data={[{index:1},{index:4},{index:9},{index:33}]}
-                   width={500}
-                   height={300}
-                   xScale={"time"}
-                   x={function(d) {console.log(d);return d.index;}}
-                 />
                 </div>
             </Tab>
             <Tab label="Settings" style={styles.headline}>
