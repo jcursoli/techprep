@@ -14,6 +14,7 @@ import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Firebase from 'firebase';
 import {LineChart} from 'react-d3';
+import {Chart} from 'react-d3';
 
   const styles = {
     tabs: {
@@ -43,6 +44,9 @@ class Profile extends Component {
       // show error message here
     }
   }
+  x = function(d) {
+      return d.index;
+    }
 
   render() {
     var user = firebase.auth().currentUser;
@@ -84,13 +88,14 @@ class Profile extends Component {
                 </p>
                 <ProgressTable />
                 <br />
-                <LineChart 
-                data={[1,2,3,5,6]} 
-                title={'Stuff'}
-                width={500}
-                height={500}
-                x={function(d) {return d}}
-                />
+                 <LineChart
+                   title={"Taiwan refuse disposal"}
+                   data={[{index:1},{index:4},{index:9},{index:33}]}
+                   width={500}
+                   height={300}
+                   xScale={"time"}
+                   x={function(d) {console.log(d);return d.index;}}
+                 />
                 </div>
             </Tab>
             <Tab label="Settings" style={styles.headline}>
