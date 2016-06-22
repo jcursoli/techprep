@@ -40,9 +40,9 @@ class Questions extends Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
-  handleOpen() {
-    console.log('in questions handleOpen')
-    this.setState({open: true});
+  handleOpen(question) {
+    // console.log('passed-in in questions handleOpen:', question)
+    this.setState({open: true, question});
   };
 
   handleClose() {
@@ -50,8 +50,8 @@ class Questions extends Component {
   };
 
   render() {
-    {console.log('this.state', this.state, 'in questions render')}
-    {console.log('this.props.questions', this.props.questions, 'in questions render')}
+    // {console.log('this.state', this.state, 'in questions render')}
+    // {console.log('this.props.questions', this.props.questions, 'in questions render')}
     return (
       <div>
         <div id="stay">
