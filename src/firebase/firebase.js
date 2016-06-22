@@ -7,6 +7,7 @@ import {
   INITIALIZE_FRIENDS,
   INITIALIZE_INVITES,
   INITIALIZE_CHAT,
+  INITIALIZE_ALGORITHMS,
   LOAD_QUESTIONS,
   REMOVE_FRIEND
  } from '../actions/actionTypes';
@@ -34,14 +35,19 @@ firebase.auth().onAuthStateChanged(function(user) {
 export function initializeState(user) {
   console.log('initializing state');
   store.dispatch({ type: AUTH_USER });
-  //make dispatches to populate state that's needed
-  console.log('User logged in/signed up (in onAuthStateChanged)');
-  console.log('user:', user);
   // Load questions from database
   var questionsRef = firebase.database().ref('/questions');
   questionsRef.on("value", function(snapshot) {
     console.log('dispatching load questions');
     store.dispatch({ type: LOAD_QUESTIONS, payload: snapshot.val().questions});
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
+  // Load algorithms from database
+  var algorithmsRef = firebase.database().ref('algorithms');
+  algorithmsRef.on("value", function(snapshot) {
+    store.dispatch({ type: INITIALIZE_ALGORITHMS, payload: snapshot.val() });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
