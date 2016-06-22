@@ -4,6 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 // import Arrows from './Arrows';
+import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
+import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionTypes';
 
@@ -12,25 +14,16 @@ class Comments extends Component {
     super(props);
     this.state = {
       expanded: false,
+      currentCommentsID: this.props.question.commentsID 
     };
 
-    console.log('this.props in comments: ', this.props)
+    // console.log('state in comments:', this.state)
+
+    //console.log('props.question.commentsID in comments', props.question.commentsID);
   }
 
 
   render() {
-    // {console.log('this.state in comments', this.state)}
-    // const commentList = [
-    //   { username: 'jesus', comment: 'whoa guys cool app' },
-    //   { username: 'bob', comment: 'wow you guys are super cool'},
-    //   { username: 'forrest', comment: 'hey guys I really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really need to find my shirt' },
-    //   { username: 'bob', comment: 'wow you guys are super cool'},
-    //   { username: 'jesus', comment: 'whoa guys cool app' },
-    //   { username: 'bob', comment: 'wow you guys are super cool'},
-    //   { username: 'jesus', comment: 'whoa guys cool app' },
-    //   { username: 'bob', comment: 'wow you guys are super cool'}
-    // ];
-
     return (  
       <div>
         <Card>
@@ -41,10 +34,11 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {this.props.comments.map((comment, index) => {
-              {console.log('comment', comment)}
+            {console.log('this.props.comments[this.state.currentCommentsID]', this.props.comments[this.state.currentCommentsID])}
+            {this.props.comments[this.state.currentCommentsID].map((comment, index) => {
               return (
                 <List key={index}>
+              {console.log('comment in map', comment)}
                   <ListItem disabled={true}>
                     <div>
                     <div>
@@ -66,9 +60,6 @@ class Comments extends Component {
                 </List>
               );
             })}
-
-
-
           </CardText>
           <CardActions expandable={true}>
           </CardActions>
@@ -79,7 +70,7 @@ class Comments extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state.comments in mstp', state.comments);
+  // console.log('state in mstp', state);
   return { comments: state.comments };
 }
 
