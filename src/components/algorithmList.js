@@ -9,15 +9,15 @@ export default class AlgorithmList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {algorithms:[{id:12,title:'1', difficulty:'hard',attempts:'12'},{ id:22,title:'1', difficulty:'hard',attempts:'10'},{ id:52,title:'1', difficulty:'hard',attempts:'6'}]};
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(item){
-  	console.log('this is the item clicked',item)
+  	console.log('this is the item clicked',item);
   }
   renderListItems(){
-  	this.props.algorithms.map((item)=>(
-  		<TableRow onTouchTap={this.handleClick}>/
+  	return this.state.algorithms.map((item)=>(
+  		<TableRow onTouchTap={()=>(this.handleClick(item.id))}>/
   		  <TableHeaderColumn style={{width: '78%'}}>{item.title}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.attempts}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.difficulty}</TableHeaderColumn>
@@ -35,14 +35,20 @@ export default class AlgorithmList extends Component {
             fixedFooter={false}
             selectable={true}
             multiSelectable={false}
+            displayRowCheckbox={false}
           >
-            <TableHeader>
+            <TableHeader 
+            displaySelectAll={false}
+            displayRowCheckbox={false}
+            adjustForCheckbox={false}
+            enableSelectAll={false}
+            >
               <TableRow>
                 <TableHeaderColumn colSpan="3" tooltip="Algorithms" style={{textAlign: 'center'}}>
                   Algorithms
                 </TableHeaderColumn>
               </TableRow>
-              <TableRow>/
+              <TableRow>
                 <TableHeaderColumn style={{width: '78%'}}>Problem</TableHeaderColumn>
                 <TableHeaderColumn style={{width: '11%'}}>Attempts</TableHeaderColumn>
                 <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
@@ -52,6 +58,7 @@ export default class AlgorithmList extends Component {
               deselectOnClickaway={true}
               showRowHover={true}
               stripedRows={true}
+              displayRowCheckbox={false}
           	  >  
            		{this.renderListItems()}
             </TableBody>

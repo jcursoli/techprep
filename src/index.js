@@ -19,6 +19,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Questions from './components/questions';
 import Algorithms from './components/algorithms';
+import AlgorithmList from './components/algorithmList';
 
 import reducers from './reducers';
 
@@ -45,7 +46,7 @@ ReactDOM.render(
           <Route path="profile" component={Profile} />
           <Route path='practice' component={Practice} />
           <Route path="questions" component={Questions} />
-          <Route path="algorithms" component={Algorithms} />
+          <Route path="algorithms" component={AlgorithmList} />
         </Route>
       </Router>
     </MuiThemeProvider>
