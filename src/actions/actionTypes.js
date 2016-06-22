@@ -7,6 +7,7 @@ export const INITIALIZE_INVITES = 'initialize_invites';
 export const INITIALIZE_CHAT = 'initialize_chat';
 export const SIGNOUT_USER = 'signout_user';
 export const LOAD_QUESTIONS = 'load_questions';
+export const LOAD_COMMENTS = 'load_comments';
 export const ADD_MESSAGE = 'add_message';
 export const ADD_FRIEND = 'add_friend';
 export const REMOVE_FRIEND = 'remove_friend';
