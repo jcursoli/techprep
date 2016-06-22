@@ -1,6 +1,6 @@
 /* CSS for Login Page */
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
@@ -436,29 +436,29 @@ li {
 }
 .profileTabs{
   margin:10px;
-  display: flex;         
+  display: flex;
   flex-direction: row;
-  align-items: left; 
+  align-items: left;
   height: 60%;
 }
 .userInfo{
   margin:10px;
-  display: flex;         
-  flex-direction: column;  
+  display: flex;
+  flex-direction: column;
   justify-content: left;
-  align-items: left; 
+  align-items: left;
   height: 60%;
 }
 .userStats{
-  display: flex;    
-  flex-direction: row; 
-  align-items: center; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .userDetails{
   margin:5px;
-  display: flex;    
-  flex-direction: column; 
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .userNumbers{
   color: blue;
@@ -466,9 +466,9 @@ li {
   font-weight: bold;
 }
 .userSettings{
-  display: flex;    
-  flex-direction: column; 
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 5px;
   max-width: 600px;
   height: 400px;
@@ -481,36 +481,36 @@ li {
   color: black;
 }
 .runButton{
-  display: flex;    
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   overflow:hidden;
-  align-items: center; 
+  align-items: center;
 }
 .profileTabs{
   margin:10px;
-  display: flex;         
+  display: flex;
   flex-direction: row;
-  align-items: left; 
+  align-items: left;
   height: 60%;
 }
 .userInfo{
   margin:10px;
-  display: flex;         
-  flex-direction: column;  
+  display: flex;
+  flex-direction: column;
   justify-content: left;
-  align-items: left; 
+  align-items: left;
   height: 60%;
 }
 .userStats{
-  display: flex;    
-  flex-direction: row; 
-  align-items: center; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .userDetails{
   margin:5px;
-  display: flex;    
-  flex-direction: column; 
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .userNumbers{
   color: blue;
@@ -518,7 +518,7 @@ li {
   font-weight: bold;
 }
 .userSettings{
-  display: flex;    
-  flex-direction: column; 
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

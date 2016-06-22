@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import { store } from '../index';
 import {
   AUTH_USER,
+  SIGNOUT_USER,
   INITIALIZE_USER,
   INITIALIZE_FRIENDS,
   INITIALIZE_INVITES,
@@ -25,6 +26,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       initializeState(user);
     } else {
       //clear state
+      store.dispatch({ type: SIGNOUT_USER });
       console.log('User logged out (in onAuthStateChanged)');
     }
 });
@@ -90,9 +92,11 @@ export function createUserWithEmailAndPassword(email, password) {
 
 export function signOutUser() {
   var user = firebase.auth().currentUser;
-  firebase.database().ref('/questions').off('value');
-  firebase.database().ref('friends/' + user.displayName + '/friendsList').off('value');
-  firebase.database().ref('friends/' + user.displayName + '/invites').off('child_added');
+  if (user) {
+    firebase.database().ref('/questions').off('value');
+    firebase.database().ref('friends/' + user.displayName + '/friendsList').off('value');
+    firebase.database().ref('friends/' + user.displayName + '/invites').off('child_added');
+  }
   return firebase.auth().signOut();
 }
 
@@ -208,7 +212,7 @@ export function createUserInDatabase(username) {
     displayName: username,
     email: user.email,
     uid: user.uid,
-    profileURL: 'http://i.imgur.com/DRuG5YH.png',
+    profileURL: 'https://i.imgur.com/DRuG5YH.png',
   });
   friendsRef.set({
     friendsList: {
@@ -216,7 +220,7 @@ export function createUserInDatabase(username) {
         displayName: 'doug',
         email: 'idugcoal@gmail.com',
         uid: 'R6PAt6KeuCURYFB4d4BUS65qRsl1',
-        profileURL: 'http://i.imgur.com/DRuG5YH.png'
+        profileURL: 'https://i.imgur.com/DRuG5YH.png'
       }
     },
     invites: {
@@ -224,7 +228,7 @@ export function createUserInDatabase(username) {
         displayName: 'drew',
         email: 'drew@gmail.com',
         uid: 'UhlE2WagS7bKJfYrV5Kp6Ydt9Zl1',
-        profileURL: 'http://i.imgur.com/DRuG5YH.png'
+        profileURL: 'https://i.imgur.com/DRuG5YH.png'
       }
     }
   });
@@ -252,7 +256,7 @@ export function addFriendInvite(displayName) {
     uid: user.uid,
     displayName: user.displayName,
     email: user.email,
-    profileURL: user.photoURL || "http://i.imgur.com/DRuG5YH.png"
+    profileURL: user.photoURL || "https://i.imgur.com/DRuG5YH.png"
   });
 }
 
