@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
-  from 'material-ui/Table';
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
-import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
-import Comments from './comments';
 
-export default class Questions extends Component {
+export default class AlgorithmList extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
-    this.showAnswer = this.showAnswer.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(item){
+  	console.log('this is the item clicked',item)
   }
   renderListItems(){
   	this.props.algorithms.map((item)=>(
-  		<TableRow>/
+  		<TableRow onTouchTap={this.handleClick}>/
   		  <TableHeaderColumn style={{width: '78%'}}>{item.title}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.attempts}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.difficulty}</TableHeaderColumn>
@@ -28,7 +26,6 @@ export default class Questions extends Component {
   }
 
   render() {
-
     return (
       <div>
         <div>
@@ -41,7 +38,7 @@ export default class Questions extends Component {
           >
             <TableHeader>
               <TableRow>
-                <TableHeaderColumn colSpan="3" tooltip="Interview Questions" style={{textAlign: 'center'}}>
+                <TableHeaderColumn colSpan="3" tooltip="Algorithms" style={{textAlign: 'center'}}>
                   Algorithms
                 </TableHeaderColumn>
               </TableRow>
