@@ -31,7 +31,7 @@ class AlgorithmDialog extends Component {
         <Dialog
         	actions={action}
           modal={false}
-          open={this.props.open}
+          open={this.props.open || false}
           onRequestClose={this.handleClose}
           contentStyle={customContentStyle}
         >
