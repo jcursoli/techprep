@@ -15,4 +15,5 @@ export const CLOSE_DIALOG = 'close_dialog';
 export const OPEN_DIALOG = 'open_dialog';
 export const REMOVE_INVITE = 'remove_invite';
 export const IGNORE_INVITE = 'ignore_invite';
-export const INITIALIZE_ALGORITHMS = 'initialize_algorithms'
+export const INITIALIZE_ALGORITHMS = 'initialize_algorithms';
+export const CURRENT_ALGORITHM = 'current_algorithm';
