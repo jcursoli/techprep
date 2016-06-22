@@ -14,7 +14,7 @@ const appReducer = combineReducers({
   auth,
   friends,
   user,
-  //questions,
+  // questions,
   chat,
   invites,
   dialog
