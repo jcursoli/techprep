@@ -13,8 +13,8 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Firebase from 'firebase';
-import {LineChart} from 'react-d3';
-import {Chart} from 'react-d3';
+// import {LineChart} from 'react-d3';
+// import {Chart} from 'react-d3';
 
   const styles = {
     tabs: {
@@ -57,7 +57,7 @@ class Profile extends Component {
         <div className="profileTabs">
         <div className='userInfo'>
              <div className='profileImg'>
-               <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' /> 
+               <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
              </div>
              <div>
                <h3 style={{color:'black'}}>{user.displayName}</h3>

@@ -45,7 +45,7 @@ export function signupUser({ username, email, password }) {
           firebase.createUserInDatabase(username);
           user.updateProfile({
             displayName: username,
-            photoURL: "http://i.imgur.com/DRuG5YH.png"
+            photoURL: "https://i.imgur.com/DRuG5YH.png"
           }).then(function() {
             console.log('user update success', user);
             firebase.initializeState(user);
@@ -57,7 +57,7 @@ export function signupUser({ username, email, password }) {
             email: user.email,
             displayName: user.displayName,
             uid: user.uid,
-            photoURL: "http://i.imgur.com/DRuG5YH.png"
+            photoURL: "https://i.imgur.com/DRuG5YH.png"
           } });
           browserHistory.push('/welcome');
         }).catch(function(error) {

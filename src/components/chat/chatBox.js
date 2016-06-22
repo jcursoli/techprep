@@ -131,10 +131,11 @@ class ChatBox extends Component {
           <div className="chat">
             <div className="chat-history">
               <ul>
-                {this.props.chat ?
+                {
+                  this.props.chat
+                  &&
                   _.map(this.props.chat[this.props.clickedUser ? this.props.clickedUser.displayName : null], this.renderChatHistory.bind(this)).reverse()
-                  :
-                  null}
+                }
               </ul>
             </div>
           </div>
@@ -146,7 +147,6 @@ class ChatBox extends Component {
 
 function mapStateToProps(state) {
   //pull out the history for the currentuser that was passed down
-  console.log('state.chat', state.chat);
   return { chat: state.chat };
 }
 

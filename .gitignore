@@ -4,3 +4,7 @@
 bundle.js
 npm-debug.log
 *.DS_Store
+.firebaserc
+database.rules.json
+firebase.json
+/public

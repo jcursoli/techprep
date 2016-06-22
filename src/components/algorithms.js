@@ -22,7 +22,7 @@ const style = {
 		marginTop:'25px',
 		border:' 4px solid #EEEFF2',
 		background:'black',
-		color:'white', 
+		color:'white',
 		display:'inline',
 		overflow: 'scroll',
 	},
