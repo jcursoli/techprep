@@ -169,7 +169,7 @@ export function removeErrorMessage() {
 }
 
 export function addVotes(commentIndex, questionIndex, next, upOrDown) {
-  console.log('in updateVotes, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
+  // console.log('in updateVotes, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var payload = {
     commentIndex,
     questionIndex,
@@ -186,7 +186,7 @@ export function addVotes(commentIndex, questionIndex, next, upOrDown) {
 }
 
 export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
-  console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+  // console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
 
   var payload = {
     commentIndex,

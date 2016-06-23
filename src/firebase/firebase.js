@@ -334,7 +334,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // addQuestionsToDatabase();
+      addQuestionsToDatabase();
       // console.log('user is authenticatd');
       initializeState(user);
     } else {
@@ -541,7 +541,7 @@ export function addMessage(messageObj) {
 }
 
 export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) {
-  console.log('in firebase>addVotesToDatabase, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
+  // console.log('in firebase>addVotesToDatabase, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var user = firebase.auth().currentUser;
   var userToAdd = {};
   // console.log('next', next)
@@ -563,7 +563,7 @@ export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) 
 }
 
 export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown) {
-  console.log('in removeVotesFromDatabase, commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+  // console.log('in removeVotesFromDatabase, commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
   var user = firebase.auth().currentUser;
   var userToRemove = {};
 

@@ -19,20 +19,35 @@ class Comments extends Component {
   }
 
   handleUpvote(questionIndex, commentIndex) {
-    
-    if (questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1 && 
-      questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
-        this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP');
-    } else if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)) {
-      this.props.removeVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
+    console.log('in handle upvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasUpvoted.length);
+
+    // if user has previously downvoted, then remove them from downvotes
+    console.log('this is previous hasDownvoted check: ', questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName))
+    var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
+    if(userIndex) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'DOWN')
     }
+    // if user has not upvoted yet, add to upvotes
+    // var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName;
+    console.log('this is hasDownvoted > add to upvotes:', questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1)
+    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP')
+    }
+
+
   }
   handleDownvote(questionIndex, commentIndex) {
-    if (questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1 && 
-      questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
-        this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN');
-    } else if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)) {
-      this.props.removeVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'UP')
+    console.log('in handle downvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasDownvoted.length);
+
+    // if user has previously upvoted, then remove them from upvotes
+    // 
+    var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
+    if(userIndex) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'UP')
+    }
+    // if user has not downvoted yet, add to downvotes
+    if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
     }
   }
 
@@ -53,7 +68,7 @@ class Comments extends Component {
                   <ListItem disabled={true}>
                     <div>
                     <div>
-                      <div id="votes"> {comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
+                      <div id="votes"> {comment.hasUpvoted && comment.hasDownvoted && comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
                       <div id="arrows">
                         <iconButton onClick={() => this.handleUpvote(comment, index)}> <UpArrow /> </iconButton>
                         <iconButton onClick={() => this.handleDownvote(comment, index)}> <DownArrow /> </iconButton>
