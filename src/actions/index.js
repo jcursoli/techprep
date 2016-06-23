@@ -182,7 +182,7 @@ export function addVotes(commentIndex, questionIndex, next, upOrDown) {
 }
 
 export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
-  console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+  // console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
 
   var payload = {
     commentIndex,

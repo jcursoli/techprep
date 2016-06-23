@@ -333,7 +333,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // addQuestionsToDatabase();
+      addQuestionsToDatabase();
       // console.log('user is authenticatd');
       initializeState(user);
     } else {
@@ -535,6 +535,7 @@ export function addMessage(messageObj) {
 }
 
 export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) {
+
   var user = firebase.auth().currentUser;
   var userToAdd = {};
   
