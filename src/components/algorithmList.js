@@ -34,18 +34,20 @@ class AlgorithmList extends Component {
       <div>
         <div>
           <Table
-            height={'100%'}
+            height={'100vh'}
             fixedHeader={false}
             fixedFooter={false}
             selectable={true}
             multiSelectable={false}
             displayRowCheckbox={false}
+            selectable={false}
           >
             <TableHeader 
             displaySelectAll={false}
             displayRowCheckbox={false}
             adjustForCheckbox={false}
             enableSelectAll={false}
+
             >
               <TableRow>
                 <TableHeaderColumn colSpan="3" tooltip="Algorithms" style={{textAlign: 'center'}}>
@@ -60,9 +62,9 @@ class AlgorithmList extends Component {
             </TableHeader>
             <TableBody
               deselectOnClickaway={true}
-              showRowHover={true}
               stripedRows={true}
               displayRowCheckbox={false}
+              showRowHover={true}
           	  >  
            		{this.renderListItems()}
             </TableBody>
