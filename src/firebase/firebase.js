@@ -540,13 +540,47 @@ export function addMessage(messageObj) {
   // console.log('current messageObj in addMessags in firebase.js:', messageObj);
 }
 
-export function addVotesToDatabase(commentIndex, questionsIndex, next) {
-  console.log('commentIndex', commentIndex, 'questionsIndex', questionsIndex)
+export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) {
+  console.log('in firebase>addVotesToDatabase, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var user = firebase.auth().currentUser;
   var userToAdd = {};
   // console.log('next', next)
   userToAdd[next] = user.displayName;
   console.log('user to add:', userToAdd);
-  firebase.database().ref('comments/' + commentIndex + '/' + questionsIndex  + '/hasUpvoted').update(userToAdd);
-  console.log('in addVotesToDatabase in firebase.js')
+  switch(upOrDown) {
+    case 'UP':
+      var votePath = '/hasUpvoted';
+      break;
+    case 'DOWN':
+      var votePath = '/hasDownvoted';
+      break;
+    default:
+      console.log('error in firebase.js addsVotesToDatabase');
+      return;
+
+  }
+  firebase.database().ref('comments/' + commentIndex + '/' + questionIndex  + votePath).update(userToAdd);
+}
+
+export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown) {
+  console.log('in removeVotesFromDatabase, commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+  var user = firebase.auth().currentUser;
+  var userToRemove = {};
+
+  userToRemove[next] = user.displayName;
+  console.log('user to remove:', userToRemove);
+
+  switch(upOrDown) {
+    case 'UP':
+      var votePath = '/hasUpvoted';
+      break;
+    case 'DOWN':
+      var votePath = '/hasDownvoted';
+      break;
+    default:
+      console.log('error in firebase.js removeVotesFromDatabase');
+      return;
+  }
+  
+  firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 }
