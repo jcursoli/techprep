@@ -15,7 +15,7 @@ import {
   IGNORE_INVITE,
   CURRENT_ALGORITHM,
   REMOVE_ERROR,
-  UPDATE_VOTES,
+  UPDATE_VOTES
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -182,14 +182,20 @@ export function addVotes(commentIndex, questionIndex, next, upOrDown) {
 }
 
 export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
+  console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+
   var payload = {
     commentIndex,
     questionIndex,
     next,
     upOrDown
   }
-  return function(dispatch) {
-    firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
-    dispatch({ type: UPDATE_VOTES, payload })
-  }
+    return function(dispatch) {
+
+      firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
+      dispatch({ type: UPDATE_VOTES, payload })
+      
+    }
+
+
 }

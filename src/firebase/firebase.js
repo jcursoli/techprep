@@ -539,7 +539,6 @@ export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) 
   var userToAdd = {};
   
   userToAdd[next] = user.displayName;
-  
   switch(upOrDown) {
     case 'UP':
       var votePath = '/hasUpvoted';
@@ -571,6 +570,6 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
       console.log('error in firebase.js removeVotesFromDatabase');
       return;
   }
-  firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 
+  firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 }
