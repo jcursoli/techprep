@@ -168,16 +168,16 @@ export function removeErrorMessage() {
   }
 }
 
-
-export function updateVotes(comment, index) {
-  console.log('in updateVotes, comment:', comment, ' index:', index);
+export function updateVotes(comment, index, next) {
+  console.log('in updateVotes, comment:', comment, ' index:', index, 'next:', next);
   var payload = {
     comment,
-    index
+    index,
+    next
   }
   return function(dispatch) {
     //firebase function call
-    firebase.addVotesToDatabase(comment, index);
+    firebase.addVotesToDatabase(comment, index, next);
     //dispatch with type/payload
     //dispatch({ type: UPDATE_VOTES, payload})
   }

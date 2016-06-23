@@ -430,13 +430,13 @@ export function signOutUser() {
 
 export function addQuestionsToDatabase() {
   var ref = firebase.database().ref('/questions');
-  for(var i = 0; i < 16; i++) {
-    ref.push(allQuestions[i]);
-  }
+  // for(var i = 0; i < 16; i++) {
+  ref.set(allQuestions);
+  // }
   var ref = firebase.database().ref('/comments');
-  for(var i = 0; i < 16; i++) {
-    ref.push(allComments[i]);
-  }
+  // for(var i = 0; i < 16; i++) {
+  ref.set(allComments);
+  // }
   //var ref = firebase.database().ref('/commentsList')
 }
 
@@ -540,8 +540,13 @@ export function addMessage(messageObj) {
   // console.log('current messageObj in addMessags in firebase.js:', messageObj);
 }
 
-export function addVotesToDatabase(comment, index) {
+export function addVotesToDatabase(commentIndex, questionsIndex, next) {
+  console.log('commentIndex', commentIndex, 'questionsIndex', questionsIndex)
   var user = firebase.auth().currentUser;
-  firebase.database().ref('comments/' +  + comment + '/' + index  + '/hasUpvoted').push('fartytime');
+  var userToAdd = {};
+  // console.log('next', next)
+  userToAdd[next] = user.displayName;
+  console.log('user to add:', userToAdd);
+  firebase.database().ref('comments/' + commentIndex + '/' + questionsIndex  + '/hasUpvoted').update(userToAdd);
   console.log('in addVotesToDatabase in firebase.js')
 }
