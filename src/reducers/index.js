@@ -9,6 +9,7 @@ import invites from './inviteReducer';
 import { SIGNOUT_USER } from '../actions/actionTypes';
 import dialog from './dialogReducer';
 import comments from './commentsReducer';
+import votes from './votesReducer'
 
 
 const appReducer = combineReducers({
@@ -20,7 +21,8 @@ const appReducer = combineReducers({
   chat,
   invites,
   dialog,
-  comments
+  comments,
+  votes
 });
 
 const rootReducer = (state, action) => {

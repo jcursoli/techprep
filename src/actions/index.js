@@ -12,7 +12,8 @@ import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
   REMOVE_INVITE,
-  IGNORE_INVITE
+  IGNORE_INVITE,
+  UPDATE_VOTES
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -147,5 +148,19 @@ export function removeFriend(displayName) {
     console.log('inside removeFriend action creator');
     firebase.removeFriend(displayName);
     dispatch({ type: REMOVE_FRIEND, payload: displayName });
+  }
+}
+
+export function updateVotes(comment, index) {
+  console.log('in updateVotes, comment:', comment, ' index:', index);
+  var payload = {
+    comment,
+    index
+  }
+  return function(dispatch) {
+    //firebase function call
+    firebase.addVotesToDatabase(comment, index);
+    //dispatch with type/payload
+    //dispatch({ type: UPDATE_VOTES, payload})
   }
 }
