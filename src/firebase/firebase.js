@@ -572,4 +572,5 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
       return;
   }
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
+
 }
