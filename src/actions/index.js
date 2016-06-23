@@ -13,7 +13,8 @@ import {
   CLOSE_DIALOG,
   REMOVE_INVITE,
   IGNORE_INVITE,
-  CURRENT_ALGORITHM
+  CURRENT_ALGORITHM,
+  REMOVE_ERROR
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -34,7 +35,7 @@ export function loginUser({ email, password }) {
       var errorMessage = error.message;
       console.log('errorCode:', errorCode);
       console.log('errorMessage:', errorMessage);
-      dispatch(authError(errorMessage));
+      dispatch(authError(errorCode));
     });
   }
 };
@@ -67,7 +68,7 @@ export function signupUser({ username, email, password }) {
           console.log('error:', error);
           var errorCode = error.code;
           var errorMessage = error.message;
-          dispatch(authError(errorMessage));
+          dispatch(authError(errorCode));
         });
       } else {
         console.log('username already exists');
@@ -157,5 +158,11 @@ export function removeFriend(displayName) {
     console.log('inside removeFriend action creator');
     firebase.removeFriend(displayName);
     dispatch({ type: REMOVE_FRIEND, payload: displayName });
+  }
+}
+
+export function removeErrorMessage() {
+  return function(dispatch) {
+    dispatch({ type: REMOVE_ERROR });
   }
 }
