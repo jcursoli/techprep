@@ -3,27 +3,42 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-// import Arrows from './Arrows';
 import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
 import { connect } from 'react-redux';
-import * as actions from '../actions/actionTypes';
+import * as actions from '../actions';
 
 class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
-      currentCommentsID: this.props.question.commentsID 
+      currentCommentsID: this.props.question.commentsID, 
+      currentUser: this.props.currentUser
     };
-
-    // console.log('state in comments:', this.state)
-
-    //console.log('props.question.commentsID in comments', props.question.commentsID);
+    console.log(props, 'in comments')
   }
 
+  handleUpvote(comment, index) {
+    // console.log('handleUpvote comment and user', comment, this.state.currentUser.displayName);
+    // console.log(index, 'in handleUpvote');
+    //console.log(this.props.currentUser.displayName);
+    if(comment.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.updateVotes(this.state.currentCommentsID, index);
+      console.log('can upvote', 'questionID:', this.state.currentCommentsID, 'commentsID', index)
+    }
+
+  }
+
+  handleDownvote(comment) {
+    // console.log('handleDownvote comment and user', comment, this.state.currentUser.displayName);
+    if(comment.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      console.log('can downvote')
+    }
+  }
 
   render() {
+    // console.log('state', this.state) {console.log('in map:', this.props.comments[this.state.currentCommentsID])
     return (  
       <div>
         <Card>
@@ -34,18 +49,18 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {console.log('this.props.comments[this.state.currentCommentsID]', this.props.comments[this.state.currentCommentsID])}
+            {console.log('props in comments: ', this.props)}
             {this.props.comments[this.state.currentCommentsID].map((comment, index) => {
+                      // {console.log('comment in map', comment)}
               return (
                 <List key={index}>
-              {console.log('comment in map', comment)}
                   <ListItem disabled={true}>
                     <div>
                     <div>
                       <div id="votes"> {comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
                       <div id="arrows">
-                        <iconButton onClick={() => this.handleUpvote(comment)}> <UpArrow /> </iconButton>
-                        <iconButton onClick={() => this.handleDownvote(comment)}> <DownArrow /> </iconButton>
+                        <iconButton onClick={() => this.handleUpvote(comment, index)}> <UpArrow /> </iconButton>
+                        <iconButton onClick={() => this.handleDownvote(comment, index)}> <DownArrow /> </iconButton>
                       </div>
                       </div>
                     </div>
@@ -70,7 +85,6 @@ class Comments extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('state in mstp', state);
   return { comments: state.comments };
 }
 

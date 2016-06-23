@@ -5,7 +5,7 @@ import {
 export default function(state = {}, action) {
   switch(action.type){
     case LOAD_COMMENTS:
-      return [ ...action.payload ];
+      return _.map(action.payload, (obj) => obj);
     default:
       return state;
   }

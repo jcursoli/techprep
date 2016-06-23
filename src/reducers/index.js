@@ -11,6 +11,7 @@ import dialog from './dialogReducer';
 import algorithms from './algorithmReducer';
 import currentAlgorithm from './currentProblemReducer';
 import comments from './commentsReducer';
+import votes from './votesReducer'
 
 const appReducer = combineReducers({
   form,
@@ -23,7 +24,8 @@ const appReducer = combineReducers({
   dialog,
   algorithms,
   currentAlgorithm,
-  comments
+  comments,
+  votes
 });
 
 const rootReducer = (state, action) => {
