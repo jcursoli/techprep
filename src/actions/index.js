@@ -15,7 +15,7 @@ import {
   IGNORE_INVITE,
   CURRENT_ALGORITHM,
   REMOVE_ERROR,
-  UPDATE_VOTES
+  UPDATE_VOTES,
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 

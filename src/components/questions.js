@@ -107,7 +107,6 @@ class Questions extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('state.questions in mapStateToProps in questions', state.questions)
   return { questions: state.questions };
 }
 

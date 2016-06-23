@@ -16,10 +16,18 @@ class Comments extends Component {
       commentsID: this.props.question.commentsID, 
       currentUser: this.props.currentUser
     };
+    console.log(props, 'in comments')
+  }
 
-    // console.log('state in comments:', this.state)
+  handleUpvote(comment, index) {
+    // console.log('handleUpvote comment and user', comment, this.state.currentUser.displayName);
+    // console.log(index, 'in handleUpvote');
+    //console.log(this.props.currentUser.displayName);
+    if(comment.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.updateVotes(this.state.currentCommentsID, index);
+      console.log('can upvote', 'questionID:', this.state.currentCommentsID, 'commentsID', index)
+    }
 
-    //console.log('props.question.commentsID in comments', props.question.commentsID);
   }
 
   handleUpvote(questionIndex, commentIndex) {
@@ -52,6 +60,7 @@ class Comments extends Component {
   }
 
   render() {
+    // console.log('state', this.state) {console.log('in map:', this.props.comments[this.state.currentCommentsID])
     return (  
       <div>
         <Card>
@@ -65,7 +74,6 @@ class Comments extends Component {
             {this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
-              {console.log('comment in map', comment)}
                   <ListItem disabled={true}>
                     <div>
                     <div>

@@ -298,7 +298,6 @@ var allQuestions = {
         "commentsID": 10
   },
   "11": { "question": "What is $scope.$apply?",
-
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "$scope.$apply is used to change $scope values and then trigger a digest cycle. This is because changes that occur outside of an Angular context (i.e., from DOM events wired up in the link function, etc.) do not automatically trigger a $digest cycle. Wrapping your change in a $scope.$apply block tells Angular to run a digest cycle after making the changes and also provides some error handling.",
@@ -330,13 +329,12 @@ var allQuestions = {
   }
 }
 
-
 firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // addQuestionsToDatabase();
-      console.log('user is authenticatd');
+      // console.log('user is authenticatd');
       initializeState(user);
     } else {
       //clear state
