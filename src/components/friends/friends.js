@@ -46,7 +46,7 @@ class Friends extends Component {
   };
 
   handleMessageClick() {
-    console.log('clicked');
+    // console.log('clicked');
   }
 
   handleAddFriend() {
@@ -63,16 +63,16 @@ class Friends extends Component {
   }
 
   handleProfileClick() {
-    console.log('clicked');
+    // console.log('clicked');
   }
 
   handleIgnoreInvite(userObj) {
-    console.log('clicked handleigoreinvite');
+    // console.log('clicked handleigoreinvite');
     this.props.ignoreFriendInvite(userObj);
   }
 
   handleRemoveFriend(displayName) {
-    console.log('handle remove friend clicked');
+    // console.log('handle remove friend clicked');
     this.props.removeFriend(displayName);
   }
 
@@ -189,7 +189,7 @@ class Friends extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state.friends', state.friends)
+  // console.log('state.friends', state.friends)
   var friends = _.map(state.friends, (n, i) => {
     return n;
   });

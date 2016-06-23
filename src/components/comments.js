@@ -13,19 +13,21 @@ class Comments extends Component {
     super(props);
     this.state = {
       expanded: false,
-      currentCommentsID: this.props.question.commentsID, 
+      commentsID: this.props.question.commentsID, 
       currentUser: this.props.currentUser
     };
     console.log(props, 'in comments')
   }
 
-  handleUpvote(comment, index) {
-    // console.log('handleUpvote comment and user', comment, this.state.currentUser.displayName);
-    // console.log(index, 'in handleUpvote');
+  handleUpvote(questionIndex, commentIndex, next) {
+    console.log('handleUpvote questionIndex and commentIndex and user', questionIndex, commentIndex, this.state.currentUser.displayName);
+    console.log(next, 'in handleUpvote');
     //console.log(this.props.currentUser.displayName);
-    if(comment.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
-      this.props.updateVotes(this.state.currentCommentsID, index);
-      console.log('can upvote', 'questionID:', this.state.currentCommentsID, 'commentsID', index)
+    console.log(questionIndex);
+    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      console.log('length', questionIndex.hasUpvoted);
+      this.props.updateVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length);
+      console.log('can upvote', 'questionID:', this.state.commentsID, 'commentsID', commentIndex)
     }
 
   }
@@ -38,7 +40,7 @@ class Comments extends Component {
   }
 
   render() {
-    // console.log('state', this.state) {console.log('in map:', this.props.comments[this.state.currentCommentsID])
+    // console.log('state', this.state) {console.log('in map:', this.props.comments[this.state.commentsID])
     return (  
       <div>
         <Card>
@@ -50,7 +52,7 @@ class Comments extends Component {
           />
           <CardText id="comments" expandable={true}>
             {console.log('props in comments: ', this.props)}
-            {this.props.comments[this.state.currentCommentsID].map((comment, index) => {
+            {this.props.comments[this.state.commentsID].map((comment, index) => {
                       // {console.log('comment in map', comment)}
               return (
                 <List key={index}>

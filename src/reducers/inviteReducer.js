@@ -9,7 +9,7 @@ export default function(state = [], action) {
     case INITIALIZE_INVITES:
       return _.uniqBy([ ...state, action.payload ], 'email');
     case REMOVE_INVITE:
-    console.log('INSIDE REMOVE INVITE:', action.payload);
+    // console.log('INSIDE REMOVE INVITE:', action.payload);
       var newState = [ ...state ];
       return _.remove(newState, friend => friend.email !== action.payload.email);
     default:
