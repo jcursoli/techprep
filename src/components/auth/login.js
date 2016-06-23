@@ -5,20 +5,23 @@ import * as actions from '../../actions';
 
 
 class Login extends Component {
+  componentWillUnmount() {
+    this.props.removeErrorMessage();
+  }
+
   handleFormSubmit({ email, password }) {
     this.props.loginUser({ email, password });
   }
 
   renderError() {
-    if (this.props.error) {
-      // show error message here
-      console.log('there is an error:', this.props.error);
+    if (this.props.loginError) {
+      //make a case statement here to show different things depending on error message
+      return <div>{this.props.loginError}</div>
     }
   }
 
   render() {
     const { handleSubmit, fields: { email, password }} = this.props;
-
     return (
       <div className="login">
         <h1>Welcome back</h1>
@@ -36,8 +39,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state){
-  console.log()
-  return { error: state.auth.error };// show error message
+  return { loginError: state.auth.error };// show error message
 }
 
 function validate(values) {

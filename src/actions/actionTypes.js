@@ -17,3 +17,4 @@ export const REMOVE_INVITE = 'remove_invite';
 export const IGNORE_INVITE = 'ignore_invite';
 export const INITIALIZE_ALGORITHMS = 'initialize_algorithms';
 export const CURRENT_ALGORITHM = 'current_algorithm';
+export const REMOVE_ERROR = 'remove_error';
