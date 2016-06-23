@@ -151,17 +151,38 @@ export function removeFriend(displayName) {
   }
 }
 
-export function updateVotes(comment, index, next) {
-  console.log('in updateVotes, comment:', comment, ' index:', index, 'next:', next);
+export function addVotes(commentIndex, questionIndex, next, upOrDown) {
+  console.log('in updateVotes, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var payload = {
-    comment,
-    index,
-    next
+    commentIndex,
+    questionIndex,
+    next,
+    upOrDown
   }
   return function(dispatch) {
     //firebase function call
-    firebase.addVotesToDatabase(comment, index, next);
+    firebase.addVotesToDatabase(commentIndex, questionIndex, next, upOrDown);
     //dispatch with type/payload
-    //dispatch({ type: UPDATE_VOTES, payload})
+    
+    dispatch({ type: UPDATE_VOTES, payload })
   }
+}
+
+export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
+  console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
+
+  var payload = {
+    commentIndex,
+    questionIndex,
+    next,
+    upOrDown
+  }
+    return function(dispatch) {
+
+      firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
+      dispatch({ type: UPDATE_VOTES, payload })
+      
+    }
+
+
 }

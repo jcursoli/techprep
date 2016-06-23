@@ -16,31 +16,27 @@ class Comments extends Component {
       commentsID: this.props.question.commentsID, 
       currentUser: this.props.currentUser
     };
-    console.log(props, 'in comments')
   }
 
-  handleUpvote(questionIndex, commentIndex, next) {
-    console.log('handleUpvote questionIndex and commentIndex and user', questionIndex, commentIndex, this.state.currentUser.displayName);
-    console.log(next, 'in handleUpvote');
-    //console.log(this.props.currentUser.displayName);
-    console.log(questionIndex);
-    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
-      console.log('length', questionIndex.hasUpvoted);
-      this.props.updateVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length);
-      console.log('can upvote', 'questionID:', this.state.commentsID, 'commentsID', commentIndex)
+  handleUpvote(questionIndex, commentIndex) {
+    
+    if (questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1 && 
+      questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+        this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP');
+    } else if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
     }
-
   }
-
-  handleDownvote(comment) {
-    // console.log('handleDownvote comment and user', comment, this.state.currentUser.displayName);
-    if(comment.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
-      console.log('can downvote')
+  handleDownvote(questionIndex, commentIndex) {
+    if (questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1 && 
+      questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+        this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN');
+    } else if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'UP')
     }
   }
 
   render() {
-    // console.log('state', this.state) {console.log('in map:', this.props.comments[this.state.commentsID])
     return (  
       <div>
         <Card>
@@ -51,9 +47,7 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {console.log('props in comments: ', this.props)}
             {this.props.comments[this.state.commentsID].map((comment, index) => {
-                      // {console.log('comment in map', comment)}
               return (
                 <List key={index}>
                   <ListItem disabled={true}>
