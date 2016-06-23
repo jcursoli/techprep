@@ -9,6 +9,7 @@ import invites from './inviteReducer';
 import { SIGNOUT_USER } from '../actions/actionTypes';
 import dialog from './dialogReducer';
 import algorithms from './algorithmReducer';
+import currentAlgorithm from './currentProblemReducer';
 
 const appReducer = combineReducers({
   form,
@@ -19,7 +20,8 @@ const appReducer = combineReducers({
   chat,
   invites,
   dialog,
-  algorithms
+  algorithms,
+  currentAlgorithm
 });
 
 const rootReducer = (state, action) => {

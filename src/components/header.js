@@ -142,7 +142,7 @@ class Header extends Component {
               <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="Toy Problems" leftIcon={<Code />} />
+              <ListItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="Algorithms" leftIcon={<Code />} />
               <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />
               <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText={<div><div>Inbox</div><div className="badgeNumber">4</div></div>} leftIcon={<Message />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />

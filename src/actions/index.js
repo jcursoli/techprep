@@ -12,7 +12,8 @@ import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
   REMOVE_INVITE,
-  IGNORE_INVITE
+  IGNORE_INVITE,
+  CURRENT_ALGORITHM
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -129,6 +130,12 @@ export function closeDialog(){
       type: CLOSE_DIALOG
    }
 };
+export function clickedAlgorithm(algorithm){
+  return {
+    type: CURRENT_ALGORITHM,
+    payload: algorithm
+  }
+}
 
 export function acceptFriendRequest(userObj) {
   return function(dispatch) {
