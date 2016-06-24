@@ -14,7 +14,8 @@ import {
   REMOVE_INVITE,
   IGNORE_INVITE,
   CURRENT_ALGORITHM,
-  REMOVE_ERROR
+  REMOVE_ERROR,
+  UPDATE_VOTES
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -164,5 +165,31 @@ export function removeFriend(displayName) {
 export function removeErrorMessage() {
   return function(dispatch) {
     dispatch({ type: REMOVE_ERROR });
+  }
+}
+
+export function addVotes(commentIndex, questionIndex, next, upOrDown) {
+  var payload = {
+    commentIndex,
+    questionIndex,
+    next,
+    upOrDown
+  }
+  return function(dispatch) {
+    firebase.addVotesToDatabase(commentIndex, questionIndex, next, upOrDown);
+    dispatch({ type: UPDATE_VOTES, payload })
+  }
+}
+
+export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
+  var payload = {
+    commentIndex,
+    questionIndex,
+    next,
+    upOrDown
+  }
+  return function(dispatch) {
+    firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
+    dispatch({ type: UPDATE_VOTES, payload })
   }
 }

@@ -10,18 +10,22 @@ import { SIGNOUT_USER } from '../actions/actionTypes';
 import dialog from './dialogReducer';
 import algorithms from './algorithmReducer';
 import currentAlgorithm from './currentProblemReducer';
+import comments from './commentsReducer';
+import votes from './votesReducer'
 
 const appReducer = combineReducers({
   form,
   auth,
   friends,
   user,
-  // questions,
+  questions,
   chat,
   invites,
   dialog,
   algorithms,
-  currentAlgorithm
+  currentAlgorithm,
+  comments,
+  votes,
 });
 
 const rootReducer = (state, action) => {

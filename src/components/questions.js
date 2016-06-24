@@ -4,15 +4,20 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
   from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-import Dialog from 'material-ui/Dialog';
+// import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
-import Comments from './comments';
+// import Comments from './comments';
+import Dialog from './dialog';
+import * as actions from '../actions/actionTypes';
+import firebase from 'firebase';
 
 class Questions extends Component {
 
   constructor(props) {
+    var currentUser = firebase.auth().currentUser;
+
     super(props);
 
     this.state = {
@@ -28,59 +33,34 @@ class Questions extends Component {
       height: '450px',
       open: false,
       question: '',
-      answer: '',
-      revealAnswer: false,
-      selectedRow: null,
-      buttonName: 'Show Answer',
-      tableData: []
+      currentUser: currentUser
     };
+
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.showAnswer = this.showAnswer.bind(this);
   }
 
-  handleOpen() {
-    this.setState({open: true});
+  handleOpen(question) {
+    // console.log('passed-in in questions handleOpen:', question)
+    this.setState({open: true, question});
   };
 
   handleClose() {
     this.setState({open: false});
   };
 
-  showAnswer() {
-    if(this.state.revealAnswer) {
-      this.setState({revealAnswer: false, buttonName: 'Show Answer'});
-    } else {
-      this.setState({revealAnswer: true, buttonName: 'Hide Answer'});
-    }
-  }
-
   render() {
-
-    const actions = [
-      <Comments hintText="Show Comments" />
-
-    ];
-
+    // {console.log('this.state', this.state, 'in questions render')}
+    // {console.log('this.props.questions', this.props.questions, 'in questions render')}
     return (
       <div>
         <div id="stay">
-        <div>
-          <Dialog
-            title={this.state.question}
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-            repositionOnUpdate={false}
-            style={{position: 'absolute', button: '50%'}}
-          >
-
-            <div id="answer"> {this.state.answer} </div>
-          </Dialog>
-            </div>
+          <Dialog 
+            question={this.state.question}
+            localOpen={this.state.open} 
+            localHandleClose={this.handleClose.bind(this)}
+            currentUser={this.state.currentUser} />
         </div>
-
         <div>
           <Table
             height={this.state.height}
@@ -103,36 +83,21 @@ class Questions extends Component {
                 <TableHeaderColumn style={{width: '78%'}}>Question</TableHeaderColumn>
                 <TableHeaderColumn style={{width: '11%'}}>Acceptance</TableHeaderColumn>
                 <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
-
               </TableRow>
             </TableHeader>
+            
             <TableBody
               displayRowCheckbox={this.state.showCheckboxes}
               deselectOnClickaway={this.state.deselectOnClickaway}
               showRowHover={this.state.showRowHover}
               stripedRows={this.state.stripedRows}
             >
-              {this.props.questions.map((row, index) => {
-
-                const handleOpen = () => {
-                  this.setState({
-                    open: true,
-                    question: this.props.questions[index]['question'],
-                    answer: this.props.questions[index]['answer'],
-                    revealAnswer: false,
-                    open: true, 
-                    question: this.props.questions[index]['question'], 
-                    answer: this.props.questions[index]['answer'], 
-                    revealAnswer: false, 
-                    buttonName: 'Show Answer'
-                  });
-                };
-
+              {this.props.questions.map((question, index) => {
                 return (
                   <TableRow key={index}>
-                    <TableRowColumn style={{width: '80%'}} onTouchTap={handleOpen}>{row.question}</TableRowColumn>
-                    <TableRowColumn style={{width: '10%'}} onTouchTap={handleOpen}>{row.acceptance}</TableRowColumn>
-                    <TableRowColumn style={{width: '10%'}} onTouchTap={handleOpen}>{row.difficulty}</TableRowColumn>
+                    <TableRowColumn style={{width: '80%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.question}</TableRowColumn>
+                    <TableRowColumn style={{width: '10%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.acceptance}</TableRowColumn>
+                    <TableRowColumn style={{width: '10%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.difficulty}</TableRowColumn>
                   </TableRow>)
                 })}
             </TableBody>
@@ -144,7 +109,8 @@ class Questions extends Component {
 }
 
 function mapStateToProps(state) {
+  // console.log('state.questions in mapStateToProps in questions', state.questions)
   return { questions: state.questions };
 }
 
-export default connect(mapStateToProps)(Questions);
+export default connect(mapStateToProps, actions)(Questions);

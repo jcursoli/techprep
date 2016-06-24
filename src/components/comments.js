@@ -3,30 +3,52 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Arrows from './Arrows';
+import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
+import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-export default class Comments extends Component {
+class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
+      commentsID: this.props.question.commentsID, 
+      currentUser: this.props.currentUser
     };
   }
 
+  handleUpvote(questionIndex, commentIndex) {
+    console.log('in handle upvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasUpvoted.length);
+    // if user has previously downvoted, then remove them from downvotes
+    console.log('this is previous hasDownvoted check: ', questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName))
+    var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
+    if(userIndex) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'DOWN')
+    }
+    // if user has not upvoted yet, add to upvotes
+    console.log('this is hasDownvoted > add to upvotes:', questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1)
+    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP')
+    }
+
+
+  }
+
+  handleDownvote(questionIndex, commentIndex) {
+    console.log('in handle downvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasDownvoted.length);
+    // if user has previously upvoted, then remove them from upvotes
+    var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
+    if(userIndex) {
+      this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'UP')
+    }
+    // if user has not downvoted yet, add to downvotes
+    if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+      this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
+    }
+  }
 
   render() {
-
-    const commentList = [
-      { username: 'jesus', comment: 'whoa guys cool app' },
-      { username: 'bob', comment: 'wow you guys are super cool'},
-      { username: 'forrest', comment: 'hey guys I really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really need to find my shirt' },
-      { username: 'bob', comment: 'wow you guys are super cool'},
-      { username: 'jesus', comment: 'whoa guys cool app' },
-      { username: 'bob', comment: 'wow you guys are super cool'},
-      { username: 'jesus', comment: 'whoa guys cool app' },
-      { username: 'bob', comment: 'wow you guys are super cool'}
-    ];
-
     return (  
       <div>
         <Card>
@@ -37,33 +59,30 @@ export default class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {commentList.map((row, index) => {
-              
-              // const handleOpen = () => {
-              //   this.setState({
-              //     username: commentList['username'], 
-              //     comment: commentList['comment']
-              //   });
-
+            {this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
                   <ListItem disabled={true}>
                     <div>
-                    <Arrows />
-                    </div>
-                      <div id="comment">
-                        {row.username}
-                        <br />
-                        {row.comment}
+                    <div>
+                      <div id="votes"> {comment.hasUpvoted && comment.hasDownvoted && comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
+                      <div id="arrows">
+                        <iconButton onClick={() => this.handleUpvote(comment, index)}> <UpArrow /> </iconButton>
+                        <iconButton onClick={() => this.handleDownvote(comment, index)}> <DownArrow /> </iconButton>
                       </div>
+                      </div>
+                    </div>
+                    <div id="comment">
+                      {comment.username}
+                      <br />
+                      {comment.comment}
+                    </div>
+
                   </ListItem>
                   <Divider />
                 </List>
               );
             })}
-
-
-
           </CardText>
           <CardActions expandable={true}>
           </CardActions>
@@ -72,3 +91,9 @@ export default class Comments extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { comments: state.comments };
+}
+
+export default connect(mapStateToProps, actions)(Comments);
