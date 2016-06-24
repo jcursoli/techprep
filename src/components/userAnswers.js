@@ -15,8 +15,6 @@ const style = {
 	overflowX:'scroll'
 };
 
-function createMarkup(js) { return {__html: js}; };
-
 export default class UserAnswers extends Component {
 
 	render(){
