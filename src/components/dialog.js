@@ -8,10 +8,16 @@ export default class DialogBox extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      questionsList: this.props.questionsList
+    }
+
+    console.log(this.props.questionsList, 'in dialog, props')
   }
 
   handleOpen() {
     this.setState({open: true});
+    // console.log('this.state.questionsList in dialog:', this.state.questionsList)
   };
 
   handleClose() {
@@ -20,11 +26,13 @@ export default class DialogBox extends Component {
   };
   // style={{position: 'absolute', bottom: '80%'}}
   render() {
+    
     const actions = [
       <Comments hintText="Show Comments"
         question={this.props.question}
         currentUser={this.props.currentUser} />
     ];
+
     const customContentStyle = {
       width: '90%',
       height: '75%',
