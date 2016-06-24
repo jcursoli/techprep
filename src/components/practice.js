@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as actions from '../actions';
+import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import {GridList, GridTile} from 'material-ui/GridList';
@@ -9,7 +10,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
 	const contents = [{title: 'HTML', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
-										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
+										{title: 'CSS', pic:'https://w3widgets.com/responsive-slider/img/css3.png'},
 										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
 										];
 
@@ -43,18 +44,18 @@ export default class Practice extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 		handleClick(categoryClicked){
-		console.log('handleClick clicked now',categoryClicked.title);
+    this.props.currentCategory(categoryClicked.title);
     browserHistory.push('/questions');
 	}
 	renderElements(category){
 		return (
-							<div key={category.title} onTouchTap={()=>{this.handleClick(category)}} style={style.GridTile} className="col-lg-2 col-md-3 col-xs-12 col-sm-4">
-								<div style={style.img}>
-				       	 <div height='200'width='200'>
-				        	<img  height='200' src={category.pic}/>
-				       	</div>
-				       </div>
-			       </div>
+			<div key={category.title} onTouchTap={()=>{this.handleClick(category)}} style={style.GridTile} className="col-lg-2 col-md-3 col-xs-12 col-sm-4">
+				<div style={style.img}>
+       	 <div height='200'width='200'>
+        	<img  height='200' src={category.pic}/>
+       	</div>
+       </div>
+     </div>
 		);
 	}
 	render(){
@@ -68,3 +69,5 @@ export default class Practice extends Component {
 	}
 
 }
+
+export default connect(null, actions)(Practice);

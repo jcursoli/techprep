@@ -10,7 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 // import Comments from './comments';
 import Dialog from './dialog';
-import * as actions from '../actions/actionTypes';
 import firebase from 'firebase';
 
 class Questions extends Component {
@@ -42,6 +41,7 @@ class Questions extends Component {
 
   handleOpen(question) {
     // console.log('passed-in in questions handleOpen:', question)
+    console.log('question is:', question);
     this.setState({open: true, question});
   };
 
@@ -109,8 +109,9 @@ class Questions extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('state.questions in mapStateToProps in questions', state.questions)
-  return { questions: state.questions };
+  var category = state.currentCategory && state.currentCategory.toLowerCase();
+  var filteredQuestions = state.questions.filter(obj => obj.category === category);
+  return { questions: filteredQuestions };
 }
 
-export default connect(mapStateToProps, actions)(Questions);
+export default connect(mapStateToProps)(Questions);

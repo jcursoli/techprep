@@ -33,7 +33,7 @@ export default class DialogBox extends Component {
             <Dialog
               title={this.props.question.question}
               modal={false}
-              actions={actions} 
+              actions={actions}
               open={this.props.localOpen}
               onRequestClose={this.props.localHandleClose}
               repositionOnUpdate={false}
