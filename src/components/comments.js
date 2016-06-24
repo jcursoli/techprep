@@ -13,7 +13,7 @@ class Comments extends Component {
     super(props);
     this.state = {
       expanded: false,
-      commentsID: this.props.question.commentsID, 
+      commentsID: this.props.question.commentsID,
       currentUser: this.props.currentUser
     };
   }
@@ -49,7 +49,7 @@ class Comments extends Component {
   }
 
   render() {
-    return (  
+    return (
       <div>
         <Card>
           <CardHeader
@@ -59,7 +59,7 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {this.props.comments[this.state.commentsID].map((comment, index) => {
+            {this.props.comments && this.state.commentsID && this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
                   <ListItem disabled={true}>

@@ -10,7 +10,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
 	const contents = [{title: 'HTML', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
-										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
+										{title: 'CSS', pic:'https://w3widgets.com/responsive-slider/img/css3.png'},
 										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
 										];
 

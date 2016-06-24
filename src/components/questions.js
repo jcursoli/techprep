@@ -41,6 +41,7 @@ class Questions extends Component {
 
   handleOpen(question) {
     // console.log('passed-in in questions handleOpen:', question)
+    console.log('question is:', question);
     this.setState({open: true, question});
   };
 
@@ -109,7 +110,8 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   var category = state.currentCategory && state.currentCategory.toLowerCase();
-  return { questions: state.questions.filter(obj => obj.category === category) };
+  var filteredQuestions = state.questions.filter(obj => obj.category === category);
+  return { questions: filteredQuestions };
 }
 
 export default connect(mapStateToProps)(Questions);
