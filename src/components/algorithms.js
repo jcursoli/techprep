@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+
 import AlgorithmDialog from './algorithmDialog';
 import * as actions from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
+import UserAnswers from './userAnswers';
+
 
 import 'brace/mode/javascript';
 import 'brace/mode/java';
@@ -13,7 +16,6 @@ import 'brace/mode/ruby';
 
 import 'brace/theme/tomorrow';
 import 'brace/ext/language_tools';
-
 
 const style = {
 	output:{
@@ -35,6 +37,10 @@ const style = {
 		marginTop:'25px',
 		border:' 4px solid #EEEFF2',
 	},
+	root: {
+    overflowY: 'scroll',
+  	height: '500',
+  },
 }
 
 class Algorithms extends Component {
@@ -42,7 +48,7 @@ class Algorithms extends Component {
 	constructor(props){
 	super(props);
 	this.state = {
-		editorContents: this.props.problem.startingCode,
+		editorContents: `${this.props.problem.startingCode}`,
 		language: 'javascript',
 		output: ''
 		};
@@ -50,7 +56,7 @@ class Algorithms extends Component {
 		this.createFunction = this.createFunction.bind(this);
 	}
 	editorChanged(editorContents){
-		this.setState({ editorContents });
+		this.setState({ editorContents: `${editorContents}` });
 	}
 	testCode(userFunction){
 		var correctness = true;
@@ -94,34 +100,35 @@ class Algorithms extends Component {
 
 	render(){
 		return (
-			<div className='newBackground' style={{overFlow: 'scroll'}}>
-				<div>
-				</div>
-				<div className='runButton'>
-					<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
-						<h1>{this.props.problem.name}</h1>
-						<br />
-						<h2>{this.props.problem.description}</h2>
-					</div>
-					<AlgorithmDialog />
-						<div style={style.compiler}>
-							<div style={style.output}>{this.state.output}</div>
-							<div style={style.editor}>
-								<AceEditor
-									theme='tomorrow'
-									height={'300px'}
-									fontSize={10}
-									value={this.state.editorContents}
-								  mode="javascript"
-								  onChange={this.editorChanged}
-								  name="ACE_EDITOR"
-								  editorProps={{$blockScrolling: true}}
-								  enableBasicAutocompletion={true}
-				   				enableLiveAutocompletion={true}
-								/>
-							</div>
+			<div className='newBackground'>
+				<div style={style.root}>
+					<div className='runButton'>
+						<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
+							<h1>{this.props.problem.name}</h1>
+							<br />
+							<h2>{this.props.problem.description}</h2>
 						</div>
-						<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
+						<AlgorithmDialog />
+							<div style={style.compiler}>
+								<div style={style.output}>{this.state.output}</div>
+								<div style={style.editor}>
+									<AceEditor
+										theme='tomorrow'
+										height={'300px'}
+										fontSize={10}
+										value={`${this.state.editorContents}`}
+									  mode="javascript"
+									  onChange={this.editorChanged}
+									  name="ACE_EDITOR"
+									  editorProps={{$blockScrolling: true}}
+									  enableBasicAutocompletion={true}
+					   				enableLiveAutocompletion={true}
+									/>
+								</div>
+							</div>
+							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
+					</div>
+					<UserAnswers show={true} code={`${this.state.editorContents}`} />
 				</div>
 			</div>
 		)
