@@ -540,6 +540,7 @@ export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) 
   var userToAdd = {};
   
   userToAdd[next] = user.displayName;
+
   switch(upOrDown) {
     case 'UP':
       var votePath = '/hasUpvoted';

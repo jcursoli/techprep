@@ -8,7 +8,6 @@ export default class DialogBox extends Component {
 
   constructor(props) {
     super(props);
-    // console.log('dialog props', props)
   }
 
   handleOpen() {
