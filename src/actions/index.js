@@ -13,6 +13,8 @@ import {
   CLOSE_DIALOG,
   REMOVE_INVITE,
   IGNORE_INVITE,
+  CURRENT_ALGORITHM,
+  REMOVE_ERROR,
   UPDATE_VOTES
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
@@ -32,7 +34,9 @@ export function loginUser({ email, password }) {
     }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
-      dispatch(authError(errorMessage));
+      console.log('errorCode:', errorCode);
+      console.log('errorMessage:', errorMessage);
+      dispatch(authError(errorCode));
     });
   }
 };
@@ -65,7 +69,7 @@ export function signupUser({ username, email, password }) {
           console.log('error:', error);
           var errorCode = error.code;
           var errorMessage = error.message;
-          dispatch(authError(errorMessage));
+          dispatch(authError(errorCode));
         });
       } else {
         console.log('username already exists');
@@ -87,6 +91,7 @@ export function signoutUser() {
 }
 
 export function authError(error) {
+  console.log('inside authError:', error);
   return {
     type: AUTH_ERROR,
     payload: error
@@ -127,6 +132,12 @@ export function closeDialog(){
       type: CLOSE_DIALOG
    }
 };
+export function clickedAlgorithm(algorithm){
+  return {
+    type: CURRENT_ALGORITHM,
+    payload: algorithm
+  }
+}
 
 export function acceptFriendRequest(userObj) {
   return function(dispatch) {
@@ -150,7 +161,13 @@ export function removeFriend(displayName) {
     dispatch({ type: REMOVE_FRIEND, payload: displayName });
   }
 }
-  
+
+export function removeErrorMessage() {
+  return function(dispatch) {
+    dispatch({ type: REMOVE_ERROR });
+  }
+}
+
 export function addVotes(commentIndex, questionIndex, next, upOrDown) {
   var payload = {
     commentIndex,

@@ -42,7 +42,7 @@ class Algorithms extends Component {
 	constructor(props){
 	super(props);
 	this.state = {
-		editorContents: 'function reverseString(string){ \n //enter code here \n }',
+		editorContents: this.props.problem.startingCode,
 		language: 'javascript',
 		output: ''
 		};
@@ -54,10 +54,10 @@ class Algorithms extends Component {
 	}
 	testCode(userFunction){
 		var correctness = true;
-		var hardCodedTests = [['abcde','edcba'],['this is a test', 'tset a si siht'],['zzzaaabbb','bbbaaazzz']];
+		var test = this.props.problem.tests;
 		try{
-			for(var i = 0; i < hardCodedTests.length;i++){
-				if(userFunction(hardCodedTests[i][0]) !== hardCodedTests[i][1]){
+			for(var i = 0; i < test.length;i++){
+				if(userFunction(test[i][0]) !== test[i][1]){
 					correctness = false;
 				}
 			}
@@ -98,8 +98,10 @@ class Algorithms extends Component {
 				<div>
 				</div>
 				<div className='runButton'>
-					<div  style={{color:'black', margin:'20px'}}>
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+					<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
+						<h1>{this.props.problem.name}</h1>
+						<br />
+						<h2>{this.props.problem.description}</h2>
 					</div>
 					<AlgorithmDialog />
 						<div style={style.compiler}>
@@ -126,6 +128,6 @@ class Algorithms extends Component {
 	}
 }
 function mapStateToProps(state){
-	return {}
+	return {problem: state.currentAlgorithm}
 }
 export default connect(mapStateToProps, actions)(Algorithms);

@@ -7,6 +7,7 @@ import {
   INITIALIZE_FRIENDS,
   INITIALIZE_INVITES,
   INITIALIZE_CHAT,
+  INITIALIZE_ALGORITHMS,
   LOAD_QUESTIONS,
   LOAD_COMMENTS,
   REMOVE_FRIEND
@@ -297,7 +298,6 @@ var allQuestions = {
         "commentsID": 10
   },
   "11": { "question": "What is $scope.$apply?",
-
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "$scope.$apply is used to change $scope values and then trigger a digest cycle. This is because changes that occur outside of an Angular context (i.e., from DOM events wired up in the link function, etc.) do not automatically trigger a $digest cycle. Wrapping your change in a $scope.$apply block tells Angular to run a digest cycle after making the changes and also provides some error handling.",
@@ -362,6 +362,14 @@ export function initializeState(user) {
   commentsList.on("value", function(snapshot) {
     console.log('dispatching load comments', snapshot.val());
     store.dispatch({ type: LOAD_COMMENTS, payload: snapshot.val()});
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
+  // Load algorithms from database
+  var algorithmsRef = firebase.database().ref('algorithms');
+  algorithmsRef.on("value", function(snapshot) {
+    store.dispatch({ type: INITIALIZE_ALGORITHMS, payload: snapshot.val() });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
@@ -531,7 +539,7 @@ export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) 
   var userToAdd = {};
   
   userToAdd[next] = user.displayName;
-  
+
   switch(upOrDown) {
     case 'UP':
       var votePath = '/hasUpvoted';
@@ -563,5 +571,6 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
       console.log('error in firebase.js removeVotesFromDatabase');
       return;
   }
+
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 }

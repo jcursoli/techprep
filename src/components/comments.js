@@ -20,7 +20,6 @@ class Comments extends Component {
 
   handleUpvote(questionIndex, commentIndex) {
     console.log('in handle upvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasUpvoted.length);
-
     // if user has previously downvoted, then remove them from downvotes
     console.log('this is previous hasDownvoted check: ', questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName))
     var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
@@ -35,9 +34,9 @@ class Comments extends Component {
 
 
   }
+
   handleDownvote(questionIndex, commentIndex) {
     console.log('in handle downvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasDownvoted.length);
-
     // if user has previously upvoted, then remove them from upvotes
     var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
     if(userIndex) {

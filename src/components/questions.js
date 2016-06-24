@@ -93,7 +93,6 @@ class Questions extends Component {
               stripedRows={this.state.stripedRows}
             >
               {this.props.questions.map((question, index) => {
-
                 return (
                   <TableRow key={index}>
                     <TableRowColumn style={{width: '80%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.question}</TableRowColumn>
