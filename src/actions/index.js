@@ -16,7 +16,8 @@ import {
   CURRENT_ALGORITHM,
   CURRENT_CATEGORY,
   REMOVE_ERROR,
-  UPDATE_VOTES
+  UPDATE_VOTES,
+  ANSWER_SUBMIT
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -147,7 +148,8 @@ export function updateAlgorithmAnswers(answer, index) {
   return function(dispatch) {
     //firebase call to update answers at correct index
     firebase.updateAlgorithmAnswers(answer, index);
-    //dispatch to add answer to current answers on state (maybe)
+    //dispatch to add answer to current answers on state
+    dispatch({type: ANSWER_SUBMIT, payload: answer});
   }
 }
 
