@@ -25,7 +25,7 @@ const appReducer = combineReducers({
   algorithms,
   currentAlgorithm,
   comments,
-  votes
+  votes,
 });
 
 const rootReducer = (state, action) => {

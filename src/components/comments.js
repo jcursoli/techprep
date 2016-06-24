@@ -16,6 +16,8 @@ class Comments extends Component {
       commentsID: this.props.question.commentsID, 
       currentUser: this.props.currentUser
     };
+
+    console.log('this.props in comments: ', this.props)
   }
 
   handleUpvote(questionIndex, commentIndex) {
@@ -32,7 +34,6 @@ class Comments extends Component {
     if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
       this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP')
     }
-
 
   }
   handleDownvote(questionIndex, commentIndex) {
