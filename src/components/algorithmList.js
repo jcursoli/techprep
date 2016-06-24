@@ -14,15 +14,15 @@ class AlgorithmList extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(item){
-		this.props.clickedAlgorithm(item);
+		this.props.clickedAlgorithm(item, index);
   	browserHistory.push('/problem');
   }
   renderListItems(){
   	if(!this.props.algorithms){
   		return;
   	}
-  	return this.props.algorithms.map((item)=>(
-  		<TableRow key={item.name} onTouchTap={()=>(this.handleClick(item))}>/
+  	return this.props.algorithms.map((item, index)=>(
+  		<TableRow key={item.name} onTouchTap={()=>(this.handleClick(item, index))}>/
   		  <TableHeaderColumn style={{width: '78%'}}>{item.name}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.attempts}</TableHeaderColumn>
   		  <TableHeaderColumn style={{width: '11%'}}>{item.difficulty}</TableHeaderColumn>
@@ -42,7 +42,7 @@ class AlgorithmList extends Component {
             displayRowCheckbox={false}
             selectable={false}
           >
-            <TableHeader 
+            <TableHeader
             displaySelectAll={false}
             displayRowCheckbox={false}
             adjustForCheckbox={false}
@@ -65,7 +65,7 @@ class AlgorithmList extends Component {
               stripedRows={true}
               displayRowCheckbox={false}
               showRowHover={true}
-          	  >  
+          	  >
            		{this.renderListItems()}
             </TableBody>
           </Table>

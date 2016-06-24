@@ -132,10 +132,21 @@ export function closeDialog(){
       type: CLOSE_DIALOG
    }
 };
-export function clickedAlgorithm(algorithm){
+export function clickedAlgorithm(algorithm, index){
   return {
     type: CURRENT_ALGORITHM,
-    payload: algorithm
+    payload: {
+      algorithm,
+      index
+    }
+  }
+}
+
+export function updateAlgorithmAnswers(answer, index) {
+  return function(dispatch) {
+    //firebase call to update answers at correct index
+    firebse.updateAlgorithmAnswers(answer, index);
+    //dispatch to add answer to current answers on state (maybe)
   }
 }
 

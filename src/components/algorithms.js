@@ -128,6 +128,6 @@ class Algorithms extends Component {
 	}
 }
 function mapStateToProps(state){
-	return {problem: state.currentAlgorithm}
+	return {problem: state.currentAlgorithm.algorithm, index: state.currentAlgorithm.index }
 }
 export default connect(mapStateToProps, actions)(Algorithms);

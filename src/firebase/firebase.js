@@ -22,7 +22,7 @@ var config = {
 var allComments = {
   "0": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -35,7 +35,7 @@ var allComments = {
     ],
   "1": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -45,10 +45,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "2": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -58,10 +58,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "3": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -71,10 +71,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "4": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -84,10 +84,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "5": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -97,10 +97,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "6": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -110,10 +110,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "7": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -123,10 +123,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "8": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -136,10 +136,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "9": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -149,10 +149,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "10": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -162,10 +162,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "11": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -175,10 +175,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "12": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -188,10 +188,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "13": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -201,10 +201,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "14": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -214,10 +214,10 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ], 
+    ],
   "15": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -228,9 +228,9 @@ var allComments = {
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
     ]
-} 
+}
 
-var allQuestions = { 
+var allQuestions = {
   "0": {  "question": "Explain javascript closures.",
         "acceptance": "27.2%",
         "difficulty": "Easy",
@@ -333,7 +333,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      addQuestionsToDatabase();
+      //addQuestionsToDatabase();
       // console.log('user is authenticatd');
       initializeState(user);
     } else {
@@ -537,7 +537,7 @@ export function addMessage(messageObj) {
 export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) {
   var user = firebase.auth().currentUser;
   var userToAdd = {};
-  
+
   userToAdd[next] = user.displayName;
 
   switch(upOrDown) {
@@ -573,4 +573,11 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
   }
 
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
+}
+
+export function updateAlgorithmAnswers(answer, index) {
+  var user = firebase.auth().currentUser;
+  var userAnswer = {};
+  userAnswer[user.displayName] = answer;
+  firebase.database().ref('algorithms/' + index + '/userAnswers').update(userAnswer);
 }
