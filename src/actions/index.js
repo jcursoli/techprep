@@ -145,7 +145,7 @@ export function clickedAlgorithm(algorithm, index){
 export function updateAlgorithmAnswers(answer, index) {
   return function(dispatch) {
     //firebase call to update answers at correct index
-    firebse.updateAlgorithmAnswers(answer, index);
+    firebase.updateAlgorithmAnswers(answer, index);
     //dispatch to add answer to current answers on state (maybe)
   }
 }
