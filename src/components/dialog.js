@@ -18,13 +18,21 @@ export default class DialogBox extends Component {
     this.setState({open: false});
 
   };
-
+  // style={{position: 'absolute', bottom: '80%'}}
   render() {
     const actions = [
       <Comments hintText="Show Comments"
         question={this.props.question}
         currentUser={this.props.currentUser} />
     ];
+    const customContentStyle = {
+      width: '90%',
+      height: '75%',
+      maxWidth: 'none',
+      position: 'absolute',
+      top: '10%',
+      left: '5%'
+    };
 
     return (
       <div>
@@ -37,7 +45,7 @@ export default class DialogBox extends Component {
               open={this.props.localOpen}
               onRequestClose={this.props.localHandleClose}
               repositionOnUpdate={false}
-              style={{position: 'absolute', bottom: '80%'}}
+              contentStyle={customContentStyle}
             >
 
               <div id="answer"> {this.props.question.answer} </div>

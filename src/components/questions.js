@@ -52,6 +52,8 @@ class Questions extends Component {
   render() {
     // {console.log('this.state', this.state, 'in questions render')}
     // {console.log('this.props.questions', this.props.questions, 'in questions render')}
+    
+
     return (
       <div>
         <div id="stay">
@@ -59,7 +61,8 @@ class Questions extends Component {
             question={this.state.question}
             localOpen={this.state.open}
             localHandleClose={this.handleClose.bind(this)}
-            currentUser={this.state.currentUser} />
+            currentUser={this.state.currentUser} 
+          />
         </div>
         <div>
           <Table
