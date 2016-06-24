@@ -55,9 +55,9 @@ class Questions extends Component {
     return (
       <div>
         <div id="stay">
-          <Dialog 
+          <Dialog
             question={this.state.question}
-            localOpen={this.state.open} 
+            localOpen={this.state.open}
             localHandleClose={this.handleClose.bind(this)}
             currentUser={this.state.currentUser} />
         </div>
@@ -85,7 +85,7 @@ class Questions extends Component {
                 <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            
+
             <TableBody
               displayRowCheckbox={this.state.showCheckboxes}
               deselectOnClickaway={this.state.deselectOnClickaway}
