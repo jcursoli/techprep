@@ -39,7 +39,7 @@ const style = {
 	},
 	root: {
     overflowY: 'scroll',
-  	height: '500',
+  	height: '500px',
   },
 }
 
@@ -50,10 +50,16 @@ class Algorithms extends Component {
 	this.state = {
 		editorContents: `${this.props.problem.startingCode}`,
 		language: 'javascript',
-		output: ''
+		output: '',
+		answered:false
 		};
 		this.editorChanged = this.editorChanged.bind(this);
 		this.createFunction = this.createFunction.bind(this);
+	}
+	componentWillMount(){
+		if(this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
+			this.setState({answered: true})
+		}
 	}
 	editorChanged(editorContents){
 		this.setState({ editorContents: `${editorContents}` });
@@ -93,6 +99,9 @@ class Algorithms extends Component {
 		if(userFunction){
 				 var correctness = this.testCode(userFunction);
 				this.props.openDialog(correctness);
+				if(correctness){
+					this.props.updateAlgorithmAnswers(`${this.state.editorContents}`,this.props.index);
+				}
 		} else {
 			this.props.openDialog(false);
 		}
@@ -128,13 +137,17 @@ class Algorithms extends Component {
 							</div>
 							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
 					</div>
-					<UserAnswers show={true} code={`${this.state.editorContents}`} />
+					<UserAnswers show={this.state.answered} answers={this.props.problem.userAnswers} />
 				</div>
 			</div>
 		)
 	}
 }
 function mapStateToProps(state){
-	return {problem: state.currentAlgorithm.algorithm, index: state.currentAlgorithm.index }
+	return {
+		problem: state.currentAlgorithm.algorithm, 
+		index: state.currentAlgorithm.index, 
+		currentUser: state.user.displayName 
+	}
 }
 export default connect(mapStateToProps, actions)(Algorithms);

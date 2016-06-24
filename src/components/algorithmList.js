@@ -13,7 +13,7 @@ class AlgorithmList extends Component {
     this.state = {};
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(item){
+  handleClick(item,index){
 		this.props.clickedAlgorithm(item, index);
   	browserHistory.push('/problem');
   }
