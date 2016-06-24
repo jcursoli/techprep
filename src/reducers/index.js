@@ -12,6 +12,7 @@ import algorithms from './algorithmReducer';
 import currentAlgorithm from './currentProblemReducer';
 import comments from './commentsReducer';
 import votes from './votesReducer'
+import currentCategory from './currentCategoryReducer';
 
 const appReducer = combineReducers({
   form,
@@ -26,6 +27,7 @@ const appReducer = combineReducers({
   currentAlgorithm,
   comments,
   votes,
+  currentCategory,
 });
 
 const rootReducer = (state, action) => {

@@ -140,7 +140,6 @@ class Header extends Component {
           >
             <List>
               <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/stats')} primaryText="Stats" leftIcon={<ShowChart />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
               <ListItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="Algorithms" leftIcon={<Code />} />
               <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />

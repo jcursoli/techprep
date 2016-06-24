@@ -10,7 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 // import Comments from './comments';
 import Dialog from './dialog';
-import * as actions from '../actions/actionTypes';
 import firebase from 'firebase';
 
 class Questions extends Component {
@@ -109,8 +108,8 @@ class Questions extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('state.questions in mapStateToProps in questions', state.questions)
-  return { questions: state.questions };
+  var category = state.currentCategory && state.currentCategory.toLowerCase();
+  return { questions: state.questions.filter(obj => obj.category === category) };
 }
 
-export default connect(mapStateToProps, actions)(Questions);
+export default connect(mapStateToProps)(Questions);

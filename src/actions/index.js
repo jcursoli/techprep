@@ -14,6 +14,7 @@ import {
   REMOVE_INVITE,
   IGNORE_INVITE,
   CURRENT_ALGORITHM,
+  CURRENT_CATEGORY,
   REMOVE_ERROR,
   UPDATE_VOTES
 } from './actionTypes';
@@ -202,5 +203,12 @@ export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
   return function(dispatch) {
     firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
     dispatch({ type: UPDATE_VOTES, payload })
+  }
+}
+
+export function currentCategory(category) {
+  return {
+    type: CURRENT_CATEGORY,
+    payload: category
   }
 }
