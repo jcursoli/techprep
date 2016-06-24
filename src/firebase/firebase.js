@@ -421,14 +421,9 @@ export function signOutUser() {
 
 export function addQuestionsToDatabase() {
   var ref = firebase.database().ref('/questions');
-  // for(var i = 0; i < 16; i++) {
   ref.set(allQuestions);
-  // }
   var ref = firebase.database().ref('/comments');
-  // for(var i = 0; i < 16; i++) {
   ref.set(allComments);
-  // }
-  //var ref = firebase.database().ref('/commentsList')
 }
 
 export function createUserInDatabase(username) {
@@ -532,12 +527,11 @@ export function addMessage(messageObj) {
 }
 
 export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) {
-  // console.log('in firebase>addVotesToDatabase, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var user = firebase.auth().currentUser;
   var userToAdd = {};
-  // console.log('next', next)
+  
   userToAdd[next] = user.displayName;
-  console.log('user to add:', userToAdd);
+  
   switch(upOrDown) {
     case 'UP':
       var votePath = '/hasUpvoted';
@@ -548,18 +542,15 @@ export function addVotesToDatabase(commentIndex, questionIndex, next, upOrDown) 
     default:
       console.log('error in firebase.js addsVotesToDatabase');
       return;
-
   }
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex  + votePath).update(userToAdd);
 }
 
 export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown) {
-  // console.log('in removeVotesFromDatabase, commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
   var user = firebase.auth().currentUser;
   var userToRemove = {};
 
   userToRemove[next] = user.displayName;
-  console.log('user to remove:', userToRemove);
 
   switch(upOrDown) {
     case 'UP':
@@ -572,6 +563,5 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
       console.log('error in firebase.js removeVotesFromDatabase');
       return;
   }
-  
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 }
