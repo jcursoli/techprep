@@ -58,7 +58,7 @@ class Algorithms extends Component {
 	}
 	componentWillMount(){
 		if(this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
-			this.setState({answered: true})
+			this.setState({answered: true, editorContents:this.props.problem.userAnswers[this.props.currentUser]})
 		}
 	}
 	editorChanged(editorContents){
