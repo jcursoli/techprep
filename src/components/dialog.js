@@ -8,7 +8,6 @@ export default class DialogBox extends Component {
 
   constructor(props) {
     super(props);
-    // console.log('dialog props', props)
   }
 
   handleOpen() {
@@ -16,14 +15,11 @@ export default class DialogBox extends Component {
   };
 
   handleClose() {
-    // console.log('in dialog handleClose')
     this.setState({open: false});
 
   };
 
   render() {
-
-    // {console.log('this.props in dialog render', this.props)}
     const actions = [
       <Comments hintText="Show Comments"
         question={this.props.question}

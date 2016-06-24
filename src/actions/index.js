@@ -169,7 +169,6 @@ export function removeErrorMessage() {
 }
 
 export function addVotes(commentIndex, questionIndex, next, upOrDown) {
-  // console.log('in updateVotes, commentIndex:', commentIndex, ' questionIndex:', questionIndex, 'next:', next, 'upOrDown', upOrDown);
   var payload = {
     commentIndex,
     questionIndex,
@@ -177,29 +176,20 @@ export function addVotes(commentIndex, questionIndex, next, upOrDown) {
     upOrDown
   }
   return function(dispatch) {
-    //firebase function call
     firebase.addVotesToDatabase(commentIndex, questionIndex, next, upOrDown);
-    //dispatch with type/payload
-    
     dispatch({ type: UPDATE_VOTES, payload })
   }
 }
 
 export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
-  // console.log('in removeVotes: commentIndex:', commentIndex, 'questionIndex', questionIndex, 'next', next)
-
   var payload = {
     commentIndex,
     questionIndex,
     next,
     upOrDown
   }
-    return function(dispatch) {
-
-      firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
-      dispatch({ type: UPDATE_VOTES, payload })
-      
-    }
-
-
+  return function(dispatch) {
+    firebase.removeVotesFromDatabase(commentIndex, questionIndex, next, upOrDown);
+    dispatch({ type: UPDATE_VOTES, payload })
+  }
 }
