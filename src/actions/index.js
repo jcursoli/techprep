@@ -211,6 +211,8 @@ export function currentCategory(category) {
   return {
     type: CURRENT_CATEGORY,
     payload: category
+  }
+}
 
 export function addComment(currentUser, commentsList, commentID, commentBody) {
   var payload = {
