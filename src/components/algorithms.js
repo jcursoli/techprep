@@ -58,7 +58,7 @@ class Algorithms extends Component {
 	}
 	componentWillMount(){
 		if(this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
-			this.setState({answered: true})
+			this.setState({answered: true, editorContents:this.props.problem.userAnswers[this.props.currentUser]})
 		}
 	}
 	editorChanged(editorContents){
@@ -100,7 +100,7 @@ class Algorithms extends Component {
 				 var correctness = this.testCode(userFunction);
 				this.props.openDialog(correctness);
 				if(correctness){
-					this.props.updateAlgorithmAnswers(`${this.state.editorContents}`,this.props.index);
+					this.props.updateAlgorithmAnswers(`${this.state.editorContents}`,this.props.index,this.props.currentUser);
 				}
 		} else {
 			this.props.openDialog(false);
@@ -147,7 +147,7 @@ function mapStateToProps(state){
 	return {
 		problem: state.currentAlgorithm.algorithm, 
 		index: state.currentAlgorithm.index, 
-		currentUser: state.user.displayName 
+		currentUser: state.user.displayName
 	}
 }
 export default connect(mapStateToProps, actions)(Algorithms);
