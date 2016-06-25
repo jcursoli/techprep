@@ -97,6 +97,12 @@ class ChatBox extends Component {
     );
   }
 
+  keyDown (event){
+    if(event.keyCode=='13'){
+      this.addChatMessage();
+    }
+  }
+
   render() {
     const actions = [
       <TextField
@@ -104,6 +110,7 @@ class ChatBox extends Component {
         fullWidth={true}
         onChange={this.handleMessageChange.bind(this)}
         value={this.state.chatMessageInput}
+        onKeyDown={this.keyDown.bind(this)}
       />,
       <FlatButton
         label="Cancel"
