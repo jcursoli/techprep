@@ -8,7 +8,6 @@ export default function(state = {}, action) {
     case CURRENT_ALGORITHM:
       return action.payload;
       case ANSWER_SUBMIT:
-      console.log('inside here')
       var newState = _.cloneDeep(state);
       newState.algorithm.userAnswers[action.payload.displayName] = action.payload.answer;
       return newState;
