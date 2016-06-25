@@ -144,12 +144,16 @@ export function clickedAlgorithm(algorithm, index){
   }
 }
 
-export function updateAlgorithmAnswers(answer, index) {
+export function updateAlgorithmAnswers(answer, index, displayName) {
   return function(dispatch) {
     //firebase call to update answers at correct index
     firebase.updateAlgorithmAnswers(answer, index);
     //dispatch to add answer to current answers on state
-    dispatch({type: ANSWER_SUBMIT, payload: answer});
+    dispatch({type: ANSWER_SUBMIT, payload: {
+      displayName,
+      index,
+      answer
+    }});
   }
 }
 

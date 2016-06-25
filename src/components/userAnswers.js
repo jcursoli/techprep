@@ -18,10 +18,6 @@ const style = {
 export default class UserAnswers extends Component {
 
 	renderComponents(){
-		console.log('this is the elements in the rendercomponents', this.props.answers)
-		var code = `${this.props.code}`
-		var js = Prism.highlight(code, Prism.languages.javascript);
-
 		var list = [];
 		 _.forEach(this.props.answers,(value,key)=>{
 			list.push(
