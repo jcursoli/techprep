@@ -206,9 +206,22 @@ export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
   }
 }
 
+
 export function currentCategory(category) {
   return {
     type: CURRENT_CATEGORY,
     payload: category
+
+export function addComment(currentUser, commentsList, commentID, commentBody) {
+  var payload = {
+    currentUser,
+    commentsList,
+    commentID,
+    commentBody
+  }
+  return function(dispatch) {
+    firebase.addCommentToDatabase(currentUser, commentsList, commentID, commentBody);
+    dispatch({ type: UPDATE_VOTES, payload})
+
   }
 }

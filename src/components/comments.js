@@ -5,8 +5,10 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
+import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import AddComment from './addComment';
 
 class Comments extends Component {
   constructor(props) {
@@ -19,24 +21,18 @@ class Comments extends Component {
   }
 
   handleUpvote(questionIndex, commentIndex) {
-    console.log('in handle upvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasUpvoted.length);
     // if user has previously downvoted, then remove them from downvotes
-    console.log('this is previous hasDownvoted check: ', questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName))
     var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
     if(userIndex) {
       this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'DOWN')
     }
     // if user has not upvoted yet, add to upvotes
-    console.log('this is hasDownvoted > add to upvotes:', questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1)
     if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
       this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP')
     }
-
-
   }
 
   handleDownvote(questionIndex, commentIndex) {
-    console.log('in handle downvote. questionIndex: ', questionIndex, 'commentIndex:', commentIndex, 'next:', questionIndex.hasDownvoted.length);
     // if user has previously upvoted, then remove them from upvotes
     var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
     if(userIndex) {
@@ -49,8 +45,18 @@ class Comments extends Component {
   }
 
   render() {
-    return (
+
+    // {console.log('this.props.comments in comments:', this.props.comments)}
+    return (  
       <div>
+          <div class="comment-button">
+            <AddComment 
+              currentUser={this.state.currentUser}
+              commentsList={this.props.comments}
+              commentsID={this.state.commentsID}
+            />
+          </div>
+
         <Card>
           <CardHeader
             title="Comments"
@@ -93,7 +99,7 @@ class Comments extends Component {
 }
 
 function mapStateToProps(state) {
-  return { comments: state.comments };
+  return { comments: state.comments, commentIndex: state.commentIndex };
 }
 
 export default connect(mapStateToProps, actions)(Comments);

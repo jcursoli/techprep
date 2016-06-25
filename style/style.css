@@ -530,6 +530,7 @@ li {
   flex-direction: column;
   align-items: center;
 }
+<<<<<<< b8e81151285c444fd0cc9c619e3b61277f6e9670
 /*end*//*end*//*end*//*end*//*end*//*end*//*end*//*end*//*end*//*end*/
 /**
  * prism.js default theme for JavaScript, CSS and HTML
@@ -669,3 +670,5 @@ pre[class*="language-"] {
 }
 
 
+=======
+>>>>>>> [Progress] Adds text field for new comments

@@ -31,7 +31,39 @@ var allComments = {
       {"comment": "This is the coolest thing ever",
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
-      "hasDownvoted": ["bobby"]}
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]},
     ],
   "1": [{"comment":"This answer is good",
       "username": "bobby",
@@ -227,105 +259,242 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ]
-}
+    ],
+  "16": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ],
+  "17": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ],
+  "18": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ],
+  "19": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ],
+  "20": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ],
+  "21": [{"comment":"This answer is good",
+      "username": "bobby",
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasDownvoted": ["bobby"]},
+      {"comment": "This answer is bad",
+      "username": "jill",
+      "hasUpvoted": ["joey", "doug"],
+      "hasDownvoted": ["drew"]},
+      {"comment": "This is the coolest thing ever",
+      "username": "cocoa",
+      "hasUpvoted": ["drew", "doug", "joey"],
+      "hasDownvoted": ["bobby"]}
+    ]    
+} 
 
 var allQuestions = {
   "0": {  "question": "Explain javascript closures.",
         "acceptance": "27.2%",
         "difficulty": "Easy",
         "answer": "Closures are like 'snapshots' of all the variables that are within a function's scope. Since functions can be passed around like regular variables in JavaScript, closures ensure that functions can execute properly as they are passed around from one scope to another. Textbook way to create a closure is to have a function that returns another function. Closures also provide a way to create 'private' variables... variables that are accessible by the returned function (through its closure) but not by external code.",
+        "category" : "javascript",
         "commentsID": 0
   },
   "1": {  "question": "Explain event bubbling.",
         "acceptance": "27.2%",
         "difficulty": "Easy",
         "answer": "Event bubbling has to do with how events are propagated through elements in the DOM. When you click on an element (an <li> for example), that element will receive the event and then, unless you explicitly stop propagation, the event will 'bubble up' to its parent element (the <ul>) and then up to that element's parent and so on. There is actually also a capture phase for events that occurs before bubbling, where the parent elements (starting with top level elements like document, body, etc.) will be notified and then the event will 'capture down' to the correct child elements, all the way down to the event's target element. If you are using jQuery, the jQuery API does not provide a way to attach event listeners to the capture phase, but you can using vanilla JavaScript.",
+        "category" : "javascript",
         "commentsID": 1
   },
   "2": {  "question": "Explain event delegation.",
         "acceptance": "27.2%",
         "difficulty": "Easy",
         "answer": "Event delegation is a strategy where you attach your event handlers to a parent element rather than on multiple child elements. Classic example would be a list (<ul> or <ol>) with multiple <li> children. If you want to attach some behavior for when the user clicks an <li>, you could attach an event handler to each <li> specifically, or you could simply attach one event listener to the parent <ul> and determine which child element was clicked by inspecting the event object itself when it bubbles up. This can simplify things quite a bit, especially when <li> elements are going to be added and removed dynamically. It can be a hassle to manually attach and remove all those individual handlers.",
+        "category" : "javascript",
         "commentsID": 2
   },
   "3": {  "question": "What does apply() do?",
         "acceptance": "27.2%",
         "difficulty": "Easy",
         "answer": "Apply() is a method on functions that you can call that will execute the function using the provided context (the value of 'this' within the function) and the provided arguments (provided as an array). This can be useful when you need to override the value of 'this' when executing a callback. There is a related method called call() that is identical except you provide the function arguments not as an array but as comma separated parameters (just like a regular function call). Apply() can also be useful when you are working with the arguments pseudo-array (especially when doing currying).",
+        "category" : "javascript",
         "commentsID": 3
   },
   "4": {  "question": "What does bind() do?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "Bind() is another method provided on all functions. Calling bind() will return a new function that, when executed ,will in turn execute the original function with the value of 'this' set to whatever you passed in to the bind() call. It also prevents the value of 'this' from ever being overridden by any subsequent call() or apply() calls on that function. It can be useful when you want to attach event listeners to DOM events but you want to ensure the proper value of 'this' when those listeners fire.",
+        "category" : "javascript",
         "commentsID": 4
   },
   "5": {  "question": "Explain what the js map function does and provide an example.",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "Map() is an Array function that will execute logic on each element in an array and return a new array with the modified values. Simple example would be, say you have an array of measurements that are in feet, but you need an array of inches. You could manually write a for loop to go through the original array and populate the converted values in a new array, but it is more concise and functional to use map() to do that for you.",
+        "category" : "javascript",
         "commentsID": 5
   },
   "6": {  "question": "What is strict mode?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "Strict mode adds some additional restrictions to your JS code to prevent some common errors. When you use strict mode, you cannot use implicitly declared variables (which would leak to global scope), assign a values to read-only properties, or add properties to objects that are not extensible.",
+        "category" : "javascript",
         "commentsID": 6
   },
   "7": {  "question": "What\"s the difference between a promise and a callback?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "A callback is a function you provide as an argument to another function. When that function has finished doing whatever its doing, it will execute your callback and thus notify your calling code that the operation is complete. Promises are actual JavaScript objects with some built-in event handling that you can pass around from one function to another, and it represents the 'promise' of work that will be done. So instead of passing in a callback, a function will return this promise to you. You attach listeners to a promise that will be executed when the promise is either resolved (success!) or rejected (error :(). Promises give you a lot more flexibility when working w/ async processes in particular. They are not built-in to JavaScript, however, you need to use a third party library like q. jQuery provides its own implementation of deferreds but they do not properly follow the promise specification.",
+        "category" : "javascript",
         "commentsID": 7
   },
   "8": {  "question": "What is $scope?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "A scope represents the current Angular 'context' that a directive, controller, or template is executing within. When something attempts to access a variable or method, Angular will look at the current scope to locate it. If not found, it will look to the scope's parent and so on.",
+        "category" : "angular",
         "commentsID": 8
   },
   "9": {  "question": "What is a directive?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "A directive is the name for Angular's reusable components... a combination of HTML and JS that will execute together.",
+        "category" : "angular",
         "commentsID": 9
   },
   "10": { "question": "What is the digest cycle?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "The digest cycle is how Angular tracks changes and performs its updates. It basically iterates through all the watchers on a scope and sees if anything has changed. If anything has changed, watchers are notified and the digest cycle will execute again (up to a maximum of 10 times I think). This is because one change can tr",
+        "category" : "angular",
         "commentsID": 10
   },
   "11": { "question": "What is $scope.$apply?",
+
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "$scope.$apply is used to change $scope values and then trigger a digest cycle. This is because changes that occur outside of an Angular context (i.e., from DOM events wired up in the link function, etc.) do not automatically trigger a $digest cycle. Wrapping your change in a $scope.$apply block tells Angular to run a digest cycle after making the changes and also provides some error handling.",
+        "category" : "angular",
         "commentsID": 11
   },
   "12": { "question": "What are the most commonly used out-of-the-box directives?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "The most commonly used out-of-the-box directives are ngIf, ngHide, ngShow, ngRepeat, ngClick, ngClass, ngModel.",
+        "category" : "angular",
         "commentsID": 12
   },
   "13": { "question": "What does transclude do on directives?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "Transclude lets you write a directive the wraps arbitrary content. Textbook example is a modal directive. You want to write your modal directive so that the consumer can specify the actual content that goes inside the modal. Behind the scenes, Angular creates a transcluded scope that does not follow the typical scope inheritance chain for the directive itself, and then creates a new child scope for the transcluded contents that DOES inherit from the initial scope (so basically, inheritance 'skips over' the transcluded directive's scope). I think that's right anyway.... transclusion is a bit tricky coneptually, and I've seen it explained several different ways.",
+        "category" : "angular",
         "commentsID": 13
   },
   "14": { "question": "Why use a q promise as opposed to just returning $http’s promise?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "Good 'question', not sure? Does it just provide a level of separation so your code has more control over promise resolution/rejection?",
+        "category" : "angular",
         "commentsID": 14
   },
   "15": { "question": "What does $resource do?",
         "acceptance": "27.2%",
         "difficulty": "Medium",
         "answer": "$resource is a REST wrapper for $http that simplifies the boilerplate code needed to interact with web services (provided they adhere to REST). Personally I love it, but there are times when it's not feasible to use it (i.e., you don't control the API you're hitting and its not RESTful... although you could always stand up a Node/Express proxy in that case.",
+        "category" : "angular",
         "commentsID": 15
+  },
+  "16": { "question": "Explain what a class selector is and how it is used.",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "A class can be thought of as a grouped collection of CSS attributes applied to HTML elements. This allows you to apply the same styling to multiple HTML elements by placing them in the same CSS class. Class methods can be called by inserting a ‘class’ property and name within an HTML element, then calling the class name with a ‘.’  in the CSS doc.",
+        "category" : "css",
+        "commentsID": 16
+  },
+  "17": { "question": "What are pseudo classes and what are they used for?",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "$Pseudo classes are similar to classes, but are not explicitly defined in the markup, and are used to add additional effects to selected HTML elements such as link colors, hover actions, etc. Pseudo classes are defined by first listing the selector, followed by a colon and then pseudo-class element. :link, :visited, :hover, :active, :first_line are all examples of pseudo classes, used to call a specific action on an element, such as the changing of a link color after it has been visited.",
+        "category" : "css",
+        "commentsID": 17
+  },
+  "18": { "question": "What does $resource do?",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "Inline: Though this method often goes against best practices, it’s easily done by inserting a ‘style’ attribute inside an HTML element. Embedded/Internal: Done by defining the head of an HTML document by wrapping characteristics in a <style> tag. Linked/External: CSS is placed in an external .css file, and linked to the HTML document with a <link> tag. This can also be accomplished using the ‘@import’, however, this can slow page load time and is generally not advised.",
+        "category" : "css",
+        "commentsID": 18
+  },
+  "19": { "question": "What is the difference between HTML elements and tags?",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "HTML elements communicate to the browser how to render text. When surrounded by angular brackets <> they form HTML tags. For the most part, tags come in pairs and surround text.",
+        "category" : "html",
+        "commentsID": 19
+  },
+  "20": { "question": "What is Semantic HTML?",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "Semantic HTML is a coding style where the tags embody what the text is meant to convey. In Semantic HTML, tags like <b></b> for bold, and <i></i> for italic should not be used, reason being they just represent formatting, and provide no indication of meaning or structure. The semantically correct thing to do is use <strong></strong> and <em></em>. These tags will have the same bold and italic effects, while demonstrating meaning and structure (emphasis in this case).",
+        "category" : "html",
+        "commentsID": 20
+  },
+  "21": { "question": "What does DOCTYPE mean?",
+        "acceptance": "27.2%",
+        "difficulty": "Medium",
+        "answer": "The term DOCTYPE tells the browser which type of HTML is used on a webpage. In turn, the browsers use DOCTYPE to determine how to render a page. Failing to use DOCTYPE or using a wrong DOCTYPE may load your page in Quirks Mode.",
+        "category" : "html",
+        "commentsID": 21
   }
 }
 
@@ -575,9 +744,32 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
   firebase.database().ref('comments/' + commentIndex + '/' + questionIndex + votePath + '/' + next).remove();
 }
 
+
 export function updateAlgorithmAnswers(answer, index) {
   var user = firebase.auth().currentUser;
   var userAnswer = {};
   userAnswer[user.displayName] = answer;
   firebase.database().ref('algorithms/' + index + '/userAnswers').update(userAnswer);
+}
+export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
+  var next = commentsList[commentID].length;
+  var newComment = {};
+  
+  // newComment[next] = { 
+  //   "comment": commentBody,
+  //   "username": currentUser.displayName,
+  //   "hasUpvoted": [currentUser.displayName],
+  //   "hasDownvoted": []
+  // }
+
+   newComment = { 
+    "comment": commentBody,
+    "username": currentUser.displayName,
+    "hasUpvoted": [currentUser.displayName],
+    "hasDownvoted": []
+  }
+
+  console.log('next', next, 'newComment', newComment);
+  firebase.database().ref('comments/' + commentID + '/' + next).update(newComment);
+
 }
