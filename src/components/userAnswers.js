@@ -8,29 +8,29 @@ import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
 
 const style = {
-	width:'90%',
 	alignItems: 'center',
-	height:'200px',
-  margin: '30px',
-	overflowY:'hidden',
-	overflowX:'hidden'
+	height:'150px',
+  margin: '10px',
+  overflowY:'hidden'
 };
 
 export default class UserAnswers extends Component {
 
-	constructor(props){
-	super(props);
-	this.state = {};
-		this.handleClick = this.handleClick.bind(this);
-	}
-
 	handleClick(event){
 		if(event.target.parentElement.firstChild.style.overflowY === 'visible'){
-			event.target.parentElement.firstChild.style.height = '200px';
-			event.target.parentElement.firstChild.style.overflowY = 'hidden'
+			//changes things to hidden
+			event.target.parentElement.children[1].firstChild.textContent = 'Show More'
+			event.target.parentElement.style.height = '200px';
+			event.target.parentElement.firstChild.style.height = '150px';
+			event.target.parentElement.firstChild.style.overflowY ='hidden';
+			event.target.parentElement.style.overflow = 'hidden';
 		} else{
-			event.target.parentElement.firstChild.style.overflowY = 'visible'
+			//changes things to visible
+			event.target.parentElement.children[1].firstChild.textContent = 'Show less'
+			event.target.parentElement.firstChild.style.overflow = 'visible';
 			event.target.parentElement.firstChild.style.height = 'auto';
+			event.target.parentElement.style.height = 'auto';
+			event.target.parentElement.scrollIntoView();
 		}
 	}
 	renderComponents(){
@@ -39,7 +39,7 @@ export default class UserAnswers extends Component {
 		 var lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
 		 		list.push(
-		 			<Paper style={{width:'90%', overflowY:'hidden',margin:'30px'}} key={key} zDepth={1} >
+		 			<Paper style={{height:'200px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
@@ -48,15 +48,15 @@ export default class UserAnswers extends Component {
 		 						primaryText={key}
 		 					/>
 		 				</List>
-		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
+		 				<pre style={{margin:'10px',marginBottom:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
-		 			<button style={{margin:'5px'}} onClick={this.handleClick}>Show more</button>
+		 			<button style={{margin:'5px',bottom:'0px',left:'0px'}} onClick={this.handleClick}>Show more</button>
 		 		</Paper>
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{width:'90%',margin:'30px'}} key={key} zDepth={1} >
-		 			<div style={style}>
+		 			<Paper style={{height:'200px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
+		 			<div style={{	alignItems: 'center',height:'200px',margin: '10px',}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
