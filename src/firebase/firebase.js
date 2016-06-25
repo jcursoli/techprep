@@ -761,15 +761,15 @@ export function addCommentToDatabase(currentUser, commentsList, commentID, comme
   //   "hasUpvoted": [currentUser.displayName],
   //   "hasDownvoted": []
   // }
-
-   newComment = { 
+  console.log('currentUser', currentUser);
+  newComment = { 
     "comment": commentBody,
-    "username": currentUser.displayName,
-    "hasUpvoted": [currentUser.displayName],
+    "username": currentUser,
+    "hasUpvoted": [currentUser],
     "hasDownvoted": []
   }
 
-  console.log('next', next, 'newComment', newComment);
+  console.log('next', next, 'commentID', + commentID, 'newComment', newComment);
   firebase.database().ref('comments/' + commentID + '/' + next).update(newComment);
 
 }
