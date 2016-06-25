@@ -21,7 +21,9 @@ export default class AddComment extends Component {
   keyDown (event){
     if(event.keyCode=='13'){
       // console.log('this.props in addComment', this.state.currentUser, this.state.commentsList, this.state.commentID, event.target.value);
-      this.props.addComment(this.state.currentUser, this.state.commentsList, this.state.commentID, event.target.value)
+      this.props.addComment(this.state.currentUser, this.state.commentsList, this.state.commentID, event.target.value);
+      // event.target.value = '';
+      document.getElementById('commentField').value='';
     }
   }
 
@@ -30,6 +32,7 @@ export default class AddComment extends Component {
       <div>
         <div class="add-comment">
           <TextField
+            id="commentField"
             hintText="Add a comment"
             onKeyDown={this.keyDown.bind(this)}
             fullWidth={true}

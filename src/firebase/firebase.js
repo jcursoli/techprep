@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+  import firebase from 'firebase';
 import { store } from '../index';
 import {
   AUTH_USER,
@@ -765,8 +765,8 @@ export function addCommentToDatabase(currentUser, commentsList, commentID, comme
   newComment = { 
     "comment": commentBody,
     "username": currentUser,
-    "hasUpvoted": [currentUser],
-    "hasDownvoted": []
+    "hasUpvoted": ['', currentUser],
+    "hasDownvoted": ['']
   }
 
   console.log('next', next, 'commentID', + commentID, 'newComment', newComment);
