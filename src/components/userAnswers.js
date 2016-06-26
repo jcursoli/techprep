@@ -47,6 +47,7 @@ export default class UserAnswers extends Component {
 		 _.forEach(this.props.answers,(value,key)=>{
 		 var lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
+		 		//push item with a show more button else dont include the button
 		 		list.push(
 		 			<Paper style={{height:'200px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
 		 			<div style={style}>
@@ -61,9 +62,9 @@ export default class UserAnswers extends Component {
 		 			</div>
 		 				<div className='userStats'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
-			 			<iconButton onClick={() => this.handleUpvote()}> <DownArrow /> </iconButton>
+			 			<iconButton className='algorithmVote' onClick={this.handleUpvote}> <DownArrow /> </iconButton>
 			 			<div>{'100'}</div>
-			 			<iconButton onClick={() => this.handleUpvote()}> <UpArrow /> </iconButton>
+			 			<iconButton className='algorithmVote' onClick={this.handleUpvote}> <UpArrow /> </iconButton>
 		 			</div>
 		 		</Paper>
 		 		)

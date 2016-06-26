@@ -677,6 +677,16 @@ pre[class*="language-"] {
 }
 .showContent:hover {
   color: #69F0AE;
+  cursor: pointer;
+}
+.algorithmVote{
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.algorithmVote:hover{
+ color: #69F0AE; 
+ background-color: #69F0AE;
 }
 
 
