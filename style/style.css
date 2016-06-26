@@ -667,3 +667,17 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
+.showContent {
+  border: none;
+  outline: none;
+  background: none;
+  margin: 5px;
+  bottom: 5px;
+  left: 5px;
+}
+.showContent:hover {
+  color: #69F0AE;
+}
+
+
+

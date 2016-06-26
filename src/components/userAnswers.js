@@ -6,31 +6,40 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
+import Less from 'material-ui/svg-icons/navigation/expand-less';
+import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
+import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
 
 const style = {
 	alignItems: 'center',
 	height:'150px',
   margin: '10px',
-  overflowY:'hidden'
+  overflowY:'hidden',
+  background:'linearGradient(transparent 150px, white)'
 };
 
 export default class UserAnswers extends Component {
+	handleUpvote(event){
+		console.log(event.target)
+	}
 
 	handleClick(event){
-		if(event.target.parentElement.firstChild.style.overflowY === 'visible'){
+		if(event.target.parentElement.parentElement.firstChild.style.overflowY === 'visible'){
 			//changes things to hidden
-			event.target.parentElement.children[1].firstChild.textContent = 'Show More'
-			event.target.parentElement.style.height = '200px';
-			event.target.parentElement.firstChild.style.height = '150px';
-			event.target.parentElement.firstChild.style.overflowY ='hidden';
-			event.target.parentElement.style.overflow = 'hidden';
+			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show More'
+			event.target.parentElement.parentElement.style.height = '200px';
+			event.target.parentElement.parentElement.firstChild.style.height = '150px';
+			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
+			event.target.parentElement.parentElement.style.overflowY = 'hidden';
+			event.target.parentElement.parentElement.style.width = '90%';
 		} else{
 			//changes things to visible
-			event.target.parentElement.children[1].firstChild.textContent = 'Show less'
-			event.target.parentElement.firstChild.style.overflow = 'visible';
-			event.target.parentElement.firstChild.style.height = 'auto';
-			event.target.parentElement.style.height = 'auto';
-			event.target.parentElement.scrollIntoView();
+			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show Less'
+			event.target.parentElement.parentElement.firstChild.style.overflowY = 'visible';
+			event.target.parentElement.parentElement.firstChild.style.overflowX = 'scroll';
+			event.target.parentElement.parentElement.firstChild.style.height = 'auto';
+			event.target.parentElement.parentElement.style.height = 'auto';
+			event.target.parentElement.parentElement.scrollIntoView();
 		}
 	}
 	renderComponents(){
@@ -50,13 +59,18 @@ export default class UserAnswers extends Component {
 		 				</List>
 		 				<pre style={{margin:'10px',marginBottom:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
-		 			<button style={{margin:'5px',bottom:'0px',left:'0px'}} onClick={this.handleClick}>Show more</button>
+		 				<div className='userStats'>
+		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
+			 			<iconButton onClick={() => this.handleUpvote()}> <DownArrow /> </iconButton>
+			 			<div>{'100'}</div>
+			 			<iconButton onClick={() => this.handleUpvote()}> <UpArrow /> </iconButton>
+		 			</div>
 		 		</Paper>
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{height:'200px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
-		 			<div style={{	alignItems: 'center',height:'200px',margin: '10px',}}>
+		 			<Paper style={{height:'auto',width:'90%',margin:'20px'}} key={key} zDepth={1} >
+		 			<div style={{overflowX:'scroll',	alignItems: 'center',height:'auto',margin: '10px',}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
@@ -66,9 +80,13 @@ export default class UserAnswers extends Component {
 		 				</List>
 		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
+		 			<div className='userStats'>
+			 			<iconButton onClick={this.handleUpvote}> <DownArrow /> </iconButton>
+			 			<div>{'100'}</div>
+			 			<iconButton onClick={this.handleUpvote}> <UpArrow /> </iconButton>
+		 			</div>
 		 		</Paper>
 		 		)
-
 		 	}
 		})
 		 return list;
