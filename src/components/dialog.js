@@ -12,8 +12,6 @@ export default class DialogBox extends Component {
     this.state = {
       questionsList: this.props.questionsList
     }
-
-    console.log(this.props.questionsList, 'in dialog, props')
   }
 
   handleOpen() {
@@ -48,7 +46,10 @@ export default class DialogBox extends Component {
         <div>
           <div>
             <Dialog
-              title={ <DialogTitle question={this.props.question.question} /> }
+              title={<DialogTitle 
+              questionText={this.props.question.question}
+              questionID={this.props.question.commentsID} 
+            />}
               modal={false}
               actions={actions}
               open={this.props.localOpen}

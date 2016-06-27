@@ -117,7 +117,7 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   var category = state.currentCategory && typeof state.currentCategory === 'string' && state.currentCategory.toLowerCase();
-  console.log('state.questions is:', state.questions);
+  // console.log('state.questions is:', state.questions);
   var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.category === category);
   return { questions: filteredQuestions || [] };
 }

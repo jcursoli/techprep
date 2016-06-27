@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Snackbar from 'material-ui/Snackbar';
+import * as actions from '../actions';
+import { connect } from 'react-redux';
 
 export default class DialogTitle extends Component {
 
   constructor(props) {
+    var currentUser = firebase.auth().currentUser;
+
     super(props);
     this.state = {
       open: false,
+      question: this.props.questionTitle,
+      questionID: this.props.question,
+      currentUser: currentUser.displayName
     };
 
-    // this.markQuestion = this.markQuestion.bind(this)
   }
 
   //  const style = {
@@ -33,6 +39,7 @@ export default class DialogTitle extends Component {
   markQuestion(e) {
     console.log('button pressed', e)
     this.setState({ open: true })
+    this.props.addQuestionToStudyList(this.state.currentUser, this.props.questionID);
   }
 
   render() {
@@ -57,11 +64,11 @@ export default class DialogTitle extends Component {
           <ContentAdd />
         </FloatingActionButton>
         <div style={titleStyle}>
-          {this.props.question}
+          {this.props.questionText}
         </div>
         <Snackbar
           open={this.state.open}
-          message="Question added to study list"
+          message="Question was added to your study list"
           autoHideDuration={1500}
           onRequestClose={this.handleRequestClose.bind(this)}
         />
@@ -69,3 +76,5 @@ export default class DialogTitle extends Component {
     )
   }
 }
+
+export default connect(null, actions)(DialogTitle);

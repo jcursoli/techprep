@@ -22,3 +22,4 @@ export const REMOVE_ERROR = 'remove_error';
 export const UPDATE_VOTES = 'update_votes';
 export const CURRENT_CATEGORY = 'current_category';
 export const ANSWER_SUBMIT = 'answer_submit';
+export const ADD_STUDY_QUESTION = 'add_study_question';

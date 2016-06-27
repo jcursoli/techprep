@@ -19,6 +19,8 @@ class Comments extends Component {
       currentUser: this.props.currentUser,
       commentButtonText: 'Show Comments'
     };
+
+    console.log(this.state.commentsID, 'in COMMENTS')
   }
 
   handleUpvote(questionIndex, commentIndex) {
