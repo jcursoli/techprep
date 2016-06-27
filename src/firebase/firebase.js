@@ -10,7 +10,8 @@ import {
   INITIALIZE_ALGORITHMS,
   LOAD_QUESTIONS,
   LOAD_COMMENTS,
-  REMOVE_FRIEND
+  REMOVE_FRIEND,
+  RESPONSE_INITIALIZE
  } from '../actions/actionTypes';
 var config = {
   apiKey: "AIzaSyBBBowxlfghEwetZ6tP6On58nQ30kqHT6M",
@@ -542,6 +543,13 @@ export function initializeState(user) {
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
+  //load user algorithm responses
+  var responseRef = firebase.database().ref('responses');
+  responseRef.on("value", function(snapshot) {
+    store.dispatch({ type: RESPONSE_INITIALIZE, payload: snapshot.val() });
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
 
   // Load friends from database
   var friendsRef = firebase.database().ref('friends/' + user.displayName + '/friendsList');
@@ -751,15 +759,15 @@ export function updateAlgorithmAnswers(answer, index) {
   userAnswer[user.displayName] = answer;
   firebase.database().ref('algorithms/' + index + '/userAnswers').update(userAnswer);
 }
-export function addVote(index,vote){
+export function userAlgorithmVote(index,vote){
   var user = firebase.auth().currentUser;
   var response = {[user.displayName]:vote.value};
   firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
 } 
-export function addComment(index,commentObj){
+export function userAlgorithmComment(index,commentObj){
   var user = firebase.auth().currentUser;
   var response = {[new Date()]:commentObj.comment};
-  firebase.database().ref(`/responses/${index}/${vote.author}/comments/${user.displayName}`).update(response);
+  firebase.database().ref(`responses/${index}/${vote.author}/comments/${user.displayName}`).update(response);
 }
 export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
   var next = commentsList[commentID].length;

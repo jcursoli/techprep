@@ -17,8 +17,9 @@ import {
   CURRENT_CATEGORY,
   REMOVE_ERROR,
   UPDATE_VOTES,
-  ANSWER_SUBMIT, 
-  ADD_STUDY_QUESTION
+  ANSWER_SUBMIT,
+  ALGORITHM_VOTE,
+  RESPONSE_INITIALIZE
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -212,8 +213,13 @@ export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
     dispatch({ type: UPDATE_VOTES, payload })
   }
 }
-
-
+export function userAlgorithmVote(index,vote){
+  var payload = {}
+ return function(dispatch){ 
+    firebase.userAlgorithmVote(index,vote);
+    dispatch({type:ALGORITHM_VOTE,payload});
+  };
+}
 export function currentCategory(category) {
   return {
     type: CURRENT_CATEGORY,
