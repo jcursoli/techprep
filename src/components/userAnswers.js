@@ -7,8 +7,9 @@ import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
 import Less from 'material-ui/svg-icons/navigation/expand-less';
-import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward'
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward'
+import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
+import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
+import * as actions from '../actions';
 
 const style = {
 	alignItems: 'center',
@@ -18,16 +19,20 @@ const style = {
   background:'linearGradient(transparent 150px, white)'
 };
 
-export default class UserAnswers extends Component {
-	handleUpvote(event){
-		console.log(event.target)
+class UserAnswers extends Component {
+	handleUpvote(userName){
+		console.log('up',userName)
+		console.log('index',this.props.index)
+	}
+	handleDownvote(userName){
+		console.log('down',userName)
 	}
 
 	handleClick(event){
 		if(event.target.parentElement.parentElement.firstChild.style.overflowY === 'visible'){
 			//changes things to hidden
 			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show More'
-			event.target.parentElement.parentElement.style.height = '200px';
+			event.target.parentElement.parentElement.style.height = '205px';
 			event.target.parentElement.parentElement.firstChild.style.height = '150px';
 			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
 			event.target.parentElement.parentElement.style.overflowY = 'hidden';
@@ -45,11 +50,12 @@ export default class UserAnswers extends Component {
 	renderComponents(){
 		var list = [];
 		 _.forEach(this.props.answers,(value,key)=>{
+		 	console.log(this.props.answers)
 		 var lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
 		 		list.push(
-		 			<Paper style={{height:'200px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
+		 			<Paper style={{height:'205px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
@@ -62,9 +68,9 @@ export default class UserAnswers extends Component {
 		 			</div>
 		 				<div className='userStats'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
-			 			<iconButton className='algorithmVote' onClick={this.handleUpvote}> <DownArrow /> </iconButton>
+			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
 			 			<div>{'100'}</div>
-			 			<iconButton className='algorithmVote' onClick={this.handleUpvote}> <UpArrow /> </iconButton>
+			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 		 			</div>
 		 		</Paper>
 		 		)
@@ -82,9 +88,9 @@ export default class UserAnswers extends Component {
 		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
 		 			<div className='userStats'>
-			 			<iconButton onClick={this.handleUpvote}> <DownArrow /> </iconButton>
-			 			<div>{'100'}</div>
-			 			<iconButton onClick={this.handleUpvote}> <UpArrow /> </iconButton>
+			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
+			 			<div>{'15'}</div>
+			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 		 			</div>
 		 		</Paper>
 		 		)
@@ -108,5 +114,12 @@ export default class UserAnswers extends Component {
 			)
 		}
 	}
-
 }
+function mapStateToProps(state){
+	return {
+		problem: state.currentAlgorithm.algorithm, 
+		index: state.currentAlgorithm.index, 
+		currentUser: state.user.displayName
+	}
+}
+export default connect(mapStateToProps, actions)(Algorithms);
