@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Prism from 'prismjs';
@@ -21,11 +22,38 @@ const style = {
 
 class UserAnswers extends Component {
 	handleUpvote(userName){
-		console.log('up',userName)
-		console.log('index',this.props.index)
+		var vote = {author:userName,value:1};
+		if(!this.props.responses[this.props.index]){
+			this.props.userAlgorithmVote(this.props.index,vote);
+		}
+		else if(!this.props.responses[this.props.index][userName]){
+			this.props.userAlgorithmVote(this.props.index,vote);
+		}
+		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
+			vote.value = 1;
+		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
+			vote.value = 1;
+		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
+			vote.value = 0;
+		}
+		this.props.userAlgorithmVote(this.props.index,vote);
 	}
 	handleDownvote(userName){
-		console.log('down',userName)
+		var vote = {author:userName,value:-1};
+		if(!this.props.responses[this.props.index]){
+			this.props.userAlgorithmVote(this.props.index,vote);
+		}
+		else if(!this.props.responses[this.props.index][userName]){
+			this.props.userAlgorithmVote(this.props.index,vote);
+		}
+		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
+			vote.value = 0;
+		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
+			vote.value = -1;
+		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
+			vote.value = -1;
+		}
+		this.props.userAlgorithmVote(this.props.index,vote);
 	}
 
 	handleClick(event){
@@ -116,10 +144,10 @@ class UserAnswers extends Component {
 	}
 }
 function mapStateToProps(state){
-	return {
-		problem: state.currentAlgorithm.algorithm, 
-		index: state.currentAlgorithm.index, 
+	console.log('this is in the mapstate to props',state.responses)
+	return { 
+		responses:state.responses,
 		currentUser: state.user.displayName
-	}
+	 }
 }
-export default connect(mapStateToProps, actions)(Algorithms);
+export default connect(mapStateToProps, actions)(UserAnswers);
