@@ -751,6 +751,16 @@ export function updateAlgorithmAnswers(answer, index) {
   userAnswer[user.displayName] = answer;
   firebase.database().ref('algorithms/' + index + '/userAnswers').update(userAnswer);
 }
+export function addVote(index,vote){
+  var user = firebase.auth().currentUser;
+  var response = {[user.displayName]:vote.value};
+  firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
+} 
+export function addComment(index,commentObj){
+  var user = firebase.auth().currentUser;
+  var response = {[new Date()]:commentObj.comment};
+  firebase.database().ref(`/responses/${index}/${vote.author}/comments/${user.displayName}`).update(response);
+}
 export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
   var next = commentsList[commentID].length;
   var newComment = {};
