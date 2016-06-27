@@ -41,7 +41,7 @@ class Questions extends Component {
 
   handleOpen(question) {
     // console.log('passed-in in questions handleOpen:', question)
-    console.log('question is:', question);
+    // console.log('question is:', question);
     this.setState({open: true, question});
   };
 
@@ -78,7 +78,11 @@ class Questions extends Component {
               enableSelectAll={this.state.enableSelectAll}
             >
               <TableRow>
-                <TableHeaderColumn colSpan="3" tooltip="Interview Questions" style={{textAlign: 'center'}}>
+                <TableHeaderColumn 
+                  colSpan="3" 
+                  tooltip="" 
+                  style={{textAlign: 'center'}}
+                >
                   Interview Questions
                 </TableHeaderColumn>
               </TableRow>
