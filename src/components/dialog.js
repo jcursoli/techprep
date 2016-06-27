@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Comments from './comments'
+import Comments from './comments';
+import DialogTitle from './dialogTitle';
 
 export default class DialogBox extends Component {
 
@@ -11,8 +12,6 @@ export default class DialogBox extends Component {
     this.state = {
       questionsList: this.props.questionsList
     }
-
-    console.log(this.props.questionsList, 'in dialog, props')
   }
 
   handleOpen() {
@@ -47,7 +46,10 @@ export default class DialogBox extends Component {
         <div>
           <div>
             <Dialog
-              title={this.props.question.question}
+              title={<DialogTitle 
+              questionText={this.props.question.question}
+              questionID={this.props.question.commentsID} 
+            />}
               modal={false}
               actions={actions}
               open={this.props.localOpen}
@@ -55,8 +57,9 @@ export default class DialogBox extends Component {
               repositionOnUpdate={false}
               contentStyle={customContentStyle}
             >
-
-              <div id="answer"> {this.props.question.answer} </div>
+            <br />
+            <br />
+              <div> {this.props.question.answer} </div>
             </Dialog>
           </div>
         </div>

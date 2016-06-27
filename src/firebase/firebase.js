@@ -783,3 +783,13 @@ export function addCommentToDatabase(currentUser, commentsList, commentID, comme
   firebase.database().ref('comments/' + commentID + '/' + next).update(newComment);
 
 }
+
+export function addQuestionToStudyList(currentUser, questionID) {
+
+  var studyList = {};
+  studyList[questionID] = true;
+
+  console.log('adding value ' + studyList + ' to users/' + currentUser)
+
+  firebase.database().ref('users/' + currentUser + '/studyList').update(studyList);
+}

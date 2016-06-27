@@ -41,7 +41,7 @@ class Questions extends Component {
 
   handleOpen(question) {
     // console.log('passed-in in questions handleOpen:', question)
-    console.log('question is:', question);
+    // console.log('question is:', question);
     this.setState({open: true, question});
   };
 
@@ -78,7 +78,11 @@ class Questions extends Component {
               enableSelectAll={this.state.enableSelectAll}
             >
               <TableRow>
-                <TableHeaderColumn colSpan="3" tooltip="Interview Questions" style={{textAlign: 'center'}}>
+                <TableHeaderColumn 
+                  colSpan="3" 
+                  tooltip="" 
+                  style={{textAlign: 'center'}}
+                >
                   Interview Questions
                 </TableHeaderColumn>
               </TableRow>
@@ -113,7 +117,7 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   var category = state.currentCategory && typeof state.currentCategory === 'string' && state.currentCategory.toLowerCase();
-  console.log('state.questions is:', state.questions);
+  // console.log('state.questions is:', state.questions);
   var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.category === category);
   return { questions: filteredQuestions || [] };
 }

@@ -16,8 +16,11 @@ class Comments extends Component {
     this.state = {
       expanded: false,
       commentsID: this.props.question.commentsID,
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      commentButtonText: 'Show Comments'
     };
+
+    console.log(this.state.commentsID, 'in COMMENTS')
   }
 
   handleUpvote(questionIndex, commentIndex) {
@@ -44,6 +47,13 @@ class Comments extends Component {
     }
   }
 
+  cardExpandChange() {
+    if(this.state.expanded === true) {
+      this.setState({ commentButtonText: 'Hide Comments'})
+    } else {
+      this.setState({ commentButtonText: 'Show Comments'})
+    }
+  }
   render() {
 
     // {console.log('this.props.comments in comments:', this.props.comments)}
@@ -57,9 +67,10 @@ class Comments extends Component {
             />
           </div>
 
-        <Card>
+        <Card
+          onExpandChange={this.cardExpandChange.bind(this)}>
           <CardHeader
-            title="Comments"
+            title={this.state.commentButtonText}
             subtitle=""
             actAsExpander={true}
             showExpandableButton={true}

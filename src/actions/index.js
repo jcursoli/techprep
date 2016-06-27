@@ -17,7 +17,8 @@ import {
   CURRENT_CATEGORY,
   REMOVE_ERROR,
   UPDATE_VOTES,
-  ANSWER_SUBMIT
+  ANSWER_SUBMIT, 
+  ADD_STUDY_QUESTION
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -232,4 +233,18 @@ export function addComment(currentUser, commentsList, commentID, commentBody) {
     dispatch({ type: UPDATE_VOTES, payload})
 
   }
+}
+
+export function addQuestionToStudyList(currentUser, questionID) {
+
+  var payload = {
+    currentUser,
+    questionID
+  }
+
+  return function(dispatch) {
+    firebase.addQuestionToStudyList(currentUser, questionID);
+    dispatch({ type: ADD_STUDY_QUESTION, payload })
+  }
+
 }
