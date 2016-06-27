@@ -762,7 +762,8 @@ export function updateAlgorithmAnswers(answer, index) {
 export function userAlgorithmVote(index,vote){
   var user = firebase.auth().currentUser;
   var response = {[user.displayName]:vote.value};
-  firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
+  firebase.database().ref(`responses/${index}/${vote.author}/count`).update()
+  //firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
 } 
 export function userAlgorithmComment(index,commentObj){
   var user = firebase.auth().currentUser;
