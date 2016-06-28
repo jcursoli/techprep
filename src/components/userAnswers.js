@@ -97,7 +97,7 @@ class UserAnswers extends Component {
 		 				<div className='userStats'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{'100'}</div>
+			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 		 			</div>
 		 		</Paper>
@@ -117,7 +117,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 			<div className='userStats'>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{'15'}</div>
+			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 		 			</div>
 		 		</Paper>

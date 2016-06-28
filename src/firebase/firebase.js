@@ -771,8 +771,13 @@ export function updateAlgorithmAnswers(answer, index) {
 export function userAlgorithmVote(index,vote){
   var user = firebase.auth().currentUser;
   var response = {[user.displayName]:vote.value};
-  firebase.database().ref(`responses/${index}/${vote.author}/count`).update()
-  //firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
+  var total;
+  firebase.database().ref(`responses/${index}/${vote.author}/count`).once('value',function(data){
+    total = data.val() || 0;
+    total += vote.value;
+    firebase.database().ref(`responses/${index}/${vote.author}`).update({count: total})
+  });
+  firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
 } 
 export function userAlgorithmComment(index,commentObj){
   var user = firebase.auth().currentUser;
