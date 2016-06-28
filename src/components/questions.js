@@ -117,8 +117,11 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   var category = state.currentCategory && typeof state.currentCategory === 'string' && state.currentCategory.toLowerCase();
-  // console.log('state.questions is:', state.questions);
-  var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.category === category);
+  if(category === 'study') {
+    var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.commentsID in state.user.studyList)
+  } else {
+    var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.category === category);
+  }
   return { questions: filteredQuestions || [] };
 }
 

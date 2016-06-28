@@ -20,7 +20,8 @@ import {
   ANSWER_SUBMIT, 
   ADD_STUDY_QUESTION,
   ALGORITHM_VOTE,
-  RESPONSE_INITIALIZE
+  RESPONSE_INITIALIZE,
+  INITIALIZE_STUDY_QUESTIONS
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
