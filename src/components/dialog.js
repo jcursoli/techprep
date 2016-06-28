@@ -10,7 +10,8 @@ export default class DialogBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: this.props.questionsList
+      questionsList: this.props.questionsList,
+      secondary: this.props.secondary
     }
   }
 
@@ -49,6 +50,7 @@ export default class DialogBox extends Component {
               title={<DialogTitle 
               questionText={this.props.question.question}
               questionID={this.props.question.commentsID} 
+              secondary={this.props.secondary}
             />}
               modal={false}
               actions={actions}

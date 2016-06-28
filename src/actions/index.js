@@ -256,3 +256,15 @@ export function addQuestionToStudyList(currentUser, questionID) {
   }
 
 }
+
+export function removeQuestionFromStudyList(currentUser, questionID) {
+  var payload = {
+    currentUser,
+    questionID
+  }
+
+  return function(dispatch) {
+    firebase.removeQuestionFromStudyList(currentUser, questionID);
+    dispatch({ type: ADD_STUDY_QUESTION, payload})
+  }
+}

@@ -807,7 +807,9 @@ export function addQuestionToStudyList(currentUser, questionID) {
   var studyList = {};
   studyList[questionID] = true;
 
-  console.log('adding value ' + studyList + ' to users/' + currentUser)
-
   firebase.database().ref('users/' + currentUser + '/studyList').update(studyList);
+}
+
+export function removeQuestionFromStudyList(currentUser, questionID) {
+  firebase.database().ref('users/' + currentUser + '/studyList/' + questionID).remove();
 }

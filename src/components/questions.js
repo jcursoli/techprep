@@ -32,7 +32,8 @@ class Questions extends Component {
       height: '450px',
       open: false,
       question: '',
-      currentUser: currentUser
+      currentUser: currentUser,
+      secondary: this.props.secondary
     };
 
     this.handleOpen = this.handleOpen.bind(this);
@@ -62,6 +63,7 @@ class Questions extends Component {
             localHandleClose={this.handleClose.bind(this)}
             currentUser={this.state.currentUser}
             questionsList={this.props.questions} 
+            secondary={this.props.secondary}
           />
         </div>
         <div>
@@ -117,8 +119,9 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   var category = state.currentCategory && typeof state.currentCategory === 'string' && state.currentCategory.toLowerCase();
-  if(category === 'study') {
-    var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.commentsID in state.user.studyList)
+  if(category === 'study' && state.user.studyList) {
+    var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.commentsID in state.user.studyList);
+    return { questions: filteredQuestions || [], secondary: true}
   } else {
     var filteredQuestions = state.questions && Array.isArray(state.questions) && state.questions.filter(obj => obj.category === category);
   }
