@@ -21,7 +21,11 @@ import {
   ADD_STUDY_QUESTION,
   ALGORITHM_VOTE,
   RESPONSE_INITIALIZE,
+<<<<<<< d7a7acb62d0f7ce4e596757e301fc9131f2f03bf
   INITIALIZE_STUDY_QUESTIONS
+=======
+  ALGORITHM_COMMENT
+>>>>>>> [Add] Adds comment functionality for comments to be displayed
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -221,7 +225,14 @@ export function userAlgorithmVote(index,vote){
     firebase.userAlgorithmVote(index,vote);
     dispatch({type:ALGORITHM_VOTE,payload});
   };
+}export function userAlgorithmComment(index,comment){
+  var payload = {}
+ return function(dispatch){ 
+    firebase.userAlgorithmComment(index,comment);
+    dispatch({type:ALGORITHM_COMMENT,payload});
+  };
 }
+
 export function currentCategory(category) {
   return {
     type: CURRENT_CATEGORY,

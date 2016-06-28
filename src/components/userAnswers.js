@@ -10,14 +10,15 @@ import _ from 'lodash';
 import Less from 'material-ui/svg-icons/navigation/expand-less';
 import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
+import Forum from 'material-ui/svg-icons/communication/forum';
 import * as actions from '../actions';
+import Comments from './algorithmComments';
 
 const style = {
 	alignItems: 'center',
 	height:'150px',
   margin: '10px',
   overflowY:'hidden',
-  background:'linearGradient(transparent 150px, white)'
 };
 
 class UserAnswers extends Component {
@@ -75,10 +76,27 @@ class UserAnswers extends Component {
 			//changes things to visible
 			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show Less'
 			event.target.parentElement.parentElement.firstChild.style.overflowY = 'visible';
-			event.target.parentElement.parentElement.firstChild.style.overflowX = 'scroll';
+			event.target.parentElement.parentElement.firstChild.style.overflowX = 'auto';
 			event.target.parentElement.parentElement.firstChild.style.height = 'auto';
 			event.target.parentElement.parentElement.style.height = 'auto';
 			event.target.parentElement.parentElement.scrollIntoView();
+		}
+	}
+	handleCommentOpen(item){
+		//this is the post comment method
+		//this.props.userAlgorithmComment(this.props.index,{author:userName,comment:'this is the first comment'});
+		console.log(item);
+	}
+	renderComments(name){
+		let algoComments = this.props.responses[this.props.index][name] ? this.props.responses[this.props.index][name].comments: false ;
+		if(algoComments){
+			var commentsCollection = [];
+			_.forEach(algoComments,(value,name)=>{
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments userName={name} comment={val} /> )]
+		})
+			return commentsCollection
+		} else{
+			return <noscript/>
 		}
 	}
 	renderComponents(){
@@ -100,18 +118,20 @@ class UserAnswers extends Component {
 		 				</List>
 		 				<pre style={{margin:'10px',marginBottom:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
-		 				<div className='userStats'>
+		 				<div className='algoAnswer'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
 			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
+		 			{this.renderComments(key)}
 		 		</Paper>
 		 		)
 		 	} else {
 		 		list.push(
 		 			<Paper style={{height:'auto',width:'90%',margin:'20px'}} key={key} zDepth={1} >
-		 			<div style={{overflowX:'scroll',	alignItems: 'center',height:'auto',margin: '10px',}}>
+		 			<div style={{overflowX:'auto',alignItems:'center',height:'auto',margin:'10px',}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
@@ -121,11 +141,13 @@ class UserAnswers extends Component {
 		 				</List>
 		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
-		 			<div className='userStats'>
+		 			<div className='algoAnswer'>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
 			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
+		 			{this.renderComments(key)}
 		 		</Paper>
 		 		)
 		 	}
@@ -150,7 +172,6 @@ class UserAnswers extends Component {
 	}
 }
 function mapStateToProps(state){
-	console.log('this is in the mapstate to props',state.responses)
 	return { 
 		responses:state.responses,
 		currentUser: state.user.displayName

@@ -782,7 +782,7 @@ export function userAlgorithmVote(index,vote){
 export function userAlgorithmComment(index,commentObj){
   var user = firebase.auth().currentUser;
   var response = {[new Date()]:commentObj.comment};
-  firebase.database().ref(`responses/${index}/${vote.author}/comments/${user.displayName}`).update(response);
+  firebase.database().ref(`responses/${index}/${commentObj.author}/comments/${user.displayName}`).update(response);
 }
 export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
   var next = commentsList[commentID].length;
