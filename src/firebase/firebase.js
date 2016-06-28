@@ -11,7 +11,8 @@ import {
   LOAD_QUESTIONS,
   LOAD_COMMENTS,
   REMOVE_FRIEND,
-  RESPONSE_INITIALIZE
+  RESPONSE_INITIALIZE,
+  INITIALIZE_STUDY_QUESTIONS
  } from '../actions/actionTypes';
 var config = {
   apiKey: "AIzaSyBBBowxlfghEwetZ6tP6On58nQ30kqHT6M",
@@ -551,6 +552,14 @@ export function initializeState(user) {
     console.log("The read failed: " + errorObject.code);
   });
 
+  //load study questions
+  var studyRef = firebase.database().ref('users/' + user.displayName + '/studyList');
+  studyRef.on("value", function(snapshot) {
+    store.dispatch({ type: INITIALIZE_STUDY_QUESTIONS, payload: snapshot.val() });
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
   // Load friends from database
   var friendsRef = firebase.database().ref('friends/' + user.displayName + '/friendsList');
   friendsRef.on("value", function(snapshot) {
@@ -621,7 +630,7 @@ export function createUserInDatabase(username) {
     displayName: username,
     email: user.email,
     uid: user.uid,
-    profileURL: 'https://i.imgur.com/DRuG5YH.png',
+    profileURL: 'https://i.imgur.com/DRuG5YH.png'
   });
   friendsRef.set({
     friendsList: {
@@ -798,7 +807,9 @@ export function addQuestionToStudyList(currentUser, questionID) {
   var studyList = {};
   studyList[questionID] = true;
 
-  console.log('adding value ' + studyList + ' to users/' + currentUser)
-
   firebase.database().ref('users/' + currentUser + '/studyList').update(studyList);
+}
+
+export function removeQuestionFromStudyList(currentUser, questionID) {
+  firebase.database().ref('users/' + currentUser + '/studyList/' + questionID).remove();
 }

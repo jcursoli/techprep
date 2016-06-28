@@ -15,7 +15,9 @@ export default class DialogTitle extends Component {
       open: false,
       question: this.props.questionTitle,
       questionID: this.props.question,
-      currentUser: currentUser.displayName
+      currentUser: currentUser.displayName,
+      secondary: this.props.secondary,
+      message: 'Question was added to your study list'
     };
 
   }
@@ -38,8 +40,15 @@ export default class DialogTitle extends Component {
 
   markQuestion(e) {
     console.log('button pressed', e)
-    this.setState({ open: true })
-    this.props.addQuestionToStudyList(this.state.currentUser, this.props.questionID);
+    
+    // if button has been clicked before
+    if(this.state.secondary) {
+      this.setState({ open: true, secondary: false, message: 'Question was removed from your study list' })
+      this.props.removeQuestionFromStudyList(this.state.currentUser, this.props.questionID);  
+    } else {
+      this.setState({ open: true, secondary: true, message: 'Question was added to your study list' })
+      this.props.addQuestionToStudyList(this.state.currentUser, this.props.questionID);  
+    }
   }
 
   render() {
@@ -60,6 +69,7 @@ export default class DialogTitle extends Component {
         <FloatingActionButton 
           style={buttonStyle}
           onMouseDown={this.markQuestion.bind(this)}
+          secondary={this.state.secondary}
         >
           <ContentAdd />
         </FloatingActionButton>
@@ -68,7 +78,7 @@ export default class DialogTitle extends Component {
         </div>
         <Snackbar
           open={this.state.open}
-          message="Question was added to your study list"
+          message={this.state.message}
           autoHideDuration={1500}
           onRequestClose={this.handleRequestClose.bind(this)}
         />

@@ -15,6 +15,7 @@ import votes from './votesReducer'
 import currentCategory from './currentCategoryReducer';
 import responses from './algorithmResponseReducer';
 
+
 const appReducer = combineReducers({
   form,
   auth,
