@@ -3,6 +3,8 @@ import {PieChart, Pie, Sector} from 'recharts';
 import Friends from 'material-ui/svg-icons/social/group';
 import Avatar from 'material-ui/Avatar';
 
+import MediaQuery from 'react-responsive';
+
 
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem} from 'material-ui/List';
@@ -13,6 +15,42 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import Divider from 'material-ui/Divider';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import MenuItem from 'material-ui/MenuItem';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+
+import FlatButton from 'material-ui/FlatButton';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+
+
+import AccountBox from 'material-ui/svg-icons/action/account-box';
+import ShowChart from 'material-ui/svg-icons/editor/show-chart';
+import Code from 'material-ui/svg-icons/action/code';
+import Group from 'material-ui/svg-icons/social/group';
+import Assignment from 'material-ui/svg-icons/action/assignment';
+import Arrows from 'material-ui/svg-icons/action/compare-arrows';
+import Help from 'material-ui/svg-icons/action/help';
+import Message from 'material-ui/svg-icons/communication/message';
+import NavMenu from 'material-ui/svg-icons/navigation/menu';
+
+const styles = {
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+};
+
 const data3 = [
   {name: 'Easy', value: .25},
   {name: 'Medium', value: .32},
@@ -22,7 +60,11 @@ const data3 = [
 export default class LandingPage extends Component  {
   constructor(props) {
     super(props);
-    this.state = {activeIndex: 0};
+    this.state = {activeIndex: 0, value: 3};
+  }
+
+  handleChange(event, index, value) {
+    this.setState({value});
   }
 
   onPieEnter(data, index) {
@@ -77,6 +119,86 @@ export default class LandingPage extends Component  {
        return (
         <div className="row">
           {/* LEFT CONTAINER */}
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <MediaQuery maxWidth={1224}>
+            <Toolbar>
+              <ToolbarGroup firstChild={true}>
+                <FlatButton
+                  label="TechPrep"
+                  linkButton={true}
+                  href="/"
+                  primary={true}
+                  icon={<ActionAndroid />}
+                />
+              </ToolbarGroup>
+              <ToolbarGroup>
+              <IconMenu
+                iconButtonElement={
+                  <IconButton touch={true}>
+                    <NavigationExpandMoreIcon />
+                  </IconButton>
+                }
+              >
+                <MenuItem primaryText="CONCEPTS" />
+                <MenuItem primaryText="ALGORITHMS" />
+                <MenuItem primaryText="MOCK INTERVIEW" />
+                <MenuItem primaryText="HELP" />
+                <MenuItem primaryText="SIGN OUT" />
+              </IconMenu>
+              </ToolbarGroup>
+            </Toolbar>
+            </MediaQuery>
+            <MediaQuery minWidth={1224}>
+            <Toolbar>
+              <ToolbarGroup firstChild={true}>
+                <FlatButton
+                  label="TechPrep"
+                  linkButton={true}
+                  href="/"
+                  primary={true}
+                  icon={<ActionAndroid />}
+                />
+              </ToolbarGroup>
+              <ToolbarGroup>
+                <FlatButton
+                  label="CONCEPTS"
+                  linkButton={true}
+                  href="/"
+                  secondary={true}
+                  icon={<ActionAndroid />}
+                />
+                <FlatButton
+                  label="ALGORITHMS"
+                  linkButton={true}
+                  href="https://github.com/callemall/material-ui"
+                  secondary={true}
+                  icon={<ActionAndroid />}
+                />
+                <FlatButton
+                  label="MOCK INTERVIEW"
+                  linkButton={true}
+                  href="https://github.com/callemall/material-ui"
+                  secondary={true}
+                  icon={<ActionAndroid />}
+                />
+                <FlatButton
+                  label="HELP"
+                  linkButton={true}
+                  href="https://github.com/callemall/material-ui"
+                  secondary={true}
+                  icon={<ActionAndroid />}
+                />
+                <FlatButton
+                  label="SIGN OUT"
+                  linkButton={true}
+                  href="https://github.com/callemall/material-ui"
+                  secondary={true}
+                  icon={<ActionAndroid />}
+                />
+              </ToolbarGroup>
+            </Toolbar>
+            </MediaQuery>
+          </div>
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
