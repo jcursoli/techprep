@@ -82,17 +82,25 @@ class UserAnswers extends Component {
 			event.target.parentElement.parentElement.scrollIntoView();
 		}
 	}
-	handleCommentOpen(item){
-		//this is the post comment method
-		//this.props.userAlgorithmComment(this.props.index,{author:userName,comment:'this is the first comment'});
-		console.log(item);
+	handleCommentOpen(key){
+		let commentSection = document.getElementById(key);
+		if(commentSection.style.visibility === 'hidden'){
+				commentSection.style.visibility = 'visible';
+				commentSection.style.display = 'inline';
+				commentSection.parentElement.style.height = 'auto';
+		}else {
+			commentSection.style.visibility = 'hidden';
+			commentSection.style.display = 'none';
+			commentSection.parentElement.style.height = '205';
+		}
+
 	}
 	renderComments(name){
 		let algoComments = this.props.responses[this.props.index][name] ? this.props.responses[this.props.index][name].comments: false ;
 		if(algoComments){
 			var commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
-			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments userName={name} comment={val} /> )]
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments style={{margin:'5px'}} userName={name} comment={val} /> )]
 		})
 			return commentsCollection
 		} else{
@@ -125,7 +133,9 @@ class UserAnswers extends Component {
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
-		 			{this.renderComments(key)}
+		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
+		 				{this.renderComments(key)}
+		 			</div>
 		 		</Paper>
 		 		)
 		 	} else {
@@ -147,7 +157,9 @@ class UserAnswers extends Component {
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
-		 			{this.renderComments(key)}
+		 		<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
+		 				{this.renderComments(key)}
+		 			</div>
 		 		</Paper>
 		 		)
 		 	}

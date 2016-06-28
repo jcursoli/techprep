@@ -8,7 +8,7 @@ import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 
 const AlgorithmComments = (props) => {
  		return (
-	 			<Paper style={{height:'auto',width:'50%',margin:'20px'}} zDepth={1} >
+	 			<Paper style={{height:'auto',width:'90%',margin:'20px'}} zDepth={1} >
 	 			<div style={{overflowX:'auto',alignItems:'center',height:'auto',margin:'10px',}}>
 	 				<List className='userCommentAvatar'>
 	 					<ListItem 
@@ -18,11 +18,6 @@ const AlgorithmComments = (props) => {
 	 					/>
 	 				</List>
 	 				<p>{props.comment}</p>
-	 			</div>
-	 			<div className='algoAnswer'>
-		 			<iconButton className='algorithmVote'> <DownArrow /> </iconButton>
-		 			<div></div>
-		 			<iconButton className='algorithmVote'> <UpArrow /> </iconButton>
 	 			</div>
 	 		</Paper>
  		)
