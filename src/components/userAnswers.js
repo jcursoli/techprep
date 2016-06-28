@@ -22,7 +22,7 @@ const style = {
 
 class UserAnswers extends Component {
 	handleUpvote(userName){
-		var vote = {author:userName,value:1};
+		var vote = {author:userName,value:1, dif: 0};
 		if(!this.props.responses[this.props.index]){
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}
@@ -30,11 +30,14 @@ class UserAnswers extends Component {
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}
 		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
+			vote.dif = 2;
 			vote.value = 1;
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
+			vote.dif = 1;
 			vote.value = 1;
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
 			vote.value = 0;
+			vote.dif = -1;
 		}
 		this.props.userAlgorithmVote(this.props.index,vote);
 	}
@@ -47,10 +50,13 @@ class UserAnswers extends Component {
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}
 		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
+			vote.dif = 1;
 			vote.value = 0;
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
+			vote.dif = -1;
 			vote.value = -1;
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
+			vote.dif = -2;
 			vote.value = -1;
 		}
 		this.props.userAlgorithmVote(this.props.index,vote);
