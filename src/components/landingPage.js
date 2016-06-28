@@ -5,7 +5,6 @@ import Avatar from 'material-ui/Avatar';
 
 import MediaQuery from 'react-responsive';
 
-
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem} from 'material-ui/List';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
