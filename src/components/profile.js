@@ -53,9 +53,9 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div style={{background:'white',overflow: 'scroll'}}>
+      <div style={{background:'white',overflow: 'scroll', height: '100vh'}}>
         <div className="profileTabs">
-        <div className='userInfo'>
+          <div className='userInfo'>
              <div className='profileImg'>
                <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
              </div>
@@ -78,7 +78,7 @@ class Profile extends Component {
                </div>
                <Divider />
              </div>
-           </div>
+          </div>
           <Tabs
           tabItemContainerStyle={styles.tabs}>
             <Tab label="Overview" style={styles.headline}>
@@ -105,7 +105,7 @@ class Profile extends Component {
               </div>
             </Tab>
           </Tabs>
-          </div>
+        </div>
       </div>
     );
   }
