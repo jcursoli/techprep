@@ -4,11 +4,9 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
   from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-// import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
-// import Comments from './comments';
 import Dialog from './dialog';
 import firebase from 'firebase';
 
@@ -41,8 +39,6 @@ class Questions extends Component {
   }
 
   handleOpen(question) {
-    // console.log('passed-in in questions handleOpen:', question)
-    // console.log('question is:', question);
     this.setState({open: true, question});
   };
 
@@ -51,9 +47,7 @@ class Questions extends Component {
   };
 
   render() {
-    // {console.log('this.props.questions', this.props.questions, 'in questions render')}
-    // {console.log('this.props.questions', this.props.questions, 'in questions render')}
-    
+
     return (
       <div>
         <div id="stay">
@@ -62,7 +56,7 @@ class Questions extends Component {
             localOpen={this.state.open}
             localHandleClose={this.handleClose.bind(this)}
             currentUser={this.state.currentUser}
-            questionsList={this.props.questions} 
+            questionsList={this.props.questions}
             secondary={this.props.secondary}
           />
         </div>
@@ -80,9 +74,9 @@ class Questions extends Component {
               enableSelectAll={this.state.enableSelectAll}
             >
               <TableRow>
-                <TableHeaderColumn 
-                  colSpan="3" 
-                  tooltip="" 
+                <TableHeaderColumn
+                  colSpan="3"
+                  tooltip=""
                   style={{textAlign: 'center'}}
                 >
                   Interview Questions

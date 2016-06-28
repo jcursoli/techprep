@@ -1,50 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../actions';
-import {List, ListItem} from 'material-ui/List';
-import AccountBox from 'material-ui/svg-icons/action/account-box';
-import ShowChart from 'material-ui/svg-icons/editor/show-chart';
-import Code from 'material-ui/svg-icons/action/code';
-import Group from 'material-ui/svg-icons/social/group';
-import Assignment from 'material-ui/svg-icons/action/assignment';
-import Arrows from 'material-ui/svg-icons/action/compare-arrows';
-import Help from 'material-ui/svg-icons/action/help';
-import Message from 'material-ui/svg-icons/communication/message';
-import NavMenu from 'material-ui/svg-icons/navigation/menu';
-
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import Divider from 'material-ui/Divider';
-import Badge from 'material-ui/Badge';
+import MediaQuery from 'react-responsive';
 
 import Chat from './chat/chat';
 import Friends from './friends/friends';
 
+import Drawer from 'material-ui/Drawer';
+import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {fullWhite} from 'material-ui/styles/colors';
+
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Close from 'material-ui/svg-icons/navigation/close';
+import Code from 'material-ui/svg-icons/action/code';
+import Group from 'material-ui/svg-icons/social/group';
+import Assignment from 'material-ui/svg-icons/action/assignment';
+import Help from 'material-ui/svg-icons/action/help';
+import Message from 'material-ui/svg-icons/communication/message';
+import NavMenu from 'material-ui/svg-icons/navigation/menu';
+
 const style = {
   appBar: {
+    borderBottom: 'solid #ffffff',
     alignItems: 'center',
     background: 'rgba(0, 0, 0, 0)'
   },
-  link: {
-    display: 'inline-block'
-  },
-  button: {
-    color: 'white'
-  },
-  title: {
-    textDecoration: 'none',
-    color: 'white'
-  },
-  menu: {
+  white: {
     color: 'white'
   }
 }
@@ -92,69 +78,120 @@ class Header extends Component {
     this.props.signoutUser();
   }
 
-  renderLinks() {
-    if(this.props.authenticated) {
-      return (
-        <div key={1} style={style.link}>
-          <Link to="/">
-            <FlatButton onClick={this.handleSignout.bind(this)} style={style.button} label="Sign Out" />
-          </Link>
-        </div>
-      );
-    } else {
-      return [
-        <div key={2} style={style.link}>
-          <Link to="/login">
-            <FlatButton style={style.button} label="Login" />
-          </Link>
-        </div>,
-        <div key={3} zDepth={1} style={style.link}>
-          <Link to="/signup">
-            <FlatButton style={style.button} label="Sign Up" />
-          </Link>
-        </div>
-      ];
-    }
-  }
-
   render() {
     return (
       <div>
-        <AppBar
-          showMenuIconButton={this.props.authenticated ? true : false}
-          style={style.appBar}
-          zDepth={1}
-          onLeftIconButtonTouchTap={this.handleMenuToggle.bind(this)}
-          title={<Link style={style.title} to="/">TechPrep</Link>}
-          children={
-              <div>
-                {this.renderLinks()}
-              </div>
+        <MediaQuery maxWidth={1159}>
+        <Toolbar style={style.appBar}>
+          <ToolbarGroup firstChild={true}>
+            <FlatButton
+              style={style.white}
+              label="TechPrep"
+              linkButton={true}
+              onTouchTap={this.handleTap.bind(this, '/')}
+              icon={<ActionAndroid />}
+            />
+          </ToolbarGroup>
+          <ToolbarGroup>
+          <IconMenu
+            iconButtonElement={
+              <IconButton touch={true}>
+                <NavMenu color={fullWhite} />
+              </IconButton>
             }
-          />
-          <Drawer
-            docked={false}
-            width={200}
-            open={this.state.menu}
-            onRequestChange={(menu) => this.setState({menu})}
           >
-            <List>
-              <ListItem onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="Profile" leftIcon={<AccountBox />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="Practice" leftIcon={<Code />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="Algorithms" leftIcon={<Code />} />
-              <ListItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="Friends" leftIcon={<Group />} />
-              <ListItem onTouchTap={this.handleChatToggle.bind(this)} primaryText={<div><div>Inbox</div><div className="badgeNumber">4</div></div>} leftIcon={<Message />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="Mock Interview" leftIcon={<Assignment />} />
-              <ListItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="Help" leftIcon={<Help />} />
-            </List>
-          </Drawer>
-          <Drawer docked={false} width={300} openSecondary={true} open={this.state.chat} onRequestChange={(chat) => this.setState({chat})}>
-            <Chat />
-          </Drawer>
-          <Drawer docked={false} width={300} openSecondary={true} open={this.state.friends} onRequestChange={(friends) => this.setState({friends})}>
-            <Friends />
-          </Drawer>
-        </div>
+            {
+              this.props.authenticated ?
+                [<MenuItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="CONCEPTS" leftIcon={<Code />} />,
+                <MenuItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="ALGORITHMS" leftIcon={<Code />} />,
+                <MenuItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" leftIcon={<Group />} />,
+                <MenuItem onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" leftIcon={<Message />} />,
+                <MenuItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
+                <MenuItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" leftIcon={<Help />} />,
+                <MenuItem onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" leftIcon={<Close />} />]
+              :
+                [<MenuItem primaryText="LOGIN" />,
+                <MenuItem primaryText="SIGN UP" />]
+            }
+          </IconMenu>
+          </ToolbarGroup>
+        </Toolbar>
+        </MediaQuery>
+        <MediaQuery minWidth={1160}>
+        <Toolbar style={style.appBar}>
+          <ToolbarGroup firstChild={true}>
+            <FlatButton
+              style={style.white}
+              label="TechPrep"
+              linkButton={true}
+              onTouchTap={this.handleTap.bind(this, '/')}
+              icon={<ActionAndroid />}
+            />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            {
+              this.props.authenticated ?
+                [<FlatButton
+                  style={style.white}
+                  label="CONCEPTS"
+                  linkButton={true}
+                  onTouchTap={this.handleTap.bind(this, '/practice')}
+                  icon={<Code />}
+                />,
+                <FlatButton
+                  style={style.white}
+                  label="ALGORITHMS"
+                  linkButton={true}
+                  onTouchTap={this.handleTap.bind(this, '/algorithms')}
+                  icon={<Code />}
+                />,
+                <FlatButton
+                  style={style.white}
+                  label="MOCK INTERVIEW"
+                  linkButton={true}
+                  onTouchTap={this.handleTap.bind(this, '/mockinterview')}
+                  icon={<Assignment />}
+                />,
+                <FlatButton
+                  style={style.white}
+                  label="HELP"
+                  linkButton={true}
+                  onTouchTap={this.handleTap.bind(this, '/help')}
+                  icon={<Help />}
+                />,
+                <FlatButton
+                  style={style.white}
+                  label="SIGN OUT"
+                  linkButton={true}
+                  onTouchTap={this.handleSignout.bind(this)}
+                  icon={<Close />}
+                />]
+              :
+                [<FlatButton
+                  style={style.white}
+                  label="LOGIN"
+                  onTouchTap={this.handleTap.bind(this, '/login')}
+                  linkButton={true}
+                  icon={<ActionAndroid />}
+                />,
+                <FlatButton
+                  style={style.white}
+                  label="SIGN UP"
+                  onTouchTap={this.handleTap.bind(this, '/signup')}
+                  linkButton={true}
+                  icon={<ActionAndroid />}
+                />]
+            }
+          </ToolbarGroup>
+        </Toolbar>
+        </MediaQuery>
+        <Drawer docked={false} width={300} openSecondary={true} open={this.state.chat} onRequestChange={(chat) => this.setState({chat})}>
+          <Chat />
+        </Drawer>
+        <Drawer docked={false} width={300} openSecondary={true} open={this.state.friends} onRequestChange={(friends) => this.setState({friends})}>
+          <Friends />
+        </Drawer>
+      </div>
     );
   }
 }
