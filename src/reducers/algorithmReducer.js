@@ -10,6 +10,7 @@ export default function(state = [], action) {
       return [ ...action.payload ];
       case ANSWER_SUBMIT:
       var newState = _.cloneDeep(state);
+      console.log('entering answer submit',newState[action.payload.index].userAnswers[action.payload.displayName])
       newState[action.payload.index].userAnswers[action.payload.displayName] = action.payload.answer;
       return newState;
     default:

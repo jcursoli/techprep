@@ -935,3 +935,6 @@ pre[class*="language-"] {
   color: #69F0AE; 
   background-color: #69F0AE;
 }
+.commentWords{
+  word-wrap: break-word;
+}

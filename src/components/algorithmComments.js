@@ -19,7 +19,7 @@ const AlgorithmComments = (props) => {
 	 						secondaryText={moment(props.date).fromNow()}
 	 					/>
 	 				</List>
-	 				<p>{props.comment}</p>
+	 				<p className='commentWords'>{props.comment}</p>
 	 			</div>
 	 		</Paper>
  		)

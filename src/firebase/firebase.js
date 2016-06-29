@@ -764,6 +764,7 @@ export function removeVotesFromDatabase(commentIndex, questionIndex, next, upOrD
 
 export function updateAlgorithmAnswers(answer, index) {
   var user = firebase.auth().currentUser;
+  console.log('this is in firebase',answer);
   var userAnswer = {};
   userAnswer[user.displayName] = answer;
   firebase.database().ref('algorithms/' + index + '/userAnswers').update(userAnswer);
@@ -780,7 +781,6 @@ export function userAlgorithmVote(index,vote){
   firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
 }
 export function userAlgorithmComment(index,commentObj){
-  console.log('this is in firebase',index)
   var user = firebase.auth().currentUser;
   var response = {[new Date()]:commentObj.comment};
   firebase.database().ref(`responses/${index}/${commentObj.author}/comments/${user.displayName}`).update(response);
