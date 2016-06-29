@@ -135,7 +135,7 @@ class Algorithms extends Component {
 									/>
 								</div>
 							</div>
-							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#A80000' />
+							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#DD0000' />
 					</div>
 					<UserAnswers show={this.state.answered} answers={this.props.problem.userAnswers} index={this.props.index} />
 				</div>

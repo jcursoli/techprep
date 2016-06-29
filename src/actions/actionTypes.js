@@ -26,3 +26,4 @@ export const ADD_STUDY_QUESTION = 'add_study_question';
 export const ALGORITHM_VOTE = 'algorithm_vote';
 export const RESPONSE_INITIALIZE = 'algorithm_initialize';
 export const INITIALIZE_STUDY_QUESTIONS = 'initialize_study_questions';
+export const ALGORITHM_COMMENT = 'algorithm_comment';

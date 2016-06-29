@@ -21,7 +21,8 @@ import {
   ADD_STUDY_QUESTION,
   ALGORITHM_VOTE,
   RESPONSE_INITIALIZE,
-  INITIALIZE_STUDY_QUESTIONS
+  INITIALIZE_STUDY_QUESTIONS,
+  ALGORITHM_COMMENT
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
@@ -221,7 +222,14 @@ export function userAlgorithmVote(index,vote){
     firebase.userAlgorithmVote(index,vote);
     dispatch({type:ALGORITHM_VOTE,payload});
   };
+}export function userAlgorithmComment(index,comment){
+  var payload = {}
+ return function(dispatch){ 
+    firebase.userAlgorithmComment(index,comment);
+    dispatch({type:ALGORITHM_COMMENT,payload});
+  };
 }
+
 export function currentCategory(category) {
   return {
     type: CURRENT_CATEGORY,
