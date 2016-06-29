@@ -53,58 +53,61 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div style={{background:'white',overflow: 'scroll', height: '100vh'}}>
-        <div className="profileTabs">
-          <div className='userInfo'>
-             <div className='profileImg'>
-               <img width='100%' src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
-             </div>
-             <div>
-               <h3 style={{color:'black'}}>{user.displayName}</h3>
-               <Divider />
-               <div className='userStats'>
-                 <div className='userDetails'>
-                     <strong className='userNumbers'> 11 </strong>
-                    <h4 style={{color:'black'}} > solved </h4>
-                 </div>
-                 <div className='userDetails'>
-                    <strong className='userNumbers'> 106 </strong>
-                   <h4 style={{color:'black'}} > Friends </h4>
-                 </div>
-                 <div className='userDetails'>
-                  <strong className='userNumbers'> 44 </strong>
-                   <h4 style={{color:'black'}} > Lessons </h4>
-                 </div>
-               </div>
-               <Divider />
-             </div>
+      <div className="row" style={{background:'white',overflow: 'scroll', height: '100vh'}}>
+        <div className='center-xs col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+          <div className="row">
+            <div className='center-xs col-xs-12'>
+              <Avatar size={150} src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
+            </div>
+            <div className='center-xs col-xs-12'>
+              <br />
+              <h2 style={{color:'black'}}>{user && user.displayName}</h2>
+              <br />
+              <Divider />
+            </div>
+            <div className='center-xs col-xs-4'>
+              <br />
+              <strong className='userNumbers'> 11 </strong>
+              <h4 style={{color:'black'}} > Friends </h4>
+            </div>
+            <div className='center-xs col-xs-4'>
+              <br />
+              <strong className='userNumbers'> 106 </strong>
+              <h4 style={{color:'black'}} > Algorithms Complete </h4>
+            </div>
+            <div className='center-xs col-xs-4'>
+              <br />
+              <strong className='userNumbers'> 44 </strong>
+              <h4 style={{color:'black'}} > Concepts Complete </h4>
+            </div>
+            <Divider />
           </div>
-          <Tabs
-          tabItemContainerStyle={styles.tabs}>
-            <Tab label="Overview" style={styles.headline}>
-              <div>
-                <p style={{color:'black'}}>
-                  Profile Overview:
-                </p>
-                <ProgressTable />
-                <br />
-                </div>
-            </Tab>
-            <Tab label="Settings" style={styles.headline}>
-              <div>
-                <p style={{color:'black'}}>
-                  Edit profile:
-                </p>
-                <div className='userSettings'>
-                  <TextField floatingLabelText="Name:" />
-                  <TextField floatingLabelText="Email:" />
-                  <TextField floatingLabelText="Password:" />
-                  <TextField floatingLabelText="re-enter password:" />
-                  <RaisedButton label="Save" backgroundColor='#52a0cc'/>
-                </div>
-              </div>
-            </Tab>
-          </Tabs>
+        </div>
+        <div className='center-xs col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+          <div>
+            <h2 style={{color:'black'}}>
+              Edit profile:
+            </h2>
+            <div className='userSettings'>
+              <TextField floatingLabelText="Name:" />
+              <TextField floatingLabelText="Email:" />
+              <TextField floatingLabelText="Password:" />
+              <TextField floatingLabelText="re-enter password:" />
+              <RaisedButton label="Save" backgroundColor='#52a0cc'/>
+            </div>
+          </div>
+        </div>
+        <div className='center-xs col-xs-12'>
+          <div className='row'>
+            <div className="center-xs col-xs-12">
+            <h2 style={{color:'black'}}>
+              Profile Stats:
+            </h2>
+            <br />
+            <ProgressTable />
+            <br />
+            </div>
+          </div>
         </div>
       </div>
     );
