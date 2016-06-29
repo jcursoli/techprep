@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import {List, ListItem} from 'material-ui/List';
 
+
+import moment from 'moment';
+import _ from 'lodash';
+
 import Avatar from 'material-ui/Avatar';
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
@@ -20,6 +24,22 @@ import Dialog from 'material-ui/Dialog';
 
 import ChatBox from '../chat/chatBox';
 
+
+
+// <ListItem
+//   leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/10988122?v=3&s=460" />}
+//   onTouchTap={this.handleOpen.bind(this)}
+//   rightIconButton={rightIconMenu}
+//   primaryText="Joey Cursoli"
+//   secondaryText={
+//     <p>
+//     <span style={{color: 'green'}}>Online</span><br />
+//       I don't know what I'm doing
+//     </p>
+//   }
+//   secondaryTextLines={2}
+// />
+// <Divider inset={false} />
 
 const iconButtonElement = (
   <IconButton
@@ -45,7 +65,7 @@ class Chat extends Component {
     this.state = { open: false, clickedUser: { displayName: null, profileURL: null } }
   }
 
-  handleOpen() {
+  handleOpen(displayName, profileURL) {
     this.setState({open: true, clickedUser: { displayName, profileURL }});
   };
 
@@ -53,84 +73,42 @@ class Chat extends Component {
     this.setState({open: false});
   };
 
-  renderChat() {
+  renderChat(userObj, key) {
     //render current chat chronologically
+    // console.log('userObj:', userObj);
+    // console.log('key:', key);
+    // console.log('moment test:', moment(new Date()));
+    var latestMessage = _.reduce(userObj, (latest, curr) => {
+      if (curr.time > latest.time) return curr;
+      return latest;
+    });
+    // console.log('latestmessage:', latestMessage);
+    var friend = this.props.friends[key];
+    return [
+      <ListItem
+        key={key}
+        leftAvatar={<Avatar src={friend.profileURL} />}
+        onTouchTap={this.handleOpen.bind(this, friend.displayName, friend.profileURL)}
+        primaryText={friend.displayName}
+        secondaryText={
+          <p>
+          <span style={{color: 'green'}}>Last Message: {moment(latestMessage.time).fromNow()}</span><br />
+            {latestMessage.message}
+          </p>
+        }
+        secondaryTextLines={2}
+      />,
+      <Divider inset={false} />
+    ];
   }
 
   render() {
     return (
       <div>
       <List>
-        <ListItem
-          leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/10988122?v=3&s=460" />}
-          onTouchTap={this.handleOpen.bind(this)}
-          rightIconButton={rightIconMenu}
-          primaryText="Joey Cursoli"
-          secondaryText={
-            <p>
-            <span style={{color: 'green'}}>Online</span><br />
-              I don't know what I'm doing
-            </p>
-          }
-          secondaryTextLines={2}
-        />
+        <h1 className="centered">Inbox</h1>
         <Divider inset={false} />
-        <ListItem
-          leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/9814083?v=3&s=460" />}
-          onTouchTap={this.handleOpen.bind(this)}
-          rightIconButton={rightIconMenu}
-          primaryText="Doug Cole"
-          secondaryText={
-            <p>
-            <span style={{color: 'green'}}>Online</span><br />
-              i solved the middle out algorithm
-            </p>
-          }
-          secondaryTextLines={2}
-        />
-        <Divider inset={false} />
-        <ListItem
-          leftAvatar={<Avatar src="https://avatars1.githubusercontent.com/u/4237388?v=3&s=460" />}
-          onTouchTap={this.handleOpen.bind(this)}
-          rightIconButton={rightIconMenu}
-          primaryText="Forrest Akin"
-          secondaryText={
-            <p>
-            <span style={{color: 'green'}}>Online</span><br />
-              I can't find my shirt, do you know where I left it?
-            </p>
-          }
-          secondaryTextLines={2}
-        />
-        <Divider inset={false} />
-        <ListItem
-          leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/16884524?v=3&s=460" />}
-          onTouchTap={this.handleOpen.bind(this)}
-          rightIconButton={rightIconMenu}
-          primaryText="Colin Zarnegar"
-          secondaryText={
-            <p>
-            <span style={{color: 'red'}}>Offline</span><br />
-              Hey, can you help me with React
-            </p>
-          }
-          secondaryTextLines={2}
-        />
-        <Divider inset={false} />
-        <ListItem
-          leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/7004741?v=3&s=460" />}
-          onTouchTap={this.handleOpen.bind(this)}
-          rightIconButton={rightIconMenu}
-          primaryText="Drew Baugher"
-          secondaryText={
-            <p>
-            <span style={{color: 'red'}}>Offline</span><br />
-              I created Google.
-            </p>
-          }
-          secondaryTextLines={2}
-        />
-        <Divider inset={false} />
+        {_.map(this.props.chat, this.renderChat.bind(this))}
       </List>
         <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
       </div>
@@ -139,7 +117,9 @@ class Chat extends Component {
 }
 
 function mapStateToProps(state) {
-  return { chat: state.chat };
+  console.log('this is state.chat:', state.chat);
+  console.log('this is state.friends:', state.friends);
+  return { chat: state.chat, friends: state.friends };
 }
 
 export default connect(mapStateToProps, actions)(Chat);

@@ -156,6 +156,8 @@ class Friends extends Component {
       <div>
         <List>
           <div className="centered">
+            <h1>{this.props.user.displayName}</h1>
+            <br />
             <FloatingActionButton
               style={style}
               mini={true}
@@ -167,8 +169,8 @@ class Friends extends Component {
           <div className="centered">
           <TextField
             value={this.state.addFriendInput}
-            hintText="UID"
-            floatingLabelText="Add Friend by UID"
+            hintText="Username"
+            floatingLabelText="Add Friend by username"
             fullWidth={false}
             onChange={this.handleAddFriendChange.bind(this)}
           />
@@ -196,7 +198,7 @@ function mapStateToProps(state) {
   var invites = _.map(state.invites, (n, i) => {
     return n;
   });
-  return { friends, invites };
+  return { friends, invites, user: state.user };
 }
 
 export default connect(mapStateToProps, actions)(Friends);

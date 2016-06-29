@@ -17,7 +17,7 @@ import {
   CURRENT_CATEGORY,
   REMOVE_ERROR,
   UPDATE_VOTES,
-  ANSWER_SUBMIT, 
+  ANSWER_SUBMIT,
   ADD_STUDY_QUESTION,
   ALGORITHM_VOTE,
   RESPONSE_INITIALIZE,
@@ -67,7 +67,7 @@ export function signupUser({ username, email, password }) {
           dispatch({ type: AUTH_USER });
           dispatch({ type: INITIALIZE_USER, payload: {
             email: user.email,
-            displayName: user.displayName,
+            displayName: username,
             uid: user.uid,
             photoURL: "https://i.imgur.com/DRuG5YH.png"
           } });
@@ -218,13 +218,13 @@ export function removeVotes(commentIndex, questionIndex, next, upOrDown) {
 }
 export function userAlgorithmVote(index,vote){
   var payload = {}
- return function(dispatch){ 
+ return function(dispatch){
     firebase.userAlgorithmVote(index,vote);
     dispatch({type:ALGORITHM_VOTE,payload});
   };
 }export function userAlgorithmComment(index,comment){
   var payload = {}
- return function(dispatch){ 
+ return function(dispatch){
     firebase.userAlgorithmComment(index,comment);
     dispatch({type:ALGORITHM_COMMENT,payload});
   };
