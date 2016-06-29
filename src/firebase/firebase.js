@@ -264,7 +264,7 @@ var allComments = {
     ],
   "16": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -277,7 +277,7 @@ var allComments = {
     ],
   "17": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -290,7 +290,7 @@ var allComments = {
     ],
   "18": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -303,7 +303,7 @@ var allComments = {
     ],
   "19": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -316,7 +316,7 @@ var allComments = {
     ],
   "20": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -329,7 +329,7 @@ var allComments = {
     ],
   "21": [{"comment":"This answer is good",
       "username": "bobby",
-      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"], 
+      "hasUpvoted": ["doug", "joey", "drew", "rong@rong.com"],
       "hasDownvoted": ["bobby"]},
       {"comment": "This answer is bad",
       "username": "jill",
@@ -339,8 +339,8 @@ var allComments = {
       "username": "cocoa",
       "hasUpvoted": ["drew", "doug", "joey"],
       "hasDownvoted": ["bobby"]}
-    ]    
-} 
+    ]
+}
 
 var allQuestions = {
   "0": {  "question": "Explain javascript closures.",
@@ -584,11 +584,11 @@ export function initializeState(user) {
     store.dispatch({ type: REMOVE_FRIEND, payload: childSnapshot.val().displayName });
   });
 
-var chatRef = firebase.database().ref('chat/' + user.displayName);
-chatRef.on('value', function(snapshot) {
-  // console.log('chat has changed,', snapshot.val());
-  store.dispatch({ type: INITIALIZE_CHAT, payload: snapshot.val() });
-});
+  var chatRef = firebase.database().ref('chat/' + user.displayName);
+  chatRef.on('value', function(snapshot) {
+    // console.log('chat has changed,', snapshot.val());
+    store.dispatch({ type: INITIALIZE_CHAT, payload: snapshot.val() });
+  });
 }
 
 export function signInWithEmailAndPassword(email, password) {
@@ -778,7 +778,7 @@ export function userAlgorithmVote(index,vote){
     firebase.database().ref(`responses/${index}/${vote.author}`).update({count: total})
   });
   firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
-} 
+}
 export function userAlgorithmComment(index,commentObj){
   console.log('this is in firebase',index)
   var user = firebase.auth().currentUser;
@@ -788,15 +788,15 @@ export function userAlgorithmComment(index,commentObj){
 export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
   var next = commentsList[commentID].length;
   var newComment = {};
-  
-  // newComment[next] = { 
+
+  // newComment[next] = {
   //   "comment": commentBody,
   //   "username": currentUser.displayName,
   //   "hasUpvoted": [currentUser.displayName],
   //   "hasDownvoted": []
   // }
   console.log('currentUser', currentUser);
-  newComment = { 
+  newComment = {
     "comment": commentBody,
     "username": currentUser,
     "hasUpvoted": ['', currentUser],
