@@ -15,6 +15,10 @@ import MenuItem from 'material-ui/MenuItem';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import {fullWhite} from 'material-ui/styles/colors';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import Close from 'material-ui/svg-icons/navigation/close';
 import Code from 'material-ui/svg-icons/action/code';
@@ -38,11 +42,62 @@ const style = {
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { menu: false, chat: false, friends: false };
+    this.state = { chat: false, friends: false, practiceOpen: false, socialOpen: false, accountOpen: false };
   }
+
+  handlePracticeTouchTap(event) {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      practiceOpen: true,
+      practiceAnchorEl: event.currentTarget,
+    });
+  };
+
+  handlePracticeRequestClose() {
+    this.setState({
+      practiceOpen: false,
+    });
+  };
+
+  handleSocialTouchTap(event) {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      socialOpen: true,
+      socialAnchorEl: event.currentTarget,
+    });
+  };
+
+  handleSocialRequestClose() {
+    this.setState({
+      socialOpen: false,
+    });
+  };
+
+  handleAccountTouchTap(event) {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      accountOpen: true,
+      accountAnchorEl: event.currentTarget,
+    });
+  };
+
+  handleAccountRequestClose() {
+    this.setState({
+      accountOpen: false,
+    });
+  };
 
   handleChatToggle() {
     this.handleFriendsClose();
+    this.handleSocialRequestClose();
+    this.handlePracticeRequestClose();
+    this.handleAccountRequestClose();
     this.setState({ chat: !this.state.chat });
   }
 
@@ -52,6 +107,9 @@ class Header extends Component {
 
   handleFriendsToggle() {
     this.handleChatClose();
+    this.handleSocialRequestClose();
+    this.handlePracticeRequestClose();
+    this.handleAccountRequestClose();
     this.setState({ friends: !this.state.friends });
   }
 
@@ -59,29 +117,29 @@ class Header extends Component {
     this.setState({ friends: false });
   }
 
-  handleMenuToggle() {
-    this.setState({ menu: !this.state.menu });
-  }
-
-  handleMenuClose() {
-    this.setState({ menu: false });
-  }
-
   handleTap(route) {
     this.handleFriendsClose();
-    this.handleMenuClose();
     this.handleChatClose();
+    this.handleSocialRequestClose();
+    this.handlePracticeRequestClose();
+    this.handleAccountRequestClose();
     browserHistory.push(route);
   }
 
   handleSignout() {
+    this.handleFriendsClose();
+    this.handleChatClose();
+    this.handleSocialRequestClose();
+    this.handlePracticeRequestClose();
+    this.handleAccountRequestClose();
     this.props.signoutUser();
+    browserHistory.push('/login');
   }
 
   render() {
     return (
       <div>
-        <MediaQuery maxWidth={1159}>
+        <MediaQuery maxWidth={749}>
         <Toolbar style={style.appBar}>
           <ToolbarGroup firstChild={true}>
             <FlatButton
@@ -102,22 +160,22 @@ class Header extends Component {
           >
             {
               this.props.authenticated ?
-                [<MenuItem onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="CONCEPTS" leftIcon={<Code />} />,
-                <MenuItem onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="ALGORITHMS" leftIcon={<Code />} />,
-                <MenuItem onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" leftIcon={<Group />} />,
-                <MenuItem onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" leftIcon={<Message />} />,
-                <MenuItem onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
-                <MenuItem onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" leftIcon={<Help />} />,
-                <MenuItem onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" leftIcon={<Close />} />]
+                [<MenuItem key='mobilepractice' onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="CONCEPTS" leftIcon={<Code />} />,
+                <MenuItem key='mobilealgorithms' onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="ALGORITHMS" leftIcon={<Code />} />,
+                <MenuItem key='mobilefriends' onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" leftIcon={<Group />} />,
+                <MenuItem key='mobileinbox' onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" leftIcon={<Message />} />,
+                <MenuItem key='mobilemockinterview' onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
+                <MenuItem key='mobilehelp' onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" leftIcon={<Help />} />,
+                <MenuItem key='mobilesignout' onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" leftIcon={<Close />} />]
               :
-                [<MenuItem primaryText="LOGIN" />,
-                <MenuItem primaryText="SIGN UP" />]
+                [<MenuItem key='mobilelogin' onTouchTap={this.handleTap.bind(this, '/login')} primaryText="LOGIN" />,
+                <MenuItem key='mobilesignup' onTouchTap={this.handleTap.bind(this, '/signup')} primaryText="SIGN UP" />]
             }
           </IconMenu>
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <MediaQuery minWidth={1160}>
+        <MediaQuery minWidth={750}>
         <Toolbar style={style.appBar}>
           <ToolbarGroup firstChild={true}>
             <FlatButton
@@ -132,42 +190,32 @@ class Header extends Component {
             {
               this.props.authenticated ?
                 [<FlatButton
+                  key='practice'
                   style={style.white}
-                  label="CONCEPTS"
+                  label="Practice"
                   linkButton={true}
-                  onTouchTap={this.handleTap.bind(this, '/practice')}
+                  onTouchTap={this.handlePracticeTouchTap.bind(this)}
                   icon={<Code />}
                 />,
                 <FlatButton
+                  key='social'
                   style={style.white}
-                  label="ALGORITHMS"
+                  label="Social"
                   linkButton={true}
-                  onTouchTap={this.handleTap.bind(this, '/algorithms')}
-                  icon={<Code />}
+                  onTouchTap={this.handleSocialTouchTap.bind(this)}
+                  icon={<Group />}
                 />,
                 <FlatButton
+                  key='account'
                   style={style.white}
-                  label="MOCK INTERVIEW"
+                  label="Account"
                   linkButton={true}
-                  onTouchTap={this.handleTap.bind(this, '/mockinterview')}
-                  icon={<Assignment />}
-                />,
-                <FlatButton
-                  style={style.white}
-                  label="HELP"
-                  linkButton={true}
-                  onTouchTap={this.handleTap.bind(this, '/help')}
+                  onTouchTap={this.handleAccountTouchTap.bind(this)}
                   icon={<Help />}
-                />,
-                <FlatButton
-                  style={style.white}
-                  label="SIGN OUT"
-                  linkButton={true}
-                  onTouchTap={this.handleSignout.bind(this)}
-                  icon={<Close />}
                 />]
               :
                 [<FlatButton
+                  key='login'
                   style={style.white}
                   label="LOGIN"
                   onTouchTap={this.handleTap.bind(this, '/login')}
@@ -175,6 +223,7 @@ class Header extends Component {
                   icon={<ActionAndroid />}
                 />,
                 <FlatButton
+                  key='signup'
                   style={style.white}
                   label="SIGN UP"
                   onTouchTap={this.handleTap.bind(this, '/signup')}
@@ -185,12 +234,50 @@ class Header extends Component {
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <Drawer docked={false} width={300} openSecondary={true} open={this.state.chat} onRequestChange={(chat) => this.setState({chat})}>
+        <Drawer docked={false} width={300} open={this.state.chat} onRequestChange={(chat) => this.setState({chat})}>
           <Chat />
         </Drawer>
-        <Drawer docked={false} width={300} openSecondary={true} open={this.state.friends} onRequestChange={(friends) => this.setState({friends})}>
+        <Drawer docked={false} width={300} open={this.state.friends} onRequestChange={(friends) => this.setState({friends})}>
           <Friends />
         </Drawer>
+        <Popover
+          open={this.state.practiceOpen}
+          anchorEl={this.state.practiceAnchorEl}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={this.handlePracticeRequestClose.bind(this)}
+        >
+          <Menu>
+            <MenuItem key='concepts' onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="CONCEPTS" />
+            <MenuItem key='algorithms' onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="ALGORITHMS" />
+            <MenuItem key='mockinterview' onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" />
+          </Menu>
+        </Popover>
+        <Popover
+          open={this.state.socialOpen}
+          anchorEl={this.state.socialAnchorEl}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={this.handleSocialRequestClose.bind(this)}
+        >
+          <Menu>
+            <MenuItem key='friends' onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" />
+            <MenuItem key='inbox' onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" />
+          </Menu>
+        </Popover>
+        <Popover
+          open={this.state.accountOpen}
+          anchorEl={this.state.accountAnchorEl}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={this.handleAccountRequestClose.bind(this)}
+        >
+          <Menu>
+            <MenuItem key='profile' onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="PROFILE" />
+            <MenuItem key='help' onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" />
+            <MenuItem key='signout' onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" />
+          </Menu>
+        </Popover>
       </div>
     );
   }
