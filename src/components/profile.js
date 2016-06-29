@@ -97,7 +97,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <div className='center-xs col-xs-12'>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1'>
           <div className='row'>
             <div className="center-xs col-xs-12">
             <h2 style={{color:'black'}}>

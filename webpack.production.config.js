@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var purify = require("purifycss-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -16,10 +18,18 @@ module.exports = {
         test: /\.js$/,
         loaders: [
           'babel-loader',
-          //'strip-loader?strip[]=debug,strip[]=console.log'
+          'strip-loader?strip[]=debug,strip[]=console.log'
         ],
         exclude: /node_modules/,
       },
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract('style', 'css'),
+      // }
+      // {
+      //   test: /\.css$/,
+      //   loader: "css-loader"
+      // }
     ]
   },
   resolve: {
@@ -31,10 +41,18 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"production"'
       }),
+      // new ExtractTextPlugin("style.css", { allChunks: true }),
+      // new purify({
+      //  basePath: __dirname,
+      //  paths: [
+      //      "test/*.html",
+      //      "test/*.html"
+      //  ]
+      // }),
       new webpack.optimize.OccurenceOrderPlugin(true),
       new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({ //minify all the things
+      new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false },
         comments: false,
         sourceMap: true,

@@ -92,7 +92,7 @@ class Chat extends Component {
         primaryText={friend.displayName}
         secondaryText={
           <p>
-          <span style={{color: 'green'}}>Last Message: {moment(latestMessage.time).fromNow()}</span><br />
+          <span style={{color: 'green'}}>{moment(latestMessage.time).fromNow()}</span><br />
             {latestMessage.message}
           </p>
         }
