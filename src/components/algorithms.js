@@ -57,6 +57,7 @@ class Algorithms extends Component {
 		this.createFunction = this.createFunction.bind(this);
 	}
 	componentWillMount(){
+		console.log('component will mound now',this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser) )
 		if(this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
 			this.setState({answered: true, editorContents:this.props.problem.userAnswers[this.props.currentUser]})
 		}
@@ -100,6 +101,7 @@ class Algorithms extends Component {
 				 var correctness = this.testCode(userFunction);
 				this.props.openDialog(correctness);
 				if(correctness){
+					console.log('this is the current user',this.props.currentUser);
 					this.props.updateAlgorithmAnswers(`${this.state.editorContents}`,this.props.index,this.props.currentUser);
 				}
 		} else {
@@ -137,13 +139,16 @@ class Algorithms extends Component {
 							</div>
 							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#DD0000' />
 					</div>
+					<div style={{alignItems:'center'}}>
 					<UserAnswers show={this.state.answered} answers={this.props.problem.userAnswers} index={this.props.index} />
+					</div>
 				</div>
 			</div>
 		)
 	}
 }
 function mapStateToProps(state){
+	console.log('this is in the map state to props',state.user)
 	return {
 		problem: state.currentAlgorithm.algorithm, 
 		index: state.currentAlgorithm.index, 

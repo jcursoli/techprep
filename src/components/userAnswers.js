@@ -33,45 +33,71 @@ class UserAnswers extends Component {
 	handleInputChange(e){
 		this.setState({inputValue:e.target.value})
 	}
+	renderVote(key){
+	if(!this.props.responses[this.props.index]){
+			return '0';
+		}
+	else if(!this.props.responses[this.props.index][key]){
+			return '0';
+		}
+	else if(this.props.responses[this.props.index][key].count){
+			return this.props.responses[this.props.index][key].count.toString();
+		}else{
+			return '0'
+		}
+	}
 	handleUpvote(userName){
-		var vote = {author:userName,value:1, dif: 0};
-		if(!this.props.responses[this.props.index]){
+		var vote = {author:userName,value:1, dif: 1};
+		if(!this.props.responses.hasOwnProperty([this.props.index])){
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}
-		else if(!this.props.responses[this.props.index][userName]){
+		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}
 		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
 			vote.dif = 2;
 			vote.value = 1;
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
 			vote.dif = 1;
 			vote.value = 1;
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
 			vote.value = 0;
 			vote.dif = -1;
+			this.props.userAlgorithmVote(this.props.index,vote);
+		} else{
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}
-		this.props.userAlgorithmVote(this.props.index,vote);
 	}
 	handleDownvote(userName){
-		var vote = {author:userName,value:-1};
-		if(!this.props.responses[this.props.index]){
+		var vote = {author:userName,value: -1,dif: -1};
+		if(!this.props.responses.hasOwnProperty([this.props.index])){
 			this.props.userAlgorithmVote(this.props.index,vote);
+			console.log('in first')
 		}
-		else if(!this.props.responses[this.props.index][userName]){
+		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
 			this.props.userAlgorithmVote(this.props.index,vote);
+			console.log('in second')
 		}
 		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
 			vote.dif = 1;
 			vote.value = 0;
+			console.log('in third')
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
 			vote.dif = -1;
 			vote.value = -1;
+			console.log('in foruth')
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
 			vote.dif = -2;
 			vote.value = -1;
+			console.log('in fifth')
+			this.props.userAlgorithmVote(this.props.index,vote);
+		} else{
+			this.props.userAlgorithmVote(this.props.index,vote);
 		}
-		this.props.userAlgorithmVote(this.props.index,vote);
 	}
 
 	handleClick(event){
@@ -128,7 +154,7 @@ class UserAnswers extends Component {
 		}
 	}
 	renderComments(name){
-		let algoComments = this.props.responses[this.props.index][name] ? this.props.responses[this.props.index][name].comments: false ;
+		let algoComments = this.props.responses[this.props.index] && this.props.responses[this.props.index][name] && this.props.responses[this.props.index][name].comments ;
 		if(algoComments){
 			let commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
@@ -172,7 +198,7 @@ class UserAnswers extends Component {
 		 				<div className='algoAnswer'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
+			 			<div>{this.renderVote(key)}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
@@ -199,7 +225,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 			<div className='algoAnswer'>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
+			 			<div>{this.renderVote(key)}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>

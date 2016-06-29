@@ -152,6 +152,7 @@ export function clickedAlgorithm(algorithm, index){
 export function updateAlgorithmAnswers(answer, index, displayName) {
   return function(dispatch) {
     //firebase call to update answers at correct index
+    console.log('the name is correc',displayName)
     firebase.updateAlgorithmAnswers(answer, index);
     //dispatch to add answer to current answers on state
     dispatch({type: ANSWER_SUBMIT, payload: {
