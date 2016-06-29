@@ -94,6 +94,7 @@ class Questions extends Component {
               deselectOnClickaway={this.state.deselectOnClickaway}
               showRowHover={this.state.showRowHover}
               stripedRows={this.state.stripedRows}
+              style={{backgroundColor: 'white'}}
             >
               {this.props.questions.map((question, index) => {
                 return (

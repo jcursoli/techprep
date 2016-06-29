@@ -12,7 +12,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 	const contents = [{title: 'HTML', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
 										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
 										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
-										{title: 'Study', pic: 'https://avatars1.githubusercontent.com/u/10988122?v=3&s=400'}];
+										{title: 'Study', pic: 'https://cdn0.iconfinder.com/data/icons/thin-science-space/24/thin-1037_brain_thinking_mind_knowledge-512.png'}];
 
 const style = {
   root: {
