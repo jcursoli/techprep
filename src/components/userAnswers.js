@@ -100,7 +100,6 @@ class UserAnswers extends Component {
 				commentSection.style.visibility = 'visible';
 				commentSection.style.display = 'inline';
 				commentSection.parentElement.style.height = 'auto';
-				console.log(commentSection.parentElement)
 		}else {
 			commentSection.style.visibility = 'hidden';
 			commentSection.style.display = 'none';
