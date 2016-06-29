@@ -26,7 +26,7 @@ export default class DialogBox extends Component {
   };
   // style={{position: 'absolute', bottom: '80%'}}
   render() {
-    
+
     const actions = [
       <Comments hintText="Show Comments"
         question={this.props.question}
@@ -47,9 +47,9 @@ export default class DialogBox extends Component {
         <div>
           <div>
             <Dialog
-              title={<DialogTitle 
+              title={<DialogTitle
               questionText={this.props.question.question}
-              questionID={this.props.question.commentsID} 
+              questionID={this.props.question.commentsID}
               secondary={this.props.secondary}
             />}
               modal={false}

@@ -528,6 +528,15 @@ export function initializeState(user) {
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
+
+  var usersRef = firebase.database().ref('users/' + user.displayName );
+  usersRef.on("value", function(snapshot) {
+    // console.log('dispatching load questions', snapshot.val());
+    store.dispatch({ type: INITIALIZE_USER, payload: snapshot.val()});
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
    // Load questions from database
   var commentsList = firebase.database().ref('/comments');
   commentsList.on("value", function(snapshot) {
@@ -773,9 +782,13 @@ export function userAlgorithmVote(index,vote){
   var user = firebase.auth().currentUser;
   var response = {[user.displayName]:vote.value};
   var total;
+  console.log('vote is:', vote);
   firebase.database().ref(`responses/${index}/${vote.author}/count`).once('value',function(data){
+    console.log('data.val() is:', data.val());
     total = data.val() || 0;
     total += vote.dif;
+    console.log('vote.diff:', vote.dif);
+    console.log('total after change:', total);
     firebase.database().ref(`responses/${index}/${vote.author}`).update({count: total})
   });
   firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);

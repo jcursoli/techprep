@@ -13,6 +13,8 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Firebase from 'firebase';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+
 // import {LineChart} from 'react-d3';
 // import {Chart} from 'react-d3';
 
@@ -53,54 +55,54 @@ class Profile extends Component {
     const { handleSubmit, fields: {}} = this.props;
 
     return (
-      <div className="row" style={{background:'white',overflow: 'scroll', height: '100vh'}}>
-        <div className='center-xs col-xs-12 col-sm-6 col-md-6 col-lg-6'>
-          <div className="row">
+      <div className="row" style={{marginTop: '25px'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px'}}>
+          <div className="row" style={{margin: '25px 25px'}}>
             <div className='center-xs col-xs-12'>
               <Avatar size={150} src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
             </div>
             <div className='center-xs col-xs-12'>
               <br />
-              <h2 style={{color:'black'}}>{user && user.displayName}</h2>
+              <h2 style={{color:'white'}}>{user && user.displayName}</h2>
               <br />
               <Divider />
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers'> 11 </strong>
-              <h4 style={{color:'black'}} > Friends </h4>
+              <strong className='userNumbers' style={{color:'white'}}> 11 </strong>
+              <h4 style={{color:'white'}} > Friends </h4>
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers'> 106 </strong>
-              <h4 style={{color:'black'}} > Algorithms Complete </h4>
+              <strong className='userNumbers' style={{color:'white'}}> 106 / 233 </strong>
+              <h4 style={{color:'white'}} > Algorithms Complete </h4>
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers'> 44 </strong>
-              <h4 style={{color:'black'}} > Concepts Complete </h4>
+              <strong className='userNumbers' style={{color:'white'}}> 44 / 837 </strong>
+              <h4 style={{color:'white'}} > Concepts Complete </h4>
             </div>
             <Divider />
           </div>
         </div>
-        <div className='center-xs col-xs-12 col-sm-6 col-md-6 col-lg-6'>
-          <div>
-            <h2 style={{color:'black'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px'}}>
+          <div style={{margin: '25px 25px'}}>
+            <h2 style={{color:'white'}}>
               Edit profile:
             </h2>
-            <div className='userSettings'>
-              <TextField floatingLabelText="Name:" />
-              <TextField floatingLabelText="Email:" />
-              <TextField floatingLabelText="Password:" />
-              <TextField floatingLabelText="re-enter password:" />
-              <RaisedButton label="Save" backgroundColor='#52a0cc'/>
+            <div>
+              <TextField fullWidth={true} floatingLabelText="Name:" floatingLabelStyle={{color: 'white'}} />
+              <TextField fullWidth={true} floatingLabelText="Email:" floatingLabelStyle={{color: 'white'}}/>
+              <TextField fullWidth={true} floatingLabelText="Password:" floatingLabelStyle={{color: 'white'}}/>
+              <TextField fullWidth={true} floatingLabelText="Confirm Password:" floatingLabelStyle={{color: 'white'}}/>
+              <RaisedButton style={{marginTop: '10px'}} label="Save" labelColor="#51ccb8" backgroundColor='white' icon={<ActionAndroid />}/>
             </div>
           </div>
         </div>
-        <div className='center-xs col-xs-12'>
-          <div className='row'>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px'}}>
+          <div className='row' style={{margin: '25px 25px'}}>
             <div className="center-xs col-xs-12">
-            <h2 style={{color:'black'}}>
+            <h2 style={{color:'white'}}>
               Profile Stats:
             </h2>
             <br />

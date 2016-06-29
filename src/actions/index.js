@@ -30,12 +30,6 @@ export function loginUser({ email, password }) {
   return function(dispatch) {
     firebase.signInWithEmailAndPassword(email, password).then(user => {
       dispatch({ type: AUTH_USER });
-      dispatch({ type: INITIALIZE_USER, payload: {
-        email: user.email,
-        uid: user.uid,
-        displayName: user.displayName,
-        photoURL: user.photoURL
-      } });
       firebase.initializeState(user);
       browserHistory.push('/welcome');
     }).catch(function(error) {
@@ -65,12 +59,6 @@ export function signupUser({ username, email, password }) {
             console.log('user update failed:', error);
           });
           dispatch({ type: AUTH_USER });
-          dispatch({ type: INITIALIZE_USER, payload: {
-            email: user.email,
-            displayName: username,
-            uid: user.uid,
-            photoURL: "https://i.imgur.com/DRuG5YH.png"
-          } });
           browserHistory.push('/welcome');
         }).catch(function(error) {
           console.log('error:', error);

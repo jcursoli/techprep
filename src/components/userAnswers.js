@@ -187,7 +187,7 @@ class UserAnswers extends Component {
 		 			<Paper style={{height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
-		 					<ListItem 
+		 					<ListItem
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
 		 						disabled={true}
 		 						primaryText={key}
@@ -215,7 +215,7 @@ class UserAnswers extends Component {
 		 			<Paper style={{overflowY:'hidden',height:'205',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={{overflowX:'auto',alignItems:'center',height:'160px'}}>
 		 				<List className='userCommentAvatar'>
-		 					<ListItem 
+		 					<ListItem
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
 		 						disabled={true}
 		 						primaryText={key}
@@ -258,7 +258,7 @@ class UserAnswers extends Component {
 	}
 }
 function mapStateToProps(state){
-	return { 
+	return {
 		responses:state.responses,
 		currentUser: state.user.displayName
 	 }

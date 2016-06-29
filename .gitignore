@@ -2,6 +2,7 @@
 /server/MKS38Thesis-19c0644b4789.json
 /node_modules
 bundle.js
+bundle.js.map
 npm-debug.log
 *.DS_Store
 .firebaserc

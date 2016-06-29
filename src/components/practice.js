@@ -9,9 +9,9 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
-	const contents = [{title: 'HTML', pic:'https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png'},
-										{title: 'CSS', pic:'http://w3widgets.com/responsive-slider/img/css3.png'},
-										{title: 'Javascript', pic: 'https://www.voice-group.co.uk/wp-content/uploads/voice_group_web-languages-logos-javascript.png'},
+	const contents = [{title: 'HTML', pic:'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FHTML5.png?alt=media&token=66a33b3e-e7c4-4765-8b2c-46343091a3d3'},
+										{title: 'CSS', pic:'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FCSS.png?alt=media&token=d6aa3c12-fcdf-44c9-8e99-da741dfa195f'},
+										{title: 'Javascript', pic: 'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FJS.png?alt=media&token=4c3f0327-e658-41c8-8346-8b1cb81509e5'},
 										{title: 'Study', pic: 'https://cdn0.iconfinder.com/data/icons/thin-science-space/24/thin-1037_brain_thinking_mind_knowledge-512.png'}];
 
 const style = {
