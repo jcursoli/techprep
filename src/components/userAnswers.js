@@ -22,6 +22,17 @@ const style = {
 };
 
 class UserAnswers extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			inputValue:'',
+			nodeRef: {},
+		}
+		this.handleInputChange = this.handleInputChange.bind(this);
+	}
+	handleInputChange(e){
+		this.setState({inputValue:e.target.value})
+	}
 	handleUpvote(userName){
 		var vote = {author:userName,value:1, dif: 0};
 		if(!this.props.responses[this.props.index]){
@@ -72,6 +83,7 @@ class UserAnswers extends Component {
 			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
 			event.target.parentElement.parentElement.style.overflowY = 'hidden';
 			event.target.parentElement.parentElement.style.width = '90%';
+			event.target.parentElement.parentElement.scrollIntoView();
 		} else{
 			//changes things to visible
 			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show Less'
@@ -93,6 +105,18 @@ class UserAnswers extends Component {
 			commentSection.style.display = 'none';
 			commentSection.parentElement.style.height = '205';
 		}
+	}
+	handleShowForm(event){
+		let node = event.target.parentElement.parentElement.getElementsByClassName('commentSubmit')[0];
+		if(_.isEmpty(this.state.nodeRef)){
+			this.setState({nodeRef:node});
+		} else{
+			this.state.nodeRef.style.display = 'none';
+			this.state.nodeRef.style.visibility = 'hidden';
+			node.style.display = 'inline';
+			node.style.visibility = 'visible';
+			this.setState({nodeRef:node,inputValue:''});
+		}
 
 	}
 	renderComments(name){
@@ -110,7 +134,6 @@ class UserAnswers extends Component {
 	renderComponents(){
 		var list = [];
 		 _.forEach(this.props.answers,(value,key)=>{
-		 	console.log(this.props.answers)
 		 var lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
@@ -134,6 +157,9 @@ class UserAnswers extends Component {
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
+		 			<br/>
+		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
@@ -157,7 +183,9 @@ class UserAnswers extends Component {
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
-		 		<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
+		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
+		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
