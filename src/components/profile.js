@@ -61,7 +61,7 @@ class Profile extends Component {
             </div>
             <div className='center-xs col-xs-12'>
               <br />
-              <h2 style={{color:'black'}}>{user.displayName}</h2>
+              <h2 style={{color:'black'}}>{user && user.displayName}</h2>
               <br />
               <Divider />
             </div>
