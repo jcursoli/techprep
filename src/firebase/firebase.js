@@ -531,7 +531,7 @@ export function initializeState(user) {
    // Load questions from database
   var commentsList = firebase.database().ref('/comments');
   commentsList.on("value", function(snapshot) {
-    console.log('dispatching load comments', snapshot.val());
+    // console.log('dispatching load comments', snapshot.val());
     store.dispatch({ type: LOAD_COMMENTS, payload: snapshot.val()});
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);

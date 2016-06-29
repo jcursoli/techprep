@@ -19,18 +19,17 @@ class Comments extends Component {
       currentUser: this.props.currentUser,
       commentButtonText: 'Show Comments'
     };
-
-    console.log(this.state.commentsID, 'in COMMENTS')
   }
 
   handleUpvote(questionIndex, commentIndex) {
     // if user has previously downvoted, then remove them from downvotes
-    var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName)
-    if(userIndex) {
+    var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName);
+
+    if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) !== -1) {
       this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'DOWN')
     }
     // if user has not upvoted yet, add to upvotes
-    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
+    else if (questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) === -1) {
       this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasUpvoted.length, 'UP')
     }
   }
@@ -38,11 +37,12 @@ class Comments extends Component {
   handleDownvote(questionIndex, commentIndex) {
     // if user has previously upvoted, then remove them from upvotes
     var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
-    if(userIndex) {
+    
+    if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) !== -1) {
       this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'UP')
     }
     // if user has not downvoted yet, add to downvotes
-    if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
+    else if (questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) === -1) {
       this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
     }
   }
@@ -76,7 +76,7 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {this.props.comments && this.state.commentsID && this.props.comments[this.state.commentsID].map((comment, index) => {
+            {/*this.props.comments && this.state.commentsID &&*/ this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
                   <ListItem disabled={true}>
