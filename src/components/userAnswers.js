@@ -122,26 +122,39 @@ class UserAnswers extends Component {
 
 	}
 	sendComment(key){
-		console.log('this is the key',key)
-		this.props.userAlgorithmComment(this.props.index,{comment:this.state.inputValue, author:key});
-		this.setState({inputValue:''});
+		if(this.state.inputValue.length){
+			this.props.userAlgorithmComment(this.props.index,{comment:this.state.inputValue, author:key});
+			this.setState({inputValue:''});
+		}
 	}
 	renderComments(name){
 		let algoComments = this.props.responses[this.props.index][name] ? this.props.responses[this.props.index][name].comments: false ;
 		if(algoComments){
-			var commentsCollection = [];
+			let commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
-			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments style={{margin:'10px'}} userName={name} comment={val} /> )]
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> {return { [key] :<Comments style={{margin:'10px'}} userName={name} comment={val} /> }} )]
 		})
-			return commentsCollection
+			commentsCollection.sort((a,b)=>{
+				let keysA = Object.keys(a);
+				let keysB = Object.keys(b);
+				if( Date.parse(keysA[0]) < Date.parse(keysB[0])){return -1};
+				if( Date.parse(keysA[0]) > Date.parse(keysB[0])){return 1};
+				return 0;
+			});
+			let OrderedComments = new Array;
+			for(let i = 0; i < commentsCollection.length;i++){
+				let key = Object.keys(commentsCollection[i])
+				OrderedComments[i] = commentsCollection[i][key];
+			}
+			return OrderedComments;
 		} else{
 			return <noscript/>
 		}
 	}
 	renderComponents(){
-		var list = [];
+		let list = [];
 		 _.forEach(this.props.answers,(value,key)=>{
-		 var lineCount = value.split(/\r\n|\r|\n/).length;
+		 let lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
 		 		list.push(
