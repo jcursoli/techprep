@@ -21,11 +21,8 @@ import {
   ADD_STUDY_QUESTION,
   ALGORITHM_VOTE,
   RESPONSE_INITIALIZE,
-<<<<<<< d7a7acb62d0f7ce4e596757e301fc9131f2f03bf
-  INITIALIZE_STUDY_QUESTIONS
-=======
+  INITIALIZE_STUDY_QUESTIONS,
   ALGORITHM_COMMENT
->>>>>>> [Add] Adds comment functionality for comments to be displayed
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
 
