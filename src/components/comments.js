@@ -76,7 +76,7 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {/*this.props.comments && this.state.commentsID &&*/ this.props.comments[this.state.commentsID].map((comment, index) => {
+            {this.props.comments[this.state.commentsID].map((comment, index) => {
               return (
                 <List key={index}>
                   <ListItem disabled={true}>
