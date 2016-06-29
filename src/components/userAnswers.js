@@ -132,7 +132,7 @@ class UserAnswers extends Component {
 		if(algoComments){
 			let commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
-			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> {return { [key] :<Comments style={{margin:'10px'}} userName={name} comment={val} /> }} )]
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> {return { [key] :<Comments style={{margin:'10px'}} date={key} userName={name} comment={val} /> }} )]
 		})
 			commentsCollection.sort((a,b)=>{
 				let keysA = Object.keys(a);
