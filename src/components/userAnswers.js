@@ -16,8 +16,8 @@ import Comments from './algorithmComments';
 
 const style = {
 	alignItems: 'center',
-	height:'150px',
-  margin: '10px',
+	height:'160px',
+  margin: 'px',
   overflowY:'hidden',
 };
 
@@ -79,7 +79,7 @@ class UserAnswers extends Component {
 			//changes things to hidden
 			event.target.parentElement.parentElement.children[1].firstChild.textContent = 'Show More'
 			event.target.parentElement.parentElement.style.height = '205px';
-			event.target.parentElement.parentElement.firstChild.style.height = '150px';
+			event.target.parentElement.parentElement.firstChild.style.height = '160px';
 			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
 			event.target.parentElement.parentElement.style.overflowY = 'hidden';
 			event.target.parentElement.parentElement.style.width = '90%';
@@ -100,6 +100,7 @@ class UserAnswers extends Component {
 				commentSection.style.visibility = 'visible';
 				commentSection.style.display = 'inline';
 				commentSection.parentElement.style.height = 'auto';
+				console.log(commentSection.parentElement)
 		}else {
 			commentSection.style.visibility = 'hidden';
 			commentSection.style.display = 'none';
@@ -110,6 +111,8 @@ class UserAnswers extends Component {
 		let node = event.target.parentElement.parentElement.getElementsByClassName('commentSubmit')[0];
 		if(_.isEmpty(this.state.nodeRef)){
 			this.setState({nodeRef:node});
+			node.style.display = 'inline';
+			node.style.visibility = 'visible';
 		} else{
 			this.state.nodeRef.style.display = 'none';
 			this.state.nodeRef.style.visibility = 'hidden';
@@ -119,12 +122,17 @@ class UserAnswers extends Component {
 		}
 
 	}
+	sendComment(key){
+		console.log('this is the key',key)
+		this.props.userAlgorithmComment(this.props.index,{comment:this.state.inputValue, author:key});
+		this.setState({inputValue:''});
+	}
 	renderComments(name){
 		let algoComments = this.props.responses[this.props.index][name] ? this.props.responses[this.props.index][name].comments: false ;
 		if(algoComments){
 			var commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
-			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments style={{margin:'5px'}} userName={name} comment={val} /> )]
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> <Comments style={{margin:'10px'}} userName={name} comment={val} /> )]
 		})
 			return commentsCollection
 		} else{
@@ -138,7 +146,7 @@ class UserAnswers extends Component {
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
 		 		list.push(
-		 			<Paper style={{height:'205px',width:'90%',margin:'20px'}} key={key} zDepth={1} >
+		 			<Paper style={{height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
@@ -147,27 +155,27 @@ class UserAnswers extends Component {
 		 						primaryText={key}
 		 					/>
 		 				</List>
-		 				<pre style={{margin:'10px',marginBottom:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
+		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
 		 				<div className='algoAnswer'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
 			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
-			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
+			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
 		 			<br/>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{height:'auto',width:'90%',margin:'20px'}} key={key} zDepth={1} >
-		 			<div style={{overflowX:'auto',alignItems:'center',height:'auto',margin:'10px',}}>
+		 			<Paper style={{overflowY:'hidden',height:'205',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<div style={{overflowX:'auto',alignItems:'center',height:'160px'}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem 
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
@@ -181,11 +189,11 @@ class UserAnswers extends Component {
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
 			 			<div>{this.props.responses[this.props.index][key] ? this.props.responses[this.props.index][key].count: 0}</div>
 			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
-			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='algorithmVote' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
+			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>

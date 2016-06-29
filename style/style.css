@@ -724,7 +724,7 @@ pre[class*="language-"] {
 }
 .algorithmVote{
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 10%;
   overflow: hidden;
   margin: 4px;
 }
@@ -732,8 +732,6 @@ pre[class*="language-"] {
  color: #69F0AE;
  background-color: #69F0AE;
 }
-
-/***********************************************************************************************/
 
 .ul-dashboard {
   list-style-type: none;
@@ -911,4 +909,18 @@ pre[class*="language-"] {
   text-align: center;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+.algorithmCommentContent{
+  padding:5px;
+  width:90%;
+  margin:20px;
+}
+.forumButton{
+  border-radius: 10%;
+  cursor: pointer;
+  overflow: hidden;
+}
+.forumButton:hover{
+  color: #69F0AE; 
+  background-color: #69F0AE;
 }

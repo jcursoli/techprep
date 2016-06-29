@@ -780,6 +780,7 @@ export function userAlgorithmVote(index,vote){
   firebase.database().ref(`responses/${index}/${vote.author}/votes`).update(response);
 } 
 export function userAlgorithmComment(index,commentObj){
+  console.log('this is in firebase',index)
   var user = firebase.auth().currentUser;
   var response = {[new Date()]:commentObj.comment};
   firebase.database().ref(`responses/${index}/${commentObj.author}/comments/${user.displayName}`).update(response);
