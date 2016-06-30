@@ -8,11 +8,7 @@ import * as actions from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserAnswers from './userAnswers';
 
-
 import 'brace/mode/javascript';
-import 'brace/mode/java';
-import 'brace/mode/python';
-import 'brace/mode/ruby';
 
 import 'brace/theme/tomorrow';
 import 'brace/ext/language_tools';
