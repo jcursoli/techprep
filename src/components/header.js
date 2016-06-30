@@ -162,9 +162,10 @@ class Header extends Component {
               this.props.authenticated ?
                 [<MenuItem key='mobilepractice' onTouchTap={this.handleTap.bind(this, '/practice')} primaryText="CONCEPTS" leftIcon={<Code />} />,
                 <MenuItem key='mobilealgorithms' onTouchTap={this.handleTap.bind(this, '/algorithms')} primaryText="ALGORITHMS" leftIcon={<Code />} />,
+                <MenuItem key='mobilemockinterview' onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
                 <MenuItem key='mobilefriends' onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" leftIcon={<Group />} />,
                 <MenuItem key='mobileinbox' onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" leftIcon={<Message />} />,
-                <MenuItem key='mobilemockinterview' onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
+                <MenuItem key='mobileprofile' onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="PROFILE" leftIcon={<ActionAndroid />} />,
                 <MenuItem key='mobilehelp' onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" leftIcon={<Help />} />,
                 <MenuItem key='mobilesignout' onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" leftIcon={<Close />} />]
               :
