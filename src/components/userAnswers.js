@@ -172,13 +172,16 @@ class UserAnswers extends Component {
 				let key = Object.keys(commentsCollection[i])
 				OrderedComments[i] = commentsCollection[i][key];
 			}
+			console.log('this is the OrderedComments in user answers',OrderedComments);
 			return OrderedComments;
 		} else{
 			return <noscript/>
 		}
 	}
 	renderComponents(){
+		let sortedList = []
 		let list = [];
+		console.log('this is the answers component',this.props.responses[this.props.index])
 		 _.forEach(this.props.answers,(value,key)=>{
 		 let lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
@@ -238,6 +241,12 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
+		 var sorted = []
+		 for (var i in this.props.responses[this.props.index]){
+		 		sorted.push([i, this.props.responses[this.props.index][i].count ]);
+		 		sorted.sort((a,b)=>b[1] - a[1])
+		 }
+		 console.log('this is sorted',sorted)
 		 return list;
 	}
 
