@@ -8,11 +8,7 @@ import * as actions from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserAnswers from './userAnswers';
 
-
 import 'brace/mode/javascript';
-import 'brace/mode/java';
-import 'brace/mode/python';
-import 'brace/mode/ruby';
 
 import 'brace/theme/tomorrow';
 import 'brace/ext/language_tools';
@@ -57,9 +53,13 @@ class Algorithms extends Component {
 		this.createFunction = this.createFunction.bind(this);
 	}
 	componentWillMount(){
-		console.log('component will mound now',this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser) )
 		if(this.props.problem.userAnswers && this.props.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
 			this.setState({answered: true, editorContents:this.props.problem.userAnswers[this.props.currentUser]})
+		}
+	}
+	componentWillReceiveProps(newProps){
+		if(newProps.problem.userAnswers && newProps.problem.userAnswers.hasOwnProperty(this.props.currentUser)){
+			this.setState({answered: true, editorContents: newProps.problem.userAnswers[this.props.currentUser]})
 		}
 	}
 	editorChanged(editorContents){
@@ -150,6 +150,7 @@ class Algorithms extends Component {
 function mapStateToProps(state){
 	console.log('this is in the map state to props',state.user)
 	return {
+		algorithm:state.algorithms,
 		problem: state.currentAlgorithm.algorithm, 
 		index: state.currentAlgorithm.index, 
 		currentUser: state.user.displayName
