@@ -15,8 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Firebase from 'firebase';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 
-// import {LineChart} from 'react-d3';
-// import {Chart} from 'react-d3';
+import Dropzone from'react-dropzone';
 
   const styles = {
     tabs: {
@@ -32,9 +31,45 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
   };
 
 class Profile extends Component {
-  handleActive(tab) {
-    console.log('Handle active');
-      // alert(`A tab with this route property ${tab.props.route} was activated.`);
+  constructor(props) {
+    super(props)
+    this.state = {file: null, preview: null};
+  }
+
+  componentDidMount() {
+    console.log('componentdid mount');
+    this.setState({ preview: this.props.user.profileURL })
+  }
+
+  onDrop(file) {
+    var uploadTask = firebase.storage().ref().child('profileImages/' + this.props.user.displayName).put(file[0]);
+    uploadTask.on('state_changed', function(snapshot){
+      // Observe state change events such as progress, pause, and resume
+      // See below for more detail
+      console.log('1');
+    }, function(error) {
+      console.log('Error:', error);
+      // Handle unsuccessful uploads
+    }, function() {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      var user = firebase.auth().currentUser;
+      firebase.database().ref('users/' + user.displayName).update({ profileURL: downloadURL })
+      user.updateProfile({
+        photoURL: downloadURL
+      });
+      console.log('downloadURL:', downloadURL);
+    });
+    this.setState({
+      file,
+      preview: file[0].preview
+    });
+  }
+
+  onOpenClick() {
+    console.log('inside onOpenClick');
+    this.refs.dropzone.open();
   }
 
   handleFormSubmit() {
@@ -46,12 +81,9 @@ class Profile extends Component {
       // show error message here
     }
   }
-  x = function(d) {
-      return d.index;
-    }
 
   render() {
-    var user = firebase.auth().currentUser;
+    //var user = firebase.auth().currentUser;
     const { handleSubmit, fields: {}} = this.props;
 
     return (
@@ -59,27 +91,27 @@ class Profile extends Component {
         <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px'}}>
           <div className="row" style={{margin: '25px 25px'}}>
             <div className='center-xs col-xs-12'>
-              <Avatar size={150} src='https://avatars0.githubusercontent.com/u/302001?v=3&s=96' />
+            <img height='200px' src={this.state.preview} onClick={this.onOpenClick.bind(this)} />
             </div>
             <div className='center-xs col-xs-12'>
               <br />
-              <h2 style={{color:'white'}}>{user && user.displayName}</h2>
+              <h2 style={{color:'white', fontWeight: '900'}}>{this.props.user && this.props.user.displayName}</h2>
               <br />
               <Divider />
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers' style={{color:'white'}}> 11 </strong>
+              <strong className='userNumbers' style={{color:'white'}}>11</strong>
               <h4 style={{color:'white'}} > Friends </h4>
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers' style={{color:'white'}}> 106 / 233 </strong>
+              <strong className='userNumbers' style={{color:'white'}}>106</strong>
               <h4 style={{color:'white'}} > Algorithms Complete </h4>
             </div>
             <div className='center-xs col-xs-4'>
               <br />
-              <strong className='userNumbers' style={{color:'white'}}> 44 / 837 </strong>
+              <strong className='userNumbers' style={{color:'white'}}>44</strong>
               <h4 style={{color:'white'}} > Concepts Complete </h4>
             </div>
             <Divider />
@@ -87,22 +119,21 @@ class Profile extends Component {
         </div>
         <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px'}}>
           <div style={{margin: '25px 25px'}}>
-            <h2 style={{color:'white'}}>
+            <h2 style={{color:'white', fontWeight: '900'}}>
               Edit profile:
             </h2>
             <div>
-              <TextField fullWidth={true} floatingLabelText="Name:" floatingLabelStyle={{color: 'white'}} />
               <TextField fullWidth={true} floatingLabelText="Email:" floatingLabelStyle={{color: 'white'}}/>
               <TextField fullWidth={true} floatingLabelText="Password:" floatingLabelStyle={{color: 'white'}}/>
               <TextField fullWidth={true} floatingLabelText="Confirm Password:" floatingLabelStyle={{color: 'white'}}/>
-              <RaisedButton style={{marginTop: '10px'}} label="Save" labelColor="#51ccb8" backgroundColor='white' icon={<ActionAndroid />}/>
+              <RaisedButton onClick={this.handleFormSubmit.bind(this)} style={{marginTop: '10px'}} label="Save" labelColor="#51ccb8" backgroundColor='white' icon={<ActionAndroid />}/>
             </div>
           </div>
         </div>
-        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px', marginBottom: '25px'}}>
           <div className='row' style={{margin: '25px 25px'}}>
             <div className="center-xs col-xs-12">
-            <h2 style={{color:'white'}}>
+            <h2 style={{color:'white', fontWeight: '900'}}>
               Profile Stats:
             </h2>
             <br />
@@ -111,13 +142,17 @@ class Profile extends Component {
             </div>
           </div>
         </div>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1'>
+          <Dropzone ref="dropzone" onDrop={this.onDrop.bind(this)} style={{display: 'none'}}>
+          </Dropzone>
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state){
-  return {};// show error message
+  return { user: state.user};// show error message
 }
 
 function validate(formProps) {
