@@ -97,6 +97,7 @@ class Chat extends Component {
       <div>
       <List>
         <h1 className="centered">Inbox</h1>
+        <br />
         <Divider inset={false} />
         {_.map(this.props.chat, this.renderChat.bind(this))}
       </List>

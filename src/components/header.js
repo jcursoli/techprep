@@ -19,7 +19,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 
-import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Profile from 'material-ui/svg-icons/social/person-outline';
+import TechPrepIcon from 'material-ui/svg-icons/places/spa'
 import Close from 'material-ui/svg-icons/navigation/close';
 import Code from 'material-ui/svg-icons/action/code';
 import Group from 'material-ui/svg-icons/social/group';
@@ -147,7 +148,7 @@ class Header extends Component {
               label="TechPrep"
               linkButton={true}
               onTouchTap={this.handleTap.bind(this, '/')}
-              icon={<ActionAndroid />}
+              icon={<TechPrepIcon />}
             />
           </ToolbarGroup>
           <ToolbarGroup>
@@ -165,7 +166,7 @@ class Header extends Component {
                 <MenuItem key='mobilemockinterview' onTouchTap={this.handleTap.bind(this, '/mockinterview')} primaryText="MOCK INTERVIEW" leftIcon={<Assignment />} />,
                 <MenuItem key='mobilefriends' onTouchTap={this.handleFriendsToggle.bind(this)} primaryText="FRIENDS" leftIcon={<Group />} />,
                 <MenuItem key='mobileinbox' onTouchTap={this.handleChatToggle.bind(this)} primaryText="INBOX" leftIcon={<Message />} />,
-                <MenuItem key='mobileprofile' onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="PROFILE" leftIcon={<ActionAndroid />} />,
+                <MenuItem key='mobileprofile' onTouchTap={this.handleTap.bind(this, '/profile')} primaryText="PROFILE" leftIcon={<Profile />} />,
                 <MenuItem key='mobilehelp' onTouchTap={this.handleTap.bind(this, '/help')} primaryText="HELP" leftIcon={<Help />} />,
                 <MenuItem key='mobilesignout' onTouchTap={this.handleSignout.bind(this)} primaryText="SIGN OUT" leftIcon={<Close />} />]
               :
@@ -184,7 +185,7 @@ class Header extends Component {
               label="TechPrep"
               linkButton={true}
               onTouchTap={this.handleTap.bind(this, '/')}
-              icon={<ActionAndroid />}
+              icon={<TechPrepIcon />}
             />
           </ToolbarGroup>
           <ToolbarGroup>
@@ -221,7 +222,7 @@ class Header extends Component {
                   label="LOGIN"
                   onTouchTap={this.handleTap.bind(this, '/login')}
                   linkButton={true}
-                  icon={<ActionAndroid />}
+                  icon={<TechPrepIcon />}
                 />,
                 <FlatButton
                   key='signup'
@@ -229,7 +230,7 @@ class Header extends Component {
                   label="SIGN UP"
                   onTouchTap={this.handleTap.bind(this, '/signup')}
                   linkButton={true}
-                  icon={<ActionAndroid />}
+                  icon={<TechPrepIcon />}
                 />]
             }
           </ToolbarGroup>
