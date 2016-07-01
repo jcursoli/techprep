@@ -201,7 +201,7 @@ class UserAnswers extends Component {
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
 		 		list.push(
-		 			<Paper style={{height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<Paper style={{height:'205px',width:'auto',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem
@@ -229,8 +229,8 @@ class UserAnswers extends Component {
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{overflowY:'hidden',height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
-		 			<div style={{overflowX:'auto',alignItems:'center',height:'160px'}}>
+		 			<Paper style={{overflowY:'hidden',height:'205px',width:'auto',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<div style={{overflowY:'hidden',overflowX:'auto',alignItems:'center',height:'160px'}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}

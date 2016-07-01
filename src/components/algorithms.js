@@ -22,7 +22,7 @@ const style = {
 		background:'black',
 		color:'white',
 		display:'inline',
-		overflow: 'scroll',
+		overflowY: 'scroll',
 	},
 	compiler:{
 		display: 'flex',
@@ -34,8 +34,7 @@ const style = {
 		border:' 4px solid #EEEFF2',
 	},
 	root: {
-    overflowY: 'scroll',
-  	height: '500px',
+  	height: 'auto',
   },
 }
 
@@ -85,7 +84,7 @@ class Algorithms extends Component {
 		this.setState({output:''});
 		var userFunction;
 		var output;
-		var infiniteHandler = '(function detect(){if(aUniqueKey123 >= 1000){throw "infinite iteration not allowed";}aUniqueKey123++;})();'
+		var infiniteHandler = '(function detect(){if(aUniqueKey123 >= 10000){throw "iteration overload process canceled";}aUniqueKey123++;})();'
 		var newHandledFunction = [];
 		try{
 			for(var i = 0; i < this.state.editorContents.length;i++){
@@ -123,8 +122,8 @@ class Algorithms extends Component {
 
 	render(){
 		return (
-			<div className='newBackground'>
-				<div style={style.root}>
+			<div className='newBackground' style={{height:'100vh'}}>
+				<div className='newBackground' style={style.root}>
 					<div className='runButton'>
 						<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
 							<h1>{this.props.problem.name}</h1>
@@ -151,8 +150,8 @@ class Algorithms extends Component {
 							</div>
 							<RaisedButton style={{margin:'20px'}} onClick={this.createFunction} label="Run" backgroundColor='#DD0000' />
 					</div>
-					<div style={{alignItems:'center'}}>
-					<UserAnswers show={this.state.answered} answers={this.props.problem.userAnswers} index={this.props.index} />
+					<div style={{margin:'20px', alignItems:'center'}}>
+						<UserAnswers show={this.state.answered} answers={this.props.problem.userAnswers} index={this.props.index} />
 					</div>
 				</div>
 			</div>
