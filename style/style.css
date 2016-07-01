@@ -867,7 +867,7 @@ pre[class*="language-"] {
     min-height: 1rem;
     margin-bottom: 0;
     background: #007FFF;
-    border: 1px solid #FFF;
+    border : 1px solid #FFF;
     border-radius: 2px;
     overflow: hidden;
     text-align: center;
@@ -897,4 +897,34 @@ pre[class*="language-"] {
   background-color: #69F0AE;
 }.commentWords{
   word-wrap: break-word;
+}
+.fontanswers{
+  font-family: Orbitron;
+}
+.sendButton{
+  border: none;
+  outline: none;
+  border : 3px solid #69F0AE;
+  background: rgb(255, 255, 255);
+  margin: 2rem auto;
+  height: 30px;
+  width: 60px;
+  padding: 2px;
+  font-weight: 300;
+  overflow: hidden;
+  border-radius: 30px;
+}
+.sendButton:hover{
+  background-color: #69F0AE;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.sendInput{
+  padding: 2px;
+  border: none;
+  outline: none;
+  border : 3px solid #69F0AE;
+  height: 30px;
+  width: 60%;
+  border-radius: 10px;
 }

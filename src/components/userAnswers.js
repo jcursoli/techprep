@@ -13,6 +13,7 @@ import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 import Forum from 'material-ui/svg-icons/communication/forum';
 import * as actions from '../actions';
 import Comments from './algorithmComments';
+import AlgorithmComment from './algorithmComment';
 
 const style = {
 	alignItems: 'center',
@@ -28,10 +29,6 @@ class UserAnswers extends Component {
 			inputValue:'',
 			nodeRef: {},
 		}
-		this.handleInputChange = this.handleInputChange.bind(this);
-	}
-	handleInputChange(e){
-		this.setState({inputValue:e.target.value})
 	}
 	renderVote(key){
 	if(!this.props.responses[this.props.index]){
@@ -143,14 +140,13 @@ class UserAnswers extends Component {
 			this.state.nodeRef.style.visibility = 'hidden';
 			node.style.display = 'inline';
 			node.style.visibility = 'visible';
-			this.setState({nodeRef:node,inputValue:''});
+			this.setState({nodeRef:node});
 		}
 
 	}
-	sendComment(key){
-		if(this.state.inputValue.length){
-			this.props.userAlgorithmComment(this.props.index,{comment:this.state.inputValue, author:key});
-			this.setState({inputValue:''});
+	sendComment(key,input){
+		if(input.length){
+			this.props.userAlgorithmComment(this.props.index,{comment:input, author:key});
 		}
 	}
 	renderComments(name){
@@ -158,7 +154,7 @@ class UserAnswers extends Component {
 		if(algoComments){
 			let commentsCollection = [];
 			_.forEach(algoComments,(value,name)=>{
-			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> {return { [key] :<Comments style={{margin:'10px'}} date={key} userName={name} comment={val} /> }} )]
+			 	commentsCollection = [...commentsCollection,..._.map(value,(val,key)=> {return { [key] :<Comments style={{margin:'20px'}} date={key} userName={name} comment={val} /> }} )]
 		})
 			commentsCollection.sort((a,b)=>{
 				let keysA = Object.keys(a);
@@ -222,7 +218,7 @@ class UserAnswers extends Component {
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
 		 			<br/>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+							 <AlgorithmComment name={key} send={this.sendComment.bind(this)} />
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
@@ -248,7 +244,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+		 					<AlgorithmComment name={key} send={this.sendComment.bind(this)} />
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
@@ -262,7 +258,7 @@ class UserAnswers extends Component {
 		if(this.props.show){
 			return(
 				<div style={{marginTop:'100px'}}>
-				<div style={{textAlign:'center',color:'black'}}>Other Answers</div>
+				<div style={{textAlign:'center',color:'black'}}><h1 className='fontanswers'>Other Answers</h1></div>
 					{this.renderComponents()}
 				</div>
 			)

@@ -56,7 +56,7 @@ export default class LandingPage extends Component  {
   render() {
     return (
       <div className="login">
-       <h1>TechPrep</h1>
+       <h1 className='fontanswers'>TechPrep</h1>
        <br />
        <p>Info about what TechPrep is.</p>
        <br />
