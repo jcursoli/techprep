@@ -145,7 +145,6 @@ class UserAnswers extends Component {
 
 	}
 	sendComment(key,input){
-		console.log('this is the inpu tin sendComment', input)
 		if(input.length){
 			this.props.userAlgorithmComment(this.props.index,{comment:input, author:key});
 		}

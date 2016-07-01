@@ -920,9 +920,11 @@ pre[class*="language-"] {
   cursor: pointer;
 }
 .sendInput{
+  padding: 2px;
   border: none;
   outline: none;
   border : 3px solid #69F0AE;
   height: 30px;
-  width: 40%;
+  width: 60%;
+  border-radius: 10px;
 }
