@@ -222,7 +222,7 @@ class UserAnswers extends Component {
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
 		 			<br/>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button className='sendButton' onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input className='sendInput' onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>
@@ -248,7 +248,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
 		 				<button className='showContent' onClick={this.handleShowForm.bind(this)}>Reply</button>
-		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
+		 				<div className='commentSubmit' style={{margin:'5px', display: 'none',visibility: 'hidden'}}><button className='sendButton' onClick={this.sendComment.bind(this,key)} style={{margin:'5px'}}>send</button><input className='sendInput' onChange={this.handleInputChange} value={this.state.inputValue} style={{margin:'5px'}}></input></div>
 		 				{this.renderComments(key)}
 		 			</div>
 		 		</Paper>

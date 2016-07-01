@@ -30,6 +30,9 @@ import Message from 'material-ui/svg-icons/communication/message';
 import NavMenu from 'material-ui/svg-icons/navigation/menu';
 
 const style = {
+  labelFont:{
+    fontfamily: 'Orbitron'
+  },
   appBar: {
     borderBottom: 'solid #ffffff',
     alignItems: 'center',
@@ -144,6 +147,7 @@ class Header extends Component {
         <Toolbar style={style.appBar}>
           <ToolbarGroup firstChild={true}>
             <FlatButton
+              labelStyle={style.labelFont}
               style={style.white}
               label="TechPrep"
               linkButton={true}
