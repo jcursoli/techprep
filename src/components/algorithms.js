@@ -85,13 +85,25 @@ class Algorithms extends Component {
 		this.setState({output:''});
 		var userFunction;
 		var output;
+		var infiniteHandler = '(function detect(){if(aUniqueKey123 >= 1000){throw "infinite iteration not allowed";}aUniqueKey123++;})();'
+		var newHandledFunction = [];
 		try{
-			var index = this.state.editorContents.indexOf('{');
-			var lastIndex = this.state.editorContents.lastIndexOf('}');
-			var paramsFirstIndex = this.state.editorContents.indexOf('(')+1;
-			var paramsLastIndex = this.state.editorContents.indexOf(')');
-			var params = this.state.editorContents.substring(paramsFirstIndex, paramsLastIndex).split(',');
-			var functionBody = this.state.editorContents.substring(index+1,lastIndex);
+			for(var i = 0; i < this.state.editorContents.length;i++){
+					if(this.state.editorContents[i] === '{'){
+						newHandledFunction.push(this.state.editorContents[i]);
+						newHandledFunction.push(infiniteHandler);
+					}else{
+						newHandledFunction.push(this.state.editorContents[i]);
+					}
+			}
+			var newHandledFunction = newHandledFunction.join('');
+			var index = newHandledFunction.indexOf('{');
+			var lastIndex = newHandledFunction.lastIndexOf('}');
+			var paramsFirstIndex = newHandledFunction.indexOf('(')+1;
+			var paramsLastIndex = newHandledFunction.indexOf(')');
+			var params = newHandledFunction.substring(paramsFirstIndex, paramsLastIndex).split(',');
+			var functionBody = newHandledFunction.substring(index+1,lastIndex);
+			functionBody = 'var aUniqueKey123 = 0;' + functionBody;
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){

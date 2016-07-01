@@ -2,10 +2,10 @@
   "name": "techprep",
   "version": "1.0.0",
   "description": "Technical Interview Preparation",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "git@github.com:Tribarbe/techprep.git",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server.js",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
   },
   "author": "Tribarbe",

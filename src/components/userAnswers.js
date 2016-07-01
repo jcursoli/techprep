@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -178,8 +178,22 @@ class UserAnswers extends Component {
 			return <noscript/>
 		}
 	}
+	sortAnswers(){
+		var sorted = []
+		let returnArray = [];
+		for (var i in this.props.responses[this.props.index]){
+				sorted.push([i, this.props.responses[this.props.index][i].count ]);
+				sorted.sort((a,b)=>b[1] - a[1])
+		}
+		console.log('this is sorted',sorted);
+		_.forEach(sorted,(val,key)=>{
+				console.log('this is the item',item)
+				returnArray.push(list[key]);
+				list.splice(key,1);
+		})
+		console.log('this is the returnArray',returnArray)
+	}
 	renderComponents(){
-		let sortedList = []
 		let list = [];
 		console.log('this is the answers component',this.props.responses[this.props.index])
 		 _.forEach(this.props.answers,(value,key)=>{
@@ -241,12 +255,6 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
-		 var sorted = []
-		 for (var i in this.props.responses[this.props.index]){
-		 		sorted.push([i, this.props.responses[this.props.index][i].count ]);
-		 		sorted.sort((a,b)=>b[1] - a[1])
-		 }
-		 console.log('this is sorted',sorted)
 		 return list;
 	}
 
