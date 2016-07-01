@@ -4,6 +4,8 @@ import * as actions from '../../actions';
 import {List, ListItem} from 'material-ui/List';
 import _ from 'lodash';
 
+import {Card, CardActions, CardHeader, CardText, CardTitle} from 'material-ui/Card';
+
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
@@ -27,8 +29,6 @@ const style = {
 const styles = {
   top: 8
 }
-
-const test = "THIS IS A TEST";
 
 class Friends extends Component {
   constructor(props) {
@@ -111,12 +111,19 @@ class Friends extends Component {
     const profileURL = obj.profileURL;
     // <Divider inset={false} />
     return (
-      <ListItem
-        key={idx}
-        leftAvatar={<Avatar src={profileURL} />}
-        rightIconButton={this.rightIconMenu.apply(this, [displayName, profileURL])}
-        primaryText={<div className="centered ellipse">{displayName}</div>}
-      />
+      <Card key={idx}>
+        <CardHeader
+          titleStyle={{fontSize: '30px'}}
+          title={<div className="centered ellipse">{displayName}</div>}
+          avatar={profileURL}
+          actAsExpander={true}
+          showExpandableButton={true}
+        />
+        <CardActions expandable={true}>
+          <FlatButton label="Remove Friend" onTouchTap={this.handleRemoveFriend.bind(this, displayName)} />
+          <FlatButton label="Message" onTouchTap={this.handleOpen.bind(this, displayName, profileURL)} />
+        </CardActions>
+      </Card>
     );
   }
 
@@ -125,12 +132,19 @@ class Friends extends Component {
     const profileURL = obj.profileURL;
     // <Divider inset={false} />
     return (
-      <ListItem
-        key={idx}
-        leftAvatar={<Avatar src={profileURL} />}
-        rightIconButton={this.rightIconMenuInvite.apply(this, [obj])}
-        primaryText={<div className="centered ellipse">{displayName}</div>}
-      />
+      <Card key={idx}>
+        <CardHeader
+          titleStyle={{fontSize: '30px'}}
+          title={<div className="centered ellipse">{displayName}</div>}
+          avatar={profileURL}
+          actAsExpander={true}
+          showExpandableButton={true}
+        />
+        <CardActions expandable={true}>
+          <FlatButton label="Ignore" onTouchTap={this.handleIgnoreInvite.bind(this, obj)} />
+          <FlatButton label="Accept" onTouchTap={this.handleAcceptFriendRequest.bind(this, obj)} />
+        </CardActions>
+      </Card>
     );
   }
 
@@ -154,36 +168,46 @@ class Friends extends Component {
     ];
     return (
       <div>
-        <List>
           <div className="centered">
             <h1>{this.props.user.displayName}</h1>
-            <br />
-            <FloatingActionButton
-              style={style}
-              mini={true}
-              onTouchTap={this.handleAddFriend.bind(this)}
-            >
-              <ContentAdd />
-            </FloatingActionButton>
           </div>
-          <div className="centered">
-          <TextField
-            value={this.state.addFriendInput}
-            hintText="Username"
-            floatingLabelText="Add Friend by username"
-            fullWidth={false}
-            onChange={this.handleAddFriendChange.bind(this)}
-          />
-          </div>
+          <br />
+          <Card>
+              <CardHeader
+                titleStyle={{fontSize: '15px'}}
+                title="Add friend by username"
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+
+              <CardText expandable={true}>
+                <TextField
+                  value={this.state.addFriendInput}
+                  hintText="Username"
+                  fullWidth={false}
+                  onChange={this.handleAddFriendChange.bind(this)}
+                />
+              </CardText>
+              <CardActions expandable={true}>
+                <div className="row center-xs">
+                <div className="col-xs-6">
+                <FlatButton label="Add" onTouchTap={this.handleAddFriend.bind(this)}/>
+                </div>
+                </div>
+              </CardActions>
+            </Card>
+          <br />
           <div className="centered">
             <h2 className="friends">Friends</h2>
           </div>
+          <br />
           {this.props.friends.map(this.renderFriends.bind(this)).sort(function(a,b) {return a.displayName-b.displayName})}
+          <br />
           <div className="centered">
             <h2 className="friends">Pending Invites</h2>
           </div>
+          <br />
           {this.props.invites.map(this.renderInvites.bind(this))}
-        </List>
         <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
       </div>
     );
@@ -191,7 +215,6 @@ class Friends extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('state.friends', state.friends)
   var friends = _.map(state.friends, (n, i) => {
     return n;
   });

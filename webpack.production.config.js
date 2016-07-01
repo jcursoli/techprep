@@ -21,6 +21,10 @@ module.exports = {
           'strip-loader?strip[]=debug,strip[]=console.log'
         ],
         exclude: /node_modules/,
+        // query: {
+        //   'plugins': ['lodash'],
+        //   'presets': ['es2015']
+        // }
       },
       // {
       //   test: /\.css$/,

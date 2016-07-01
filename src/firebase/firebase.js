@@ -629,7 +629,7 @@ export function addQuestionsToDatabase() {
   ref.set(allComments);
 }
 
-export function createUserInDatabase(username) {
+export function createUserInDatabase(username, url) {
   var user = firebase.auth().currentUser;
   // console.log('user:', user);
   // console.log('username is:', username);
