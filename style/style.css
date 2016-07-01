@@ -502,7 +502,6 @@ li {
 .runButton{
   display: flex;
   flex-direction: column;
-  overflow:hidden;
   align-items: center;
 }
 .profileTabs{

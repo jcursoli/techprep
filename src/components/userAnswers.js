@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -178,8 +178,22 @@ class UserAnswers extends Component {
 			return <noscript/>
 		}
 	}
+	sortAnswers(){
+		var sorted = []
+		let returnArray = [];
+		for (var i in this.props.responses[this.props.index]){
+				sorted.push([i, this.props.responses[this.props.index][i].count ]);
+				sorted.sort((a,b)=>b[1] - a[1])
+		}
+		console.log('this is sorted',sorted);
+		_.forEach(sorted,(val,key)=>{
+				console.log('this is the item',item)
+				returnArray.push(list[key]);
+				list.splice(key,1);
+		})
+		console.log('this is the returnArray',returnArray)
+	}
 	renderComponents(){
-		let sortedList = []
 		let list = [];
 		console.log('this is the answers component',this.props.responses[this.props.index])
 		 _.forEach(this.props.answers,(value,key)=>{
@@ -187,7 +201,7 @@ class UserAnswers extends Component {
 		 	if(lineCount >= 6){
 		 		//push item with a show more button else dont include the button
 		 		list.push(
-		 			<Paper style={{height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<Paper style={{height:'205px',width:'auto',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={style}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem
@@ -215,8 +229,8 @@ class UserAnswers extends Component {
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{overflowY:'hidden',height:'205',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
-		 			<div style={{overflowX:'auto',alignItems:'center',height:'160px'}}>
+		 			<Paper style={{overflowY:'hidden',height:'205px',width:'auto',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<div style={{overflowY:'hidden',overflowX:'auto',alignItems:'center',height:'160px'}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem
 		 					leftAvatar={<Avatar src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAhBAAAAJDg2N2NlOWU0LTM2MzYtNDJjMS04ZjI5LTE4ZGU1NjgzZmNiMA.jpg" />}
@@ -241,12 +255,6 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
-		 var sorted = []
-		 for (var i in this.props.responses[this.props.index]){
-		 		sorted.push([i, this.props.responses[this.props.index][i].count ]);
-		 		sorted.sort((a,b)=>b[1] - a[1])
-		 }
-		 console.log('this is sorted',sorted)
 		 return list;
 	}
 
