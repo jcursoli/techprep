@@ -229,7 +229,7 @@ class UserAnswers extends Component {
 		 		)
 		 	} else {
 		 		list.push(
-		 			<Paper style={{overflowY:'hidden',height:'205',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
+		 			<Paper style={{overflowY:'hidden',height:'205px',width:'90%',margin:'20px',padding:'5px'}} key={key} zDepth={1} >
 		 			<div style={{overflowX:'auto',alignItems:'center',height:'160px'}}>
 		 				<List className='userCommentAvatar'>
 		 					<ListItem
