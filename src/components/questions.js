@@ -67,6 +67,7 @@ class Questions extends Component {
             fixedFooter={this.state.fixedFooter}
             selectable={this.state.selectable}
             multiSelectable={this.state.multiSelectable}
+
           >
             <TableHeader
               displaySelectAll={this.state.showCheckboxes}

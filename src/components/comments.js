@@ -36,8 +36,7 @@ class Comments extends Component {
 
   handleDownvote(questionIndex, commentIndex) {
     // if user has previously upvoted, then remove them from upvotes
-    var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName)
-    
+    var userIndex = questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName);
     if(questionIndex.hasUpvoted.indexOf(this.state.currentUser.displayName) !== -1) {
       this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'UP')
     }
@@ -46,6 +45,27 @@ class Comments extends Component {
       this.props.addVotes(this.state.commentsID, commentIndex, questionIndex.hasDownvoted.length, 'DOWN')
     }
   }
+
+  // handleVote(questionIndex, commentIndex, upOrDown) {
+    
+  //   if (upOrDown = "UP") {
+  //     var removeFrom = 'hasDownvoted';
+  //     var addTo = 'hasUpvoted';
+  //   } else {
+  //     var removeFrom = 'hasUpvoted';
+  //     var addTo = 'hasDownvoted';
+  //   }
+
+  //   var userIndex = questionIndex[removeFrom].indexOf(this.state.currentUser.displayName);
+  //   console.log(userIndex, 'userIndex')
+  //   if(questionIndex[removeFrom].indexOf(this.state.currentUser.displayName) !== -1) {
+  //     this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, upOrDown);
+  //   } else if(questionIndex[addTo].indexOf(this.state.currentUser.displayName) === -1) {
+  //     this.props.addVotes(this.state.commentsID, commentIndex, questionIndex[addTo].length, upOrDown);
+  //   }
+
+
+  // }
 
   cardExpandChange() {
     if(this.state.expanded === true) {
@@ -84,8 +104,8 @@ class Comments extends Component {
                     <div>
                       <div id="votes"> {comment.hasUpvoted && comment.hasDownvoted && comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
                       <div id="arrows">
-                        <iconButton onClick={() => this.handleUpvote(comment, index)}> <UpArrow /> </iconButton>
-                        <iconButton onClick={() => this.handleDownvote(comment, index)}> <DownArrow /> </iconButton>
+                        <iconButton iconStyle={{fill: 'blue'}} onClick={() => this.handleUpvote(comment, index, "UP")}> <UpArrow /> </iconButton>
+                        <iconButton onClick={() => this.handleDownvote(comment, index, "DOWN")}> <DownArrow /> </iconButton>
                       </div>
                       </div>
                     </div>
