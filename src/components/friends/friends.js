@@ -172,9 +172,11 @@ class Friends extends Component {
             <h1>{this.props.user.displayName}</h1>
           </div>
           <br />
-          <Card>
+          <Card style={{boxShadow: 'none'}}>
               <CardHeader
+                style={{textAlign: 'center'}}
                 titleStyle={{fontSize: '15px'}}
+                textStyle={{paddingRight: '0px'}}
                 title="Add friend by username"
                 actAsExpander={true}
                 showExpandableButton={true}
@@ -191,23 +193,23 @@ class Friends extends Component {
               <CardActions expandable={true}>
                 <div className="row center-xs">
                 <div className="col-xs-6">
-                <FlatButton label="Add" onTouchTap={this.handleAddFriend.bind(this)}/>
+                <FlatButton icon={<ContentAdd />} label="Add" onTouchTap={this.handleAddFriend.bind(this)}/>
                 </div>
                 </div>
               </CardActions>
             </Card>
           <br />
           <div className="centered">
-            <h2 className="friends">Friends</h2>
-          </div>
-          <br />
-          {this.props.friends.map(this.renderFriends.bind(this)).sort(function(a,b) {return a.displayName-b.displayName})}
-          <br />
-          <div className="centered">
             <h2 className="friends">Pending Invites</h2>
           </div>
           <br />
           {this.props.invites.map(this.renderInvites.bind(this))}
+          <br />
+          <div className="centered">
+            <h2 className="friends">Friends</h2>
+          </div>
+          <br />
+          {this.props.friends.map(this.renderFriends.bind(this)).sort(function(a,b) {return a.displayName-b.displayName})}
         <ChatBox clickedUser={this.state.clickedUser} localOpen={this.state.open} localHandleClose={this.handleClose.bind(this)} />
       </div>
     );

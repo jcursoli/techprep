@@ -36,7 +36,7 @@ class ChatBox extends Component {
     const message = obj.message;
     if (username === ( user ? user.displayName : null)) {
       return (
-        <li className="clearfix" key={idx}>
+        <li className="testingThis clearfix" key={idx}>
           <div className="message-data align-right">
             <span className="message-data-time" >{time}</span> &nbsp; &nbsp;
             <span className="message-data-name" >{username}</span>
@@ -48,7 +48,7 @@ class ChatBox extends Component {
       );
     } else {
       return (
-        <li key={idx}>
+        <li key={idx} className="testingThis">
           <div className="message-data">
             <span className="message-data-name">{username}</span>
             <span className="message-data-time">{time}</span>
@@ -102,6 +102,20 @@ class ChatBox extends Component {
     }
   }
 
+  componentDidMount() {
+    this.goToBottom();
+  }
+
+  componentDidUpdate() {
+    this.goToBottom();
+  }
+
+  goToBottom(){
+     var element = document.querySelector('.chatWindow');
+     if (element) element.scrollTop = element.scrollHeight;
+
+  }
+
   render() {
     const actions = [
       <TextField
@@ -125,7 +139,11 @@ class ChatBox extends Component {
     ];
     return (
       <Dialog
+        titleStyle={{background: '#f2f5f8'}}
+        bodyStyle={{background: '#f2f5f8'}}
+        actionsContainerStyle={{background: '#f2f5f8'}}
         actions={actions}
+        bodyClassName="chatWindow"
         title={this.renderHeader()}
         modal={false}
         open={this.props.localOpen}
