@@ -20,47 +20,49 @@ class AlgorithmList extends Component {
   }
   renderListItems(){
   	if(!this.props.algorithms){
-  		return;
+  		return <noscript />;
   	}
-  	return this.props.algorithms.map((item, index)=>(
+  	return (this.props.algorithms.map((item, index)=>(
   		<TableRow key={item.name} onTouchTap={()=>(this.handleClick(item, index))}>/
-  		  <TableHeaderColumn style={{width: '78%'}}>{item.name}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{width: '11%'}}>{item.attempts}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{width: '11%'}}>{item.difficulty}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{width: '80%'}}>{item.name}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{width: '10%'}}>{item.attempts}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{width: '10%'}}>{item.difficulty}</TableHeaderColumn>
   		</TableRow>
   	))
+    )
   }
   render() {
     return (
       <div>
         <div>
           <Table
-            height={'100vh'}
-            fixedHeader={false}
+            height={'100%'}
+            fixedHeader={true}
             fixedFooter={false}
-            selectable={true}
-            multiSelectable={false}
-            displayRowCheckbox={false}
             selectable={false}
+            multiSelectable={false}
           >
             <TableHeader
-            displaySelectAll={false}
-            displayRowCheckbox={false}
-            adjustForCheckbox={false}
-            enableSelectAll={false}
-
+              displaySelectAll={false}
+              adjustForCheckbox={false}
+              enableSelectAll={false}
             >
               <TableRow>
-                <TableHeaderColumn colSpan="3" tooltip="Algorithms" style={{textAlign: 'center'}}>
-                  Algorithms
+                <TableHeaderColumn
+                  colSpan="3"
+                  tooltip=""
+                  style={{textAlign: 'center'}}
+                >
+                  Interview Questions
                 </TableHeaderColumn>
               </TableRow>
-              <TableRow>
-                <TableHeaderColumn style={{width: '78%'}}>Problem</TableHeaderColumn>
-                <TableHeaderColumn style={{width: '11%'}}>Attempts</TableHeaderColumn>
-                <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
+              <TableRow>/
+                <TableHeaderColumn style={{width: '80%'}}>Question</TableHeaderColumn>
+                <TableHeaderColumn style={{width: '10%'}}>Acceptance</TableHeaderColumn>
+                <TableHeaderColumn style={{width: '10%'}}>Difficulty</TableHeaderColumn>
               </TableRow>
             </TableHeader>
+
             <TableBody
               deselectOnClickaway={true}
               stripedRows={true}
