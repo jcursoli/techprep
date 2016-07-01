@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
@@ -25,6 +24,7 @@ import {
   ALGORITHM_COMMENT
 } from './actionTypes';
 import * as firebase from '../firebase/firebase';
+import Firebase from 'firebase';
 
 export function loginUser({ email, password }) {
   return function(dispatch) {
@@ -48,16 +48,20 @@ export function signupUser({ username, email, password }) {
       if (!user.exists()) {
         firebase.createUserWithEmailAndPassword(email, password).then(user => {
           firebase.createDisplayName(username);
-          firebase.createUserInDatabase(username);
-          user.updateProfile({
-            displayName: username,
-            photoURL: "https://i.imgur.com/DRuG5YH.png"
-          }).then(function() {
-            console.log('user update success', user);
-            firebase.initializeState(user);
-          }, function(error) {
-            console.log('user update failed:', error);
-          });
+          //Firebase.storage().ref('profileImages/' + username).getDownloadURL().then(function(url) {
+            firebase.createUserInDatabase(username);
+            user.updateProfile({
+              displayName: username,
+              photoURL: 'https://i.imgur.com/DRuG5YH.png'
+            }).then(function() {
+              console.log('user update success', user);
+              firebase.initializeState(user);
+            }, function(error) {
+              console.log('user update failed:', error);
+            });
+         // }).catch(function(error) {
+            //console.log('Error:', error);
+          //});
           dispatch({ type: AUTH_USER });
           browserHistory.push('/welcome');
         }).catch(function(error) {

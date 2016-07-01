@@ -151,8 +151,8 @@ function mapStateToProps(state){
 	console.log('this is in the map state to props',state.user)
 	return {
 		algorithm:state.algorithms,
-		problem: state.currentAlgorithm.algorithm, 
-		index: state.currentAlgorithm.index, 
+		problem: state.currentAlgorithm.algorithm,
+		index: state.currentAlgorithm.index,
 		currentUser: state.user.displayName
 	}
 }

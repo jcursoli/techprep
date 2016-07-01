@@ -37,8 +37,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log('componentdid mount');
-    this.setState({ preview: this.props.user.profileURL })
+    this.setState({ preview: this.props.user.profileURL || 'https://i.imgur.com/DRuG5YH.png' })
   }
 
   onDrop(file) {
@@ -88,10 +87,10 @@ class Profile extends Component {
 
     return (
       <div className="row" style={{marginTop: '25px'}}>
-        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '20px'}}>
           <div className="row" style={{margin: '25px 25px'}}>
             <div className='center-xs col-xs-12'>
-            <img height='200px' src={this.state.preview} onClick={this.onOpenClick.bind(this)} />
+            <img height='200px' style={{borderRadius: '20px'}} src={this.state.preview} onClick={this.onOpenClick.bind(this)} />
             </div>
             <div className='center-xs col-xs-12'>
               <br />
@@ -117,7 +116,7 @@ class Profile extends Component {
             <Divider />
           </div>
         </div>
-        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '20px', marginTop: '25px'}}>
           <div style={{margin: '25px 25px'}}>
             <h2 style={{color:'white', fontWeight: '900'}}>
               Edit profile:
@@ -130,7 +129,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '10px', marginTop: '25px', marginBottom: '25px'}}>
+        <div className='center-xs col-xs-offset-1 col-xs-10 col-xs-offset-1' style={{border:'solid', borderRadius: '20px', marginTop: '25px', marginBottom: '25px'}}>
           <div className='row' style={{margin: '25px 25px'}}>
             <div className="center-xs col-xs-12">
             <h2 style={{color:'white', fontWeight: '900'}}>

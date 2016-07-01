@@ -6,7 +6,6 @@ import Dialog from 'material-ui/Dialog';
 
 import TextField from 'material-ui/TextField';
 import Avatar from 'material-ui/Avatar';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 import FlatButton from 'material-ui/FlatButton';
 

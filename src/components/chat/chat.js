@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import {List, ListItem} from 'material-ui/List';
 
-
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -15,16 +14,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
-import FlatButton from 'material-ui/FlatButton';
-
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
-
 import ChatBox from '../chat/chatBox';
-
-
 
 // <ListItem
 //   leftAvatar={<Avatar src="https://avatars3.githubusercontent.com/u/10988122?v=3&s=460" />}
