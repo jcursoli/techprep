@@ -61,7 +61,8 @@ export default class DialogTitle extends Component {
 
     const titleStyle = {
       fontSize: '30px',
-      marginLeft: 25
+      marginLeft: 25,
+      marginRight: 100
     };
 
     return(
