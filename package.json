@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": "git@github.com:Tribarbe/techprep.git",
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
   },
   "author": "Tribarbe",
