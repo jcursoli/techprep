@@ -5,12 +5,6 @@ import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 import * as actions from '../actions';
 
 class AlgorithmVote extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-
-		};
-	}
 		renderVote(key){
 	if(!this.props.responses[this.props.indexValue]){
 			return '0';
@@ -75,7 +69,7 @@ class AlgorithmVote extends Component {
 
 	render(){
 		return(
-			<div>
+			<div className='algoAnswer'>
 				<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(this.props.keyValue)}> <DownArrow /> </iconButton>
 				<div>{this.renderVote(this.props.keyValue)}</div>
 				<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(this.props.keyValue)}> <UpArrow /> </iconButton>

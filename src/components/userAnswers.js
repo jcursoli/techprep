@@ -7,8 +7,6 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
-import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 import Forum from 'material-ui/svg-icons/communication/forum';
 import * as actions from '../actions';
 import Comments from './algorithmComments';
@@ -27,72 +25,9 @@ class UserAnswers extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			inputValue:'',
 			nodeRef: {},
 		}
 	}
-	renderVote(key){
-	if(!this.props.responses[this.props.index]){
-			return '0';
-		}
-	else if(!this.props.responses[this.props.index][key]){
-			return '0';
-		}
-	else if(this.props.responses[this.props.index][key].count){
-			return this.props.responses[this.props.index][key].count.toString();
-		}else{
-			return '0'
-		}
-	}
-	handleUpvote(userName){
-		var vote = {author:userName,value:1, dif: 1};
-		if(!this.props.responses.hasOwnProperty([this.props.index])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
-			vote.dif = 2;
-			vote.value = 1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
-			vote.dif = 1;
-			vote.value = 1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
-			vote.value = 0;
-			vote.dif = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		} else{
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-	}
-	handleDownvote(userName){
-		var vote = {author:userName,value: -1,dif: -1};
-		if(!this.props.responses.hasOwnProperty([this.props.index])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
-			vote.dif = 1;
-			vote.value = 0;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
-			vote.dif = -1;
-			vote.value = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
-			vote.dif = -2;
-			vote.value = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		} else{
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-	}
-
 	handleClick(event){
 		if(event.target.parentElement.parentElement.firstChild.style.overflowY === 'visible'){
 			//changes things to hidden
@@ -177,13 +112,11 @@ class UserAnswers extends Component {
 				sorted.push([i, this.props.responses[this.props.index][i].count ]);
 				sorted.sort((a,b)=>b[1] - a[1])
 		}
-		console.log('this is sorted',sorted);
 		_.forEach(sorted,(val,key)=>{
 				console.log('this is the item',item)
 				returnArray.push(list[key]);
 				list.splice(key,1);
 		})
-		console.log('this is the returnArray',returnArray)
 	}
 	renderComponents(){
 		let list = [];
