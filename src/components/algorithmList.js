@@ -24,9 +24,9 @@ class AlgorithmList extends Component {
   	}
   	return (this.props.algorithms.map((item, index)=>(
   		<TableRow key={item.name} onTouchTap={()=>(this.handleClick(item, index))}>/
-  		  <TableHeaderColumn style={{width: '80%'}}>{item.name}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{width: '10%'}}>{item.attempts}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{width: '10%'}}>{item.difficulty}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '80%'}}>{item.name}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '10%'}}>{item.attempts}</TableHeaderColumn>
+  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '10%'}}>{item.difficulty}</TableHeaderColumn>
   		</TableRow>
   	))
     )
@@ -53,7 +53,7 @@ class AlgorithmList extends Component {
                   tooltip=""
                   style={{textAlign: 'center'}}
                 >
-                  Interview Questions
+                  Algorithms
                 </TableHeaderColumn>
               </TableRow>
               <TableRow>/
