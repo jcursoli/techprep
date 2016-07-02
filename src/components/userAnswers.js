@@ -7,13 +7,14 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
-import Less from 'material-ui/svg-icons/navigation/expand-less';
 import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 import Forum from 'material-ui/svg-icons/communication/forum';
 import * as actions from '../actions';
 import Comments from './algorithmComments';
 import AlgorithmComment from './algorithmComment';
+import AlgorithmVote from './algorithmVote';
+
 
 const style = {
 	alignItems: 'center',
@@ -205,9 +206,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 				<div className='algoAnswer'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.renderVote(key)}</div>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+		 				<AlgorithmVote indexValue={this.props.index} keyValue={key} />
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
@@ -232,9 +231,7 @@ class UserAnswers extends Component {
 		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
 		 			<div className='algoAnswer'>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.renderVote(key)}</div>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+			 			<AlgorithmVote indexValue={this.props.index} keyValue={key} />
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
