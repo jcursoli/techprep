@@ -71,26 +71,21 @@ class UserAnswers extends Component {
 		var vote = {author:userName,value: -1,dif: -1};
 		if(!this.props.responses.hasOwnProperty([this.props.index])){
 			this.props.userAlgorithmVote(this.props.index,vote);
-			console.log('in first')
 		}
 		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
 			this.props.userAlgorithmVote(this.props.index,vote);
-			console.log('in second')
 		}
 		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
 			vote.dif = 1;
 			vote.value = 0;
-			console.log('in third')
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
 			vote.dif = -1;
 			vote.value = -1;
-			console.log('in foruth')
 			this.props.userAlgorithmVote(this.props.index,vote);
 		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
 			vote.dif = -2;
 			vote.value = -1;
-			console.log('in fifth')
 			this.props.userAlgorithmVote(this.props.index,vote);
 		} else{
 			this.props.userAlgorithmVote(this.props.index,vote);

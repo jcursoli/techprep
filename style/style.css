@@ -954,6 +954,16 @@ figure:hover+span {
 .hover01 figure:hover img {
   -webkit-transform: scale(1.3);
   transform: scale(1.3);
+  cursor: pointer;
+}
+
+.algoList{
+  color:black;
+  color: rgb(0,0,0);
+}
+.algoList:hover{
+  background-color: rgb(224, 224, 224);
+  cursor: pointer;
 }
 
 
