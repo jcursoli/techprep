@@ -74,7 +74,7 @@ class Algorithms extends Component {
 				}
 			}
 	} catch(err){
-		this.setState({output:`${this.state.output}\n${err.toString()}`})
+		this.setState({output:`${this.state.output}\n${err.toString()}\n`})
 		correctness = false;
 		}
 		return correctness;
@@ -106,7 +106,7 @@ class Algorithms extends Component {
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			this.setState({output:err.toString()});
+			this.setState({output:`${err.toString()}\n`});
 		}
 		if(userFunction){
 				 var correctness = this.testCode(userFunction);

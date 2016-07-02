@@ -51,8 +51,8 @@ export default class Practice extends Component {
 		return (
 			<div key={category.title} onTouchTap={()=>{this.handleClick(category)}} style={style.GridTile} className="col-lg-2 col-md-3 col-xs-12 col-sm-4">
 				<div style={style.img}>
-       	 <div height='200'width='200'>
-        	<img  height='200' src={category.pic}/>
+       	 <div className='hover01' height='200'width='200'>
+        	<figure><img  height='200' src={category.pic}/></figure>
        	</div>
        </div>
      </div>

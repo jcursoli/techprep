@@ -23,11 +23,15 @@ class AlgorithmList extends Component {
   		return <noscript />;
   	}
   	return (this.props.algorithms.map((item, index)=>(
-  		<TableRow key={item.name} onTouchTap={()=>(this.handleClick(item, index))}>/
-  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '80%'}}>{item.name}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '10%'}}>{item.attempts}</TableHeaderColumn>
-  		  <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '10%'}}>{item.difficulty}</TableHeaderColumn>
-  		</TableRow>
+            <TableRow 
+              style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300', width: '10%'}} 
+              className='algoList' 
+              key={item.name} 
+              onTouchTap={()=>(this.handleClick(item, index))}>/
+              <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300',width: '80%',}} className='algoList'>{item.name}</TableHeaderColumn>
+              <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300',width: '10%'}} className='algoList'>{item.attempts}</TableHeaderColumn>
+              <TableHeaderColumn style={{color: 'rgba(0, 0, 0, 0.870588)', fontWeight: '300',width: '10%'}} className='algoList'>{item.difficulty}</TableHeaderColumn>
+            </TableRow>
   	))
     )
   }
