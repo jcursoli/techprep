@@ -53,27 +53,7 @@ class Comments extends Component {
       this.setState({ commentButtonText: 'Hide Comments', expanded: true})  
     }
   }
-  
-  // handleVote(questionIndex, commentIndex, upOrDown) {
-    
-  //   if (upOrDown = "UP") {
-  //     var removeFrom = 'hasDownvoted';
-  //     var addTo = 'hasUpvoted';
-  //   } else {
-  //     var removeFrom = 'hasUpvoted';
-  //     var addTo = 'hasDownvoted';
-  //   }
 
-  //   var userIndex = questionIndex[removeFrom].indexOf(this.state.currentUser.displayName);
-  //   console.log(userIndex, 'userIndex')
-  //   if(questionIndex[removeFrom].indexOf(this.state.currentUser.displayName) !== -1) {
-  //     this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, upOrDown);
-  //   } else if(questionIndex[addTo].indexOf(this.state.currentUser.displayName) === -1) {
-  //     this.props.addVotes(this.state.commentsID, commentIndex, questionIndex[addTo].length, upOrDown);
-  //   }
-  // }
-
- 
   getUpArrow(comment) {
     if(comment.comment == "") {
       return <noscript />
@@ -123,7 +103,6 @@ class Comments extends Component {
   }
 
   renderList() {
-    // console.log("length:", this.props.comments[this.state.commentsID].length)
     return (this.props.comments[this.state.commentsID].map((comment, index) => (
       <List key={index}>
         <ListItem disabled={true}>

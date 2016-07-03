@@ -732,7 +732,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      addQuestionsToDatabase();
+      // addQuestionsToDatabase();
       // console.log('user is authenticatd');
       initializeState(user);
     } else {
@@ -1026,17 +1026,11 @@ export function userAlgorithmComment(index,commentObj){
   var response = {[new Date()]:commentObj.comment};
   firebase.database().ref(`responses/${index}/${commentObj.author}/comments/${user.displayName}`).update(response);
 }
+
 export function addCommentToDatabase(currentUser, commentsList, commentID, commentBody) {
   var next = commentsList[commentID].length;
   var newComment = {};
 
-  // newComment[next] = {
-  //   "comment": commentBody,
-  //   "username": currentUser.displayName,
-  //   "hasUpvoted": [currentUser.displayName],
-  //   "hasDownvoted": []
-  // }
-  console.log('currentUser', currentUser);
   newComment = {
     "comment": commentBody,
     "username": currentUser,
@@ -1044,9 +1038,7 @@ export function addCommentToDatabase(currentUser, commentsList, commentID, comme
     "hasDownvoted": ['']
   }
 
-  console.log('next', next, 'commentID', + commentID, 'newComment', newComment);
   firebase.database().ref('comments/' + commentID + '/' + next).update(newComment);
-
 }
 
 export function addQuestionToStudyList(currentUser, questionID) {
