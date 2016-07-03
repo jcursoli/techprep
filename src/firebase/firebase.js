@@ -1,4 +1,4 @@
-  import firebase from 'firebase';
+import firebase from 'firebase';
 import { store } from '../index';
 import {
   AUTH_USER,

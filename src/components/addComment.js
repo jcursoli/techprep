@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
