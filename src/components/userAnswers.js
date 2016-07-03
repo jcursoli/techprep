@@ -36,7 +36,7 @@ class UserAnswers extends Component {
 			event.target.parentElement.parentElement.firstChild.style.height = '160px';
 			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
 			event.target.parentElement.parentElement.style.overflowY = 'hidden';
-			event.target.parentElement.parentElement.style.width = '90%';
+			event.target.parentElement.parentElement.style.width = 'auto';
 			event.target.parentElement.parentElement.scrollIntoView();
 		} else{
 			//changes things to visible
@@ -94,33 +94,38 @@ class UserAnswers extends Component {
 				if( Date.parse(keysA[0]) > Date.parse(keysB[0])){return 1};
 				return 0;
 			});
-			let OrderedComments = new Array;
+			let OrderedComments = new Array(commentsCollection.length);
 			for(let i = 0; i < commentsCollection.length;i++){
 				let key = Object.keys(commentsCollection[i])
 				OrderedComments[i] = commentsCollection[i][key];
 			}
-			console.log('this is the OrderedComments in user answers',OrderedComments);
 			return OrderedComments;
 		} else{
 			return <noscript/>
 		}
 	}
-	sortAnswers(){
+	sortAnswers(list){
 		var sorted = []
 		let returnArray = [];
 		for (var i in this.props.responses[this.props.index]){
 				sorted.push([i, this.props.responses[this.props.index][i].count ]);
-				sorted.sort((a,b)=>b[1] - a[1])
 		}
-		_.forEach(sorted,(val,key)=>{
-				console.log('this is the item',item)
-				returnArray.push(list[key]);
-				list.splice(key,1);
+		sorted.sort((a,b)=>b[1] - a[1])
+
+		_.forEach(sorted,(val,key2)=>{
+				for(var i = 0; i < list.length;i++){
+					if(list[i].key === sorted[key2][0]){
+						returnArray.push(list[i]);
+						list.splice(i,1);
+				}
+			}
 		})
+		returnArray.splice(returnArray.indexOf(undefined),returnArray.length);
+		console.log('before the return',[...returnArray,...list])
+		return [...returnArray,...list]
 	}
 	renderComponents(){
 		let list = [];
-		console.log('this is the answers component',this.props.responses[this.props.index])
 		 _.forEach(this.props.answers,(value,key)=>{
 		 let lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
@@ -176,7 +181,9 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
-		 return list;
+		 var m = this.sortAnswers(list)
+		 console.log('this is the sorted list returned',m)
+		 return m
 	}
 
 	render(){

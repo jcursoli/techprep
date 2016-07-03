@@ -26,6 +26,9 @@ class AlgorithmVote extends Component {
 		else if(!this.props.responses[this.props.indexValue].hasOwnProperty([userName])){
 			this.props.userAlgorithmVote(this.props.indexValue,vote);
 		}
+		else if(!this.props.responses[this.props.indexValue][userName].votes){
+			this.props.userAlgorithmVote(this.props.indexValue,vote);
+		}
 		else if(this.props.responses[this.props.indexValue][userName].votes[this.props.currentUser] === -1){
 			vote.dif = 2;
 			vote.value = 1;
@@ -48,6 +51,9 @@ class AlgorithmVote extends Component {
 			this.props.userAlgorithmVote(this.props.indexValue,vote);
 		}
 		else if(!this.props.responses[this.props.indexValue].hasOwnProperty([userName])){
+			this.props.userAlgorithmVote(this.props.indexValue,vote);
+		}
+		else if(!this.props.responses[this.props.indexValue][userName].votes){
 			this.props.userAlgorithmVote(this.props.indexValue,vote);
 		}
 		else if(this.props.responses[this.props.indexValue][userName].votes[this.props.currentUser] === -1){
