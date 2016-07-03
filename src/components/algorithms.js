@@ -122,7 +122,7 @@ class Algorithms extends Component {
 
 	render(){
 		return (
-			<div className='newBackground' style={{height:'100vh'}}>
+			<div className='newBackground'>
 				<div className='newBackground' style={style.root}>
 					<div className='runButton'>
 						<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
