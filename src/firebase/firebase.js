@@ -68,218 +68,272 @@ var allComments = {
       "hasDownvoted": ["bobby"]},
     ],
   "1": [{"comment": "",
+         "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "2": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "3": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "4": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "5": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "6": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "7": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "8": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "9": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "10": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "11": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "12": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "13": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "14": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "15": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "16": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "17": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "18": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "19": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "20": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "21": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "22": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "23": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "24": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "25": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "26": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "27": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "28": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "29": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "30": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "31": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "32": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "33": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "34": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "35": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "36": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "37": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "38": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "39": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "40": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "41": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "42": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "43": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "44": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "45": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "46": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "47": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "48": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "49": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "50": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "51": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "52": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "53": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
   "54": [{"comment": "",
+        "username": "",
         "hasUpvoted": [""],
         "hasDownvoted": [""]
   }],
