@@ -111,7 +111,6 @@ class UserAnswers extends Component {
 				sorted.push([i, this.props.responses[this.props.index][i].count ]);
 		}
 		sorted.sort((a,b)=>b[1] - a[1])
-
 		_.forEach(sorted,(val,key2)=>{
 				for(var i = 0; i < list.length;i++){
 					if(list[i].key === sorted[key2][0]){
@@ -121,7 +120,6 @@ class UserAnswers extends Component {
 			}
 		})
 		returnArray.splice(returnArray.indexOf(undefined),returnArray.length);
-		console.log('before the return',[...returnArray,...list])
 		return [...returnArray,...list]
 	}
 	renderComponents(){
@@ -181,9 +179,7 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
-		 var m = this.sortAnswers(list)
-		 console.log('this is the sorted list returned',m)
-		 return m
+		 return this.sortAnswers(list);
 	}
 
 	render(){
