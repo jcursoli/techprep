@@ -2,14 +2,8 @@
 
 Designed for web professionals and passionate learners to get the best content to prepare and refine their skills.
 
+## Installing
 
-### Installing
-```
-1) Fork the repo on a local branch
-2) run npm install
-3) run npm start
-4) navigate to http://localhost:8080/webpack-dev-server/
-```
 1) Fork the repo on a local branch
 2) Clone the repo onto your local machine
 
@@ -22,18 +16,26 @@ Designed for web professionals and passionate learners to get the best content t
 ```
  npm install
 ```
+4) To run the project locally run
 
+```
+ npm start
+```
+ 5) Navigate to http://localhost:8080/webpack-dev-server/
 ## Built With
 
 * React
 * Redux
+* react-router
+* redux-thunk
 * firebase
+
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+## Team
 
 * **Joey Cursoli** - *Frontend*
 * **Drew Baugher** - *Fullstack*
