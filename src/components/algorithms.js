@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import brace from 'brace';
 import AceEditor from 'react-ace';
-
+import Divider from 'material-ui/Divider';
 import AlgorithmDialog from './algorithmDialog';
 import * as actions from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -45,7 +45,7 @@ class Algorithms extends Component {
 	this.state = {
 		editorContents: `${this.props.problem.startingCode}`,
 		language: 'javascript',
-		output: '',
+		output: `output:`,
 		answered:false
 		};
 		this.editorChanged = this.editorChanged.bind(this);
@@ -74,14 +74,13 @@ class Algorithms extends Component {
 				}
 			}
 	} catch(err){
-		this.setState({output:`${this.state.output}\n${err.toString()}\n`})
+		this.setState({output:`${this.state.output}${err.toString()}`})
 		correctness = false;
 		}
 		return correctness;
 	}
 	createFunction(){
 		// reset output
-		this.setState({output:''});
 		var userFunction;
 		var output;
 		var infiniteHandler = '(function detect(){if(aUniqueKey123 >= 10000){throw "iteration overload process canceled";}aUniqueKey123++;})();'
@@ -106,13 +105,12 @@ class Algorithms extends Component {
 			userFunction = new Function(...params ,functionBody);
 		}
 		catch(err){
-			this.setState({output:`${err.toString()}\n`});
+			this.setState({output:`\n${err.toString()}\n`});
 		}
 		if(userFunction){
 				 var correctness = this.testCode(userFunction);
 				this.props.openDialog(correctness);
 				if(correctness){
-					console.log('this is the current user',this.props.currentUser);
 					this.props.updateAlgorithmAnswers(`${this.state.editorContents}`,this.props.index,this.props.currentUser);
 				}
 		} else {
@@ -125,14 +123,19 @@ class Algorithms extends Component {
 			<div className='newBackground'>
 				<div className='newBackground' style={style.root}>
 					<div className='runButton'>
-						<div  style={{color:'black', margin:'20px', textAlign:'center'}}>
-							<h1>{this.props.problem.name}</h1>
+						<div  style={{color:'black', margin:'20px', textAlign:'left', width:'50%'}}>
+							<h1 style={{textAlign:'center'}}>{this.props.problem.name}</h1>
+							<Divider />
 							<br />
-							<h2>{this.props.problem.description}</h2>
+							<h3>{`${this.props.problem.description}`}</h3>
+							<br />
+							<h3><strong style={{fontWeight:'900'}}>Example : </strong>{`Input = ${this.props.problem.tests[0][0]} output = ${this.props.problem.tests[0][1]}`}</h3>
+							<br />
+							<h3><strong style={{fontWeight:'900'}}>Example : </strong>{`Input = ${this.props.problem.tests[1][0]} output = ${this.props.problem.tests[1][1]}`}</h3>
 						</div>
 						<AlgorithmDialog />
 							<div style={style.compiler}>
-								<div style={style.output}>{this.state.output}</div>
+								<div style={style.output}>{`${this.state.output}`}</div>
 								<div style={style.editor}>
 									<AceEditor
 										theme='tomorrow'

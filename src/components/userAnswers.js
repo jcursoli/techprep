@@ -187,6 +187,7 @@ class UserAnswers extends Component {
 			return(
 				<div style={{marginTop:'100px'}}>
 				<div style={{textAlign:'center',color:'black'}}><h1 className='fontanswers'>Other Answers</h1></div>
+				<br/>
 					{this.renderComponents()}
 				</div>
 			)
