@@ -17,18 +17,16 @@ export default class DialogBox extends Component {
 
   handleOpen() {
     this.setState({open: true});
-    // console.log('this.state.questionsList in dialog:', this.state.questionsList)
   };
 
   handleClose() {
     this.setState({open: false});
-
   };
-  // style={{position: 'absolute', bottom: '80%'}}
+
   render() {
 
     const actions = [
-      <Comments hintText="Show Comments"
+      <Comments  
         question={this.props.question}
         currentUser={this.props.currentUser} />
     ];

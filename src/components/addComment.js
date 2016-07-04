@@ -20,9 +20,7 @@ export default class AddComment extends Component {
 
   keyDown (event){
     if(event.keyCode=='13'){
-      // console.log('this.props in addComment', this.state.currentUser, this.state.commentsList, this.state.commentID, event.target.value);
       this.props.addComment(this.state.currentUser, this.state.commentsList, this.state.commentID, event.target.value);
-      // event.target.value = '';
       document.getElementById('commentField').value='';
     }
   }
@@ -40,12 +38,6 @@ export default class AddComment extends Component {
             rows={1}
             rowsMax={8}
           />
-        </div>
-        <div class="comment-button">
-          <FlatButton 
-            label="Submit Comment" 
-            primary={true} 
-            onTouchStart={this.keyDown.bind(this)}/>
         </div>
       </div>
     )

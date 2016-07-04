@@ -14,17 +14,17 @@ class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false,
       commentsID: this.props.question.commentsID,
       currentUser: this.props.currentUser,
-      commentButtonText: 'Show Comments'
+      commentButtonText: 'Show Comments',
+      expanded: false,
+      arrows: true
     };
   }
 
   handleUpvote(questionIndex, commentIndex) {
     // if user has previously downvoted, then remove them from downvotes
     var userIndex = questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName);
-
     if(questionIndex.hasDownvoted.indexOf(this.state.currentUser.displayName) !== -1) {
       this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, 'DOWN')
     }
@@ -46,47 +46,90 @@ class Comments extends Component {
     }
   }
 
-  // handleVote(questionIndex, commentIndex, upOrDown) {
-    
-  //   if (upOrDown = "UP") {
-  //     var removeFrom = 'hasDownvoted';
-  //     var addTo = 'hasUpvoted';
-  //   } else {
-  //     var removeFrom = 'hasUpvoted';
-  //     var addTo = 'hasDownvoted';
-  //   }
-
-  //   var userIndex = questionIndex[removeFrom].indexOf(this.state.currentUser.displayName);
-  //   console.log(userIndex, 'userIndex')
-  //   if(questionIndex[removeFrom].indexOf(this.state.currentUser.displayName) !== -1) {
-  //     this.props.removeVotes(this.state.commentsID, commentIndex, userIndex, upOrDown);
-  //   } else if(questionIndex[addTo].indexOf(this.state.currentUser.displayName) === -1) {
-  //     this.props.addVotes(this.state.commentsID, commentIndex, questionIndex[addTo].length, upOrDown);
-  //   }
-
-
-  // }
-
   cardExpandChange() {
     if(this.state.expanded === true) {
-      this.setState({ commentButtonText: 'Hide Comments'})
+      this.setState({ commentButtonText: 'Show Comments', expanded: false})
     } else {
-      this.setState({ commentButtonText: 'Show Comments'})
+      this.setState({ commentButtonText: 'Hide Comments', expanded: true})  
     }
   }
-  render() {
 
-    // {console.log('this.props.comments in comments:', this.props.comments)}
+  getUpArrow(comment) {
+    if(comment.comment == "") {
+      return <noscript />
+    }
+    if(comment.hasUpvoted.indexOf(this.state.currentUser.displayName) !== -1) {
+      return <UpArrow style={{fill: 'green'}} /> 
+    }
+    return <UpArrow style={{fill: 'black'}} />
+
+  }
+
+  getDownArrow(comment) {
+    if(comment.comment == "") {
+      return <noscript />
+    }
+    if(comment.hasDownvoted.indexOf(this.state.currentUser.displayName) !== -1) {
+      return <DownArrow style={{fill: 'red'}} />
+    }
+    return <DownArrow style={{fill: 'black'}} />
+  }
+
+  getVoteTotal(comment) {
+    if(comment.comment == "") {
+      return ""
+    }
+    return comment.hasUpvoted && comment.hasDownvoted && comment.hasUpvoted.length - comment.hasDownvoted.length
+  }
+
+  getComment(comment) {
+    if(comment.comment == "") {
+      return <noscript />
+    }
+    return (
+      <div id="comment">
+        {comment.username}
+      <br />
+        {comment.comment}
+      </div>
+    )
+  }
+
+  getDivider(comment) {
+    if(comment.comment == "") {
+      return <noscript />
+    }
+    return <Divider />
+  }
+
+  renderList() {
+    return (this.props.comments[this.state.commentsID].map((comment, index) => (
+      <List key={index}>
+        <ListItem disabled={true}>
+          <div id="votes"> {this.getVoteTotal(comment)} </div>
+          <div id="arrows">
+            <iconButton onClick={() => this.handleUpvote(comment, index)}> {this.getUpArrow(comment)} </iconButton>
+            <iconButton onClick={() => this.handleDownvote(comment, index)}> {this.getDownArrow(comment)} </iconButton>
+          </div>
+            <div id="comment">
+              {this.getComment(comment)} 
+            </div>
+        </ListItem>
+        {this.getDivider(comment)}
+      </List>
+    )))
+  }
+
+  render() {
     return (  
       <div>
-          <div class="comment-button">
-            <AddComment 
-              currentUser={this.state.currentUser}
-              commentsList={this.props.comments}
-              commentsID={this.state.commentsID}
-            />
-          </div>
-
+        <div class="comment-button">
+          <AddComment 
+            currentUser={this.state.currentUser}
+            commentsList={this.props.comments}
+            commentsID={this.state.commentsID}
+          />
+        </div>
         <Card
           onExpandChange={this.cardExpandChange.bind(this)}>
           <CardHeader
@@ -96,30 +139,7 @@ class Comments extends Component {
             showExpandableButton={true}
           />
           <CardText id="comments" expandable={true}>
-            {this.props.comments[this.state.commentsID].map((comment, index) => {
-              return (
-                <List key={index}>
-                  <ListItem disabled={true}>
-                    <div>
-                    <div>
-                      <div id="votes"> {comment.hasUpvoted && comment.hasDownvoted && comment.hasUpvoted.length - comment.hasDownvoted.length} </div>
-                      <div id="arrows">
-                        <iconButton iconStyle={{fill: 'blue'}} onClick={() => this.handleUpvote(comment, index, "UP")}> <UpArrow /> </iconButton>
-                        <iconButton onClick={() => this.handleDownvote(comment, index, "DOWN")}> <DownArrow /> </iconButton>
-                      </div>
-                      </div>
-                    </div>
-                    <div id="comment">
-                      {comment.username}
-                      <br />
-                      {comment.comment}
-                    </div>
-
-                  </ListItem>
-                  <Divider />
-                </List>
-              );
-            })}
+            {this.renderList()}
           </CardText>
           <CardActions expandable={true}>
           </CardActions>

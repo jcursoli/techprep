@@ -22,10 +22,6 @@ export default class DialogTitle extends Component {
 
   }
 
-  //  const style = {
-  //     marginLeft: 700
-  // };
-
   handleTouchTap() {
     this.setState({
       open: true,
@@ -39,9 +35,6 @@ export default class DialogTitle extends Component {
   };
 
   markQuestion(e) {
-    console.log('button pressed', e)
-    
-    // if button has been clicked before
     if(this.state.secondary) {
       this.setState({ open: true, secondary: false, message: 'Question was removed from your study list' })
       this.props.removeQuestionFromStudyList(this.state.currentUser, this.props.questionID);  
@@ -65,7 +58,7 @@ export default class DialogTitle extends Component {
       marginRight: 100
     };
 
-    return(
+    return ( 
       <div>
         <FloatingActionButton 
           style={buttonStyle}
