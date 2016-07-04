@@ -7,13 +7,12 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import _ from 'lodash';
-import Less from 'material-ui/svg-icons/navigation/expand-less';
-import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
 import Forum from 'material-ui/svg-icons/communication/forum';
 import * as actions from '../actions';
 import Comments from './algorithmComments';
 import AlgorithmComment from './algorithmComment';
+import AlgorithmVote from './algorithmVote';
+
 
 const style = {
 	alignItems: 'center',
@@ -26,72 +25,9 @@ class UserAnswers extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			inputValue:'',
 			nodeRef: {},
 		}
 	}
-	renderVote(key){
-	if(!this.props.responses[this.props.index]){
-			return '0';
-		}
-	else if(!this.props.responses[this.props.index][key]){
-			return '0';
-		}
-	else if(this.props.responses[this.props.index][key].count){
-			return this.props.responses[this.props.index][key].count.toString();
-		}else{
-			return '0'
-		}
-	}
-	handleUpvote(userName){
-		var vote = {author:userName,value:1, dif: 1};
-		if(!this.props.responses.hasOwnProperty([this.props.index])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
-			vote.dif = 2;
-			vote.value = 1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
-			vote.dif = 1;
-			vote.value = 1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
-			vote.value = 0;
-			vote.dif = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		} else{
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-	}
-	handleDownvote(userName){
-		var vote = {author:userName,value: -1,dif: -1};
-		if(!this.props.responses.hasOwnProperty([this.props.index])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(!this.props.responses[this.props.index].hasOwnProperty([userName])){
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-		else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === -1){
-			vote.dif = 1;
-			vote.value = 0;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 0){
-			vote.dif = -1;
-			vote.value = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}else if(this.props.responses[this.props.index][userName].votes[this.props.currentUser] === 1){
-			vote.dif = -2;
-			vote.value = -1;
-			this.props.userAlgorithmVote(this.props.index,vote);
-		} else{
-			this.props.userAlgorithmVote(this.props.index,vote);
-		}
-	}
-
 	handleClick(event){
 		if(event.target.parentElement.parentElement.firstChild.style.overflowY === 'visible'){
 			//changes things to hidden
@@ -100,7 +36,7 @@ class UserAnswers extends Component {
 			event.target.parentElement.parentElement.firstChild.style.height = '160px';
 			event.target.parentElement.parentElement.firstChild.style.overflowY ='hidden';
 			event.target.parentElement.parentElement.style.overflowY = 'hidden';
-			event.target.parentElement.parentElement.style.width = '90%';
+			event.target.parentElement.parentElement.style.width = 'auto';
 			event.target.parentElement.parentElement.scrollIntoView();
 		} else{
 			//changes things to visible
@@ -158,35 +94,36 @@ class UserAnswers extends Component {
 				if( Date.parse(keysA[0]) > Date.parse(keysB[0])){return 1};
 				return 0;
 			});
-			let OrderedComments = new Array;
+			let OrderedComments = new Array(commentsCollection.length);
 			for(let i = 0; i < commentsCollection.length;i++){
 				let key = Object.keys(commentsCollection[i])
 				OrderedComments[i] = commentsCollection[i][key];
 			}
-			console.log('this is the OrderedComments in user answers',OrderedComments);
 			return OrderedComments;
 		} else{
 			return <noscript/>
 		}
 	}
-	sortAnswers(){
+	sortAnswers(list){
 		var sorted = []
 		let returnArray = [];
 		for (var i in this.props.responses[this.props.index]){
 				sorted.push([i, this.props.responses[this.props.index][i].count ]);
-				sorted.sort((a,b)=>b[1] - a[1])
 		}
-		console.log('this is sorted',sorted);
-		_.forEach(sorted,(val,key)=>{
-				console.log('this is the item',item)
-				returnArray.push(list[key]);
-				list.splice(key,1);
+		sorted.sort((a,b)=>b[1] - a[1])
+		_.forEach(sorted,(val,key2)=>{
+				for(var i = 0; i < list.length;i++){
+					if(list[i].key === sorted[key2][0]){
+						returnArray.push(list[i]);
+						list.splice(i,1);
+				}
+			}
 		})
-		console.log('this is the returnArray',returnArray)
+		returnArray.splice(returnArray.indexOf(undefined),returnArray.length);
+		return [...returnArray,...list]
 	}
 	renderComponents(){
 		let list = [];
-		console.log('this is the answers component',this.props.responses[this.props.index])
 		 _.forEach(this.props.answers,(value,key)=>{
 		 let lineCount = value.split(/\r\n|\r|\n/).length;
 		 	if(lineCount >= 6){
@@ -205,9 +142,7 @@ class UserAnswers extends Component {
 		 			</div>
 		 				<div className='algoAnswer'>
 		 			<button className='showContent' onClick={this.handleClick}>Show more</button>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.renderVote(key)}</div>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+		 				<AlgorithmVote indexValue={this.props.index} keyValue={key} />
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{display: 'none',visibility: 'hidden'}}>
@@ -232,9 +167,7 @@ class UserAnswers extends Component {
 		 				<pre style={{margin:'10px'}} className='no-whitespace-normalization' dangerouslySetInnerHTML={{__html:Prism.highlight(`${value}`, Prism.languages.javascript)}} />
 		 			</div>
 		 			<div className='algoAnswer'>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleDownvote(key)}> <DownArrow /> </iconButton>
-			 			<div>{this.renderVote(key)}</div>
-			 			<iconButton className='algorithmVote' onClick={()=>this.handleUpvote(key)}> <UpArrow /> </iconButton>
+			 			<AlgorithmVote indexValue={this.props.index} keyValue={key} />
 			 			<iconButton style={{position: 'absolute',right:'0px',top:'0px'}} className='forumButton' onClick={()=>this.handleCommentOpen(key)}> <Forum /> </iconButton>
 		 			</div>
 		 			<div id={`${key}`} style={{visibility: 'hidden'}}>
@@ -246,7 +179,7 @@ class UserAnswers extends Component {
 		 		)
 		 	}
 		})
-		 return list;
+		 return this.sortAnswers(list);
 	}
 
 	render(){
