@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
@@ -58,15 +59,17 @@ export default class DialogTitle extends Component {
       marginRight: 100
     };
 
-    return ( 
+      if(this.state.secondary) {
+        return(
       <div>
-        <FloatingActionButton 
+        <button 
+          className='minus'
           style={buttonStyle}
-          onMouseDown={this.markQuestion.bind(this)}
+          onClick={this.markQuestion.bind(this)}
           secondary={this.state.secondary}
         >
-          <ContentAdd />
-        </FloatingActionButton>
+          <ContentRemove />
+        </button>
         <div style={titleStyle}>
           {this.props.questionText}
         </div>
@@ -77,7 +80,30 @@ export default class DialogTitle extends Component {
           onRequestClose={this.handleRequestClose.bind(this)}
         />
       </div>
-    )
+     )
+    } else {
+      return(
+         <div>
+           <button 
+             className='plus'
+             style={buttonStyle}
+             onClick={this.markQuestion.bind(this)}
+             secondary={this.state.secondary}
+           >
+             <ContentAdd />
+           </button>
+           <div style={titleStyle}>
+             {this.props.questionText}
+           </div>
+           <Snackbar
+             open={this.state.open}
+             message={this.state.message}
+             autoHideDuration={1500}
+             onRequestClose={this.handleRequestClose.bind(this)}
+           />
+         </div>
+      )
+    }
   }
 }
 

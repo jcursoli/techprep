@@ -12,21 +12,22 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 	const contents = [{title: 'HTML', pic:'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FHTML5.png?alt=media&token=66a33b3e-e7c4-4765-8b2c-46343091a3d3'},
 										{title: 'CSS', pic:'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FCSS.png?alt=media&token=d6aa3c12-fcdf-44c9-8e99-da741dfa195f'},
 										{title: 'Javascript', pic: 'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2FJS.png?alt=media&token=4c3f0327-e658-41c8-8346-8b1cb81509e5'},
-										{title: 'Study', pic: 'https://cdn0.iconfinder.com/data/icons/thin-science-space/24/thin-1037_brain_thinking_mind_knowledge-512.png'}];
+										{title: 'Study', pic: 'https://firebasestorage.googleapis.com/v0/b/mks38thesis.appspot.com/o/Categories%2Fstudy.png?alt=media&token=0f7b00a6-03e0-4ace-95fb-1a67701ad909'}];
 
 const style = {
   root: {
-  	height: 500,
+  	height: 'auto',
+    minHeight:'500px',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginTop: 35,
     marginLeft:25,
     marginRight:25,
     overflowY: 'auto',
+    overflowX: 'hidden',
   },
   gridList: {
-    height: 500,
-    overflowY: 'auto',
+
   },
   GridTile:{
 
@@ -52,7 +53,7 @@ export default class Practice extends Component {
 			<div key={category.title} onTouchTap={()=>{this.handleClick(category)}} style={style.GridTile} className="col-lg-2 col-md-3 col-xs-12 col-sm-4">
 				<div style={style.img}>
        	 <div className='hover01' height='200'width='200'>
-        	<figure><img  height='200' src={category.pic}/></figure>
+        	<figure><img height='200' src={category.pic}/></figure>
        	</div>
        </div>
      </div>
