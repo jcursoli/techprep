@@ -5,6 +5,9 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import Dialog from './dialog';
 import firebase from 'firebase';
 
+// <TableHeaderColumn style={{width: '11%', visibility: 'hidden'}}>Acceptance</TableHeaderColumn>
+// <TableRowColumn style={{width: '10%', visibility: 'hidden'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.acceptance}</TableRowColumn>
+
 class Questions extends Component {
 
   constructor(props) {
@@ -79,8 +82,7 @@ class Questions extends Component {
                 </TableHeaderColumn>
               </TableRow>
               <TableRow>/
-                <TableHeaderColumn style={{width: '78%'}}>Question</TableHeaderColumn>
-                <TableHeaderColumn style={{width: '11%'}}>Acceptance</TableHeaderColumn>
+                <TableHeaderColumn style={{width: '89%'}}>Question</TableHeaderColumn>
                 <TableHeaderColumn style={{width: '11%'}}>Difficulty</TableHeaderColumn>
               </TableRow>
             </TableHeader>
@@ -95,8 +97,7 @@ class Questions extends Component {
               {this.props.questions.map((question, index) => {
                 return (
                   <TableRow key={index}>
-                    <TableRowColumn style={{width: '80%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.question}</TableRowColumn>
-                    <TableRowColumn style={{width: '10%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.acceptance}</TableRowColumn>
+                    <TableRowColumn style={{width: '90%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.question}</TableRowColumn>
                     <TableRowColumn style={{width: '10%'}} onTouchTap={this.handleOpen.bind(this, question)}>{question.difficulty}</TableRowColumn>
                   </TableRow>)
                 })}
