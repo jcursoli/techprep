@@ -1005,3 +1005,55 @@ figure:hover+span {
 .muidocs-icon-custom-github:before {
   content: "\e625";
 }
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #69F0AE;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #69F0AE;
+  outline: 1px solid slategrey;
+}
+::selection {
+  background: #69F0AE; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #69F0AE; /* Gecko Browsers */
+}
+.minus{
+  outline: 0;
+  height:40px;
+  width:40px;
+  border-radius:50%;
+  border:none;
+  background: #e84a4a;
+  text-align: center;
+  font-size: 200%;
+  font-weight: 500;
+  color: rgb(255,255,255);
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     1.5px 6px rgba(0, 0, 0, 0.2);
+}
+.minus:hover{
+  background: #ff7272;
+  cursor:pointer;
+}
+.plus{
+  outline: 0;
+  height:40px;
+  width:40px;
+  border-radius:50%;
+  border:none;
+  background: #69F0AE;
+  text-align: center;
+  font-size: 200%;
+  font-weight: 500;
+  color: rgb(255,255,255);
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     1.5px 6px rgba(0, 0, 0, 0.2);
+}
+.plus:hover{
+  background: #9ffccd;
+  cursor:pointer;
+}

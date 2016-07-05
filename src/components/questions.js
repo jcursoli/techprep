@@ -27,7 +27,7 @@ class Questions extends Component {
       enableSelectAll: false,
       deselectOnClickaway: true,
       showCheckboxes: false,
-      height: '540px',
+      height: 'auto',
       open: false,
       question: '',
       currentUser: currentUser,
