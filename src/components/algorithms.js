@@ -43,7 +43,7 @@ class Algorithms extends Component {
 	constructor(props){
 	super(props);
 	this.state = {
-		editorContents: `${this.props.problem.startingCode}`,
+		editorContents: `${this.props.problem.startingCode || 'function someFunction(){\n}'}`,
 		language: 'javascript',
 		output: `output:`,
 		answered:false
@@ -162,7 +162,6 @@ class Algorithms extends Component {
 	}
 }
 function mapStateToProps(state){
-	console.log('this is in the map state to props',state.user)
 	return {
 		algorithm:state.algorithms,
 		problem: state.currentAlgorithm.algorithm,
