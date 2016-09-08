@@ -31,8 +31,8 @@ module.exports = {
     devtool: 'eval',
     hot: true,
     historyApiFallback: true,
-    contentBase: './src',
-    outputPath: './src',
+    contentBase: './',
+    outputPath: './',
   },
   devtool: 'eval',
   plugins: [
